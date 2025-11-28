@@ -54,7 +54,6 @@ _In verband met voordelen en uitdagingen:_
 - Hoe kan de betrouwbaarheid en uitlegbaarheid van het model worden gewaarborgd?
 - Hoe kunnen valse positieven en foutieve voorspellingen worden geminimaliseerd om onnodige onderhoudsinterventies te voorkomen?
 
-
 **Bronnen** 
 
 ## Bronnen die het Probleem aanduiden
