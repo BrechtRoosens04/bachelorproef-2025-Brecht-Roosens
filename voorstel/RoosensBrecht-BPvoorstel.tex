@@ -8,6 +8,10 @@
 % Let op: kan enkel na toestemming van de bachelorproefcoördinator!
 \documentclass{hogent-article}
 
+\usepackage{lipsum} % Voor vultekst
+\usepackage[pdftex,bookmarks=true]{hyperref}
+\usepackage[backend=biber,style=apa]{biblatex}
+
 % Invoegen bibliografiebestand
 \addbibresource{voorstel.bib}
 
@@ -20,10 +24,10 @@
 % \course{Bachelor thesis}
 % \assignmenttype{Research proposal}
 
-\academicyear{2022-2023} % TODO: pas het academiejaar aan
+\academicyear{2025-2026} % TODO: pas het academiejaar aan
 
 % TODO: Werktitel
-\title{Vul hier de voorgestelde titel van je onderzoek in}
+\title{Met Machine Learning een voorspellend onderhoudsmodel maken voor bouwmachines in kleine bouwondernemingen}
 
 % TODO: Studentnaam en emailadres invullen
 \author{Brecht Roosens}
@@ -49,13 +53,13 @@
 % - Als het onderzoek niet past binnen een van deze domeinen specifieer je deze
 %   zelf
 %
-\specialisation{Mobile \& Enterprise development}
-\keywords{Scheme, World Wide Web, $\lambda$-calculus}
+\specialisation{Data \& AI Engineering}
+\keywords{Machine Learing, Bouwmachines, Voorspellend Onderhoud}
 
 \begin{document}
 
 \begin{abstract}
-  Hier schrijf je de samenvatting van je voorstel, als een doorlopende tekst van één paragraaf. Let op: dit is geen inleiding, maar een samenvattende tekst van heel je voorstel met inleiding (voorstelling, kaderen thema), probleemstelling en centrale onderzoeksvraag, onderzoeksdoelstelling (wat zie je als het concrete resultaat van je bachelorproef?), voorgestelde methodologie, verwachte resultaten en meerwaarde van dit onderzoek (wat heeft de doelgroep aan het resultaat?).
+  In kleine bouwbedrijven worden machines zoals graafmachines, betonpompen en andere apparaten vaak nog gerapareerd met traditioneel preventief onderhoud, wat niet altijd effectief is en onvoorziene defecten en kosten kan veroorzaken. Recente onderzoeken tonen aan dat voorspellend onderhoud, dat machine learning-algoritmes en sensordata bevat, kan leiden tot het minder stilstaan van de machines, lagere onderhoudskosten en hogere betrouwbaarheid van de machines. Deze bachelorproef heeft als doel te analyseren op welke manier een machine learning-model, gebaseerd op sensorgegevens, kan worden gebruikt om storingen in bouwmachines bij kleine bouwondernemingen te voorspellen en het onderhoud effectiever  te plannen. Daarnaast wordt er ook onderzocht welke sensorgegevens belangrijk kunnen zijn, welke machine learning-algoritmes het meest geschikte zijn en welke obstakels zich voordoen bij de uitvoering ervan in een klein bouwbedrijf en in zijn omgeving. De aanpak omvat een literatuurstudie, gevolg door het verkrijgen en het verzamelen van de sensorgegevens, daarna het analyseren van de sensorgegevens en het het evalueren van een voorspellend model dat is gebaseerd op de bekomen dataset. De verwachte uitkomsten zijn dat machine learning op een effectieve manier kan worden toegepast voor voorspellend onderhoud in de bouwmachines van het bouwbedrijf, wat kan resulteren in minder onvoorziene stilstanden van de machines, lagere kosten en een efficiëntere onderhoudsbeleid van het bouwbedrijf. De waarde van dit onderzoek ligt in het bieden van een praktische en haalbare oplossing voor kleine bouwbedrijven die hun machines betrouwbaarder en efficiënter willen gebruiken op het werkveld. 
 \end{abstract}
 
 \tableofcontents
