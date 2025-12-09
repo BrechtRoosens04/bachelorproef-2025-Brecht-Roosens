@@ -57,7 +57,7 @@ De literatuur toont aan dat voorspellend onderhoud met machine learni\-ng-algori
 \section{Methodologie}%
 \label{sec:methodologie}
 
-Dit onderzoek maakt gebruik van een praktisch maar ook casusgerichte aanpak om zowel probleemgerichte als oplossingsgerichte deelvragen te beantwoorden. De methode past bij de huidige technieken voor voorspellend onderhoud, zoals gebruikt in door anderen eerdere uitgevoerd\-e case- en vergelijkende onderzoeken.
+Dit onderzoek maakt gebruik van een praktisch maar ook casusgerichte aanpak om zowel probleemgerichte als oplossingsgerichte deelvragen te beantwoorden. De methode past bij de huidige technieken voor voorspellend onderhoud, zoals gebruikt in door anderen eerdere uitgevoerd\-e case- en vergelijkende onderzoeken. Ik verwacht zo'n ongeveer 14 weken dat ik aan deze bachelorproef zal werken. Een paar weken zullen met elkaar overlappen dit leg hieronder in de verschillende fases uit.
 
 \paragraph{Literatuurstudie}
 
@@ -71,13 +71,32 @@ Als een volgende fase ga ik de specifieke situatie bij Bouwonderneming Marcha\-n
 
 Ik kan de onderhouds-en fo\-utgegevens bij de machine-dealers gaan opvragen, aangezien bij kleine bouwondernemingen vaak geen eigen sensorgegevens registreren, maa\-r in voorspellend onderhoudsonderzoek is het gebruikelijk om gegevens te verzamelen via externe organisaties zoals de dealers \autocite{Elahi2023, Hu2024, Wang2025}. Als dat nodig is, kunnen er extra gesimuleerde of synthetische tijdreeksen worden ontwikkeld op basis van al geweten faalpatronen uit de literatuur \autocite{Nayak2024, Wang2025, Meddaoui2024}. Hiermee ga ik toch een viertal-weken mee bezig om de dataset goed te kunnen verzamelen, bij de verschillende dealers gaan en misschien ook om dat te simuleren.
 
+\paragraph{Preprocessing en feature engineering}
+
+Ik ga in de deze fase de verzamelde gegevens weergeven, filteren en voorbereiden om te gebruiken voor een machine learning-model op te maken. Dit omvat onder andere het verwijderen van ruis in de dataset en het normaliseren van tijdreeksen, methoden die cruciaal zijn volgens de studies van \textcite{Wang2025} en \textcite{Aggarwal2025} over foutdiagnose onder realistische omstandigheden. Volgens \textcite{Nayak2024} en \textcite{Dang2024} is de feature engineering gebaseerd op de best practices van data van vibratiesensoren, belastingsensoren en multisensoren. Met deze fase ga ik één week werk aan hebben om de dataset goed te zetten om te gebruiken in de volgende fase.
+
+\paragraph{Proof-of-concept machine learning-model}
+
+Ve\-rvolgens ga ik in deze verschillende machine learn\-ing-algoritmes ontwikkelen en uittesten. Onderzoek toont aan dat ensemble-methoden en deep learn\-ing-technieken een uitstekende prestatie leveren in voorspellingsmodellen in de industrie sector \autocite{Carvalho2019, Li2025, Keshavarz2025}. Hierdoor ga ik hierdoor onder andere Random Forests, Gradient Boosting, CatBoost en CNN/LSTM-architecturen \autocite{Khalili2025, Li2025, Dang2024}. De uitvoering vindt plaats in Python, met onder andere Pandas, Scikitlearn en PyTorch, meer nog \textcite{Chen2025} hebben onderzocht of multiview-time-seriesmod\-ellen die zijn gebruikt in het onderhoud van voertuigen, ook geschikt zijn voor bouwmachines. Ik ga met deze fase zo'n twee weken mee bezig om het volledig uit te werken.
+
+\paragraph{Beoordeling van het model}
+
+Het model wordt in deze fase beoordeeld met gebruikelijke prestati\-e-indicatoren zoals precision, recall, F1-score en conf\-usion-matrices, want deze worden ook geadviseerd in de studies over foutclassificatie en onderdousdetectie \autocite{Roehrich2024, Mahale2025}. DE uitkomsten worden in vergelijking gebracht met het bestaande preventieve onderhoud\-sbeleid van het bouwbedrijf. Volgens \textcite{Deepak2025} en \textcite{Hu2024} moet ik mij focussen op de meldingen die niet correct zijn, overbodige waarschuwingen en de relevantie in een realistische situatie voor het bouwbedrijf. Met deze fase ga ik ook één week mee bezig om een goeie beoordeling te doen van mijn model.
+
+\paragraph{conclusie en implemnetatie voor bouwbedrijf}
+
+In deze laatste fase ga ik proberen de uitkomsten te interpreteren en probeer ik een technisch en praktisch adviesrapport op te stellen voor Bouwonderneming Marchand BV waarmee ik deze bachelorproef zal samenwerken. De invloed van het model is gebaseerd op literatuur die aantoont dat voorspellend onderhoud resulteert in lagere kosten, minder stilstand van de machines en een grotere betrouwbaarheid van deze machines\autocite{ErRatby2025, Mahfoud2025, Maguluri2024}. Het adviesrapport en het proof-of-concept vormen samen het defintieve resultaat van de bachelorproef die ik ook kan indienen op het indienen en gebruiken bij de mondelinge verdediging. Hiermee ga ik toch ook één week mee bezig zijn.
+
 %---------- Verwachte resultaten ----------------------------------------------
 \section{Verwacht resultaat, conclusie}%
 \label{sec:verwachte_resultaten}
 
-Hier beschrijf je welke resultaten je verwacht. Als je metingen en simulaties uitvoert, kan je hier al mock-ups maken van de grafieken samen met de verwachte conclusies. Benoem zeker al je assen en de onderdelen van de grafiek die je gaat gebruiken. Dit zorgt ervoor dat je concreet weet welk soort data je moet verzamelen en hoe je die moet meten.
+Aan de hand van de literatuur neem ik aan dat een machine learning-model bij Bouwonderneming Marchand BV in staat zal zijn om storingen van tevoren te voorspellen. Volgens de studies van \textcite{ErRatby2025} en \textcite{Mikulic2024} wijzen zij erop dat voorspellend onderhoud resulteert in minder stilstand van de machines en verbeterde prestaties in de industrie sector en dat dit ook een bekend probleem is bij bouwmachines.
 
-Wat heeft de doelgroep van je onderzoek aan het resultaat? Op welke manier zorgt jouw bachelorproef voor een meerwaarde?
+Ik ben van mening dat sensorgegevens zoals trillingen en belasting genoeg informatie bieden om defecten te identificeren, omdat eerder onderzoeken hebben aangetoond dat deze signalen geschikt zijn voor het opsporen van fouten wanneer ze goed worden gefilterd \autocite{Nayak2024, Wang2025}. In onderzoeken van \textcite{Carvalho2019} en \textcite{Li2025} hebben modellen als Random Forest, CatBoost en deep learning de beste prestatie geleverd, waardoor ik verwacht dat één van deze modellen heldere en nuttige resutlaten zal opleveren.
 
-Hier beschrijf je wat je verwacht uit je onderzoek, met de motivatie waarom. Het is \textbf{niet} erg indien uit je onderzoek andere resultaten en conclusies vloeien dan dat je hier beschrijft: het is dan juist interessant om te onderzoeken waarom jouw hypothesen niet overeenkomen met de resultaten.
+Waarschijnlijk zal de uitkomst een precision-recall-grafiek zijn die laat zien hoeveel storingen nauwkeurig kunnen worden voorspeld, vergelijkbaar met eerdere voorbeelden van \textcite{Roehrich2024}. Volgens \textcite{Mahfoud2025} en \textcite{Deepak2025} kan ik hierdoor Bouwonderneming Marchand BV specifiek advies geven over welke datastromen ze moeten verzamelen en hoeveel efficiëntie er haalbaar is, iets waarvan kleine bouwbedrijven duidelijke voordeel kunnen halen.
 
+\paragraph{conclusie}
+
+Ik verwacht te concluderen dat voorspellend onderhoudsmodel technisch haalbaar is en een proof-of-conceptmodel nuttig kan zijn voor het verbeteren van het plannen van het onderhoud en het verminderen van de onvoorziene storingen en defecten.
