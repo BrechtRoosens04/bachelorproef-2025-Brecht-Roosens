@@ -36,6 +36,16 @@ In de bouwsector wordt onderhoud nog ingewikkelder door zware omstandigheden, va
 
 \paragraph{Voorspellend onderhoud met sensordata en machine learning-algoritmes}
 
+Voorspellend onderhoud maakt gebruik van sensorgegevens en machine learning-algoritmes om problemen van tevoren te herkennen in plaats van pass na een probleem actie te ondernemen. Random Forests, Support Vector Machines en Neurale Netwerken zijn uiterst geschikt voor toepassing van voorspellend onderhoud \autocite{Carvalho2019}. Volgens recente onderzoeken van \textcite{Li2025} tonen zij aan dat deep learning-algoritmes ook uiterst precies zijn in het voorspellen van defecten op basis van sensorgegevens.
+
+Er worden diverse soorten sensoren ingezet om betrouwbare inputdata te verzamelen. \textcite{Nayak2024} bewijzen dat trillingssensoren en temperatuurmetingen uiterst effectief zijn in het opsporen van aanvankelijke storingen in draaiende machines. In de bouwsector worden bovendien IMU-sensoren ingezet voor het analyseren van de bewegingen die de machine maakt, bijvoorbeeld door het automatisch herkennen van de werkprocessen die de graafmachines uitvoeren \autocite{Molaei2024}. Deze onderzoeken laten zien dat sensortechnologie op technisch vlak geschikt is voor gebruik in onder andere de industriële sector.
+
+De voordelen van voorspellend onderhoud worden eveneens op bedrijfsniveau onderbouwd. \textcite{ErRatby2025} bewijzen dat voorspellend onderhoud resulteert in minder stilstanden van de machines, lagere onderhoudskosten en verbetering van de efficiëntie. Er blijven echter aanzienlijke obstakels bestaan met betrekking tot de betrouwbaarheid van de modellen, het classificeren van fouten en defecten en de implementeatie in bestaande systemen \autocite{Roehrich2024, Elahi2023}. Volgens \textcite{Wang2025} en \textcite{Holtz2025} hebben nieuwe methoden, zoals stevige foutbeoordeling bij ruis in de data en data-efficiënte leermethoden, als doel deze problemen te verminderen, maar vragen nog om aanvullende praktische bevestiging in kleinere ondernemingen.
+
+\paragraph{Conclusie en relevantie}
+
+De literatuur toont aan dat voorspellend onderhoud met machine learni\-ng-algoritmes technisch goed onderbouwd is en al met succes wordt toegepast in de industriële sector \autocite{Carvalho2019, ErRatby2025, Li2025}.Verschillende onderzoeken laten zien dat het gebruik ervan in kleine bouwbedrijven eerder nog beperkt blijft door praktische en organisatorische beperkingen, zoals onder andere beperkte gegevens, geluidsoverlast en de moeilijkheid van de implementatie \autocite{Elahi2023, Mikulic2024}. Dit vormt de basis voor deze bachelorproef waarin bestudeerd wordt op welke wijze een voorspellend onderhoudsmodel haalbaar kan worden ingezet binnen een klein bouwbedrijf. 
+
 % Voor literatuurverwijzingen zijn er twee belangrijke commando's:
 % \autocite{KEY} => (Auteur, jaartal) Gebruik dit als de naam van de auteur
 %   geen onderdeel is van de zin.
@@ -47,17 +57,19 @@ In de bouwsector wordt onderhoud nog ingewikkelder door zware omstandigheden, va
 \section{Methodologie}%
 \label{sec:methodologie}
 
-Hier beschrijf je hoe je van plan bent het onderzoek te voeren. Welke onderzoekstechniek ga je toepassen om elk van je onderzoeksvragen te beantwoorden? Gebruik je hiervoor literatuurstudie, interviews met belanghebbenden (bv.~voor requirements-analyse), experimenten, simulaties, vergelijkende studie, risico-analyse, PoC, \ldots?
+Dit onderzoek maakt gebruik van een praktisch maar ook casusgerichte aanpak om zowel probleemgerichte als oplossingsgerichte deelvragen te beantwoorden. De methode past bij de huidige technieken voor voorspellend onderhoud, zoals gebruikt in door anderen eerdere uitgevoerd\-e case- en vergelijkende onderzoeken.
 
-Valt je onderwerp onder één van de typische soorten bachelorproeven die besproken zijn in de lessen Research Methods (bv.\ vergelijkende studie of risico-analyse)? Zorg er dan ook voor dat we duidelijk de verschillende stappen terug vinden die we verwachten in dit soort onderzoek!
+\paragraph{Literatuurstudie}
 
-Vermijd onderzoekstechnieken die geen objectieve, meetbare resultaten kunnen opleveren. Enquêtes, bijvoorbeeld, zijn voor een bachelorproef informatica meestal \textbf{niet geschikt}. De antwoorden zijn eerder meningen dan feiten en in de praktijk blijkt het ook bijzonder moeilijk om voldoende respondenten te vinden. Studenten die een enquête willen voeren, hebben meestal ook geen goede definitie van de populatie, waardoor ook niet kan aangetoond worden dat eventuele resultaten representatief zijn.
+Eerst ga ik een literatuuronderzoek uitvoeren om verder het onderhoudsprobleem binnen de bouwsector beter te kunnen plaatsen en te achterhalen waarom gebruikelijke onderhoudsmethoden resulteren in stilstand en fouten verder nog dit wordt al aangetoond in de industriële sector en de bouwmachines \autocite{ErRatby2025, Mikulic2024, Farwaha2024}. Bovendien wordt er ook onderzocht welke sensoren, datatypes en machine learning-algoritmes momenteel het beste functioneren voor het detecteren van fouten en het voorspellen van de resterende nuttige levensduur van een bepaald component van de machine \autocite{Carvalho2019, Nayak2024, Li2025, Meddaoui2024}. Met deze fase zal ik waarschijnlijk zo'n drie weken mee bezig zijn om dit af te werken en dit zal ook wel nog overlappen met andere fases als ik nog bepaalde bronnen nodig heb. Ik kan hiervan ook een deliverable maken die ik op het einde van die drie weken al eens kan indienen om mezelf een deadline op te leggen.
 
-Uit dit onderdeel moet duidelijk naar voor komen dat je bachelorproef ook technisch voldoen\-de diepgang zal bevatten. Het zou niet kloppen als een bachelorproef informatica ook door bv.\ een student marketing zou kunnen uitgevoerd worden.
+\paragraph{Analyse-fase}
 
-Je beschrijft ook al welke tools (hardware, software, diensten, \ldots) je denkt hiervoor te gebruiken of te ontwikkelen.
+Als een volgende fase ga ik de specifieke situatie bij Bouwonderneming Marcha\-nd Bv, waarmee ik nauw samenwerk in deze bachelorproef, bestuderen door middel van gesprekken met de technisch verantwoordelijke, geïnspireerd door de praktijkvoorbeelden in de onderhoudsonderzoeken van \textcite{Racchumi2024} en \textcite{Deepak2025}. De meest voorkomende storingen, onderhoudsintervallen en de belangrijkste sensoren worden hierbij vastgesteld. De fase ga ik waarschijnlijk één tot misschien twee weken mee bezig om het uitwerken. Dit kan ook overlapping hebben met de literatuurstudie.
 
-Probeer ook een tijdschatting te maken. Hoe lang zal je met elke fase van je onderzoek bezig zijn en wat zijn de concrete \emph{deliverables} in elke fase?
+\paragraph{Data-verzameling}
+
+Ik kan de onderhouds-en fo\-utgegevens bij de machine-dealers gaan opvragen, aangezien bij kleine bouwondernemingen vaak geen eigen sensorgegevens registreren, maa\-r in voorspellend onderhoudsonderzoek is het gebruikelijk om gegevens te verzamelen via externe organisaties zoals de dealers \autocite{Elahi2023, Hu2024, Wang2025}. Als dat nodig is, kunnen er extra gesimuleerde of synthetische tijdreeksen worden ontwikkeld op basis van al geweten faalpatronen uit de literatuur \autocite{Nayak2024, Wang2025, Meddaoui2024}. Hiermee ga ik toch een viertal-weken mee bezig om de dataset goed te kunnen verzamelen, bij de verschillende dealers gaan en misschien ook om dat te simuleren.
 
 %---------- Verwachte resultaten ----------------------------------------------
 \section{Verwacht resultaat, conclusie}%
