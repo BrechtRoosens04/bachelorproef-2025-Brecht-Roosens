@@ -15,11 +15,49 @@ uitgewerkt (met medestudent Liam Smets als mede-auteur).
 \section{Inleiding}%
 \label{sec:inleiding}
 
-Graafmachines, hijskranen en betonpompen zijn cruciaal voor de dagelijkse activiteiten van kleine bouwbedrijven en hebben een directe impact op zowel de productiviteit als de kosten van een bouwproject waaraan het bedrijf werkt \autocite{Mikulic2024}. Als deze machines plotseling stuk raken, resulteert dit vaak in stilstand, vertragingen en aanzienlijke kosten voor reparaties van de machines \autocite{ErRatby2025}. In tal van kleine bouwondernemingen wordt onderhoud tegenwoordig nog altijd voornamelijk preventief uitgevoerd op vaste tijdstippen. Volgens het onderzoek van \textcite{Morganti2024} en \textcite{Deepak2025} tonen zij aan dat deze methode niet altijd effectief is en dit kan resulteren in onnodige onderhoudskosten of onvoorziene stilstanden van de machines.
+Graafmachines, hijskranen en betonpompen zijn cruciaal voor de dagelijkse activiteiten van kleine bouwbedrijven en hebben een directe impact op zowel de productiviteit als de kosten van een bouwproject waaraan het bedrijf werkt \autocite{Mikulic2024}. Als deze machines plotseling defect raken, resulteert dit vaak in stilstand, vertragingen en aanzienlijke kosten voor reparaties van de machines \autocite{ErRatby2025}. In tal van kleine bouwondernemingen wordt onderhoud tegenwoordig nog altijd voornamelijk preventief uitgevoerd op vaste tijdstippen. Volgens het onderzoek van \textcite{Morganti2024} en \textcite{Deepak2025} tonen zij aan dat deze methode niet altijd effectief is en dit kan resulteren in onnodige onderhoudskosten of onvoorziene stilstanden van de machines.
 
 Een effectievere optie is voorspellend onderhoud waarbij sensorgegevens en machine learnin\-g-algoritmes worden ingezet om problemen van tevoren te identificeren. Diverse onderzoeken wijzen erop dat voorspellend onderhoud kan leiden tot minder stilstand van de machines, maar ook zorgt voor lagere onderhoudskosten en grotere betrouwbaarheid van de machines zelf \autocite{Carvalho2019, ErRatby2025, Mahale2025}. Sensoren zoals trillingssensoren, temperatuursensoren en Inertial Measurement Units of IMU's worden vaak gebruikt om de toestand van machines in real-time te monitoren \autocite{Nayak2024, Molaei2024}. Volgens \textcite{Elahi2023} en \textcite{Wang2025} blijft de implementatie van deze technologie in de kleine bouwbedrijven echter beperkt door de factoren zoals ruis in de sensordata, beperkte datasets en een tekort aan technische kennis.
 
-Deze bachelorproef is specifiek gebaseerd op kleine bouwbedrijven onder andere Bouwonderneming Marchand BV, waarmee ik in deze bachelorproef ga samenwerken, die ook een eigen machinepark heeft. De doelgroep van mijn onderzoek richt zich vooral op de IT-verantwoordelijk\-e van het bedrijf en de werknemers van het bedrijf waarvoor ik ga zorgen dat ze er ook meekunnen werken. De belangrijkste onderzoeksvraag is: Op welke manier kan een machine learning-model, gebaseeerd op sensorgegevens, worden gebruikt om storingen in bouwmachines bij een kleine bouwonderneming nauwkeurig te voorspellen en het onderhoud effectiever te organiseren? Eerst wordt onderzocht welke soorten sensordata en onderhoudsproblemen van belang zijn voor bouwmachines \autocite{Mikulic2024, Nayak2024}. Welke technische beperkingen er zijn binnen kleine bouwondernemingen \autocite{Elahi2023}. Zoals \textcite{Carvalho2019}, \textcite{Roehrich2024}, \textcite{Li2025} en \textcite{Wang2025} ook in hun onderzoek beschrijven, kan daarna pas onderzocht worden welke machine learning-algoritmes geschikt zijn voor voorspellend onderhoud en op welke manier deze correct kunnen worden beoordeeld.
+Deze bachelorproef is specifiek gebaseerd op kleine bouwbedrijven onder andere Bouwonderneming Marchand BV, waarmee ik in deze bachelorproef ga samenwerken, die ook een eigen machinepark heeft. De doelgroep van mijn onderzoek richt zich vooral op de IT-verantwoordelijk\-e van het bedrijf en de werknemers van het bedrijf waarvoor ik ga zorgen dat ze er ook meekunnen werken. De belangrijkste onderzoeksvraag is: Op welke manier kan een machine learning-model, gebaseeerd op sensorgegevens, worden gebruikt om storingen in bouwmachines bij een kleine bouwonderneming nauwkeurig te voorspellen en het onderhoud effectiever te organiseren? 
+
+De deelvragen van deze bachelorproef zijn ontwikkeld op basis van een analyse van de huidige literatuur over voorspellend onderhoud en het toepassen van machine learning-algoritmes in industriële en bouwkundige omgevingen. Diverse onderzoeken tonen aan dat traditionele onderhoudsmethoden in de bouwsector resulteren vaak in onnodige kosten voor onderhoud en onverwachte stilstanden , wat een nadelige impact heeft op de activiteiten van de kleine bouwbedrijven \autocite{Carvalho2019, Mikulic2024, ErRatby2025}. Eerst worden er enkele deelvragen geformuleerd binnen het probleemdomein op basis van deze conclusies. Deze deelvragen zijn gericht op het begrijpen van de beschikbare sensorgegevens, de gebruikelijke storingen en de beperkingen die bestaan in een realistische bouwomgeving.
+
+\paragraph{Deelvragen in verband met het probleemdomein}
+
+\begin{itemize}
+    \item 1: Welke soorten sensordata zijn het meest geschikt voor het voorspellen van storingen in bouwmachines binnen kleine bouw ondernemingen?
+    
+    \item 2: Welke verschillen bestaan er in beschikbare sensordata tussen verschillende types bouwmachines en hoe beïnvloeden deze verschillen de mogelijkheid tot foutdetectie?
+    
+    \item 3: Welke typische storingen en onderhoudsproblemen komen het vaakst voor bij bouwmachines in kleine bouwondernemingen?
+    
+    \item 4: Welke vormen van ruis en onnauwkeurigheden komen voor in sensordata van bouwmachines en welke impact hebben deze op de betrouwbaarheid van foutdetectie?
+    
+    \item 5: Welke organisatorische, technische en financiële uitdagingen belemmeren de toepassing van het vorospellend onderhoud in kleine bouwondernemingen?
+\end{itemize}
+
+Deelvragen binnen het oplossingsdomein zijn gebaseerd op de inzichten uit het probleemdomein. Deze deelvragen richten zich op het ontwikkelen, implementeren en beoordelen van een voorspellend onderhoudssysteem. Op basis van machine learning-algoritmes, waarbij de haalbaarheid en praktische bruikbaarheid in overweging worden genomen.
+
+\paragraph{Deelvragen in verband met het oplossingsdomein}
+
+\begin{itemize}
+    \item 1: Hoe kan sensordata van bouwmachines efficiënt worden voorverwerkt, gefilterd en geanalyseerd om geschikt te zijn voor machine learning-modellen?
+    
+    \item 2: Welke machine learning-algoritmes zijn het meest geschikt voor het ontwikkelen van een voorspellend onderhoudsmodel in een context met beperkte en ruisgevoelige data?
+    
+    \item 3: Hoe kunnen de geselecteerde machine learning-modellen worden getraind en gevalideerd om betrouwbare voorspellingen va\-n storingen te realiseren?
+    
+    \item 4: Wat is de invloed van verschillende feature selection- en feature engineering-methoden op de prestaties van het voorspellend onderhoudsmodel?
+    
+    \item 5: Welke evaluatiemaatstaven, zoals precision, recall, f1-score en confusion-matrix zijn het meest geschikt om de prestaties van het model te beoordelen in een onderhoudscontext?
+    
+    \item 6: Hoe kunnen valse positieven en foutieve voorspellingen worden geminimaliseerd om onnodige onderhoudsinterventies te vermijden?
+    
+    \item 7: Hoe kan de betrouwbaarheid en uitlegbaarheid van het voorspellend onderhoudsmodel worden verhoogd om praktische inzet in een bouwbedrijf mogelijk te maken?
+    
+    \item 8: Welke potentiële kostenbesparingen en efficiëntieverbeteringen kunnen worden gerealiseerd door de toepassing van het ontwikkelde voorspellend onderhoudsmodel?
+\end{itemize}
 
 Deze bachelorproef heeft als doel een soort van proof-of-concept voorspellend onderhoudsmodel te creëren en te evalueren voor de gekozen casus. Dit wordt ook aangevuld met een praktisch adviesrapport om het model te integreren en uit te voeren binnen het bedrijf. De bachelorproef is pas succesvol, zoals \textcite{Raffaele2024} en \textcite{Mahale2025} ook beschrijven in hun onderzoek, als het model technisch helemaal goed functioneert en een duidelijke waarde toevoegt aan het onderhoudsbeleid van het bouwbedrijf.
 
@@ -42,6 +80,8 @@ Er worden diverse soorten sensoren ingezet om betrouwbare inputdata te verzamele
 
 De voordelen van voorspellend onderhoud worden eveneens op bedrijfsniveau onderbouwd. \textcite{ErRatby2025} bewijzen dat voorspellend onderhoud resulteert in minder stilstanden van de machines, lagere onderhoudskosten en verbetering van de efficiëntie. Er blijven echter aanzienlijke obstakels bestaan met betrekking tot de betrouwbaarheid van de modellen, het classificeren van fouten en defecten en de implementatie in bestaande systemen \autocite{Roehrich2024, Elahi2023}. Volgens \textcite{Wang2025} en \textcite{Holtz2025} hebben nieuwe methoden, zoals stevige foutbeoordeling bij ruis in de data en data-efficiënte leermethoden, als doel deze problemen te verminderen, maar vragen nog om aanvullende praktische bevestiging in kleinere ondernemingen.
 
+In recente studies worden naast supervised machine learning-algoritmes ook steeds vaker unsupervised en semi-supervised leermethoden toegepast voor voorspellend onderhoud. Volgens \textcite{Giannoulidis2024} en \textcite{Holtz2025} zijn deze methoden vooral boeiend in situaties waarin er weinig of geen gelabelde foutdata beschikbaar is, wat vaak voorkomt bij kleine bouwbedrijven. \textcite{Giannoulidis2024} laten zien dat unsupervised anomaly detection kan worden gebruikt om afwijkend machinegedrag te identificeren zonder duidelijke labels voor storingen. \textcite{Aggarwal2025} geven bovendien een beschrijving van het toepassen van self-supervised modellen voor multivariate tijdsreeksen, die in staat zijn om afwijkingen in sensordata te herkennen in onderhoudssituaties en deze vormen ook een modelijke vervanging of aanvulling op traditionele supervised modellen, vooral in situaties met beperkte datasets en veel ruis in de meetgegevens.
+
 \paragraph{Conclusie en relevantie}
 
 De literatuur toont aan dat voorspellend onderhoud met machine learni\-ng-algoritmes technisch goed onderbouwd is en al met succes wordt toegepast in de industriële sector \autocite{Carvalho2019, ErRatby2025, Li2025}.Verschillende onderzoeken laten zien dat het gebruik ervan in kleine bouwbedrijven eerder nog beperkt blijft door praktische en organisatorische beperkingen, zoals onder andere beperkte gegevens, de grote hoeveelheid ruis in de gegevens en de moeilijkheid van de implementatie \autocite{Elahi2023, Mikulic2024}. Dit vormt de basis voor deze bachelorproef waarin bestudeerd wordt op welke wijze een voorspellend onderhoudsmodel haalbaar kan worden ingezet binnen een klein bouwbedrijf. 
@@ -57,15 +97,15 @@ De literatuur toont aan dat voorspellend onderhoud met machine learni\-ng-algori
 \section{Methodologie}%
 \label{sec:methodologie}
 
-Dit onderzoek maakt gebruik van een praktisch maar ook casusgerichte aanpak om zowel probleemgerichte als oplossingsgerichte deelvragen te beantwoorden. De methode past bij de huidige technieken voor voorspellend onderhoud, zoals gebruikt in door anderen eerdere uitgevoerd\-e case- en vergelijkende onderzoeken. Ik verwacht dat ik ongeveer 14 weken aan deze bachelorproef zal werken. Een paar weken zullen met elkaar overlappen, dit leg ik uit hieronder in de verschillende fases.
+Dit onderzoek hanteert een praktische en casusgerichte benadering om zowel probleemgerichte als oplossingsgerichte vragen te beantwoorden. De aanpak past bij de bestaande technieken voor voorspellend onderhoud, zoals gebruikt in eerdere case-en vergelijkende studies van anderen. Deze bachelorproef zal ongeveer veertien weken in beslag nemen. Enkele weken zullen elkaar overlappen, dit wordt hieronder verder uitgelegd in de verschillende fases.
 
 \paragraph{Literatuurstudie}
 
-Eerst ga ik een literatuuronderzoek uitvoeren om verder het onderhoudsprobleem binnen de bouwsector beter te kunnen plaatsen en te achterhalen waarom gebruikelijke onderhoudsmethoden resulteren in stilstand en fouten, verder nog dit wordt al aangetoond in de industriële sector en de bouwmachines \autocite{ErRatby2025, Mikulic2024, Farwaha2024}. Bovendien wordt er ook onderzocht welke sensoren, datatypes en machine learning-algoritmes momenteel het beste functioneren voor het detecteren van fouten en het voorspellen van de resterende nuttige levensduur van een bepaald component van de machine \autocite{Carvalho2019, Nayak2024, Li2025, Meddaoui2024}. Met deze fase zal ik waarschijnlijk zo'n drie weken bezig zijn om dit af te werken en dit zal ook wel nog overlappen met andere fases als ik nog bepaalde bronnen nodig heb. Ik kan hiervan ook een deliverable maken die ik op het einde van die drie weken al eens kan indienen om mezelf een deadline op te leggen.
+In de eerste plaats wordt er een literatuurstudie uitgevoerd om het onderhoudsprobleem in de bouwsector beter te kunnen plaatsen en te onderzoeken waarom gangbare onderhoudsmethoden leiden tot stilstand en fouten. Dit is al bewezen in de industrie en bij bouwmachines \autocite{ErRatby2025, Farwaha2024, Mikulic2024}. Bovendien wordt onderzocht welke sensoren, datatypes en machine learning-algoritmes momenteel het me\-est effectief zijn voor het opsporen van fouten en het voorspellen van de resterende levensduur van bepaalde machinecomponenten \autocite{Carvalho2019, Li2025, Meddaoui2024, Nayak2024}. Deze fase wordt verwacht ongeveer drie weken te duren en er kan mogelijk een overlap ontstaan met andere fases als er extra bronnen vereist zijn. Daarnaast kan er een deliverable worden opgesteld dat aan het einde van deze drie weken ingediend kan worden om een heldere deadline te stellen.
 
 \paragraph{Analyse-fase}
 
-Als een volgende fase ga ik de specifieke situatie bij Bouwonderneming Marcha\-nd Bv, waarmee ik nauw samenwerk in deze bachelorproef, bestuderen door middel van gesprekken met de technisch verantwoordelijke, geïnspireerd door de praktijkvoorbeelden in de onderhoudsonderzoeken van \textcite{Racchumi2024} en \textcite{Deepak2025}. De meest voorkomende storingen, onderhoudsintervallen en de belangrijkste sensoren worden hierbij vastgesteld. Met deze fase ga ik waarschijnlijk één tot misschien twee weken bezig zijn om het uitwerken. Dit kan ook overlapping hebben met de literatuurstudie.
+In deze fase wordt de specifieke situatie bij Bouwonderneming Marchand BV onderzocht, in samenwerking met het bedrijf, door middel van gesprekken met de technische verantwoordelijke. Deze methode is gebaseerd op de praktijkvoorbeelden uit de onderhoudsonderzoeken van \textcite{Racchumi2024} en \textcite{Deepak2025}. De meest voorkomende problemen, onderhoudsintervallen en de belangrijkste sensoren worden hierbij bepaald. Het uitwerken van deze fase zal naar verwachting één tot twee weken in beslag nemen, met mogelijke overlap met de literatuurstudie.
 
 \paragraph{Data-verzameling}
 
