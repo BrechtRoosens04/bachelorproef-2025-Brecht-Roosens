@@ -26,5 +26,56 @@
 %% Maak voor elke fase (behalve het literatuuronderzoek) een NIEUW HOOFDSTUK aan
 %% en geef het een gepaste titel.
 
-\lipsum[21-25]
+Dit onderzoek hanteert een praktische en casusgerichte benadering om zowel probleemgerichte als oplossingsgerichte vragen te beantwoorden.
+De aanpak past bij de bestaande technieken voor voorspellend onderhoud, zoals gebruikt in eerdere case-en vergelijkende studies van anderen. Deze bachelorproef zal ongeveer veertien weken in beslag nemen. Enkele weken zullen elkaar overlappen, dit wordt hieronder verder uitgelegd in de verschillende fases.
+
+\section{\IfLanguageName{dutch}{Literatuurstudie}{literature study}}%
+\label{sec:literatuurstudie_methodologie}
+
+In de eerste plaats wordt er een literatuurstudie uitgevoerd om het onderhoudsprobleem in de bouwsector beter te kunnen plaatsen en te
+onderzoeken waarom gangbare onderhoudsmethoden leiden tot stilstand en fouten. Dit is al bewezen in de industrie en bij bouwmachines \autocite{ErRatby2025, Farwaha2024, Mikulic2024}. Bovendien wordt onderzocht welke sensoren, datatypes en machine learning- en unsupervised learning-algoritmes momenteel het meest effectief zijn voor het opsporen van fouten en het voorspellen van de resterende levensduur van bepaalde machinecomponenten \autocite{Carvalho2019, Li2025, Meddaoui2024, Nayak2024}. Deze fase zal ongeveer drie weken duren en een mogelijke overlap met andere fases kan ontstaan als er
+extra bronnen vereist zijn. Daarnaast kan er een deliverable worden opgesteld dat aan het einde van deze drie weken ingediend kan worden om een heldere deadline te stellen.
+
+\section{\IfLanguageName{dutch}{Analyse-fase}{analysis phase}}%
+\label{sec:analyse-fase}
+
+In deze fase wordt de specifieke situatie bij Bouwonderneming Marchand BV onderzocht, in samenwerking met het bedrijf, door
+middel van gesprekken met de technische verantwoordelijke.
+Deze methode is gebaseerd op de praktijkvoorbeelden uit de onderhoudsonderzoeken van \textcite{Racchumi2024} en \textcite{Deepak2025}. De meest voorkomende problemen, onderhoudsintervallen en de belangrijkste sensoren worden hierbij bepaald. Het uitwerken van deze fase zal naar verwachting één tot twee weken in beslag nemen, met mogelijke overlap met de literatuurstudie.
+    
+\section{\IfLanguageName{dutch}{Data verzameling en data captatie }{Data collection and data recording}}%
+\label{sec:data-verzameling-en-data-captatie}
+
+Onderhouds- en foutgegevens kunnen opgevraagd worden bij de machinedealers, omdat kleine bouwbedrijven vaak geen
+eigen sensorgegevens registreren. In de studies
+van \textcite{Elahi2023}, \textcite{Hu2024} en \textcite{Wang2025} over voorspellend onderhoud is het gebruikelijk om informatie te verkrijgen van externe organisaties waaronder dealers van de machines. Als dat nodig is, kunnen er extra gesimuleerde of synthetische tijdreeksen of data worden gecreëerd op basis van eerder bekende faalpatronen uit de literatuur\autocite{Meddaoui2024, Nayak2024, Wang2025}. Er bestaat een kans dat sommige dealers geen toegang willen geven tot hun data, daarom is er een alternatieve aanpak uitgewerkt in een volgende sectie van de methodologie namelijk de sectie ‘Risico en alternatieve aanpak‘ gebaseerd op synthetische data. Voor het opstellen van een complete dataset wordt ongeveer vier weken besteed, inclusief het bezoeken en contacteren van de diverse dealers en indien nodig het simuleren van extra bijkomende data. Ondertussen werd er voor de start van de bachelorproefperiode al contact gelegd met de verantwoordelijke van Bouwonderneming Marchand BV en werd ook al contact gelegd naar een aantal dealers van bouwmachines zoals onder andere Van Der Spek in Ternat, een dealer van één van de hijskranen in het bedrijf.
+
+\section{\IfLanguageName{dutch}{Preprocessing en feature engineering }{Preprocessing and feature engineering}}%
+\label{sec:preprocessing-and-feature-engineering}
+
+In deze fase worden de verzamelde gegevens weergegeven, gefilterd en klaargemaakt voor gebruik in een unsupervised learning-model. Dit omvat onder andere het verwijderen van eventuele ruis uit de dataset en het normaliseren van tijdsreeksen, methoden die volgens de onderzoeken van \textcite{Wang2025} en \textcite{Aggarwal2025} essentieel worden beschouwd voor foutdiagnose onder realistische situaties. \textcite{Nayak2024} en \textcite{Dang2024} stellen dat de feature engineering gebaseerd is op de best practices voor gegevens die afkomstig zijn van vibratiesensoren, belastingsensoren en multisensoren. Voor deze fase is er ongeveer een week nodig om de dataset klaar te maken voor de volgende fase.
+
+\section{\IfLanguageName{dutch}{Proof-of-concept machine learning-model}{Proof-of-concept machine learning-model(ENG)}}%
+\label{sec:proof-of-concept machine learning-model}
+
+Er worden diverse machine learning-algoritmes ontwikkeld en beoordeeld om onderhoudsbehoeften te voorspellen op basis van sensorgegevens. Volgens \textcite{Elahi2023}, \textcite{Giannoulidis2024} en \textcite{Aggarwal2025} is gelabelde foutdata bij kleine bouwbedrijven vaak beperkt en richt
+men zich voornamelijk op unsupervised en selfsupervised technieken, die het mogelijk maken om afwijkingen in sensorgegevens te identificeren zonder duidelijke labels. De bestudeerde algoritmen omvatten similarity-based methoden zoals Cosinus‐similariteit, forecasting-based modellen voor tijdsreeksen zoals LSTM, deep unsupervised modellen zoals autoencoders en een self-supervised Transformer (DASTAD) voor anomaly detection in multivariate
+sensordata \autocite{Aggarwal2025, Giannoulidis2024}. Volgens \textcite{Carvalho2019}, \textcite{Li2025} en \textcite{Khalili2025} bieden verschillende supervised learning modellen, zoals Random Forests, Gradient Boosting en CatBoost ook goede resultaten bij voldoende gelabelde gegevens. Stel dat de sensordata voldoende labeling bevat, kunnen de resultaten van de supervised learning modellen ook bestudeerd en beoordeeld worden. De uitvoering vindt plaats in Python met Pandas, Scikit-learn en PyTorch en er wordt gekeken in welke mate tijdreeksmodellen uit andere domeinen,
+zoals multiview time-seriesmodellen voor voertuigen, relevant zijn voor bouwmachines \autocite{Chen2025}. Voor deze fase zijn er ongeveer twee weken gepland.
+
+\section{\IfLanguageName{dutch}{Beoordeling van het model}{assessment of the model}}%
+\label{sec:beoordeling-van-het-model}
+
+In deze fase wordt het model geëvalueerd met gebruikelijke prestatie-indicatoren zoals precision, recall, F1-score en confusion-matrices zoals aanbevolen in de studies over foutclassificatie en onderhoudsdetectie \autocite{Mahale2025, Roehrich2024}. De resultaten worden vergeleken met het bestaande preventieve onderhoudsbeleid van het bouwbedrijf. Volgens \textcite{Deepak2025} en \textcite{Hu2024} richt men zich op onjuiste meldingen, overbodige waarschuwingen en de relevantie van de resultaten in een realistische situatie voor het bouwbedrijf. Voor deze fase wordt ongeveer een week beschikbaar gesteld om een grondige evaluatie van het model te maken.
+
+\section{\IfLanguageName{dutch}{Risico en alternatieve aanpak}{Risk and alternative approach}}%
+\label{sec:risico-en-alternatieve-aanpak}
+
+Bij het uitvoeren van deze bachelorproef wordt in overweging genomen dat historische sensorgegevens van machine-dealers mogelijk niet toegankelijk zijn of ze deze data niet willen vrijgeven. In zulke gevallen wordt volgens \textcite{Carvalho2019} en \textcite{Elahi2023} in de literatuur vaak gebruikgemaakt van synthetische of gesimuleerde data als een haalbaar en wetenschappelijk onderbouwd alternatief, vooral in het voorspellend onderhoud in industriële omgevingen. Synthetische gegevens maken het mogelijk om realistische sensorgegevens te creëren, gebaseerd op bekende gedragingen van de machines, slijtagepatronen en faalmechanismen. Bij diverse onderzoeken van \textcite{Meddaoui2024}, \textcite{Nayak2024} en \textcite{Wang2025} wordt deze methode gebruikt om proof-of-concept modellen te creëren en algoritmische beslissingen te verifiëren, vooral wanneer real-world gegevens beperkt, onvolledig of vertrouwelijk zijn. Hoewel modellen die alleen op synthetische gegevens worden getraind niet alle complexiteit en ruis van realistische werkomgevingen bevatten, wijzen recente studies erop dat unsupervised en self-supervised leermethoden minder afhankelijk zijn van exacte labeling, wat resulteert in een betere generalisatie van gesimuleerde naar echte gegevens, vooral voor het opsporen van anomalieën \autocite{Aggarwal2025, Holtz2025}. \textcite{Hu2024} en \textcite{Maguluri2024} verklaren ook in hun onderzoeken dat digitale tweelingen en gesimuleerde omgevingen bovendien steeds vaker worden toegepast om synthetische datasets te genereren die sterk lijken op de werkelijke processen. In deze bachelorproef worden synthetische gegevens gezien als een volwaardige alternatieve aanpak om de technische haalbaarheid van een voorspellend onderhoudsmodel aan te tonen. Volgens \textcite{Raffaele2024} en \textcite{ErRatby2025} ligt de nadruk op het beoordelen van geschikte algoritmen, methoden voor dataverwerking en evaluatiestrategieën, wat in de literatuur wordt gezien als een gebruikelijke en gangbare aanpak binnen een proof-of-concept situatie. Als deze alternatieve aanpak uitgevoerd wordt omdat de machine-dealers de data niet wensen vrij te gegeven of geen toegang hebben, wordt voor deze fase hetzelfde aantal weken ingepland zoals bij de dataverzameling fase. In plaatst van de weken te gebruiken om data te verzamelen, worden deze dan gebruikt om synthetische data te creëren.
+
+\section{\IfLanguageName{dutch}{Conclusie en implementatie voor het bouwbedrijf}{conclusion and implementation for the construction company}}%
+\label{sec:Conclusie-en-implementatie-voor-het-bouwbedrijf}
+
+In deze laatste fase worden de resultaten beoordeeld en wordt er een technisch en praktisch adviesrapport opgesteld voor Bouwonderneming Marchand BV, het bedrijf waarmee deze bachelorproef wordt uitgevoerd. De impact van het model is gebaseerd op literatuur die aantoont dat voorspellend onderhoud resulteert in lagere kosten, minder stilstand van machines en een hogere betrouwbaarheid van deze machines \autocite{ErRatby2025, Maguluri2024, Mahfoud2025}. Het adviesrapport en het proof-of-concept vormen samen het definitieve resultaat van de bachelorproef en kunnen als deliverables worden ingediend en gebruikt worden tijdens de mondelinge verdediging. Voor deze fase wordt ongeveer één week vrijgemaakt om de uitwerking te voltooien.
+
 
