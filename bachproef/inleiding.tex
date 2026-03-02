@@ -20,21 +20,22 @@
 \section{\IfLanguageName{dutch}{context}{context}}%
 \label{sec:context}
 
-Graafmachines, betonpompen en andere zware machines zijn essentieel voor de operationele werking van kleine bouwbedrijven, waardoor de betrouwbaarheid en beschikbaarheid van deze machines zijn direct van invloed op de productiviteit, het planningsproces van projecten en werven en het kostencontrole \autocite{Mikulic2024}. Als een machine plotseling defect raakt, resulteert dit in onvoorziene stilstand, vertragingen op de werf en aanzienlijke kosten voor herstel en vervanging \autocite{ErRatby2025}. Onderzoek van \textcite{Mahfoud2025} in de industrie wijzen erop dat onvoorziene stilstand een aanzienlijke nadelige impact heeft op de prestaties van bedrijven en hun concurrentiepositie.
+Graafmachines, betonpompen en andere zware machines zijn essentieel voor de operationele werking van kleine bouwbedrijven, waardoor de betrouwbaarheid en beschikbaarheid van deze machines direct van invloed zijn op de productiviteit, het planningsproces van projecten en werven en de kostencontrole \autocite{Mikulic2024}. Als een machine plotseling defect raakt, resulteert dit in onvoorziene stilstand, vertraging op de werf en aanzienlijke kosten voor herstel en vervanging \autocite{ErRatby2025}. Onderzoek van \textcite{Mahfoud2025} in de industrie wijst erop dat onvoorziene stilstand een aanzienlijke nadelige impact heeft op de prestaties van bedrijven en hun concurrentiepositie.
 
-Vandaag de dag wordt onderhoud in de bouwsector voornamelijk uitgevoerd met behulp van preventieve of reactieve methoden. Preventief onderhoud vindt plaats op vooraf vastgestelde tijdstippen, terwijl reactief onderhoud pas gebeurt nadat een defect heeft plaatsgevonden \autocite{Mikulic2024, Morganti2024}. Diverse onderzoeken van \textcite{Deepak2025} en \textcite{ErRatby2025} wijzen erop dat deze methode misschien niet effectief is: soms worden onderdelen vervangen terwijl ze nog goed functioneren, terwijl andere defecten plotseling optreden en alsnog resulteren in kostbare stilstand.
+Vandaag de dag wordt onderhoud in de bouwsector voornamelijk uitgevoerd met behulp van preventieve of reactieve methoden. Preventief onderhoud vindt plaats op vooraf vastgestelde tijdstippen, terwijl reactief onderhoud pas gebeurt nadat een defect heeft plaatsgevonden \autocite{Mikulic2024, Morganti2024}. Diverse onderzoeken van \textcite{Deepak2025} en \textcite{ErRatby2025} wijzen erop dat deze methode misschien niet effectief genoeg is, omdat onderdelen soms worden vervangen terwijl ze nog goed functioneren of doordat andere defecten plotseling optreden en alsnog resulteren in kostbare stilstand.
 
-Als alternatief wint voorspellend onderhoud of predictive maintenance in het Engels aan belang. Predictive maintenance maakt gebruik van sensordata en data-analyse om defecten vroegtijdig te detecteren en onderhoud te plannen op basis van de werkelijke toestand van de machine \autocite{Carvalho2019}. Diverse recente studies van \textcite{ErRatby2025} en \textcite{Mahale2025} tonen aan dat deze methode resulteert in minder stilstand, lagere onderhoudskosten en een grotere betrouwbaarheid van industriële systemen.
+Als alternatief wint voorspellend onderhoud of predictive maintenance in het Engels aan belang. Predictive maintenance maakt gebruik van sensordata en data-analyse om defecten vroegtijdig te detecteren en onderhoud te plannen op basis van de werkelijke toestand van de machine \autocite{Carvalho2019}. Diverse recente studies van \textcite{ErRatby2025} en \textcite{Mahale2025} tonen aan dat deze methode resulteert in minder stilstand, lagere onderhoudskosten en een grotere betrouwbaarheid van de machines.
 
 Machine learning is hierbij van groot belang. Een gestructureerde literatuurstudie over machine learning in voorspellend onderhoud laat zien dat algoritmes zoals Random Forests, Support Vector Machines en neurale netwerken op een effectieve manier worden gebruikt voor het detecteren van fouten en het voorspellen van Remaining Useful Life \autocite{Carvalho2019}. Recente onderzoeken van \textcite{Li2025} en \textcite{Aggarwal2025} laten daarnaast zien dat deep learning-modellen, zoals transformer-gebaseerde ontwerpen, uiterst geschikt zijn voor het bestuderen van ingewikkelde multivariate tijdsreeksen.
 
-Uit de literatuur blijkt echter dat de uitvoering van voorspellend onderhoud binnen kleine bedrijven beperkt is. \textcite{Elahi2023} stellen dat een beperkte beschikbaarheid van gelabelde foutdata en ruis in sensorgegevens belangrijke obstakels zijn. Daarnaast benadrukken \textcite{Wang2025} dat ruis en signaalvervorming een aanzienlijke invloed uitoefenen op de betrouwbaarheid van foutdetectiemodellen in realistische situaties. Volgens \textcite{Mikulic2024} wordt in de bouwsector deze problematiek nog versterkt door de zware werkomstandigheden en de variabele belasting van de machines.
+Uit de literatuur blijkt echter dat de uitvoering van voorspellend onderhoud binnen kleine bedrijven beperkt is. Het onderzoek van \textcite{Elahi2023} stelt dat een beperkte beschikbaarheid van gelabelde foutdata en ruis in sensorgegevens belangrijke obstakels zijn. Daarnaast benadrukt de studie van \textcite{Wang2025} dat ruis en signaalvervorming een aanzienlijke invloed uitoefenen op de betrouwbaarheid van foutdetectiemodellen in realistische situaties. Volgens het onderzoek van \textcite{Mikulic2024} wordt in de bouwsector deze problematiek nog versterkt door de zware werkomstandigheden en de variabele belasting van de machines.
 
-Recent Onderzoek wijst erop dat zowel unsupervised als self-supervised learning methoden effectiever kunnen zijn in situaties waarin gelabelde gegevens beperkt beschikbaar zijn \autocite{Elahi2023}. \textcite{Giannoulidis2024} laten zien dat autoencoders moeiteloos afwijkingen kunnen opsporen zonder duidelijke foutlabels. \textcite{Aggarwal2025} introduceren met DASTAD een transformer-gebaseerde self-supervised methode voor het opsporen van onregelmatigheden in multivariate tijdsreeksen. \textcite{Holtz2025} verenigen onopgemerkte afwijkingen met active learning om betrouwbare modellen te creëren met een minimale labeling.
+Recent Onderzoek wijst erop dat zowel unsupervised als self-supervised learning methoden effectiever kunnen zijn in situaties waarin gelabelde gegevens beperkt beschikbaar zijn \autocite{Elahi2023}. Het onderzoek van \textcite{Giannoulidis2024} laat zien dat autoencoders moeiteloos afwijkingen kunnen opsporen zonder duidelijke foutlabels. 
+De studie van \textcite{Aggarwal2025} introduceert met DASTAD een transformer-gebaseerde self-supervised methode voor het opsporen van onregelmatigheden in multivariate tijdsreeksen. Het onderzoek van \textcite{Holtz2025} verenigt onopgemerkte afwijkingen met active learning om betrouwbare modellen te creëren met een minimale labeling.
 
-Literatuur toont bovendien aan dat synthetische gegevens en digital twins een mogelijke oplossing kunnen zijn wanneer historische sensordata niet altijd beschikbaar zijn \autocite{Meddaoui2024, Hu2024}. \textcite{Nieminen2026} stellen dat synthetische gegevens steeds vaker worden gebruikt om voorspellend onderhoudsmodellen te valideren en  evalueren.
+Literatuur toont bovendien aan dat synthetische gegevens en digital twins een mogelijke oplossing kunnen zijn wanneer historische sensordata niet altijd beschikbaar zijn \autocite{Meddaoui2024, Hu2024}. Het onderzoek van \textcite{Nieminen2026} stelt dat synthetische gegevens steeds vaker worden gebruikt om voorspellend onderhoudsmodellen te valideren en evalueren.
 
-Deze bachelorproef bevindt zich in deze context en bestudeert op welke manier een voorspellend onderhoudsmodel, gebaseerd op machine learning, kan worden ontwikkeld voor een kleine bouwonderneming, zoals Bouwonderneming Marchan\-d BV, met beperkte gegevens en middelen.
+Deze bachelorproef bevindt zich in deze context en bestudeert op welke manier een voorspellend onderhoudsmodel, gebaseerd op machine learning, kan worden ontwikkeld voor een kleine bouwonderneming, zoals Bouwonderneming Marchan\-d BV waarmee nauw samengewerkt wordt, met beperkte gegevens en middelen.
 
 \newpage
 
@@ -43,11 +44,11 @@ Deze bachelorproef bevindt zich in deze context en bestudeert op welke manier ee
 
 %Uit je probleemstelling moet duidelijk zijn dat je onderzoek een meerwaarde heeft voor een concrete doelgroep. De doelgroep moet goed gedefinieerd en afgelijnd zijn. Doelgroepen als ``bedrijven,'' ``KMO's'', systeembeheerders, enz.~zijn nog te vaag. Als je een lijstje kan maken van de personen/organisaties die een meerwaarde zullen vinden in deze bachelorproef (dit is eigenlijk je steekproefkader), dan is dat een indicatie dat de doelgroep goed gedefinieerd is. Dit kan een enkel bedrijf zijn of zelfs één persoon (je co-promotor/opdrachtgever).%/
 
-De focus van deze bachelorproef ligt specifiek binnen Bouwonderneming Marchan\-d BV, een kleine bouwonderneming die een eigen machinepark heeft. Het bedrijf is afhankelijk van de betrouwbare werking van onder meer graafmachines, betonpompen en zelfs tractoren. Onvoorziene fouten resulteren in vertragingen in het project, hogere kosten en onzekerheid over de operationele zaken.
+De focus van deze bachelorproef ligt specifiek binnen Bouwonderneming Marchan\-d BV, een kleine bouwonderneming die een eigen machinepark heeft. Het bedrijf is afhankelijk van de betrouwbare werking van onder meer graafmachines, betonpompen en zelfs tractoren. Onvoorziene fouten resulteren in vertragingen van projecten, hogere kosten en onzekerheid over de operationele zaken.
 
-Hoewel voorspellend onderhoud in industriële omgevingen al aanzienlijke voordelen heeft geleverd \autocite{ErRatby2025, Mahfoud2025}, is de praktische toepassing ervan binnen kleine bouwbedrijven nog niet voldoende bestudeerd. Kleine bedrijven hebben vaak geen uitgebreide historische datasets of specifieke kennis van \autocite{Elahi2023}. Dit leidt tot een kloof tussen de theoretische opties en de praktische uitvoering.
+Hoewel voorspellend onderhoud in industriële omgevingen al aanzienlijke voordelen heeft opgeleverd, is de praktische toepassing ervan binnen kleine bouwbedrijven nog niet voldoende bestudeerd  \autocite{ErRatby2025, Mahfoud2025}. Kleine bedrijven hebben vaak geen uitgebreide historische datasets of specifieke kennis van \autocite{Elahi2023}. Dit leidt tot een kloof tussen de theoretische opties en de praktische uitvoering.
 
-De doelgroep van dit onderzoek zijn de technische verantwoordelijke van Bouwonderneming Marchand BV, de zaakvoerder van het bedrijf, de onderhoudsverantwoordelijken en de machine-operatoren. Voor deze specifieke doelgroep kan een goed onderbouwd proof-of-concept model een directe voordeel opleveren op het gebied van effectiever onderhoudsbeheer en het verminderen van risico's.
+De doelgroep van dit onderzoek zijn de technische verantwoordelijke van Bouwonderneming Marchand BV, de zaakvoerder van het bedrijf, de onderhoudsverantwoordelijken en de machine-operatoren. Voor deze specifieke doelgroep kan een goed onderbouwd proof-of-concept model een directe voordeel opleveren op het gebied van efficiëntere onderhoudsbeheer en het verminderen van risico's.
 
 %Bouwmachines zijn cruciaal voor bouwbedrijven, omdat hun betrouwbaarheid een directe impact heeft op de productiviteit, planning en uitgaven van het bedrijf, maar onvoorziene problemen kunnen ervoor zorgen dat bouwmachines stilstand krijgen en dat er vertragingen op de werven ontstaan, wat leidt tot extra financiële en organisatorische gevolgen \autocite{Mikulic2024, ErRatby2025}. In de praktijk vindt het onderhoud vaak plaats op een preventieve of reactieve manier. Preventief onderhoud wordt regelmatig uitgevoerd, terwijl reactief onderhoud pas gebeurt na een storing \autocite{Morganti2024, Mikulic2024}. Volgens \textcite{ErRatby2025} kan deze methode niet effectief zijn, omdat onderdelen soms te vroeg worden vervangen of onverwachte defecten toch optreden.
 
@@ -58,6 +59,8 @@ De doelgroep van dit onderzoek zijn de technische verantwoordelijke van Bouwonde
 %In recente literatuur krijgen zowel unsupervised als self-supervised  leermethoden steeds meer aandacht om deze beperkingen te verhelpen. Deze methoden stellen ons in staat om afwijkingen in tijdsreeksen te identificeren zonder duidelijke foutlabels \autocite{Giannoulidis2024, Aggarwal2025}. \textcite{Dissem2024} illustreren onder andere hoe unsupervised anomaly detection in combinatie met data-imputatie op een effectieve manier kan omgaan met geluidsrijke tijdsreeksen. \textcite{Holtz2025} integreren bovendien unsupervised representationlearning met active learning om met beperkte gelabelde gegevens toch betrouwbare foutdetectie te bereiken.
 
 %Als historische gegevens niet genoeg beschikbaar zijn, kan synthethische informatie een optie zijn. \textcite{Ardebili2026} leggen uit op welke manier Generative Adversarial Networks(GANs) worden toegepast om realistische synthetische datasets te creëren. In het kader van voorspellend onderhoud laten \textcite{Demir2025} zien dat het verhogen van gegevens op basis van GAN-en cGAN-modellen de prestaties van onderhoudsmodellen kan verbeteren. Volgens \textcite{Hu2024} en \textcite{Maguluri2024} worden bovendien digital twins en gesimuleerde omgevingen in de literatuur genoemd als strategieën om realistische synthetische sensordata te creëren voor industriële toepassingen.
+
+\newpage
 
 \section{\IfLanguageName{dutch}{Onderzoeksvraag}{Research question}}%
 \label{sec:onderzoeksvraag}
@@ -70,10 +73,10 @@ De centrale onderzoeksvraag luidt:
 
 \textbf{Op welke manier kan een machine learning-model, gebaseeerd op sensorgegevens, worden gebruikt om storingen in bouwmachines bij een kleine bouwonderneming nauwkeurig te voorspellen en het onderhoud effectiever te organiseren?}
 
-Deze vraag is van belang omdat onderzoek aantoont dat traditionele onderhoudsmethoden niet effectief zijn \autocite{Deepak2025, Mikulic2024}, terwijl volgens \textcite{Elahi2023} de invoering van AI-gebaseerde technieken in kleine ondernemingen nog niet goed is uitgewerkt.
+Deze vraag is van belang omdat onderzoek aantoont dat traditionele onderhoudsmethoden niet effectief genoeg zijn \autocite{Deepak2025, Mikulic2024}, terwijl volgens het onderzoek van\textcite{Elahi2023} de invoering van AI-gebaseerde technieken in kleine ondernemingen nog niet goed is uitgewerkt.
 
 De onderzoeksvraag wordt verder verdeeld in deelvragen die zich richten op het probleemdomein en het oplossingsdomein.
-Dit omvat onder andere geschikte sensordata \autocite{Nayak2024}, ruisverwerking \autocite{Wang2025}, geschikte machine learning-algoritmes \autocite{Giannoulidis2024, Aggarwal2025} en volgens \textcite{Roehrich2024} en \textcite{Mahale2025} ook de evaluatiemetrieken.
+Dit omvat onder andere geschikte sensordata \autocite{Nayak2024}, ruisverwerking \autocite{Wang2025}, geschikte machine learning-algoritmes \autocite{Giannoulidis2024, Aggarwal2025} en volgens de studies van \textcite{Roehrich2024} en \textcite{Mahale2025} ook de evaluatiemetrieken.
 
 %Kleine bouwondernemingen hebben vaak geen uitgebreide en gelabelde historische datasets om traditionele supervised voorspellingsmodellen te ontwikkelen \autocite{Elahi2023}. Daarnaast omvatten sensorgegevens vaak ruis en onbekende waarden, wat de betrouwbaarheid van modellen kan schaden \autocite{Wang2025, Dissem2024}. Dit leidt tot de behoefte aan een data-efficiënte en stevige methode voor voorspellend onderhoud, die ook geschikt is in omgevingen met een beperkte beschikbaarheid van datasets. De belangrijkste onderzoeksvraag is: Op welke manier kan een machine learning-model, gebaseerd op sensorgegevens, worden gebruikt om storingen in bouwmachines bij een kleine bouwonderneming nauwkeurig te voorspellen en het onderhoud effectiever te organiseren?
 
@@ -82,7 +85,7 @@ Dit omvat onder andere geschikte sensordata \autocite{Nayak2024}, ruisverwerking
 \paragraph{Deelvragen in verband met het probleemdomein}
 
 \begin{itemize}
-    \item 1: Welke soorten sensordata zijn het meest geschikt voor het voorspellen van storingen in bouwmachines binnen kleine bouw ondernemingen?
+    \item 1: Welke soorten sensordata zijn het meest geschikt voor het voorspellen van storingen in bouwmachines binnen kleine bouwondernemingen?
     
     \item 2: Welke verschillen bestaan er in beschikbare sensordata tussen verschillende types bouwmachines en hoe beïnvloeden deze verschillen de mogelijkheid tot foutdetectie?
     
@@ -117,6 +120,7 @@ Deelvragen binnen het oplossingsdomein zijn gebaseerd op de inzichten uit het pr
 
 Deze bachelorproef heeft als doel een soort van proof-of-concept voorspellend onderhoudsmodel te creëren en te evalueren voor de gekozen casus. Dit wordt ook aangevuld met een praktisch adviesrapport om het model te integreren en uit te voeren binnen het bedrijf. De bachelorproef is pas succesvol, zoals \textcite{Raffaele2024} en \textcite{Mahale2025} ook beschrijven in hun onderzoek, als het model technisch helemaal goed functioneert en een duidelijke waarde toevoegt aan het onderhoudsbeleid van het bouwbedrijf.
 
+\newpage
 
 \section{\IfLanguageName{dutch}{Onderzoeksdoelstelling}{Research objective}}%
 \label{sec:onderzoeksdoelstelling}
@@ -134,7 +138,7 @@ Concreet wordt beoogd:
     \item 5: Een praktisch adviesrapport op te stellen voor mogelijke implementatie binnen de onderneming.
 \end{itemize}
 
-Het onderzoek is succesvol wanneer kan worden bewezen dat het ontwikkelde model technisch functioneert en mogelijk een effectiever onderhoudsbeleid ondersteunt, zoals ook blijkt uit het onderzoek van \textcite{ErRatby2025} bij vergelijkbare industriële toepassingen.
+Het onderzoek is succesvol wanneer kan worden bewezen dat het ontwikkelde model technisch functioneert en mogelijk een efficiëntere onderhoudsbeleid ondersteunt, zoals ook blijkt uit het onderzoek van \textcite{ErRatby2025} bij vergelijkbare industriële toepassingen.
 
 %Deze bachelorproef heeft als doel een soort van proof-of-concept voorspellend onderhoudsmodel te creëren en te evalueren voor de gekozen casus. Dit wordt ook aangevuld met een praktisch
 %adviesrapport om het model te integreren en uit te voeren binnen het bedrijf. De bachelorproef is pas succesvol, zoals \textcite{Raffaele2024} en \textcite{Mahale2025} ook beschrijven in hun onderzoek, als het model technisch helemaal goed functioneert en een duidelijke waarde toevoegt aan het onderhoudsbeleid van het bouwbedrijf.
