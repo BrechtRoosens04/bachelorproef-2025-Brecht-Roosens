@@ -51,6 +51,8 @@
 
 Dit hoofdstuk vervolgt de probleemstelling uit de inleiding en richt zich op de wetenschappelijke en technologische vooruitgangen met betrekking tot voorspellend onderhoud en machine learning. In de inleiding werd het probleem van kleine bouwbedrijven toegelicht, maar hier wordt de huidige onderzoeksstatus binnen het bredere domein van data-gedreven onderhoudssystemen onderzocht. Deze literatuurstudie biedt de theoretische en methodologische fundamenten voor de benadering die in het volgende hoofdstuk wordt toegelicht.
 
+\newpage
+
 \section{\IfLanguageName{dutch}{Onderhoudsstrategieën}{Maintenance strategies}}%
 \label{sec:Onderhoudsstrategieën}
 
@@ -70,3 +72,52 @@ Machine learning is van groot belang in hedendaagse predictieve onderhoudssystem
 \label{sec:{supervised learning}
     
 Supervised learning modellen zoals Support Vector Machines, Random Forests en Artificial Neural Networks worden vaak gebruikt wanneer er gelabelde foutdata beschikbaar zijn \autocite{Carvalho2019}. Volgens \textcite{Elahi2023} hebben echter deze modellen behoefte aan voldoende representatieve foutvoorbeelden, wat in veel realistische situaties een probleem vormt. \textcite{Roehrich2024} laten zien dat supervised modellen uitstekend presteren in gecontroleerde industriële omgevingen, maar kwetsbaar zijn voor veranderingen in de dataset en een beperkte toepasbaarheid.
+
+\section{\IfLanguageName{dutch}{Unsupervised learning en anomaly detection}{Unsupervised learning and anomaly detection}}%
+\label{sec:{unsupervised learning}
+    
+In gevallen waarin foutlabels schaars of niet volledig zijn, worden unsupervised technieken gebruikt. Deze modellen leren het gebruikelijke gedrag van een machine en herkennen afwijkingen als anomalieën \autocite{Giannoulidis2024}. Autoencoders worden vaak gebruikt om verborgen weergaven van normaal gedrag te simuleren. \textcite{Aggarwal2025} presenteren DASTAD, een self-supervised transformer-gebaseerde aanpak voor het opsporen van onregelmatigheden in multivariate tijdsreeksen. Hun bevindingen laten zien dat transformer-architecturen-effectiever complexe tijdelijke afhankelijkheden kunnen modelleren dan traditionele recurrente netwerken. \textcite{Holtz2025} combineren unsupervised anomaly detection met active learning, waardoor menselijke betrokkenheid alleen nodig is in gevallen van twijfel. Dit vermindert de nood aan uitgebreide labeling aanzienlijk.
+
+\section{\IfLanguageName{dutch}{Deep learning en tijdsreeksanalyse}{Deep learning and time series analysis}}%
+\label{sec:{Deep learning and time series analysis}
+    
+Door de groei van sensorgegevens krijgen deep learning-modellen steeds meer waarde binnen predictieve onderhoud. \textcite{Li2025} laten zien dat transformer-gebaseerde modellen bijzonder geschikt zijn voor het onderzoeken van multivariate industriële tijdsreeksen. In tegenstelling tot conventionele LSTM-netwerken zijn transformers in staat om langeafstandsafhankelijkheden efficiënter te simuleren. \textcite{Mahfoud2025} benadrukken dat deep learning vooral voordelen oplevert in ingewikkelde systemen met een hoge dimensie en niet-lineaire interacties tussen variabelen. \textcite{Elahi2023} wijzen echter op de hoge computationele vereisten van deep learning-modellen, wat van belang is in situaties met een beperkte IT-infrastructuur.
+
+\section{\IfLanguageName{dutch}{Datakwaliteit en ruisproblematiek}{Data quality and noise issues}}%
+\label{sec:{Datakwaliteit en ruisproblematiek}
+    
+
+Een cruciale uitdaging in voorspellend onderhoud is de kwaliteit van gegevens. Ruis en signaalvervorming oefenen een aanzienlijke negatieve invloed uit op de prestaties van modellen voor foutdetectie \autocite{Wang2025}. In industriële omgevingen, vooral in de bouwsector, worden sensoren geconfronteerd met stof, trillingen en temperatuurfluctuaties \autocite{Mikulic2024}. \textcite{Nayak2024} benadrukken dat feature engineering en signaalverwerking essentiële stappen zijn voor het creëren van betrouwbare modellen, want zonder voldoende preprocessing kunnen zelfs geavanceerde modellen onjuiste voorspellingen genereren.
+
+\newpage
+
+\section{\IfLanguageName{dutch}{Beperkte data en synthetische data-oplossingen}{limited data and synthetic data solutions}}%
+\label{sec:{Beperkte data en synthetische data-oplossingen}
+    
+Een terugkerend probleem voor kleine bedrijven is het gebrek aan uitgebreide historische datasets. Kleine datavolumes worden beschouwd als één van de belangrijkste obstakels voor de implementatie van AI \autocite{Elahi2023}. \textcite{Meddaoui2024} bewijzen dat Generatieve Adversarial Networks of GANs kunnen worden gebruikt om synthetische sensorgegevens te creëren voor het trainen van predictieve onderhoudsmodellen. Dit concept wordt ook verbonden met digital twins, waarbij gesimuleerde omgevingen worden ingezet voor het modelleren van falingsscenario's \autocite{Hu2024}. Volgens \textcite{Nieminen2026} stellen ze dat synthetische gegevens steeds vaker worden gebruikt om modellen te evalueren wanneer er beperkte beschikbaarheid is aan reële foutdata.
+
+\section{\IfLanguageName{dutch}{Edge AI en implementatiecontext}{Edge AI and implementation context}}%
+\label{sec:{Edge AI en implementatiecontext}
+    
+Een andere ontwikkeling in voorspellend onderhoud is de overgang naar Edge AI. In plaats van alleen data in de cloud te werwerken, worden modellen op locatie op industriële apparatuur geïnstalleerd \autocite{Mahale2025}. Dit vermindert de latency en verbetert de privacy van de data.
+Het onderzoek van \textcite{Elahi2023} wijst uit dat voor kleine bedrijven een eenvoudige en effectieve modelarchitectuur van groter belang kan zijn dan optimale precisie, vanwege de beperkte infrastructuur.
+
+\section{\IfLanguageName{dutch}{Synthese en onderzoekspositie}{Synthesis and research position}}%
+\label{sec:{Synthese en onderzoekspositie}
+    
+Uit de literatuur blijkt dat:
+\begin{itemize}
+    \item 1: Voorspellend onderhoud aantoonbare voordelen biedt ten opzichte van traditionele onderhoudsstrategieën \autocite{ErRatby2025, Mahale2025}.
+    
+    \item 2: Machine learning, in het bijzonder anomaly detection, geschikt is voor foutdetectie in industriële systemen \autocite{Carvalho2019, Giannoulidis2024}.
+    
+    \item 3: Deep learning en transformer-modellen sterke prestaties leveren bij complexe tijdsreeksen \autocite{Li2025, Aggarwal2025}.
+    
+    \item 4: Beperkte data en ruis belangrijke implementatie-uitdagingen vormen \autocite{Elahi2023, Wang2025}.
+    
+    \item 5: Synthetische data en digital twins mogelijke oplossingen bieden voor datatekorten \autocite{Meddaoui2024, Hu2024}.
+\end{itemize}
+
+Wat minder is bestudeeerd, is de specifieke toepasbaarheid van deze technieken in kleine bouwbedrijven met beperkte financiële middelen en specifieke operationele omstandigheden.
+
+Deze bachelorproef richt zich op dit kruispunt, namelijk het samenbrengen van technieken voor anomaly detection met een praktisch toepasbaar implementatiekader voor een kleine bouwbedrijf.
