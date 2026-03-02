@@ -26,9 +26,9 @@
 %% Maak voor elke fase (behalve het literatuuronderzoek) een NIEUW HOOFDSTUK aan
 %% en geef het een gepaste titel.
 
-Dit hoofdstuk behandelt de onderzoeksaanpak voor het creëren en beoordelen van een data-gedreven voorspellend onderhoudsmodel voor bouwmachines binnen een kleine bouwonderneming, zoals Bouwonderneming Marchand BV, waarmee nauw samengewerkt wordt. In het vorige hoofdstuk werd de theoretische basis en de huidige situatie besproken, maar hier wordt uitgelegd op welke manier deze inzichten op een systematische manier worden omgezet in een specifiek onderzoeksontwerp.
+Dit hoofdstuk behandelt de onderzoeksaanpak voor het creëren en beoordelen van een data-gedreven voorspellend onderhoudsmodel voor bouwmachines binnen een kleine bouwonderneming, zoals Bouwonderneming Marchand BV waarmee nauw samengewerkt wordt. In het vorige hoofdstuk werd de theoretische basis en de huidige situatie besproken, maar hier wordt uitgelegd op welke manier deze inzichten op een systematische manier worden omgezet in een specifiek onderzoeksontwerp.
 
-Volgens \textcite{Carvalho2019}, \textcite{Xue2025} en \textcite{Nieminen2026} volgt de gekozen methode een stapsgewijze aanpak die aansluit bij gebruikelijke AI-implemen\-tatie in industriële predictieve onderhoud.
+Volgens de studies van \textcite{Carvalho2019}, \textcite{Xue2025} en \textcite{Nieminen2026} volgt de gekozen methode een stapsgewijze aanpak die aansluit bij gebruikelijke AI-implemen\-tatie in industriële predictieve onderhoud.
 
 Het onderzoek is ingedeeld in zes achtereenvolgende fasen:
 
@@ -54,13 +54,13 @@ Deze indeling maakt het mogelijk om literatuur, praktijksituatie en technische u
 
 \paragraph{Doelstelling}
 
-De eerste fase diende om een passende machine learning-strategie te ontwikkelen voor vroegtijdige detectie van fouten in bouwmachines.
+De eerste fase dient om een passende machine learning-strategie te ontwikkelen voor vroegtijdige detectie van fouten in bouwmachines.
 
 \paragraph{Methodologische verantwoording}
 
-De systematische beoordeling van \textcite{Carvalho2019} toont aan dat predictieve onderhoud voornamelijk gebaseerd is op supervised, unsupervised en deep learnin\-g-methoden. In kleine bedrijven kan het vaak lastig zijn om genoeg gelabelde foutdata te verzamelen \autocite{Elahi2023}. Hierdoor zijn zowel unsupervised als self-supervised technieken methodologisch beter geschikt.
+De systematische beoordeling in het onderzoek van \textcite{Carvalho2019} toont aan dat predictieve onderhoud voornamelijk gebaseerd is op supervised learning-, unsupervised learning- en deep learnin\-g-methoden. In kleine bouwbedrijven kan het vaak lastig zijn om genoeg gelabelde foutdata te verzamelen \autocite{Elahi2023}. Hierdoor zijn zowel unsupervised learning-technieken als self-supervised learning-technieken methodologisch beter geschikt.
 
-Autoencoders kunnen op een effectieve manier normaal gedrag simuleren en afwijkingen opsporen zonder duidelijke foutlabels \autocite{Giannoulidis2024}. Het onderzoek van \textcite{Aggarwal2025} introduceert dat transformer-gebaseerde anomaly detection (DASTAD) voor multivariate tijdsreeksen, waarbij ingewikkelde tijdelijke afhankelijkheden effectiever worden vastgelegd dan bij traditionele modellen. De studie van \textcite{Li2025} toont ook aan dat transformer-architecturen uiterst geschikt zijn voor industriële sensorgegevens.
+Autoencoders kunnen op een efficiëntere manier normaal gedrag simuleren en afwijkingen opsporen zonder duidelijke foutlabels \autocite{Giannoulidis2024}. Het onderzoek van \textcite{Aggarwal2025} introduceert een transformer-gebaseerde anomaly detection (DASTAD) voor multivariate tijdsreeksen, waarbij ingewikkelde tijdelijke afhankelijkheden efficiënter worden vastgelegd dan bij traditionele modellen. De studie van \textcite{Li2025} toont ook aan dat transformer-architecturen uiterst geschikt zijn voor industriële sensorgegevens.
 
 Tegelijkertijd benadrukt het onderzoek van \textcite{Xue2025} dat prognostische modellen bestand moeten zijn tegen fluctuaties in belastings- en omgevingsfactoren onder verschillende werkomstandigheden. Dankzij het onderzoek van \textcite{Carvalho2019} wordt in deze bachelorproef daarom gekozen voor een benadering voor anomaly detection in plaats van een complete Remaining Useful Life-voorspelling, omdat deze laatste meer datavereisten vereist.
 
@@ -119,9 +119,9 @@ Het verhogen van de kwaliteit van data en het ontdekken van belangrijke eigensch
 
 \paragraph{Methodologische verantwoording}
 
-Modellen die gebaseerd zijn op encoders zijn effectiever wanneer ruissignalen van tevoren worden gefilterd \autocite{WangXueyi2025}. Het onderzoek van \textcite{Dissem2024} toont aan dat unsupervised technieken niet alleen anomalieën opsporen, maar ook ontbrekende waarden kunnen imputeren in ruisgevoelige tijdsreeksen.
+Modellen die gebaseerd zijn op encoders zijn effectiever wanneer ruissignalen van tevoren worden gefilterd \autocite{WangXueyi2025}. Het onderzoek van \textcite{Dissem2024} toont aan dat unsupervised learning-technieken niet alleen anomalieën opsporen, maar ook ontbrekende waarden kunnen imputeren in ruisgevoelige tijdsreeksen.
 
-Feature engineering wordt gezien als een essentiële fase in het voorspellen van onderhoud \autocite{Nayak2024}. Daarom worden zowel statistische eigenschappen (gemiddelde, variantie, root mean square) als spectrale eigenschappen geëxtraheerd.
+Feature engineering wordt gezien als een essentiële fase in het voorspellen van onderhoud \autocite{Nayak2024}. Daarom worden zowel statistische eigenschappen, zoals gemiddelde, variantie en root mean square, als spectrale eigenschappen geëxtraheerd.
 
 \paragraph{Beperkte data en synthetische augmentatie}
 
@@ -138,13 +138,13 @@ Het implementeren van een proof-of-concept anomaly detection-model.
 
 \paragraph{Modelarchitectuur}
 
-De keuze voor de modelarchitectuur is gebaseerd op de nieuwste inzichten uit de literatuur over data-gedreven foutdetectie in industriële systemen. Omdat foutlabels in kleine bedrijven vaak niet altijd beschikbaar zijn, ligt de nadruk in eerste instantie op anomaly detection-modellen die het gebruikelijke machinegedrag modellen en afwijkingen  kunnen vaststellen met behulp van een afwijkingsscore. Volgens de onderzoeken van \textcite{Giannoulidis2024} en \textcite{Carvalho2019} worden autoencoder-gebaseerde ontwerpen gezien als een passende basis, omdat ze zonder duidelijke foutlabels in staat zijn om latente weergaven van normaal gedrag te leren en anomalieën te identificeren door  middel van reconstructiefouten.
+De keuze voor de modelarchitectuur is gebaseerd op de nieuwste inzichten uit de literatuur over data-gedreven foutdetectie in industriële systemen. Omdat foutlabels in kleine bedrijven vaak niet altijd beschikbaar zijn, ligt de nadruk in eerste instantie op anomaly detection-modellen die het gebruikelijke machinegedrag modelleren en afwijkingen kunnen vaststellen met behulp van een afwijkingsscore. Volgens de onderzoeken van \textcite{Giannoulidis2024} en \textcite{Carvalho2019} worden autoencoder-gebaseerde ontwerpen gezien als een passende basis, omdat ze zonder duidelijke foutlabels in staat zijn om latente weergaven van normaal gedrag te leren en anomalieën te identificeren door  middel van reconstructiefouten.
 
-Bovendien worden transformer-gebaseerde modellen in overweging genomen, omdat deze modellen beter in staat zijn om ingewikkelde tijdelijke afhankelijkheden in verschillende tijdsintervallen te modelleren dan gebruikelijke recurrente netwerken \autocite{Aggarwal2025, Li2025}. Volgens de onderzoeken van \textcite{WangXueyi2025} en \textcite{Touil2025} kunnen voor toepassingen die zich richten op vibratiesignalen een wavelet-geïnspireerde encoderarchitectuur ook van belang zijn, omdat deze zowel tijdsgebonden als frequentiekenmerken samenbrengt en daardoor kwetsbaar is voor kleine frequentiefluctuaties die kenmerkend zijn voor eerste defecten in roterende machines.
+Bovendien worden transformer-gebaseerde modellen in overweging genomen, omdat deze modellen beter in staat zijn om ingewikkelde tijdsgebonden afhankelijkheden in verschillende tijdsintervallen te modelleren dan gebruikelijke recurrente netwerken \autocite{Aggarwal2025, Li2025}. Volgens de onderzoeken van \textcite{WangXueyi2025} en \textcite{Touil2025} kan een wavelet-geïnspireerde encoderarchitectuur ook van belang zijn voor toepassingen die zich richten op vibratiesignalen, omdat deze zowel tijdsgebonden als frequentiekenmerken samenbrengt en daardoor kwetsbaar is voor kleine frequentiefluctuaties die kenmerkend zijn voor eerste defecten in roterende machines.
 
 Als de beschikbare dataset beperkt is, wordt er ook nagedacht over het combineren van convolutionele of ResNet-gebaseerde modellen met GAN-gebaseerde data-augmentatie. Volgens het onderzoek van \textcite{Demir2025} toont deze uitbreiding aan dat de prestaties van deep learning-modellen in voorspellend onderhoud aanzienlijk kan verhogen, terwijl de studie van \textcite{Ardebili2026} de technische basis van GAN-architecturen uitlegt.
 
-De definitieve keuze van het model hangt af van de omvang van de dataset, de ingewikkeldheid van de tijdsreeksen en de computationele mogelijkheden. Het onderzoek van \textcite{Xue2025} benadrukt ook dat de robuustheid onder verschillende werkomstandigheden in overweging genomen wordt.
+De definitieve keuze van het model hangt af van de omvang van de dataset, de ingewikkeldheid van de tijdsreeksen en de computationele mogelijkheden. Het onderzoek van \textcite{Xue2025} benadrukt ook dat de robuustheid onder verschillende werkomstandigheden in overweging moeten genomen worden.
 
 \newpage
 
@@ -161,7 +161,7 @@ In de predictieve onderhoudstechniek wordt de prestatie van modellen meestal beo
 
 Bovendien dient men de impact van ruis en signaalvervorming op de prestaties van het model in overweging te nemen. De studie van \textcite{WangXueyi2025} bewijst dat industriële sensorgegevens vaak worden beïnvloed door externe factoren, wat een directe impact heeft op de betrouwbaarheid van modellen die op encoders zijn gebaseerd. Het onderzoek van \textcite{Dissem2024} benadrukt dat stevigheid tegen ruis en ontbrekende waarden een cruciale factor is voor het detecteren van onregelmatigheden in tijdsreeksen.
 
-Daarnaast stelt het onderzoek van \textcite{Xue2025} dat predictieve onderhoudsmodellen onder variabele operationele omstandigheden geëvalueerd dienen te worden om hun toepasbaarheid te garanderen. Dit is van groot belang in de bouwsector, waar belasting en gebruikspatronen aanzienlijk kunnen verschillen.
+Daarnaast stelt het onderzoek van \textcite{Xue2025} dat predictieve onderhoudsmodellen onder variabele operationele omstandigheden geëvalueerd dienen te worden om hun toepasbaarheid te garanderen. Dit is van groot belang in de bouwsector, waar belastings- en gebruikspatronen aanzienlijk kunnen verschillen.
 
 Wanneer synthetische gegevens worden toegepast om de trainingsdataset aan te vullen, wordt de invloed hiervan ook geëvalueerd. De synthetische gegevens zijn alleen waardevol als de verzamelde distributie goed overeenkomt met de werkelijke operationele gegevens \autocite{Nieminen2026}. Het onderzoek van \textcite{Demir2025} bewijst dat GAN-gebaseerde augmentatie de prestaties van het model kan verhogen, maar dat het essentieel blijft om validatie met echte gegevens te doen.
 
@@ -172,7 +172,7 @@ Naast de kwantitatieve beoordeling wordt ook de praktische uitvoerbaarheid beoor
 \section{\IfLanguageName{dutch}{Samenvattende verantwoording}{summary accountability}}%
 \label{sec:Samenvattende verantwoording}
 
-De gekozen methodologie verenigt traditionele principes van machine learning met recente innovaties in predictieve onderhoudstechnologie. De theoretische fundamenten zijn gebaseerd op de systematische literatuurstudie van \textcite{Carvalho2019}, waarin wordt bewezen dat het opsporen van onregelmatigheden bijzonder effectief is wanneer foutlabels beperkt beschikbaar zijn. De onderzoeken van \textcite{Aggarwal2025} en \textcite{Li2025} wijzen op de recente innovaties met betrekking tot self-supervised en transformer-based modellen, omdat deze modellen ook in staat zijn om ingewikkelde tijdsgebonden afhankelijkheden in multivariate industriële tijdsreeksen op een effectieve manier te modelleren.
+De gekozen methodologie verenigt traditionele principes van machine learning met recente innovaties in predictieve onderhoudstechnologie. De theoretische fundamenten zijn gebaseerd op de systematische literatuurstudie van \textcite{Carvalho2019}, waarin wordt bewezen dat het opsporen van onregelmatigheden bijzonder effectief is wanneer foutlabels beperkt beschikbaar zijn. De onderzoeken van \textcite{Aggarwal2025} en \textcite{Li2025} wijzen op de recente innovaties met betrekking tot self-supervised learning en transformer-based modellen, omdat deze modellen ook in staat zijn om ingewikkelde tijdsgebonden afhankelijkheden in multivariate industriële tijdsreeksen op een effectieve manier te modelleren.
 
 Omdat de nadruk ligt op roterende componenten van machines, wordt de methode verder ondersteund door onderzoeken naar spectrale analyse en data-gedre\-ven foutdetectie in roterende systemen \autocite{Touil2025, Lu2026}. De beslissing om tijd- en frequentiekenmerken te integreren sluit aan bij het wavelet-geïnspireerde encoder-concept van uit de studie van \textcite{WangXueyi2025}, dat een grotere gevoeligheid voor kleine afwijkingen toont.
 
