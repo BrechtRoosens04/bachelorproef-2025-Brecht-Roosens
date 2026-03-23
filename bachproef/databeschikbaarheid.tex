@@ -1,0 +1,46 @@
+%%=============================================================================
+%% Databeschikbaarheid
+%%=============================================================================
+
+\chapter{\IfLanguageName{dutch}{Databeschikbaarheid en uitdagingen bij het verkrijgen van datasets in de bouwsector}{Data availability and challenges in obtaining datasets in the construction industry}}%
+\label{ch:databeschikbaarheid en uitdagingen bij het verkrijgen}
+
+Een cruciale vereiste voor het creëren van een betrouwbaar voorspellend onderhoudsmodel is de beschikbaarheid van kwalitatieve, representatieve en voldoende uitgebreide datasets. Machine learning-algoritmes, met name modellen voor voorspellend onderhoud, zijn namelijk sterk afhankelijk van eerdere gegevens om patronen, afwijkingen en faalgedrag te herkennen. Zonder toegang tot dergelijke gegevens is het lastig om modellen te ontwikkelen die nauwkeurig en robuust zijn in praktische toepassingen. Volgens het onderzoek van \textcite{Elahi2023} is de beschikbaarheid van gegevens een essentiële vereiste voor een succesvolle invoering van kunstmatige intelligentie in industriële toepassingen.
+
+In de bouwsector is het echter bijzonder moeilijk om dergelijke datasets te verkrijgen. In tegenstelling tot sterk gedigitaliseerde sectoren is de bouwsector historisch gezien minder afhankelijk van gegevens, wat leidt tot een lagere maturiteit op het gebied van verzameling en beheer van gegevens. Volgens de studie van \textcite{Mikulic2024} bevindt de sector zich nog in een relatief vroege fase van digitale transformatie, waardoor gestructureerde en historische opgebouwde datasets vaak ontbreken.
+
+Bovendien onderstreept het onderzoek van \textcite{Wang2025} dat industriële gegevens vaak moeilijk bereikbaar zijn, zelfs als ze binnen organisaties aanwezig zijn. Data kan over diverse systemen worden verspreid, niet gestandaardiseerd zijn of door technische of organisatorische obstakels moeilijk bereikbaar zijn. Deze kwestie is volgens de studie van \textcite{Hu2024} nog duidelijker bij kleine en middelgrote bedrijven, waar vaak de benodigde infrastructuur en expertise voor databeheer ontbreken.
+
+Daarnaast laten onderzoeken zien dat het niet vanzelfsprekend is om gegevens te delen tussen diverse partijen binnen een industriële omgeving. Volgens de onderzoeken van \textcite{Elahi2023} en \textcite{Wang2025} zijn organisatorische, commerciële en vertrouwelijkheidsgerelateerde elementen cruciaal voor het bepreken van de toegang tot gegevens. Dit leidt ertoe dat waardevolle datasets vaak niet beschikbaar zijn voor onderzoeksdoeleinden of externe toepassingen.
+
+Deze bevindingen worden bevestigd door de ervaringen binnen dit onderzoek, waarbij het verkrijgen van datasets via externe partijen, zoals machine-dealers, gepaard ging met beperkte respons, onduidelijkheid over datatoegang en een lage bereidheid tot samenwerking. Deze praktische uitdagingen komen volgense de studies van \textcite{Elahi2023} en \textcite{Wang2025} overeen met de in de literatuur genoemde obstakels voor toegang tot de data en het delen van data in industriële omgevingen.
+
+De mix van beperkte datacaptatie, beperkte toegankelijkheid en terughoudendheid bij het delen van gegevens maakt het verzamelen van geschikte datasets tot één van de belangrijkste obstakels in dit onderzoek. Volgens de studies van \textcite{Hu2024} en \textcite{Elahi2023} heeft dit niet alleen invloed op de fase van dataverzameling, maar ook op de verdere ontwikkeling en validatie van voorspellende modellen, zoals ook wordt vermeld in de literatuur over AI-toepassingen in onderhoudssituaties.
+
+\newpage
+
+\section{\IfLanguageName{dutch}{Beperkte datacaptatie en digitalisering}{Limited data collection and digitization}}%
+\label{sec: Beperkte datacaptatie en digitalisering}
+
+Binnen kleine bouwbedrijven is de digitalisering van machinegegevens vaak nog niet optimaal. In tegenstelling tot volledig geautomatiseerde industriële omgevingen, waar sensorgegevens voortdurend en op een systematische manier worden verzameld en opgeslagen, hebben veel bouwbedrijven geen uitgebreide historische datasets. Dit ontbreken van datacaptatie vormt een cruciale obstakel voor het gebruik van technieken die gebaseerd zijn op gegevens, zoals voorspellend onderhoud. Volgens het onderzoek van \textcite{Elahi2023} is het beschikbaar hebben van gestructureerde en voldoende grote datasets een essentiële vereiste voor de invoering van kunstmatige intelligentie in industriële toepassingen.
+
+De beperkte dataverzameling in de bouwsector is nauw verbonden met de lagere graad van digitalisering binnen de sector. Het onderzoek van \textcite{Mikulic2024} stelt dat de bouwsector achterloopt ten opzichte van andere sectoren op het gebied van digitale ontwikkeling, wat onder andere blijkt uit een beperkte integratie van sensoren, IoT-technologieën en centrale dataplatformen. Volgens de onderzoeken van \textcite{Mikulic2024} en \textcite{Hu2024} leidt dit ertoe dat operationele gegevens van machines vaak niet automatisch worden vastgelegd of slechts gedeeltelijk worden bijgehouden, wat de toegankelijkheid van waardevolle gegevens vermindert.
+
+Daarnaast wordt onderhoudsinformatie in veel gevallen nog manueel geregistreerd, bijvoorbeeld via papieren documenten of eenvoudige digitale tools zonder gestandaardiseerde structuur. Dit resulteert in onvolledige, onconsistente en lastig te verwerken datasets. De studie van \textcite{Hu2024} stelt dat het gebrek aan gestructureerde en kwalitatieve gegevens een aanzienlijke obstakel vormt voor het gebruik van machine learning-methoden, omdat deze modellen sterk afhankelijk zijn van consistente inputgegevens.
+
+Verder onderstreept het onderzoek van \textcite{Wang2025} dat, zelfs wanneer gegevens worden verzameld, deze vaak niet op een centrale en toegankelijke wijze worden opgeslagen. Data kan over diverse systemen of afdelingen worden verspreid, waardoor het lastig is om een compleet en samenhangend overzicht te krijgen van het gedrag en de staat van machines. Volgens de studie van \textcite{Wang2025} beperkt dit probleem van gefragmenteerde datacaptatie de mogelijkheden voor geavanceerde data-analyse aanzienlijk.
+
+De combinatie van beperkte digitalisering, onvoldoende gestructureerde data en gefragmenteerde opslag resulteert in een lage beschikbaarheid van bruikbare datasets binnen de bouwsector \autocite{Mikulic2024, Hu2024, Wang2025}. Dit vormt volgens de studies van \textcite{Elahi2023} en \textcite{Hu2024} een essentiële obstakel voor het creëren van betrouwbare voorspellende modellen, omdat zowel de hoeveelheid als de kwaliteit van de beschikbare gegevens niet genoeg zijn om complexe patronen en faalmechanismen nauwkeurig te analyseren.
+
+\newpage
+
+\section{\IfLanguageName{dutch}{Problemen bij het verkrijgen van externe datasets}{Problems obtaining external datasets}}%
+\label{sec: problemen bij het verkrijgen van externe datasets}
+
+Omdat kleine bouwbedrijven vaak geen uitgebreide of gestructureerde interne datasets hebben, wordt er in onderzoek en praktijk vaak gebruikgemaakt van externe bronnen van gegevens, zoals machine-dealers, fabrikanten of serviceproviders \autocite{Elahi2023, Hu2024}. In industriële omgevingen worden dergelijke gegevens vaak door diverse betrokkenen beheerd, waardoor externe partijen een mogelijke bron zijn voor operationele en onderhoudsinformatie \autocite{Meddaoui2024, Nayak2024}. In de praktijk blijkt het verwerven van deze datasets echter een ingewikkelde en onduidelijke taak te zijn.
+
+Tijdens de uitvoering van dit onderzoek werd aangetoond dat het in contact komen met externe partijen vaak leidt tot diverse uitdagingen. In verschillende situaties was er geen reactie op contactpogingen, waardoor het opstarten van samenwerkingen lastig werd. Daarnaast werd vastgesteld dat sommige partijen expliciet geen toegang wilden geven tot hun data, terwijl in andere gevallen onduidelijk bleef of de gevraagde data überhaupt beschikbaar was. Deze beperkte respons en onduidelijkheid leiden tot een aanzienlijke vertraging en onzekerheid tijdens de fase van het verzamelen van gegevens in het onderzoek.
+
+De literatuur toont aan dat dergelijke problemen vaak voorkomen bij het verzamelen van industriële informatie. De toegang tot gegevens wordt vaak bemoeilijkt door organisatorische en praktische obstakels, waaronder het gebrek aan standaard processen voor het delen van gegevens en een beperkte hoeveelheid interne middelen \autocite{Wang2025, Dissem2024}. Bovendien onderstreept het onderzoek van \textcite{Aggarwal2025} dat veel organisaties niet goed voorbereid zijn op het delen van gegevens voor analytische doeleinden, wat de toegankelijkheid nog verder vermindert.
+
+Een cruciale factor hierbij is de vertrouwelijkheid van bedrijfsinformatie. Bedrijven zijn vaak niet bereid om informatie over machinegebruik, onderhoud en prestaties met externe partijen te delen, omdat deze informatie strategisch van belang is \autocite{Hu2024, Meddaoui2024}. Volgens de studies van \textcite{Elahi2023} en \textcite{Nayak2024} wordt dit versterkt door twijfels over het gebruik van gegevens, de eigendom en de mogelijke commerciële gevolgen.
