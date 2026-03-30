@@ -26,137 +26,82 @@
 %% Maak voor elke fase (behalve het literatuuronderzoek) een NIEUW HOOFDSTUK aan
 %% en geef het een gepaste titel.
 
-In dit onderzoek wordt een data-gedreven aanpak gebruikt om een voorspellend onderhoudsmodel voor bouwmachines te creëren. Volgens de onderzoeken van \textcite{Carvalho2019} en \textcite{ErRatby2025} gebruiken voorspellend onderhoudsprocessen sensorgegevens en machine learning-methoden om afwijkingen en mogelijke defecten op tijd te identificeren, wat leidt tot een efficiëntere inplanning van onderhoud en een vermindering van ongeplande stilstand.
+In dit onderzoek wordt een data-gedreven benadering toegepast om een voorspellend onderhoudsmodel voor bouwmachines te creëren. Voorspellend onderhoud maakt gebruik van sensorgegevens in combinatie met machine learning-methoden om op tijd afwijkingen en mogelijke defecten te identificeren. Volgens de onderzoeken van \textcite{Carvalho2019} en \textcite{ErRatby2025} stelt dit ons in staat om onderhoud effectiever te organiseren en ongeplande stilstand te verminderen, wat in de literatuur wordt gezien als één van de voornaamste voordelen van deze methode.
 
-In de context van hedendaagse industriële toepassingen en het Industrial Internet of Things of ook wel afgekort IIoT is data cruciaal voor het bevorderen van dergelijke onderhoudsstrategieën \autocite{Kapoor2025}. Machines verzamelen voortdurend gegevens via sensoren, wat het mogelijk maakt om patronen te onderzoeken en degradatieprocessen beter te doorgronden.
+In het kader van moderne industriële toepassingen, met name het Industrial Internet of Things of afgekort IIoT, is data cruciaal voor het bevorderen van dergelijke onderhoudsstrategieën. Machines verzamelen voortdurend informatie via sensoren, wat het mogelijk maakt om patronen te analyseren en degradatieprocessen beter te doorgronden, wat een cruciale fundament vormt voor voorspellend onderhoud \autocite{Kapoor2025, WangXueyi2025}. Volgens de studie van \textcite{Kapoor2025} is deze overgang naar data-gedreven systemen cruciaal voor de uitvoering van voorspellend onderhoud in industriële omgevingen.
 
-De aanpak van dit onderzoek is samengesteld uit een mix van theoretische basis en een praktische casestudy. Hierbij wordt een gestructureerde machine learning-aanpak gevolgd, aangevuld met een iteratieve en adaptieve werkwijze die inspeelt op de kenmerken van de beschikbare data. Volgens de studies van \textcite{Mahale2025} en \textcite{Xue2025} past de aanpak van dit onderzoek bij de gebruikelijke methoden in voorspellend onderhoudsonderzoek.
+De onderzoeksmethode in deze bachelorproef verenigt een theoretische basis met een praktische casestudy. Er wordt een gestructureerde machine learning-method\-e toegepast, aangevuld met een iteratieve en adaptieve benadering die inspeelt op de eigenschappen en beperkingen van de beschikbare gegevens. Volgens de onderzoeken van \textcite{Mahale2025} en \textcite{Xue2025} is een dergelijke mix van technieken opvallend voor studies in voorspellend onderhoud, waar flexibiliteit en afhankelijkheid van gegevens een cruciale rol vervullen.
 
-%Dit hoofdstuk behandelt de onderzoeksaanpak voor het creëren en beoordelen van een data-gedreven voorspellend onderhoudsmodel voor bouwmachines binnen een kleine bouwonderneming, zoals Bouwonderneming Marchand BV waarmee nauw samengewerkt wordt. In het vorige hoofdstuk werd de theoretische basis en de huidige situatie besproken, maar hier wordt uitgelegd op welke manier deze inzichten op een systematische manier worden omgezet in een specifiek onderzoeksontwerp.
+%In dit onderzoek wordt een data-gedreven aanpak gebruikt om een voorspellend onderhoudsmodel voor bouwmachines te creëren. Volgens de onderzoeken van \textcite{Carvalho2019} en \textcite{ErRatby2025} gebruiken voorspellend onderhoudsprocessen sensorgegevens en machine learning-methoden om afwijkingen en mogelijke defecten op tijd te identificeren, wat leidt tot een efficiëntere inplanning van onderhoud en een vermindering van ongeplande stilstand.
 
-%Volgens de studies van \textcite{Carvalho2019}, \textcite{Xue2025} en \textcite{Nieminen2026} volgt de gekozen methode een stapsgewijze aanpak die aansluit bij gebruikelijke AI-implemen\-tatie in industriële predictieve onderhoud.
+%In de context van hedendaagse industriële toepassingen en het Industrial Internet of Things of ook wel afgekort IIoT is data cruciaal voor het bevorderen van dergelijke onderhoudsstrategieën \autocite{Kapoor2025}. Machines verzamelen voortdurend gegevens via sensoren, wat het mogelijk maakt om patronen te onderzoeken en degradatieprocessen beter te doorgronden.
 
-%Het onderzoek is ingedeeld in zes achtereenvolgende fasen:
-
-%\begin{itemize}
-    %\item Theoretische onderbouwing en modelselectie
-    
-    %\item Casusgerichte probleemanalyse en requirementsbepaling
-    
-    %\item Dataverzameling en signaalanalyse
-    
-    %\item Data preprocessing en feature engineering
-    
-    %\item Modelontwikkeling en training
-    
-    %\item Evaluatie en validatie
-%\end{itemize}
-
-%Deze indeling maakt het mogelijk om literatuur, praktijksituatie en technische uitvoering op een gestructureerde manier te combineren.
+%De aanpak van dit onderzoek is samengesteld uit een mix van theoretische basis en een praktische casestudy. Hierbij wordt een gestructureerde machine learning-aanpak gevolgd, aangevuld met een iteratieve en adaptieve werkwijze die inspeelt op de kenmerken van de beschikbare data. Volgens de studies van \textcite{Mahale2025} en \textcite{Xue2025} past de aanpak van dit onderzoek bij de gebruikelijke methoden in voorspellend onderhoudsonderzoek.
 
 \newpage
 
 \section{\IfLanguageName{dutch}{Theoretische onderbouwing en modelselectie}{Theoretical basis and model selection}}%
 \label{sec: theoretische onderbouwing en modelselectie}
 
-De eerste fase van dit onderzoek omvat het creëren van een theoretische framework voor voorspellend onderhoudsprocessen en de implementatie van machine learning in onderhoudssystemen. Uit het onderzoek van \textcite{Carvalho2019} blijkt dat data-gedreven modellen een belangrijke rol spelen bij het analyseren van sensordata en het detecteren van afwijkingen in industriële toepassingen.
+De eerste fase van dit onderzoek richt zich op het uitwerken van een theoretisch kader rond voorspellend onderhoud en de toepassing van machine learning binnen onderhoudssystemen. In de literatuur wordt benadrukt dat data-gedreven modellen een centrale rol spelen bij het analyseren van sensorgegevens en het detecteren van afwijkingen in industriële omgevingen \autocite{Carvalho2019}. Deze inzichten vormen de basis voor de verdere uitwerking van het model in dit onderzoek.
 
-In voorspellend onderhoud worden diverse soorten modellen gebruikt, variërend van traditionele machine learning-algoritmen tot geavanceerde deep learning-modellen. Volgens het onderzoek van \textcite{Li2025} is de keuze van een geschikt model sterk afhankelijk van factoren zoals de aard van de data, de beschikbaarheid van labels en de complexiteit van het probleem.
+Binnen voorspellend onderhoud wordt een brede waaier aan modellen toegepast, gaande van traditionele machine learning-algoritmes tot meer geavanceerde deep learning-technieken \autocite{Carvalho2019, Li2025}. De keuze voor een geschikt model is daarbij sterk afhankelijk van verschillende factoren, zoals de aard en kwaliteit van de beschikbare data, de aanwezigheid van gelabelde gegevens en de complexiteit van het probleem \autocite{Li2025}. Dit impliceert dat modelselectie geen statisch proces is, maar afgestemd moet worden op de specifieke context van de toepassing.
 
-Als er genoeg gelabelde gegevens beschikbaar zijn, kunnen supervised learning-technieken worden gebruikt voor taken met classificatie en regressie. In situaties waarin labels beperkt of niet aanwezig zijn, bieden zowel unsupervised als self-supervised technieken een oplossing, waarbij patronen en afwijkingen zelfstandig worden opgemerkt \autocite{Giannoulidis2024, Aggarwal2025}. Daarnaast toont de studie van \textcite{Lu2026} aan dat deep learning-modellen bijzonder geschikt zijn voor het analyseren van complexe en multivariate tijdsreeksen, aangezien zij in staat zijn om niet-lineaire relaties en verborgen patronen te modelleren.
+Als er genoeg gelabelde gegevens beschikbaar zijn, kunnen supervised learning-methoden worden toegepast voor taken op het gebied van classificatie en regressie. In situaties waarin labels beperkt of niet aanwezig zijn, vormen zowel unsupervised als self-supervised technieken een nuttig alternatief, omdat deze methoden in staat zijn om zelfstandig patronen en afwijkingen te herkennen \autocite{Aggarwal2025, Giannoulidis2024}. Recent onderzoek van \textcite{Lu2026} wijst erop dat deep learning-modellen uiterst effectief zijn voor het bestuderen van ingewikkelde en multivariate tijdsreeksen, omdat ze in staat zijn om niet-lineaire relaties en verborgen structuren in de gegevens te analyseren.
 
-Binnen dit onderzoek wordt geen vaste keuze voor het model vooraf bepaald, maar wordt er een flexibele aanpak toegepast, waarbij de uiteindelijke keuze voor het model afhankelijk is van de kenmerken van de beschikbare gegevens.
+Binnen dit onderzoek wordt er geen vooraf bepaalde modelkeuze toegepast op basis van deze inzichten. In plaats daarvan wordt er een flexibele en data-gedreven benadering toegepast, waarbij de definitieve keuze van het model wordt afgestemd op de eigenschappen en beperkingen van de beschikbare dataset. Volgens de onderzoeken van \textcite{Li2025, Aggarwal2025, Giannoulidis2024} past deze aanpak bij de adviezen uit de literatuur, die onderstrepen dat de keuze van het model afhankelijk is van de specifieke data-context en niet afzonderlijk kan worden vastgelegd.
 
-%\paragraph{Doelstelling}
+%De eerste fase van dit onderzoek omvat het creëren van een theoretische framework voor voorspellend onderhoudsprocessen en de implementatie van machine learning in onderhoudssystemen. Uit het onderzoek van \textcite{Carvalho2019} blijkt dat data-gedreven modellen een belangrijke rol spelen bij het analyseren van sensordata en het detecteren van afwijkingen in industriële toepassingen.
 
-%De eerste fase dient om een passende machine learning-strategie te ontwikkelen voor vroegtijdige detectie van fouten in bouwmachines.
+%In voorspellend onderhoud worden diverse soorten modellen gebruikt, variërend van traditionele machine learning-algoritmen tot geavanceerde deep learning-modellen. Volgens het onderzoek van \textcite{Li2025} is de keuze van een geschikt model sterk afhankelijk van factoren zoals de aard van de data, de beschikbaarheid van labels en de complexiteit van het probleem.
 
-%\paragraph{Methodologische verantwoording}
+%Als er genoeg gelabelde gegevens beschikbaar zijn, kunnen supervised learning-technieken worden gebruikt voor taken met classificatie en regressie. In situaties waarin labels beperkt of niet aanwezig zijn, bieden zowel unsupervised als self-supervised technieken een oplossing, waarbij patronen en afwijkingen zelfstandig worden opgemerkt \autocite{Giannoulidis2024, Aggarwal2025}. Daarnaast toont de studie van \textcite{Lu2026} aan dat deep learning-modellen bijzonder geschikt zijn voor het analyseren van complexe en multivariate tijdsreeksen, aangezien zij in staat zijn om niet-lineaire relaties en verborgen patronen te modelleren.
 
-%De systematische beoordeling in het onderzoek van \textcite{Carvalho2019} toont aan dat predictieve onderhoud voornamelijk gebaseerd is op supervised learning-, unsupervised learning- en deep learnin\-g-methoden. In kleine bouwbedrijven kan het vaak lastig zijn om genoeg gelabelde foutdata te verzamelen \autocite{Elahi2023}. Hierdoor zijn zowel unsupervised learning-technieken als self-supervised learning-technieken methodologisch beter geschikt.
-
-%Autoencoders kunnen op een efficiëntere manier normaal gedrag simuleren en afwijkingen opsporen zonder duidelijke foutlabels \autocite{Giannoulidis2024}. Het onderzoek van \textcite{Aggarwal2025} introduceert een transformer-gebaseerde anomaly detection (DASTAD) voor multivariate tijdsreeksen, waarbij ingewikkelde tijdelijke afhankelijkheden efficiënter worden vastgelegd dan bij traditionele modellen. De studie van \textcite{Li2025} toont ook aan dat transformer-architecturen uiterst geschikt zijn voor industriële sensorgegevens.
-
-%Tegelijkertijd benadrukt het onderzoek van \textcite{Xue2025} dat prognostische modellen bestand moeten zijn tegen fluctuaties in belastings- en omgevingsfactoren onder verschillende werkomstandigheden. Dankzij het onderzoek van \textcite{Carvalho2019} wordt in deze bachelorproef daarom gekozen voor een benadering voor anomaly detection in plaats van een complete Remaining Useful Life-voorspelling, omdat deze laatste meer datavereisten vereist.
+%Binnen dit onderzoek wordt geen vaste keuze voor het model vooraf bepaald, maar wordt er een flexibele aanpak toegepast, waarbij de uiteindelijke keuze voor het model afhankelijk is van de kenmerken van de beschikbare gegevens.
 
 \newpage
 
 \section{\IfLanguageName{dutch}{Casusgerichte probleemanalyse en requirementsbepaling}{case-oriented problem analysis and requirements determination}}%
 \label{sec:Casusgerichte probleemanalyse en requirements determination}
 
-Naast de theoretische onderbouwing wordt het onderzoek gekaderd binnen een praktijkgerichte case study. Een specifiek probleem wordt onderzocht, namelijk het implementeren van voorspellende onderhoud op machines, gebaseerd op beschikbare sensorgegevens. In deze fase wordt het probleem omgezet in een reeks functionele en technische eisen. Er worden elementen zoals het soort gegevens, de gewenste uitkomst van het model en de praktische bruikbaarheid van de oplossing in overweging genomen.
+Het onderzoek wordt niet alleen theoretisch onderbouwd, maar ook verder uitgewerkt in een praktijkgerichte casestudy. Centraal staat een specifiek probleem, namelijk het toepassen van voorspellend onderhoud voor bouwmachines op basis van beschikbare sensorgegevens. Door te kijken vanuit een werkelijke bedrijfsomgeving is het mogelijk om niet alleen theoretische kennis te beoordelen, maar ook de praktische uitvoerbaarheid en bruikbaarheid van data-gedreven onderhoudsstrategieën te beoordelen.
 
-Uit de literatuur blijkt dat de implementatie van voorspellend onderhoud sterk afhankelijk is van contextuele factoren, waaronder de beschikbaarheid van data, de gebruikte sensoren en de operationele omgeving \autocite{Elahi2023}. In dit onderzoek wordt een contextgerichte aanpak toegepast, waarbij de methodologie wordt aangepast aan de unieke eigenschappen van de zaak. 
+In deze fase wordt het oorspronkelijke probleem op een gestructureerde manier omgezet in een reeks functionele en technische eisen. Er wordt onder andere rekening gehouden met het soort beschikbare gegevens, zoals temperatuur- en trillingensmetingen, de gewenste uitkomsten van het model (zoals het detecteren van fouten of het voorspellen van falen), en in welke  mate de oplossing nuttig moet zijn voor de operationele activiteiten van het bedrijf. Het is cruciaal om deze vereisten duidelijk te formuleren, zodat de verdere ontwikkeling van het model doelgericht kan plaatsvinden en om de kloof tussen theoretische opties en praktische uitvoering te overbruggen.
 
-Deze fase fungeert als een cruciale verbinding tussen theorie en praktijk en legt de basis voor de volgende methodologische stappen.
+De literatuur toont aan dat de uitvoering van voorspellend onderhoud sterk afhankelijk is van verschillende contextuele elementen, zoals de beschikbaarheid en kwaliteit van gegevens, de gebruikte sensortechnologie en de unieke operationele omgeving waarin machines opereren \autocite{Elahi2023, Hu2024}. Bovendien benadrukt de studie van \textcite{Dissem2024} dat ook organisatorische factoren, zoals de niveaus van digitalisering en databeheer, cruciaal  zijn voor het succes van dergelijke toepassingen. Dit houdt in dat een standaard of algemene benadering vaak niet genoeg is, en dat oplossingen moeten worden aangepast aan de unieke eigenschappen van de toepassing.
 
-%\paragraph{Doelstelling}
+Daarom wordt in dit onderzoek een contextgerichte en flexibele benadering toegepast, waarbij de methodologie geleidelijk wordt aangepast aan de kenmerken en beperkingen van de bestudeerde situatie. Volgens de studies van \textcite{Aggarwal2025} en \textcite{Nayak2024} past deze methode bij de adviezen uit de literatuur, die aangeven dat voorspellend onderhoudsprojecten sterk afhankelijk zijn van gegevens en daarom een flexibele benadering nodig hebben.
 
-%In deze fase wordt het algemene kader voor voorspellend onderhoud omgezet naar de unieke situatie van Bouwonderneming Marchand BV.
+Deze fase speelt een essentiële rol in de overgang tussen theorie en praktijk en vormt de fundamenten voor de volgende fasen van het onderzoek, zoals het verzamelen van gegevens, het ontwikkelen van modellen en het evalueren. Door het probleem en de eisen in deze fase helder vast te stellen, ontstaat er een gestructureerd vertrekpunt voor de verdere ontwikkeling van het voorspellend onderhoudsmodel. 
 
-%\paragraph{Methodologische verantwoording}
+%Naast de theoretische onderbouwing wordt het onderzoek gekaderd binnen een praktijkgerichte case study. Een specifiek probleem wordt onderzocht, namelijk het implementeren van voorspellende onderhoud op machines, gebaseerd op beschikbare sensorgegevens. In deze fase wordt het probleem omgezet in een reeks functionele en technische eisen. Er worden elementen zoals het soort gegevens, de gewenste uitkomst van het model en de praktische bruikbaarheid van de oplossing in overweging genomen.
 
-%De literatuur toont aan dat de invoering van AI-systemen in kleine bedrijven sterk afhankelijk is van de volwassenheid van de organisatie, de beschikbare gegevens en de infrastructuur \autocite{Elahi2023}. Kleine ondernemingen hebben meestal geen uitgebreide historische datasets of gespecialiseerde data science-teams, wat een directe invloed heeft op de haalbaarheid van ingewikkelde gecontroleerde modellen \autocite{Carvalho2019, Nieminen2026}. In deze fase vindt eerst een inventarisatie plaats van de beschikbare sensorgegevens en onderhoudsprocedures.
+%Uit de literatuur blijkt dat de implementatie van voorspellend onderhoud sterk afhankelijk is van contextuele factoren, waaronder de beschikbaarheid van data, de gebruikte sensoren en de operationele omgeving \autocite{Elahi2023}. In dit onderzoek wordt een contextgerichte aanpak toegepast, waarbij de methodologie wordt aangepast aan de unieke eigenschappen van de zaak. 
 
-%De nadruk ligt op roterende onderdelen van machines, zoals lagers en motoren, omdat recente onderzoeken wijzen op hun uitstekende capaciteit voor foutdetectie op basis van gegevens \autocite{Lu2026, Touil2025}. De studie van \textcite{Touil2025} benadrukt dat vibratieanalyse in het frequentiedomein essentiële inzichten biedt over aanvankelijke lagerdefecten, terwijl de studie van \textcite{Lu2026} aantoont dat data-gedreven modellen het mogelijk maken om vroegtijdig fouten te identificeren bij roterende systemen.
-
-%Bovendien worden er variabele werkomstandigheden in overweging genomen, zoals variabele belasting en invloeden uit de omgeving, die volgens het onderzoek van \textcite{Xue2025} een aanzienlijke invloed kunnen uitoefenen op de prestaties van prognostische modellen. Dit houdt in dat het model bestand moet zijn tegen variaties in de operationele parameters.
+%Deze fase fungeert als een cruciale verbinding tussen theorie en praktijk en legt de basis voor de volgende methodologische stappen.
 
 \newpage
 
 \section{\IfLanguageName{dutch}{Data verzameling en analyse}{Data collection and analysis}}%
 \label{sec:Data verzameling en signaalanalysis}
 
-De volgende fase van het onderzoek omvat het verzamelen en analyseren van gegevens. Volgens het onderzoek van \textcite{Mahale2025} zijn de gegevens in voorspellend onderhoudstoepassingen meestal gebaseerd op tijdsreeksen die worden verzameld door sensoren die diverse parameters van machines volgen, zoals temperatuur, trillingen en operationele variabelen.
+De volgende fase van het onderzoek is gericht op het verzamelen en analyseren van gegevens die nodig zijn voor de ontwikkeling van het voorspellend onderhoudsmodel. In het kader van voorspellend onderhoud omvat deze informatie meestal reeksen die door sensoren worden verzameld, waarbij diverse machineparameters zoals temperatuur, trillingen en operationele variabelen voortdurend worden gevolgd \autocite{Mahale2025, Touil2025}. Deze sensorinformatie is essentieel voor het opsporen van patronen en afwijkingen in het gedrag van machines.
 
-Na de verzameling wordt de data onderworpen aan een voorverwerkingsfase, waarbij ruis wordt verwijderd, ontbrekende waarden worden behandeld en de data wordt genormaliseerd. Volgens de studie van \textcite{Dissem2024} is dit cruciaal voor het uitvoeren van betrouwbare analyses en het ontwikkelen van modellen.
+Na het verzamelen van gegevens wordt de dataset geconfronteerd met een uitgebreide preprocessingfase. Dit omvat onder andere het verwijderen van ruis en onjuiste metingen, het behandelen van ontbrekende waarden en het normaliseren van de gegevens om de consistentie te garanderen. Volgens de onderzoeken van \textcite{Dissem2024} en \textcite{WangXueyi2025} is deze stap van groot belang, omdat de literatuur aangeeft dat de kwaliteit van de inputdata een directe impact heeft op de betrouwbaarheid van analyses en de prestaties van machine learning-modellen.
 
-Daarna wordt er een analyse van de gegevens uitgevoerd om een beter begrip te krijgen van de structuur, kwaliteit en bruikbaarheid ervan. Er wordt onder andere gekeken naar trends, patronen en mogelijke afwijkingen. Feature engineering is hierbij van groot belang, omdat het verzamelen van belangrijke kenmerken direct de prestaties van het model beïnvloedt \autocite{Nayak2024}. Het onderzoek van \textcite{Touil2025} bevestigt dat het afhankelijk is van de aard van de data om bijkomende technieken toe te passen, zoals spectrale analyse of transformaties, om onderliggende patronen beter te identificeren.
+Daarna wordt er een exploratieve data-analyse uitgevoerd om een beter begrip te krijgen van de structuur, kwaliteit en bruikbaarheid van de dataset. Er wordt onder andere gekeken naar trends, patronen en mogelijke afwijkingen in de gegevens. In deze fase is feature engineering cruciaal, omdat het kiezen en ontwikkelen van relevante eigenschappen een directe invloed heeft op de prestaties van het uiteindelijke model \autocite{Nayak2024, Aggarwal2025}. Volgens de studie van \textcite{Touil2025} is het afhankelijk van de soort gegevens dat extra analysemethoden kunnen gebruikt worden, zoals spectrale analyse of andere transformaties, om de onderliggende patronen duidelijker te maken.
 
-Binnen deze fase worden bovendien mogelijke beperkingen in de gegevens in overweging genomen, zoals een beperkte omvang of ontbrekende labels. In de onderzoeken van \textcite{Schwarz2024} en \textcite{Nieminen2026} worden diverse methoden aangedragen om hiermee om te gaan, zoals het vergoten van gegevens en het toepassen van synthetische gegevens.
+Binnen deze fase wordt bovendien duidelijk aandacht besteed aan mogelijke beperkingen van de beschikbare gegevens, zoals een beperkte grootte van de dataset of het gebrek aan gelabelde informatie. Deze problemen komen regelmatig voor in industriële sectoren en kunnen een aanzienlijke invloed uitoefenen op de ontwikkeling van modellen. In de studies van \textcite{Schwarz2024}, \textcite{Nieminen2026} en \textcite{Giannoulidis2024} worden diverse methoden aangedragen om hiermee om te gaan, zoals het vergroten van gegevens en het toepassen van synthetische gegevens om de dataset te vergroten en de modellen te versterken.
 
-%\paragraph{Doelstelling}
+%De volgende fase van het onderzoek omvat het verzamelen en analyseren van gegevens. Volgens het onderzoek van \textcite{Mahale2025} zijn de gegevens in voorspellend onderhoudstoepassingen meestal gebaseerd op tijdsreeksen die worden verzameld door sensoren die diverse parameters van machines volgen, zoals temperatuur, trillingen en operationele variabelen.
 
-%Het verzamelen en onderzoeken van sensordata die aangeven dat er beginnende defecten zijn.
+%Na de verzameling wordt de data onderworpen aan een voorverwerkingsfase, waarbij ruis wordt verwijderd, ontbrekende waarden worden behandeld en de data wordt genormaliseerd. Volgens de studie van \textcite{Dissem2024} is dit cruciaal voor het uitvoeren van betrouwbare analyses en het ontwikkelen van modellen.
 
-%\paragraph{Methodologische verantwoording}
+%Daarna wordt er een analyse van de gegevens uitgevoerd om een beter begrip te krijgen van de structuur, kwaliteit en bruikbaarheid ervan. Er wordt onder andere gekeken naar trends, patronen en mogelijke afwijkingen. Feature engineering is hierbij van groot belang, omdat het verzamelen van belangrijke kenmerken direct de prestaties van het model beïnvloedt \autocite{Nayak2024}. Het onderzoek van \textcite{Touil2025} bevestigt dat het afhankelijk is van de aard van de data om bijkomende technieken toe te passen, zoals spectrale analyse of transformaties, om onderliggende patronen beter te identificeren.
 
-%In recente studies wordt vibratieanalyse gezien als een van de meest nuttige indicatoren voor een foutieve diagnose bij roterende machines \autocite{Wankhede2025, Touil2025}. Het onderzoek van \textcite{Touil2025} bewijst dat spectrale analyse uiterst doeltreffend is voor het opsporen van lagere defecten. De studie van \textcite{WangXueyi2025} introduceert een wavelet-geïnspireerde encoder die zowel tijdsgebonden als frequentiekenmerken samenbrengt. Dit toont aan hoe cruciaal analyse is in zowel het tijd- als het frequentiedomein. 
-
-%\paragraph{Onderzoeksaanpak}
-
-%\begin{itemize}
-    %\item Exploratieve data-analyse
-    
-    %\item Fourier- of wavelettransformatie
-    
-    %\item Identificatie van dominante frequentiecomponenten
-    
-    %\item Visualisatie van afwijkingspatronen 
-%\end{itemize}
-
-%Volgens de studie van \textcite{Touil2025} wordt deze aanpak versterkt door het feit dat vroege defecten vaak verschijnen als kleine frequentieafwijkingen.
+%Binnen deze fase worden bovendien mogelijke beperkingen in de gegevens in overweging genomen, zoals een beperkte omvang of ontbrekende labels. In de onderzoeken van \textcite{Schwarz2024} en \textcite{Nieminen2026} worden diverse methoden aangedragen om hiermee om te gaan, zoals het vergoten van gegevens en het toepassen van synthetische gegevens.
 
 \newpage
-
-%\section{\IfLanguageName{dutch}{Data preprocessing en feature engineering}{ Data preprocessing and feature engineering}}%
-%\label{sec: Data preprocessing-and-feature-engineering}
-
-%\paragraph{Doelstelling}
-
-%Het verhogen van de kwaliteit van data en het ontdekken van belangrijke eigenschappen voor modeltraining.
-
-%\paragraph{Methodologische verantwoording}
-
-%Modellen die gebaseerd zijn op encoders zijn effectiever wanneer ruissignalen van tevoren worden gefilterd \autocite{WangXueyi2025}. Het onderzoek van \textcite{Dissem2024} toont aan dat unsupervised learning-technieken niet alleen anomalieën opsporen, maar ook ontbrekende waarden kunnen imputeren in ruisgevoelige tijdsreeksen.
-
-%Feature engineering wordt gezien als een essentiële fase in het voorspellen van onderhoud \autocite{Nayak2024}. Daarom worden zowel statistische eigenschappen, zoals gemiddelde, variantie en root mean square, als spectrale eigenschappen geëxtraheerd.
-
-%\paragraph{Beperkte data en synthetische augmentatie}
-
-%Als er weinig foutdata beschikbaar is, wordt er nagedacht over het genereren van synthetische gegevens. De studie van \textcite{Nieminen2026} presenteerd een gestructureerd framework voor het toepassen van synthetische gegevens. In het onderzoek van \textcite{Ardebili2026} wordt de technologische ontwikkeling van GAN-architecturen onderzocht, terwijl de studie van \textcite{Demir2025} bewijst dat het uitbreiden van GAN of cGAN de prestaties van deep learning-modellen aanzienlijk kan verbeteren in predictieve onderhoudstoepassingen.
-
-%\newpage
 
 \section{\IfLanguageName{dutch}{Modelontwikkeling}{Model development}}%
 \label{sec:Modelontwikkeling}
