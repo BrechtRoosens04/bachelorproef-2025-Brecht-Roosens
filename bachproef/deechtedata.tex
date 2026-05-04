@@ -61,3 +61,149 @@ In dit onderzoek bestond de verzamelde dataset uit verschillende Excel-bestanden
 Om de informatie toegankelijk te maken voor verdere analyse, werden alle bestanden ingelezen in een Python-notebook met behulp van de bibliotheek pandas. Deze bibliotheek wordt vaak ingezet in data-analyse en machine learning om grote hoeveelheden gestructureerde gegevens te verwerken, te combineren en te wijzigen. Daarna werden de verschillende datasets samengevoegd tot één uniforme analysetabel, waardoor er een centrale dataset ontstond waarop verdere preprocessing en analyse konden plaatsvinden.
 
 Bij deze samenvoeging werden de variaties in kolomnamen, ontbrekende waarden en de beschikbare sensoren tussen de bestanden in overweging genomen. Volgens de studie van \textcite{Dissem2024} is een uniforme sstructuur van gegevens cruciaal voor betrouwbare analyse van tijdsreeksen en het opsporen van onregelmatigheden, omdat fouten of inconsistenties in de informatie direct een nadelige impact kunnen hebben op de prestaties van machine learning-modellen.
+
+Bovendien werd onderzocht welke variabelen van belang waren voor toepassingen van belang waren voor toepassingen voor voorspellend onderhoud. Niet alle beschikbare kolommen waren geschikt voor het ontwikkelen van modellen. Om ruis en redundantie te verminderen, zijn kolommen zonder technische betekenis, administratieve velden of zeer onvolledige data verwijderd. Het onderzoek van \textcite{Nayak2024} beklemtoont dat het juiste kiezen van relevante kenmerken een aanzienlijke impact heeft op de kwaliteit van foutdetectie en voorspellende modellen.
+
+In hedendaagse data-analyse blijft de noodzaak van juiste datastructuren en een effectieve verwerking bij omvangrijke datasets van groot belang. Een zorgvuldig samengestelde centrale dataset is namelijk de fundament voor aanvullende preprocessing, visualisatie, feature engineering en modellering. De studies van \textcite{Carvalho2019} en \textcite{Li2025} accentueren eveneens dat de kwaliteit en opbouw van de gegevens een directe invloed uitoefenen op de betrouwbaarheid en prestaties van voorspellend onderhoudsmodellen.
+
+Na het combineren van de verschillende databestanden werd er een extra controle uitgevoerd op de consistentie en kwaliteit van de centrale dataset. Er werd onderzocht of de kolomnamen daadwerkelijk overeenkwamen met de diverse bestanden, of de datatypes correct waren ingesteld en of tijdstempels op een consistente wijze werden opgevat. Bovendien werd onderzocht of de meetwaarden numeriek haalbaar waren en of er dubbele records of foute registraties in de dataset aanwezig waren.
+
+Deze voorbereidingsfase is cruciaal in toepassingen voor voorspellend onderhoud die gebaseerd zijn op data. Het voorbereiden van gegevens speelt een cruciale rol in machine learning-projecten, omdat inconsistenties, ontbrekende waarden en onjuiste datastructuren een directe nadelige impact kunnen hebben op de modellenprestaties \autocite{Carvalho2019}. Het onderzoek van \textcite{Dissem2024} beklemtoont eveneens dat een juiste preprocessing en een consistente opbouw van tijdsreeksdata essentieel zijn voor betrouwbare analyse en het opsporen van onregelmatigheden.
+
+In het onderzoek naar voorspellend onderhoud is de kwaliteit van sensordata vooral van groot belang. De betrouwbaarheid van machine learning-modellen hangt aanzienlijk af van de kwaliteit, consistentie en de toegankelijkheid van de inputdata \autocite{Li2025}. Daarom werd er in dit onderzoek extra aandacht besteed aan het nakijken en normaliseren van de verzamelde meetgegevens voordat er verdere analyse en modellering werden uitgevoerd.
+
+\newpage
+
+\section{\IfLanguageName{dutch}{Geselecteerde parameters uit de verkregen data}{Selected parameters from the collected data}}%
+\label{sec: geselecteerde parameters uit de verkregen data}
+
+ Uit de beschikbare velden is een specifieke selectie gemaakt van parameters die van belang zijn voor het onderzoeken van de technische staat van de tractor. Niet elke beschikbare telematicavariabele ondersteunt namelijk voorspellend onderhoudstoepassingen. De studies van \textcite{Carvalho2019} en \textcite{Mahale2025} benadrukken dat het cruciaal is om relevante sensorgegevens te selecteren binnen data-gedreven onderhoudssystemen, omdat irrelevante of redundante variabelen de prestaties van machine learning-modellen negatief kunnen beïnvloeden.
+ 
+ Daarom lag de nadruk op factoren die direct gerelateerd zijn aan motorbelasting, temperatuur, druk, brandstofverbruik of de mechanische werking van de machine. Volgens de onderzoeken van \textcite{Nayak2024} en \textcite{Li2025} worden dergelijke variabelen vaak toegepast in toepassingen voor voorspellend onderhoud, omdat ze veranderingen in het gedrag of de conditie van machines kunnen aantonen.
+ 
+ De uiteindelijke dataset omvatte onder andere de volgende parameters:
+ 
+ \begin{itemize}
+     \item Tijdstempel
+     
+     \item Draai-uren motor
+     
+     \item Druk transmissieolie
+     
+     \item Koelvloeistoftemperatuur motor
+     
+     \item Motorbelasting
+     
+     \item Motortoerental
+     
+     \item Rijsnelheid
+     
+     \item Accuspanning
+     
+     \item Brandstofdebiet motor
+     
+     \item Brandstofpeil
+     
+     \item DEF-/ureumgehalte
+     
+     \item Temperatuur inlaatspruitstuk
+     
+     \item Temperatuur transmissieolie
+     
+     \item Motoroliedruk
+     
+     \item Motorolietemperatuur
+     
+     \item Niveau DEF-/ureumtank
+     
+     \item Vuldruk motor
+ \end{itemize}
+
+Deze keuze is begrijpelijk vanuit een technisch en operationeel perspectief, omdat de gekozen parameters direct gerelateerd zijn aan de werking en belasting van de motor, transmissie en ondersteunende systemen van de tractor.
+
+\paragraph{Meting van de temperatuur}
+Temperatuurmetingen zijn één van de voornaamste indicatoren voor foutdetectie en voorspellend onderhoud. Stijgende temperaturen van olie, koelvloeistof of motor kunnen duiden op een hogere wrijving, onvoldoende smering, overbelasting of defecte onderdelen. Thermische afwijkingen zijn vaak vroegtijdige aanwijzingen van degradatieprocessen en mechanische problemen in industriële machines \autocite{Touil2025, WangXueyi2025}. Het onderzoek van \textcite{Nayak2024} beklemtoont eveneens dat sensorgegevens die verband houden met temperatuur vaak worden ingezet om afwijkend machinegedrag te identificeren.
+
+\paragraph{Meting van de druk}
+Naast het meten van temperatuur zijn ook drukwaarden essentiële aanwijzingen voor de staat van hydraulische en mechanische systemen. Parameters zoals transmissieoliedruk en vuldruk kunnen afwijkingen aangeven die duiden op lekkages, defecte pompen, verstoppingen of slijtage in hydraulische circuits. De studie van \textcite{Daoudi2025} bewijst dat drukvariabelen een cruciale functie vervullen in het voorspellend onderhoud van industriële installaties, omdat afwijkingen in druk vaak voorkomen dat er een effectieve storing ontstaat.
+
+\paragraph{Meting van de belasting van de motor}
+De motorbelasting, het motortoerental en het brandstofverbruik bieden een blik op de operationele belasting en de gebruiksomstandigheden van de machine. Dergelijke criteria zijn cruciaal om te kunnen onderscheiden tussen normaal zwaar gebruik en daadwerkelijk afwijkend gedrag \autocite{Chen2025, Mahale2025}. Deze operationele variabelen ondersteunen machine learning-modellen bij het identificeren van patronen die kunnen duiden op overbelasting, een ondoeltreffend gebruik of aanvankelijke defecten.
+
+\paragraph{Meting van de elektriciteit}
+Binnen voorspellend onderhoudstoepassingen zijn ook elektrische waarden, zoals accuspanning, van belang. Verschillen in de accuspanning kunnen duiden op problemen met het elektrische systeem, laadproblemen of defecte onderdelen van de batterij. Het onderzoek van \textcite{Chen2025} accentueert dat elektrische sensorgegevens vaak worden gebruikt in hedendaagse onderhoudssystemen, omdat ze extra informatie bieden over de algemene staat van machines en ondersteunende subsystemen.
+
+\newpage
+
+Bovendien zijn ook parameters zoals draai-uren en tijdstempels behouden, omdat deze essentieel zijn voor het onderzoeken van trends, de intensiteit van gebruik en processen van tijdsgebonden degradatie. De studie van \textcite{Xue2025} benadrukt dat tijdsreeksen en operationele gebruiksdata cruciaal zijn voor voorspellend onderhoud, aangezien defecten vaak geleidelijk ontstaan over langere tijd.
+
+\section{\IfLanguageName{dutch}{Opschoning en voorbereiden van de data}{Data cleaning and preparation}}%
+\label{sec: Opschoning en voorbereiden van de data}
+
+Na het combineren van de diverse databestanden vond er een grondige preprocessingfase plaats. Industriële datasets vertonen vaak ruis, onduidelijke waarden, onduidelijke registratie of ongeldige meetwaarden. Onduidelijke tijdreeksgegevens vormen één van de grootste obstakels bij het opsporen van onregelmatigheden en het onderhouden van voorspellende gegevens, omdat onjuiste of inconsistente informatie de betrouwbaarheid van analyses en modellen aanzienlijk kan schaden \autocite{Dissem2024}. De studie van \textcite{Carvalho2019} beklemtoont eveneens dat de kwaliteit van data essentieel is voor machine learning-projecten en dat een aanzienlijk deel van de problemen met voorspellend onderhoudsprocessen ontstaat tijdens de voorbereidende verwerking van gegevens.
+
+In deze fase zijn er verschillende stappen ondernomen om de dataset te standaardiseren en voorbereid te maken op verdere analyse en modelontwikkeling.
+
+\paragraph{Verwijdering van lege waarden}
+Eerst werden records die geen bruikbare meetwaarden bevatten, verwijderd of behandeld. Ontbrekende waarden kunnen resulteren in onjuiste analyses, onduidelijke statistieken en onzekere modeltraining. Volgens de studies van \textcite{Li2025} en \textcite{Dissem2024} is het cruciaal om missing values nauwkeurig te behandelen in tijdreeksanalyse en machine learning, omdat veel algoritmen niet in staat zijn om onvolledige inputgegevens te verwerken.
+
+\paragraph{Verwijdering van dubbele records}
+Bovendien zijn er dubbele records ontdekt en verwijderd. Duplicaten van deze aard kunnen ontstaan door exporten, synchronisatieproblemen of een overlap tussen bestanden. Als dubbele registraties niet worden verwijderd, kunnen analyses vertekend worden en kunnen modellen onjuiste patronen opmerken. Het onderzoek van \textcite{Carvalho2019} geven aan dat onjuiste of tegenstrijdige gegevens een nadelige impact hebben op de prestaties van voorspellend onderhoudsmodellen.
+
+\paragraph{Verbeteren datumnotaties}
+De tijdstempels werden daarna omgezet naar een consistent datetime-formaat. Dit laat toe om de gegevens juist chronologisch te ordenen en later methoden zoals filtering, herhaling en tijdsgebaseerde analyses toe te passen. Volgens de studie van \textcite{Xue2025} zijn juiste tijdsstructuren cruciaal voor voorspellend onderhoud, omdat machinegedrag meestal wordt beoordeeld als een proces van tijdsreeksen.
+
+\paragraph{Numeriek converteren van de meetwaarden}
+Aanvankelijk was een aantal sensorgegevens opgeslagen in een tekstformaat. Deze waarden werden omgezet in numerieke datatypes, zodat mathematische berekeningen, statistische analyses en machine learning-processen op de juiste manier konden plaatsvinden. Het onderzoek van \textcite{Nayak2024} stellen dat betrouwbare feature-analyse een consistente numerieke weergave van sensorgegevens vereist.
+
+\paragraph{Chronologisch sorteren van de data}
+Vervolgens werden alle records chronologisch ingedeeld op basis van hun tijdstempel. Deze fase is cruciaal voor time series-analyse en modellen die op sequence zijn gebaseerd, zoals LSTM-netwerken, omdat deze modellen afhankelijk zijn van de juiste volgorde van achtereenvolgende observaties. De studies van \textcite{Li2025} en \textcite{Wang2025} accentueren dat tijdelijke samenhang een cruciale rol speelt in deep learning-toepassingen voor voorspellende onderhoud.
+
+\paragraph{Herindexeren van de dataset}
+Na het filteren en opschonen van de dataset werd deze opnieuw geïndexeerd, waardoor de gegevensstructuur weer consistent en opeenvolgend werd. Dit vergemakkelijkt toekomstige analyses en voorkomt problemen tijdens modeltraining of visualisatieprocessen.
+
+\paragraph{Conclusie}
+Preprocessing is geen extra stap, maar een essentieel aspect van AI-projecten in de industrie \autocite{Elahi2023}. Het onderzoek van \textcite{Mahale2025} beklemtoont eveneens het belang van een juiste datavoorbereiding om betrouwbare voorspellend onderhoudsmodellen te creëren en onjuiste voorspellingen te vermijden.
+
+\newpage
+
+\section{\IfLanguageName{dutch}{Uitdagingen bij het bekomen dataset}{Challenges with the obtained dataset}}%
+\label{sec: uitdagingen bij het bekomen dataset}
+
+Hoewel de verzamelde dataset nuttige informatie biedt over de werking en staat van de tractor, waren er ook diverse beperkingen die de analyse en de ontwikkeling van het model beïnvloeden. Volgens het onderzoek van \textcite{Elahi2023} en \textcite{Mahale2025} zijn de beperkingen vaak aanwezig in industriële voorspellend onderhoudstoepassingen, vooral wanneer er gebruikt wordt gemaakt van real-world sensorgegevens uit operationele machines.
+
+\paragraph{Geen gelabelde defecten in de data}
+De voornaamste beperking van de dataset is het gebrek aan duidelijke fout- of onderhoudslabels. Tijdens de beschikbare tijd van ongeveer twee maanden heeft de tractor nog geen onderhoud gehad en werden er geen duidelijke defecten vastgelegd. Hierdoor waren er geen bevestigde labels beschikbaar, zoals:
+
+\begin{itemize}
+    \item Storing transmissie
+    
+    \item Onderhoud uitgevoerd
+    
+    \item Sensorfout bevestigd
+    
+    \item Motorprobleem vastgelegd
+ \end{itemize}
+    
+Dit maakt het moeilijker om supervised learning-methoden toe te passen, omdat deze modellen gebaseerd zijn op gelabelde voorbeelden van zowel normale als foutieve situaties. Het ontbreken van labels is één van de meest voorkomende problemen in industriële voorspellend onderhoudsprojecten \autocite{Giannoulidis2024}. De studie van \textcite{Aggarwal2025} accentueert eveneens dat veel industriële datasets slechts een beperkte of helemaal geen foutmarkeringen bevatten, wat vaak leidt tot de noodzaak van anomaly detection en onzichtbare technieken.
+
+Binnen voorspellend onderhoud ontwikkelen defecten zich bovendien vaak geleidelijk, hierdoor worden storingen niet altijd expliciet geregistreerd in de beschikbare sensordata. Het onderzoek van \textcite{Carvalho2019} beklemtoont dat het verzamelen van betrouwbare labels binnen industriële omgevingen duur, tijdsintensief en operationeel complex kan zijn.
+
+\paragraph{Beperkte historiek}
+Een andere belangrijke obstakel is de korte historische levensduur van de dataset. De sensorgegevens die beschikbaar zijn, duren slechts ongeveer twee maanden. Voor betrouwbare degradatieanalyse en het identificeren van langetermijnpatronen zijn meestal uitgebreidere historische periodes vereist. Het onderzoek van \textcite{Xue2025} beklemtoont dat uitgebreide tijdsreeksen cruciaal zijn voor voorspellend onderhoud, aangezien defecten en slijtageprocessen vaak geleidelijk zich over langere tijdsperiodes ontwikkelen. De studie van \textcite{Mahfoud2025} accentueert eveneens dat het tekort aan historische gegevens het lastiger maakt om robuuste machine learning-modellen te ontwikkelen en om betrouwbare voorspellingen te maken in dynamische industriële omstandigheden.
+
+\paragraph{Variabele werkomstandigheden}
+Bovendien opereert de tractor niet in een gecontroleerde fabriek, maar in een dynamische buitenomgeving waarin de werkomstandigheden voortdurend evolueren. Afhankelijk van de uitgevoerde werkzaamheden kunnen elementen zoals belasting, snelheid, terreinomstandigheden, weersomstandigheden en de intensiteit van het gebruik aanzienlijk verschillen. Dergelijke variabele  operationele omstandigheden vormen een aanzienlijke uitdaging voor voorspellend onderhoud, omdat gebruikspatronen vaak aanzienlijk kunnen variëren \autocite{Mahale2025, Chen2025}. Dit maakt het lastiger om te onderscheiden tussen normaal zwaar gebruik en daadwerkelijk afwijkend of defect gedrag. Het onderzoek van \textcite{Lu2026} beklemtoont eveneens dat industriële sensordata vaak ingewikkelde en niet-lineaire patronen bevatten als gevolg van veranderende operationele omstandigheden. Dit vereist het gebruik van flexibele en data-gedreven analysemethoden om betrouwbare detectie van afwijkingen te realiseren.
+
+\section{\IfLanguageName{dutch}{Meerwaarde van de bekomen dataset}{Added value of the obtained dataset}}%
+\label{sec: meerwaarde van de bekomen dataset}
+
+Hoewel er beperkingen zijn, blijft de verzamelde dataset uiterst waardevol voor dit onderzoek. Real-time sensorgegevens van operationele machines geven waardevolle inzichten in het efficiënte gedrag, het gebruik en de variaties van industriële systemen. Volgens de onderzoeken van \textcite{Elahi2023} en \textcite{Mahale2025} bieden dergelijke praktijkdatasets een essentiële fundament voor voorspellend onderhoud op basis van gegevens, zelfs wanneer er geen duidelijke foutlabels beschikbaar zijn.
+
+De dataset maakt het onder andere mogelijk om normaal machinegedrag te simuleren en de gebruikelijke operationele patronen van de tractor te onderzoeken. Door de voortdurende registratie van sensorgegevens is het mogelijk om stationaire en actieve werkperiodes van elkaar te onderscheiden, evenals fluctuaties in motorbelasting, temperatuur en druk onder diverse gebruiksomstandigheden. De studies van \textcite{Chen2025} en \textcite{Xue2025} accentueren dat deze operationele patronen cruciaal zijn voor het doorgronden van machinegedrag en het opsporen van afwijkingen binnen bepaalde tijdsperiodes.
+
+De dataset stelt bovendien in staat om trends en evoluties in parameters zoals de temperatuur van koelvloeistof, motorbelasting, transmissiedruk en brandstofverbruik te onderzoeken. Volgens de onderzoeken van \textcite{Touil2025} en \textcite{Nayak2024} zijn veranderingen in deze sensorgegevens cruciale aanwijzingen voor slijtage, overbelasting of aanvankelijke defecten.
+
+Hoewel er geen duidelijke foutlabels zijn, is het nog steeds mogelijk om anomalieën te detecteren met behulp van unsupervised learning-methoden. Unsupervised technieken zijn zeer geschikt voor industriële omgevingen waar alleen normaal machinegedrag aanwezig is \autocite{Giannoulidis2024, Aggarwal2025}. Deze methoden streven ernaar afwijkende patronen automatisch te herkennen, zonder dat er vooraf gelabelde foutgevallen nodig zijn.
+
+Een extra voordeel van de dataset is de optie om de eigen sensorgegevens te vergelijken met openbare datasets voor voorspellend onderhoud. Het combineren van eigen industriële gegevens met openbare datasets kan zeer nuttig zijn wanneer lokale storingsdata beperkt toegankelijk is \autocite{Veloso2022}. Publieke datasets laten het toe om aanvullende analyses te doen, modellen te vergelijken en methodologieën te verifiëren binnen een bredere context van onderzoek.
