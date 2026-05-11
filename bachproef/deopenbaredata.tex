@@ -4,3 +4,20 @@
 
 \chapter{\IfLanguageName{dutch}{De gekozen openbare dataset}{The selected public dataset}}%
 \label{ch:de openbare data}
+
+In dit hoofdstuk wordt de keuze en analyse van de gebruikte openbare dataset besproken. De verkregen tractordata bestond voornamelijk uit operationele sensorgegevens. Er ontbrak echter uitgebreide historische defect- of onder\-houdsinformatie. Hierdoor was extra data nodig om technieken voor anomalie detectie en voorspellend onderhoud juist te kunnen evalueren. Daarom werd onderzocht welke publieke datasets het beste als aanvulling op de private tractordata konden dienen.
+
+Bij voorspellend onderhoud is de kwaliteit en structuur van datasets van groot belang. Machine learning en modellen voor anomalie detectie zijn sterk afhankelijk van voortdurende tijdsreeksen, historische afwijkingen en vastgelegde storingen om betrouwbare voorspellingen te kunnen doen \autocite{Carvalho2019, Elahi2023}. Volgens de studies van \textcite{Giannoulidis2024} en \textcite{Holtz2025} is het bovendien essentieel dat datasets genoeg realistische operationele omstandigheden bieden, zodat ontwikkelde modellen ook toepasbaar blijven in de industrie- en bouwsector.
+
+In dit hoofdstuk worden eerst diverse publieke datasets onderzocht, waarna wordt uitgelegd waarom de MetroPT-3-dataset uiteindelijk is gekozen. Daarna wordt de opbouw, inhoud en betekenis van deze dataset toegelicht, en wordt er een verband gelegd met de kenmerken van de verkregen tractorgegevens. Dit geeft een helder inzicht in de functie van de openbare dataset in het verdere onderzoek naar voorspellend onderhoud en het opsporen van onregelmatigheden.
+
+\newpage
+
+\section{\IfLanguageName{dutch}{Het selecteren van een openbare dataset}{Selecting a public dataset}}%
+\label{sec: het selecteren van een openbare dataset}
+
+De analyse van de verzamelde tractorgegevens toonde aan dat de dataset belangrijke operationele sensorinformatie bevatte, maar dat er onvoldoende historische gegevens waren over onderhoudsmaatregelen, storingen of defecten om een volledig voorspellend onderhoudsmodel op een betrouwbare manier te trainen en te beoordelen. De dataset omvatte vooral continue telematicametingen die voortkomen uit gebruikelijk machinegedrag, wat het mogelijk maakte om trends, variaties en mogelijke afwijkingen te onderzoeken. Er waren echter geen duidelijke labels die aangaven wanneer een defect daadwerkelijk plaatsvond of wanneer het onderhoud werd uitgevoerd. Dit maakte het lastig om de resultaten van anomalie detectie direct te verbinden aan daadwerkelijke machineproblemen of onderhoudswerkzaamheden.
+
+Binnen voorspellend onderhoud is het beschikbaar stellen van historische foutinformatie echter een essentieel aspect van het ontwikkelen van betrouwbare modellen. Machine learning-methoden in voorspellend onderhoud zijn sterk afhankelijk van kwalitatieve historische datasets waarin zowel gebruikelijk operationele omstandigheden als afwijkende situaties zijn opgenomen \autocite{Carvalho2019}. Artificiële intelligentie in voorspellend onderhoudsprocessen kan alleen effectief opereren als modellen beschikken over voldoende historische operationele gegevens, samen met bekende afwijkingen of defectmomenten \autocite{Elahi2023}. Zonder dergelijke referentiepunten wordt het veel lastiger om modellen op een objectieve manier te beoordelen of om de effectiviteit van anomalie detectie-technieken nauwkeurig te meten.
+
+Om deze beperking te verhelpen, is besloten om extra gebruik te maken van een openbare dataset voor voorspellend onderhoud. Publieke datasets zijn cruciaal voor wetenschappelijk onderzoek, omdat ze onderzoekers in staat stellen modellen te toetsen, resultaten te vergelijken en algoritmen op een objectieve manier te beoordelen. Datasets voor voorspellend onderhoud zijn nog steeds relatief zeldzaam vooral het
