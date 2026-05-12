@@ -102,60 +102,34 @@ De keuze voor de MetroPT-3-dataset stelde ons in staat om anomalie detectie-tech
 
 \newpage
 
-\section{\IfLanguageName{dutch}{Beschrijving van de gekozen MetroPT-3-dataset}{Description of the selected MetroPT-3-dataset}}%
-\label{sec: Beschrijving van de gekozen MetroPT-3-dataset}
+\section{\IfLanguageName{dutch}{Vergelijkende data-analyse van de beide datasets}{Comparative data analysis of the two datasets}}%
+\label{sec: vergelijkende data-analyse van de beide datasets}
 
-De openbare dataset die is gebruikt, is de MetroPT-3-dataset, die is ontworpen voor het onderzoek naar voorspellend onderhoud in industriële systemen. De dataset omvat sensorinformatie die afkomstig is van een Air Production Unit of afgekort APU van een treincompressorsysteem in de spoorwegsector. Het onderzoek van \textcite{Veloso2022} benadrukt dat de dataset speciaal is gepubliceerd om onderzoek naar anomalie detectie, fout detectie en voorspellend onderhoudsprocessen te faciliteren en om onderzoekers toegang te bieden tot realistische industriële sensorgegevens met geregistreerde defecten.
+In de derde fase werden beide datasets bestudeerd en geanalyseerd om een beter begrip te krijgen van hun structuur, trends en operationele eigenschappen. Het doel van deze fase was om te onderzoeken in hoeverre patronen in de tractordata overeenkomen met trends en afwijkingen in de openbare MetroPT-3-dataset. Door beide datasets naast elkaar te analyseren, werd onderzocht of soortgelijke sensorevoluties zichtbaar zijn in diverse industriële omgevingen.
 
-De MetroPT-3-dataset valt onder de groep van multivariate tijdreeksdatasets. Dit houdt in dat verschillende sensoren tegelijkertijd gegevens vastleggen over een langere periode. Elke rij in de dataset is een tijdmeting van diverse operationele parameters van het compressorsysteem. De studie van \textcite{Carvalho2019} accentueert dat multivariate tijdsreeksen cruciaal zijn voor voorspellend onderhoud, aangezien defecten vaak niet zichtbaar zijn in één enkele parameter, maar voortkomen uit combinaties van afwijkingen over verschillende sensoren.
+Exploratieve data-analyse is een cruciale stap in projecten voor voorspellend onderhoud, omdat het inzicht biedt in het gedrag van sensoren, mogelijke afwijkingen en de algemene kwaliteit van de beschikbare gegevens \autocite{Carvalho2019}. De studie van \textcite{Elahi2023} beklemtoont eveneens dat een grondig inzicht in de gegevens essentieel is voor een betrouwbare toepassing van machine learning-modellen.
 
-De dataset omvat zowel gebruikelijke operationele toestanden als periodes die resulteren in geregistreerde defecten. Dit stelt ons in staat om veranderingen in sensorgedrag te onderzoeken voordat er falen optreden. Het onderzoek van \textcite{Davari2021} beklemtoont dat datasets met zowel normale als defecte operationele toestanden bijzonder geschikt zijn voor het opsporen van onregelmatigheden en het vroegtijdig opsporen van fouten in industriële installaties.
-
-Binnen deze bachelorproef werd gebruikgemaakt van de MetroPT-3-dataset. De dataset bevat onder andere volgende parameters:
+De analyse omvatte onder andere:
 
 \begin{itemize}
+    \item Trendanalyse van sensorgegevens
     
-    \item TP2
+    \item Het visualiseren van temperatuur-, druk- en motorbelastingswaarden
     
-    \item TP3
+    \item Het analyseren van operationele patronen
     
-    \item H1
-    
-    \item DV\_pressure
-    
-    \item Reservoirs
-    
-    \item Oil\_temperature
-    
-    \item Motor\_current
-    
-    \item COMP
-    
-    \item DV\_eletric
-    
-    \item Towers
-    
-    \item MPG
-    
-    \item LPS
-    
-    \item Pressure\_switch
-    
-    \item Oil\_level
-    
-    \item Caudal\_impulses
-    
+    \item Het opsporen van afwijkende meetwaarden
 \end{itemize}
 
-Deze waarden vertegenwoordigen diverse drukken, temperaturen, elektrische signalen en operationele omstandigheden van het compressorsysteem. Drukmetingen zijn cruciale aanwijzingen voor lekkages, compressorproblemen of defecten in pneumatische systemen \autocite{Daoudi2025}. Volgens het onderzoek van \textcite{Touil2025} kunnen temperatuurmetingen aangeven dat er overbelasting, wrijving of defecte onderdelen aanwezig zijn, terwijl het onderzoek van \textcite{Chen2025} benadrukt dat elektrische signalen zoals motorstroom vaak ingezet worden voor het monitoren van de toestand van industriële machines.
+Voor beide datasets zijn er diverse grafische visualisaties ontwikkeld in Python Notebooks, waarbij bibliotheken zoals pandas en matplotlib zijn toegepast. Dit maakte het mogelijk om de veranderingen in parameters over de tijd te analyseren en mogelijke afwijkingen visueel te identificeren. Volgens het onderzoek van \textcite{Dissem2024} zijn visualisaties en trendanalyses cruciaal voor noisy industrial time-series data, aangezien afwijkingen vaak lastig te zien zijn in ruwe numerieke datasets.
 
-Deze sensorgegevens zijn uiterst geschikt zijn voor het opsporen van onregelmatigheden, omdat defecten vaak eerst zichtbaar worden door subtiele veranderingen in temperatuur-, druk- of stroomwaarden \autocite{Davari2021}. Het onderzoek van \textcite{Nayak2024} accentueert eveneens dat voortdurende sensormonitoring cruciaal is voor het op tijd opsporen van afwijkend machinegedrag in voorspellend onderhoudssystemen.
+Tijdens de analyse werd er specifiek gefocust op temperatuur-, druk- en motorbelastingsfactoren. Afwijkingen in temperatuur kunnen duiden op overbelasting, slijtage of defecte onderdelen \autocite{Touil2025}. Drukwaarden zijn cruciaal voor het opsporen van lekkages of problemen in hydraulische en pneumatische systemen \autocite{Daoudi2025}. Het onderzoek van \textcite{Mahale2025} benadrukt bovendien dat parameters zoals motorbelasting, motortoerental en energieverbruik inzicht bieden in de functionele staat van een machine.
 
-Evenals de verkregen tractorgegevens is ook deze dataset omgevormd tot een tijdsreeksdataset. De timestampkolom is hiervoor omgezet naar een juist datetimeformaat en is ingesteld als index. Daarna werden de gegevens chronologisch geordend om trendanalyse, filtering en herhaling mogelijk te maken. De studie van \textcite{Elahi2023} benadrukt dat de juiste preprocessing van tijdsreeksen een essentiële stap is in industriële AI-toepassingen.
+Tijdens de analyse werd ook bestudeerd of specifieke trends zich over tijd langzaam ontwikkelen. Veel defecten ontstaan niet plotseling, maar door middel van progressieve degradatieprocessen die zichtbaar zijn in tijdsreeksen van sensordata \autocite{Xue2025}. De studie van \textcite{Chen2025} accentueert eveneens dat tijdsgebaseerde patronen cruciaal zijn voor het opsporen van afwijkend machinegedrag in voorspellend onderhoudssystemen.
 
-Na het inladen en voorbereiden van de dataset werden de dagelijkse gemiddelden vastgesteld door middel van hersampling. Dit maakte het mogelijk om trends en veranderingen in parameters visueel te analyseren en bovendien werd de ruis in de ruwe sensorgegevens gedeeltelijk verminderd. Volgens het onderzoek van \textcite{Dissem2024} kunnen tijdsgebaseerde aggregaties bijdragen aan het beter identificeren van verborgen patronen en afwijkingen in onrustige industriële tijdreeksen.
+Naast algemene trendanalyse werden er ook afwijkende meetwaarden en mogelijke afwijkingen in beide datasets onderzocht. Er werd onderzocht of pieken, onverwachte schommelingen of langdurige afwijkingen binnen specifieke sensoren waarneembaar waren. Het onderzoek van \textcite{Giannoulidis2024} stelt dat anomalie detectie een cruciale methode is in situaties waar er weinig duidelijke foutlabels beschikbaar zijn, omdat afwijkend gedrag vaak een eerste aanwijzing is voor toekomstige problemen.
 
-Trendanalyse en tijdsgebaseerde aggregaties zijn essentiële methoden voor voorspellend onderhoud, aangezien defecten doorgaans langzaam ontstaan en niet direct zichtbaar zijn in ruwe sensordata \autocite{Xue2025}. Door sensorgegevens over langere tijd te analyseren, kunnen afwijkende ontwikkelingen vroegtijdig worden vastgesteld voordat er een effectieve machine-uitval plaatsvindt.
+De vergelijkende analyse van de private tractordataset en de publieke MetroPT-3-dataset leidde uiteindelijk tot een duidelijker begrip van de toepasbaarheid van de private data voor voorspellend onderhoud. Ondanks dat de private dataset geen duidelijke defectlabels bevatte, konden belangrijke operationele patronen en mogelijke afwijkingen toch worden bestudeerd door de middel van trendanalyse en visualisatie. Dit vormde een fundament voor de verdere ontwikkeling van methoden voor anomalie detectie in de volgende fasen van het onderzoek.
 
 %De volgende fase van het onderzoek is gericht op het verzamelen en analyseren van gegevens die nodig zijn voor de ontwikkeling van het voorspellend onderhoudsmodel. In het kader van voorspellend onderhoud omvat deze informatie meestal reeksen die door sensoren worden verzameld, waarbij diverse machineparameters zoals temperatuur, trillingen en operationele variabelen voortdurend worden gevolgd \autocite{Mahale2025, Touil2025}. Deze sensorinformatie is essentieel voor het opsporen van patronen en afwijkingen in het gedrag van machines.
 
@@ -179,9 +153,6 @@ In dit onderzoek wordt daarom gekozen voor een unsupervised aanpak, waarbij de n
 Het model wordt iteratief ontwikkeld en bestaat uit diverse stappen, zoals het kiezen van belangrijke features, het aanpassen van het model aan gebruikelijke operationele gegevens en het opsporen van afwijkingen met behulp van statistische of machine learning-technieken. In de studies van \textcite{Nayak2024} en \textcite{Touil2025} wordt er aandacht besteed aan de unieke eigenschappen van tijdsreeksdata, zoals seizoensgebonden trends en variaties in het gebruik van machines.
 
 Deze fase biedt een realistische weergave van de obstakels in de bouwsector, waar de gegevens vaak onvolledig of niet geannoteerd zijn. De studies van \textcite{Elahi2023}, \textcite{Hu2024} en \textcite{Wang2025} verklaren door gebruik te maken van een unsupervised methode dat er dan wordt nagegaan in hoeverre voorspellend onderhoud haalbaar is onder deze beperkte omstandigheden, wat een cruciale rol speelt in de praktische toepassing van data-gedreven technieken.
-
-\section{\IfLanguageName{dutch}{Ongecontroleerde modelontwikkeling met unsupervised learning}{Unsupervised model development using unsupervised learning}}%
-\label{sec: Ongecontroleerde model ontwikkeling met unsupervised learning}
 
 %In deze fase wordt er een voorspellend onderhoudsmodel ontwikkeld dat is gebaseerd op de verzamelde en voorverwerkte gegevens. Volgens de onderzoeken van \textcite{Mahale2025}, \textcite{Nayak2024} en \textcite{Touil2025} kunnen er machine learning-methoden worden toegepast die geschikt zijn voor het analyseren van tijdsreeksen en sensorgegevens, omdat dit type data typisch is voor toepassingen voor voorspellend onderhoud.
 

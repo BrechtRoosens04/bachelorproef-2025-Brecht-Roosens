@@ -29,3 +29,59 @@ De AI4I 2020-dataset is een populaire dataset voor voorspellend onderhoudsonderz
 Ook de voorspellend onderhoud van Microsoft Azure Dataset werd bestudeerd als een mogelijke kandidaat. Deze dataset concentreert zich vooral op algemene industriële componenten van machines en wordt vaak toegepast in cloudgebaseerde toepassingen voor voorspellend onderhoudsdiensten. Hoewel de dataset ideaal is voor basisanalyse en classificatievraagstukken, bevat ze minder uitgebreide constante multivariate sensorgegevens in vergelijking met de gegevens over tractoren die zijn verkregen. Bovendien lag de nadruk minder op ingewikkelde tijdsreeksen, maar meer op vooraf voorbereide onderhoudslabels. Het onderzoek van \textcite{Kapoor2025} benadrukt dat moderne toepassingen voor voorspellend onderhoud net uitgebreide, constante sensorgegevens nodig hebben, afkomstig van verbonden systemen en cloudinfrastructuren, zodat ze evoluties en afwijkingen nauwkeurig kunnen analyseren.
 
 Uiteindelijk werd de MetroPT-3 dataset geselecteerd omdat deze het beste aansluit bij zowel de opbouw van de tractordata als de onderzoeksdoelstellingen van deze bachelorproef. De MetroPT-3 dataset bevat werkelijke industriële tijdreeksen die afkomstig zijn van een luchtcompressorsysteem in de spoorwegindustrie. De dataset is specifiek ontworpen om voorspellend onderhoudsonderzoek en toepassingen voor anomalie detectie te ondersteunen \autocite{Veloso2022}.
+
+
+\section{\IfLanguageName{dutch}{Beschrijving van de gekozen MetroPT-3-dataset}{Description of the selected MetroPT-3-dataset}}%
+\label{sec: Beschrijving van de gekozen MetroPT-3-dataset}
+
+De openbare dataset die is gebruikt, is de MetroPT-3-dataset, die is ontworpen voor het onderzoek naar voorspellend onderhoud in industriële systemen. De dataset omvat sensorinformatie die afkomstig is van een Air Production Unit of afgekort APU van een treincompressorsysteem in de spoorwegsector. Het onderzoek van \textcite{Veloso2022} benadrukt dat de dataset speciaal is gepubliceerd om onderzoek naar anomalie detectie, fout detectie en voorspellend onderhoudsprocessen te faciliteren en om onderzoekers toegang te bieden tot realistische industriële sensorgegevens met geregistreerde defecten.
+
+De MetroPT-3-dataset valt onder de groep van multivariate tijdreeksdatasets. Dit houdt in dat verschillende sensoren tegelijkertijd gegevens vastleggen over een langere periode. Elke rij in de dataset is een tijdmeting van diverse operationele parameters van het compressorsysteem. De studie van \textcite{Carvalho2019} accentueert dat multivariate tijdsreeksen cruciaal zijn voor voorspellend onderhoud, aangezien defecten vaak niet zichtbaar zijn in één enkele parameter, maar voortkomen uit combinaties van afwijkingen over verschillende sensoren.
+
+De dataset omvat zowel gebruikelijke operationele toestanden als periodes die resulteren in geregistreerde defecten. Dit stelt ons in staat om veranderingen in sensorgedrag te onderzoeken voordat er falen optreden. Het onderzoek van \textcite{Davari2021} beklemtoont dat datasets met zowel normale als defecte operationele toestanden bijzonder geschikt zijn voor het opsporen van onregelmatigheden en het vroegtijdig opsporen van fouten in industriële installaties.
+
+Binnen deze bachelorproef werd gebruikgemaakt van de MetroPT-3-dataset. De dataset bevat onder andere volgende parameters:
+
+\begin{itemize}
+    
+    \item TP2
+    
+    \item TP3
+    
+    \item H1
+    
+    \item DV\_pressure
+    
+    \item Reservoirs
+    
+    \item Oil\_temperature
+    
+    \item Motor\_current
+    
+    \item COMP
+    
+    \item DV\_eletric
+    
+    \item Towers
+    
+    \item MPG
+    
+    \item LPS
+    
+    \item Pressure\_switch
+    
+    \item Oil\_level
+    
+    \item Caudal\_impulses
+    
+\end{itemize}
+
+Deze waarden vertegenwoordigen diverse drukken, temperaturen, elektrische signalen en operationele omstandigheden van het compressorsysteem. Drukmetingen zijn cruciale aanwijzingen voor lekkages, compressorproblemen of defecten in pneumatische systemen \autocite{Daoudi2025}. Volgens het onderzoek van \textcite{Touil2025} kunnen temperatuurmetingen aangeven dat er overbelasting, wrijving of defecte onderdelen aanwezig zijn, terwijl het onderzoek van \textcite{Chen2025} benadrukt dat elektrische signalen zoals motorstroom vaak ingezet worden voor het monitoren van de toestand van industriële machines.
+
+Deze sensorgegevens zijn uiterst geschikt zijn voor het opsporen van onregelmatigheden, omdat defecten vaak eerst zichtbaar worden door subtiele veranderingen in temperatuur-, druk- of stroomwaarden \autocite{Davari2021}. Het onderzoek van \textcite{Nayak2024} accentueert eveneens dat voortdurende sensormonitoring cruciaal is voor het op tijd opsporen van afwijkend machinegedrag in voorspellend onderhoudssystemen.
+
+Evenals de verkregen tractorgegevens is ook deze dataset omgevormd tot een tijdsreeksdataset. De timestampkolom is hiervoor omgezet naar een juist datetimeformaat en is ingesteld als index. Daarna werden de gegevens chronologisch geordend om trendanalyse, filtering en herhaling mogelijk te maken. De studie van \textcite{Elahi2023} benadrukt dat de juiste preprocessing van tijdsreeksen een essentiële stap is in industriële AI-toepassingen.
+
+Na het inladen en voorbereiden van de dataset werden de dagelijkse gemiddelden vastgesteld door middel van hersampling. Dit maakte het mogelijk om trends en veranderingen in parameters visueel te analyseren en bovendien werd de ruis in de ruwe sensorgegevens gedeeltelijk verminderd. Volgens het onderzoek van \textcite{Dissem2024} kunnen tijdsgebaseerde aggregaties bijdragen aan het beter identificeren van verborgen patronen en afwijkingen in onrustige industriële tijdreeksen.
+
+Trendanalyse en tijdsgebaseerde aggregaties zijn essentiële methoden voor voorspellend onderhoud, aangezien defecten doorgaans langzaam ontstaan en niet direct zichtbaar zijn in ruwe sensordata \autocite{Xue2025}. Door sensorgegevens over langere tijd te analyseren, kunnen afwijkende ontwikkelingen vroegtijdig worden vastgesteld voordat er een effectieve machine-uitval plaatsvindt.
