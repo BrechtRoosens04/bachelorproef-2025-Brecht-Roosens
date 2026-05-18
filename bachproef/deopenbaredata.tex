@@ -96,3 +96,100 @@ Evenals de verkregen tractorgegevens is ook deze dataset omgevormd tot een tijds
 Na het inladen en voorbereiden van de dataset werden de dagelijkse gemiddelden vastgesteld door middel van hersampling. Dit maakte het mogelijk om trends en veranderingen in parameters visueel te analyseren en bovendien werd de ruis in de ruwe sensorgegevens gedeeltelijk verminderd. Volgens het onderzoek van \textcite{Dissem2024} kunnen tijdsgebaseerde aggregaties bijdragen aan het beter identificeren van verborgen patronen en afwijkingen in onrustige industriële tijdreeksen.
 
 Trendanalyse en tijdsgebaseerde aggregaties zijn essentiële methoden voor voorspellend onderhoud, aangezien defecten doorgaans langzaam ontstaan en niet direct zichtbaar zijn in ruwe sensordata \autocite{Xue2025}. Door sensorgegevens over langere tijd te analyseren, kunnen afwijkende ontwikkelingen vroegtijdig worden vastgesteld voordat er een effectieve machine-uitval plaatsvindt.
+
+\section{\IfLanguageName{dutch}{Trendanalyse van de gekozen MetroPT-3-dataset}{Trend analysis of the selected MetroPT-3-dataset}}%
+\label{sec: Trendanalyse van de gekozen MetroPT-3-dataset}
+
+Na het verwerken en voorbereiden van de gekozen MetroPT-3-dataset werd een data-analyse uitgevoerd op verschillende sensordata binnen het luchtcompressorsysteem om zo de dataset te verkennen. De hoofdreden van deze verkennende analyse was om de nodige inzicht te krijgen in het operationele gedrag van de installatie en om mogelijke fouten, trends of patronen te identificeren die een mogelijk verband kunnen houden met slijtage, motorbelasting of foutvorming. Binnen voorspellend onderhoud vormt een soortgelijke begrijpende analyse een belangrijke eerste stap, omdat hierdoor beter begrepen kan worden hoe sensoren zich gedragen tijdens normale en afwijkende operationele situaties. De onderzoeken van \textcite{Carvalho2019} en \textcite{Elahi2023} stellen dat verkennende analyse van industriële sensorgegevens cruciaal is om belangrijke patronen en mogelijke anomalieën te detecteren voor machine learning-modellen worden toegepast.
+
+In deze bachelorproef lag de nadruk vooral op parameters die een directe verbinding kunnen vormen met de toestand van het luchtcompressorsysteem. Aan de hand van de uitgevoerde analyse in de Python-notebook zijn onder andere de volgende parameters gekozen:
+
+\begin{itemize}
+    
+    \item olietemperatuur (Oil\_temperature)
+    
+    \item motorstroom (Motor\_current)
+    
+    \item compressordruk (TP2).
+
+\end{itemize}
+
+Deze parameters werden gekozen omdat temperatuur-, druk- en stroommetingen vaak belangrijke indicatoren zijn voor de gezondheid van bouwmachines. Volgens de studies van \textcite{Nayak2024} en \textcite{Wang2025} zijn veranderingen in temperatuur, druk en elektrische belasting enkele van de meest gebruikte signalen voor het vroegtijdig opsporen van fouten in voorspellend onderhoudstoepassingen.
+
+Om de ontwikkeling van deze sensoren duidelijker te maken, zijn de ruwe tijdsreeksen verwerkt door middel van dagelijkse aggregaties. Dagelijkse gemiddelden zijn vastgesteld op basis van de continue sensormetingen. Door dagelijkse gemiddelden toe te passen, werd de aanzienlijke hoeveelheid ruwe gegevens duidelijker en konden langetermijntrends gemakkelijker worden onderzocht. Het onderzoek van \textcite{Xue2025} benadrukt dat tijdsgebaseerde aggregaties zeer waardevol zijn voor voorspellend onderhoud, omdat defecten zich vaak langzaam ontwikkelen over langere tijd, waardoor ze moeilijk te herkennen zijn in sterk variabele ruwe sensordata.
+
+Voor elke gekozen parameter werden daarna tijdsreeksgrafieken gemaakt die de ontwikkeling van de sensorgegevens in de loop der jaren weergaven. Visualisatie van sensorgegevens is cruciaal voor het opsporen van afwijkingen, aangezien afwijkende patronen vaak eerst worden opgemerkt door veranderingen in trends, variaties of bijzondere pieken. De onderzoeken van \textcite{Holtz2025} en \textcite{Giannoulidis2024} beklemtonen dat visuele trendanalyse een essentieel middel is om operationele variaties in industriële tijdsperiodes te herkennen.
+
+De geanalyseerde grafieken toonden aan dat verschillende parameters aanzienlijke variaties en veranderende trendpatronen vertoonden. Tijdens specifieke operationele periodes en in de nabijheid van geregistreerde defecten waren vooral de olietemperatuur en de drukwaarden die duidelijk veranderden. Afwijkingen zoals deze kunnen duiden op veranderende omstandigheden in de machine, hogere motorbelasting of de aanvang van slijtage van componenten. De studie van \textcite{Davari2021} stelt dat defecten in industriële systemen vaak niet onverwacht ontstaan, maar zich langzaam ontwikkelen door kleine aanpassingen in sensorgegevens voordat er een daadwerkelijke uitval optreedt.
+
+Om de algemene trends nog helderder te maken, werd er een rolling mean over een periode van zeven dagen toegepast. Voor elk datapunt wordt het gemiddelde van de omliggende waarden in een vastgesteld tijdschema berekend. Deze aanpak laat toe om kortetermijnschommelingen te verminderen en de onderliggende trend duidelijker te laten zien.
+
+Binnen tijdsreeksanalyse en het opsporen van onregelmatigheden wordt regelmatig gebruikgemaakt van smoothingtechnieken zoals rolling averages. Dergelijke methoden dragen bij tot een beter onderscheid tussen structurele afwijkingen en gebruikelijke operationele ruis in industriële sensorgegevens\autocite{Dissem2024}. Het onderzoek van \textcite{Aggarwal2025} accentueert eveneens dat preprocessing en smoothing essentiële stappen zijn voor het juist analyseren van ingewikkelde multivariate tijdsreeksen in voorspellend onderhoudstoepassingen.
+
+Naast de trendanalyse zijn ook de bekende falen momenten visueel aan de grafieken toegevoegd. Dit maakte het mogelijk om de sensorevoluties direct te vergelijken met de geregistreerde defectevenementen in deze dataset. Door defectmomenten op dezelfde tijd te observeren, werd het evident dat sommige parameters al afwijkend gedrag begonnen te vertonen voor het daadwerkelijke defect.
+
+Deze observatie is sterk verbonden met de essentiële werking van voorspellend onderhoud. Binnen voorspellend onderhoud is het de bedoeling om defecten op tijd te herkennen op basis van wijzigingen in operationele gegevens voordat er een volledige machine-uitval plaatsvindt. Volgens de onderzoeken van \textcite{Li2025} en \textcite{Daoudi2025} ontstaan defecten in industriële systemen vaak door geleidelijk veranderende sensordata, zoals temperatuur, druk of stroomverbruik. Het herkennen van de dergelijke patronen is daarom essentieel voor het opsporen van anomalieën en het voorspellend onderhoud.
+
+De trendanalyse van MetroPT-3-dataset toonde daarom aan dat deze dataset genoeg relevante operationele variaties en patronen met betrekking tot defecten bevat voor aanvullend onderzoek naar voorspellend onderhoudsprocessen. Daarnaast maakten de heldere tijdsreekspatronen het mogelijk om vergelijkingen te maken met de verzamelde tractorgegevens, waardoor beide datasets in deze bachelorproef op een vergelijkbare wijze konden worden onderzocht.
+
+\section{\IfLanguageName{dutch}{Vergelijking met de verkregen tractordata}{Comparison with the tractor data obtained}}%
+\label{sec: Verglijking met de verkregen tractordata}
+
+Een essentieel aspect van deze bachelorproef omvatte het analyseren van de openbare MetroPT-3-dataset in vergelijking met de gegevens van tractoren die actief zijn in grondverzet- en transportactiviteiten. Hoewel beide datasets afkomstig zijn uit diverse industriële sectoren, met spoorwegcompressorsystemen aan de ene kant en bouwmachines aan de andere kant, vertonen ze vanuit het perspectief van voorspellend onderhoud verschillende belangrijke overeenkomsten. Het analyseren van beide datasets liet toe om te onderzoeken in hoeverre methoden voor anomalie detectie en trendanalyse toepasbaar zijn in diverse industriële omgevingen.
+
+Beide datasets omvatten continue multivariate tijdsreeksen waarin sensorgegevens automatisch worden vastgelegd tijdens het gebruik van de machines tijdens het gebruikspatroon. De onderzoeken van \textcite{Carvalho2019} en \textcite{Elahi2023} stellen dat deze continue sensormetingen de fundamenten leggen voor hedendaagse voorspellend onderhoudssystemen, omdat ze het mogelijk maken om operationele veranderingen, afwijkingen en mogelijke defecten in de loop der jaren te onderzoeken.
+
+Bovendien omvatten beide datasets parameters die gerelateerde zijn aan essentiële operationele kenmerken van machines, zoals temperatuur, druk, motorbelasting en motorgedrag. Binnen voorspellend onderhoud zijn dit essentiële indicatoren, aangezien defecten of slijtage vaak eerst zichtbaar worden door subtiele aanpassingen in deze sensorgegevens. De studies van \textcite{Nayak2024}, \textcite{Wang2025} en \textcite{Daoudi2025} beklemtonen dat temperatuur-, druk- en stroomgerelateerde parameters de meest populaire sensoren zijn voor het vroegtijdig opsporen van fouten in industriële systemen.
+
+Binnen de verzamelde tractorgegevens zijn onder andere de volgende parameters onderzocht:
+
+\begin{itemize}
+    
+    \item motorolietemperatuur
+    
+    \item vuldruk van de motor
+    
+    \item druk van de transmissieolie
+    
+    \item motorbelasting
+    
+    \item brandstofdebiet van de motor
+    
+    \item motortoerental
+    
+\end{itemize}
+
+Deze waarden beschrijven diverse operationele toestanden van de tractor en bieden inzicht in het functioneren van zowel de motor als het hydraulische en transmissiesysteem. Binnen voorspellend onderhoud zijn metingen van temperatuur en druk vooral belangrijk, omdat afwijkingen in deze waarden kunnen duiden op een hogere slijtage, overbelasting of aanvankelijke defecten. De onderzoeken van \textcite{Mahale2025} en \textcite{Xue2025} stellend dat deze operationele sensoren essentiële gegevens bieden voor het volgen van de gezondheidstoestand van zware voertuigen en industriële machines.
+
+Evenals bij de MetroPT-3-dataset zijn ook de tractordata omgevormd tot tijdsreeksen. De sensormetingen zijn chronologisch ingedeeld en daarna geaggregeerd met behulp van dagelijkse gemiddelden. Door dagelijkse sampling te gebruiken, werden grote hoeveelheden ruwe sensordata duidelijker en werden langetermijntrends beter zichtbaar. Volgens de onderzoeken van \textcite{Dissem2024} en \textcite{Xue2025} zijn preprocessing, resampling en trendanalyse essentiële stappen in voorspellend onderhoud, omdat defecten vaak langzaam ontstaan en daardoor lastig direct zichtbaar zijn in ruwe gegevens.
+
+Na de preprocessing werden er voor beide datasets aparte trendgrafieken gemaakt. Deze visualisaties lieten toe om de veranderingen in sensordata in de loop der jaren te onderzoeken en operationele patronen met elkaar te vergelijken. De studies van \textcite{Holtz2025} en \textcite{Giannoulidis2024} beklemtonen dat visuele trendanalyse cruciaal is voor het opsporen van afwijkingen, aangezien deze vaak eerst zichtbaar worden door veranderingen in tijdsreekspatronen.
+
+De uitgevoerde analyses toonden aan dat verschillende parameters in de tractorgegevens soortgelijke trendstructuren vertonen als die in de MetroPT-3-dataset. Evenals bij de gegevens van de compressor waren er in de loop der jaren aanzienlijke variaties te zien in temperatuur-, druk- en motorbelastingwaarden. Hoewel de absolute waarden en de operationele omstandigheden tussen de twee systemen uiteenlopen, vertoonden de tijdsperiodes soortgelijke variaties, pieken en ontwikkelingen.
+
+Een essentieel onderscheid tussen de twee datasets is echter de aanwezigheid van informatie over defecten. De MetroPT-3-dataset toont duidelijk geregistreerde defecten en onderhoudsmomenten, terwijl dergelijke defectlabels niet waren opgenomen in de verkregen tractorgegevens. Dit zorgde ervoor dat defecten in de tractorgegevens niet direct konden worden verbonden met bepaalde fouten of afwijkende sensordata. Hoewel deze beperking bestond, waren er toch vergelijkbare operationele trends en variaties te zien tussen beide datasets.
+
+Vanwege deze overeenkomsten werd de MetroPT-3-dataset gezien als een geschikte referentiedataset voor het analyseren van technieken voor anomalie detectie in deze bachelorproef. Met behulp van een openbare dataset met bekende defectmomenten was het mogelijk om analysetechnieken te onderzoeken op een dataset waarin fouten daadwerkelijk aanwezig zijn, terwijl de tractorgegevens het mogelijk maakte om dezelfde technieken toe te passen op realistische operationele data afkomstig uit de praktijk.
+
+Het analyseren van operationele trends in diverse datasets is een waardevolle benadering voor voorspellend onderhoud, vooral wanneer er beperkte defectdata beschikbaar is in een industriële omgeving \autocite{Holtz2025, Giannoulidis2024}. Door patronen, variaties en afwijkingen te onderzoeken in soortgelijke sensordata, kunnen modellen worden gecreëerd die mogelijk toepasbaar zijn in andere industriële toepassingen of machines.
+
+Deze benadering past bovendien bij de grotere ontwikkelingen in Industry 4.0 en datagedreven onderhoudssystemen, waar machine learning-modellen steeds vaker worden ingezet in diverse industriële omgevingen. De onderzoeken van \textcite{Kapoor2025} en \textcite{Aggarwal2025} stellen dat het samenbrengen van diverse databronnen en sensorsoorten steeds crucialer wordt voor het creëren van stevige voorspellend onderhoudsoplossingen die geschikt zijn voor ingewikkelde industriële omstandigheden.
+
+De vergelijking tussen de MetroPT-3-dataset en de verzamelde tractorgegevens was daardoor een cruciale stap in het onderzoek. Aan de ene kant gaf de openbare dataset de kans om technieken voor anomalie detectie te beoordelen op gegevens met succesvolle defecten, terwijl de tractorgegevens aan de andere kant de mogelijkheid bood om dezelfde analysetechnieken te gebruiken voor realistische sensordata van zware voertuigen in de grondverzet en het transport. Dit leidde tot een uitgebreidere en meer haalbare onderzoeksbasis voor de verdere ontwikkeling van deze bachelorproef.
+
+\section{\IfLanguageName{dutch}{De redenen voor het toepassen van MetroPT-3-dataset}{Reasons for using the MetroPT-3-dataset}}%
+\label{sec: De redenen voor het toepassen van MetroPT-3-dataset}
+
+De MetroPT-3-dataset voegde een waardevolle toevoeging toe aan de verzamelde private tractorgegevens in deze bachelorproef. Hoewel de privédataset waardevolle real-world sensorgegevens bevatte van een operationele tractor, waren er geen duidelijke defectmeldingen of onderhoudslabels in deze gegevens te vinden. Dit maakte het lastig om anomalie detectie-methoden te beoordelen op basis van de daadwerkelijk vastgelegde storingen.
+
+De MetroPT-3-dataset bood hiervoor een passende oplossing. De dataset is speciaal ontworpen voor het onderzoek naar voorspellend onderhoud, anomalie detectie en fouten detectie in industriële systemen \autocite{Veloso2022}. De dataset omvat sensorgegevens van verschillende variaties die afkomstig zijn van een Air Production Unit (APU) van een treincompressorsysteem, samen met geregistreerde defecten. Dit maakte het mogelijk om afwijkende patronen en gebeurtenissen die verband houden met defecten effectiever te onderzoeken binnen een gecontroleerde onderzoeksomgeving. 
+
+De dataset past bovendien uitstekend bij het thema van deze bachelorproef, namelijk het gebruik van machine learning-methoden op industriële sensorgegevens voor voorspellend onderhoud. Het onderzoek van \textcite{Davari2021} stelt dat datasets met continue sensormetingen van druk, temperaturen en operationele toestanden bijzonder geschikt zijn voor het opsporen van anomalieën, omdat defecten vaak langzaam optreden door subtiele veranderingen in tijdsreekspatronen.
+
+Een extra voordeel van de MetroPT-3-dataset is dat de gegevens openbaar zijn en wetenschappelijk zijn vastgelegd. Dit maakt het mogelijk om onderzoek opnieuw uit te voeren, wat volgens het onderzoek van \textcite{Carvalho2019} een cruciaal element is in machine learning-onderzoek en voorspellend onderhoudstoepassingen.
+
+Door een publieke dataset met gemarkeerde fouten en een privédataset met realistische telematicagegevens te combineren, is er een balans bereikt tussen academische beoordeling en praktische toepassing. De studie van \textcite{Veloso2022} stelt dat het combineren van publieke en private industriële datasets zeer nuttig kan zijn wanneer bedrijven slechts een beperkte hoeveelheid historische storingsdata beschikken.
+
+In deze bachelorproef liet deze gecombineerde benadering toe om aan de ene kant analysemethoden en technieken voor anomalie detectie te beoordelen binnen een gecontroleerde dataset, en aan de andere kant te onderzoeken in hoeverre dergelijke technieken overdraagbaar zijn naar realistische industriële omstandigheden.
+
+Het combineren van de MetroPT-3-dataset met de private tractorgegevens biedt een haalbare basis voor het verder onderzoeken van voorspellend onderhoud en het opsporen van onregelmatigheden in zware voertuigen, bouwmachines en industriële toepassingen.
