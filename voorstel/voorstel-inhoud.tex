@@ -26,15 +26,15 @@ De deelvragen van deze bachelorproef zijn ontwikkeld op basis van een analyse va
 \paragraph{Deelvragen in verband met het probleemdomein}
 
 \begin{itemize}
-    \item 1: Welke soorten sensordata zijn het meest geschikt voor het voorspellen van storingen in bouwmachines binnen kleine bouw ondernemingen?
+    \item Welke sensorgegevens zijn het meest van belang voor het opsporen van afwijkingen in bouwmachines?
     
-    \item 2: Welke verschillen bestaan er in beschikbare sensordata tussen verschillende types bouwmachines en hoe beïnvloeden deze verschillen de mogelijkheid tot foutdetectie?
+    \item Welke beperkingen zijn er met betrekking tot de beschikbaarheid en kwaliteit van sensordata binnen kleine bouwbedrijven?
     
-    \item 3: Welke typische storingen en onderhoudsproblemen komen het vaakst voor bij bouwmachines in kleine bouwondernemingen?
+    \item Welke obstakels komen voor het verzamelen en verwerken van echte gegevens in de bouwsector?
     
-    \item 4: Welke vormen van ruis en onnauwkeurigheden komen voor in sensordata van bouwmachines en welke impact hebben deze op de betrouwbaarheid van foutdetectie?
+    \item Welke andere bronnen of technieken kunnen worden gebruikt als de gegevens beperkt of niet volledig zijn?
     
-    \item 5: Welke organisatorische, technische en financiële uitdagingen belemmeren de toepassing van het voorspellend onderhoud in kleine bouwondernemingen?
+    \item Welke eigenschappen van sensordata maken het moeilijker om afwijkingen in bouwmachines te identificeren?
 \end{itemize}
 
 Deelvragen binnen het oplossingsdomein zijn gebaseerd op de inzichten uit het probleemdomein. Deze deelvragen richten zich op het ontwikkelen, implementeren en beoordelen van een voorspellend onderhoudssysteem. Op basis van machine learning-algoritmes, waarbij de haalbaarheid en praktische bruikbaarheid in overweging worden genomen.
@@ -42,21 +42,15 @@ Deelvragen binnen het oplossingsdomein zijn gebaseerd op de inzichten uit het pr
 \paragraph{Deelvragen in verband met het oplossingsdomein}
 
 \begin{itemize}
-    \item 1: Hoe kan sensordata van bouwmachines efficiënt worden voorverwerkt, gefilterd en geanalyseerd om geschikt te zijn voor machine learning-modellen?
+    \item Op welke manieren kunnen sensorgegevens van bouwmachines worden voorbereid en geanalyseerd om geschikt te zijn voor machine learning-toepassingen?
     
-    \item 2: Welke machine learning-algoritmes zijn het meest geschikt voor het ontwikkelen van een voorspellend onderhoudsmodel in een context met beperkte en ruisgevoelige data?
+    \item Op welke manier kan een unsupervised learn\-in\-g-model worden gebruikt voor niet-gelabel\-de sensorgegevens uit de praktijk?
     
-    \item 3: Hoe kunnen de geselecteerde machine learning-modellen worden getraind en gevalideerd om betrouwbare voorspellingen va\-n storingen te realiseren?
+    \item Op welke manier kan een supervised learnin\-g-model worden gecreëerd op basis van een gelabelde dataset voor voorspellend onderhoud?
     
-    \item 4: Wat is de invloed van verschillende feature selection- en feature engineering-methoden op de prestaties van het voorspellend onderhoudsmodel?
+    \item Op welke manieren kunnen beide modellen worden beoordeeld en vergeleken op het gebied van prestaties en toepasbaarheid?
     
-    \item 5: Welke evaluatiemaatstaven, zoals precision, recall, F1-score en confusion-matrix zijn het meest geschikt om de prestaties van het model te beoordelen in een onderhoudscontext?
-    
-    \item 6: Hoe kunnen valse positieven en foutieve voorspellingen worden geminimaliseerd om onnodige onderhoudsinterventies te vermijden?
-    
-    \item 7: Hoe kan de betrouwbaarheid en uitlegbaarheid van het voorspellend onderhoudsmodel worden verhoogd om praktische inzet in een bouwbedrijf mogelijk te maken?
-    
-    \item 8: Welke potentiële kostenbesparingen en efficiëntieverbeteringen kunnen worden gerealiseerd door de toepassing van het ontwikkelde voorspellend onderhoudsmodel?
+    \item Welke methoden kunnen worden toegepast om om te gaan met beperkte of onvolledige gegevens?
 \end{itemize}
 
 Deze bachelorproef heeft als doel een soort van proof-of-concept voorspellend onderhoudsmodel te creëren en te evalueren voor de gekozen casus. Dit wordt ook aangevuld met een praktisch adviesrapport om het model te integreren en uit te voeren binnen het bedrijf. De bachelorproef is pas succesvol, zoals \textcite{Raffaele2024} en \textcite{Mahale2025} ook beschrijven in hun onderzoek, als het model technisch helemaal goed functioneert en een duidelijke waarde toevoegt aan het onderhoudsbeleid van het bouwbedrijf.
@@ -80,7 +74,7 @@ Er worden diverse soorten sensoren ingezet om betrouwbare inputdata te verzamele
 
 De voordelen van voorspellend onderhoud worden eveneens op bedrijfsniveau onderbouwd. \textcite{ErRatby2025} bewijzen dat voorspellend onderhoud resulteert in minder stilstanden van de machines, lagere onderhoudskosten en verbetering van de efficiëntie. Er blijven echter aanzienlijke obstakels bestaan met betrekking tot de betrouwbaarheid van de modellen, het classificeren van fouten en defecten en de implementatie in bestaande systemen \autocite{Roehrich2024, Elahi2023}. Volgens \textcite{Wang2025} en \textcite{Holtz2025} hebben nieuwe methoden, zoals stevige foutbeoordeling bij ruis in de data en data-efficiënte leermethoden, als doel deze problemen te verminderen, maar vragen nog om aanvullende praktische bevestiging in kleinere ondernemingen.
 
-In recente literatuur worden naast supervised machine learning-algoritmes ook unsupervised en self-supervised leermethoden gebruikt voor voorspellend onderhoud, vooral wanneer gelabelde foutdata beperkt beschikbaar zijn \autocite{Elahi2023}. \textcite{Giannoulidis2024} beschrijven verschillende unsupervised benaderingen, wa\-aronder similartiy-based methoden die afwijkingen detecteren door te vergelijken met de patronen van normaal machinegedrag, forecasting-based modellen die anomalieën identificeren op basis van grote voorspellingsfouten in tijdsreeksen en deep unsupervised modellen zoals autoencoders die afwijkingen vaststellen via reconstructiefouten.
+In recente literatuur worden naast supervised machine learning-algoritmes ook unsupervised en self-supervised leermethoden gebruikt voor voorspellend onderhoud, vooral wanneer gelabelde foutdata beperkt beschikbaar zijn \autocite{Elahi2023}. \textcite{Giannoulidis2024} beschrijven verschillende unsupervised benaderingen, wa\-aro\-nder similartiy-based methoden die afwijkingen detecteren door te vergelijken met de patronen van normaal machinegedrag, forecasting-based modellen die anomalieën identificeren op basis van grote voorspellingsfouten in tijdsreeksen en deep unsupervised modellen zoals autoencoders die afwijkingen vaststellen via reconstructiefouten.
 
 Bovendien worden er ook self-supervised deep learning-modellen toegepast. \textcite{Aggarwal2025} stellen met DASTAD een Transformer-gebaseerd self-supervised model voor anomaly detection in multivariate tijdsreeksen. \textcite{Holtz2025} combineren unsupervised anomaly detection op basis van autoencoders met active learning om met een beperkte hoeveelheid gelabelde data toch betrouwbare foutdetectie te realiseren.
 
@@ -103,35 +97,47 @@ Recent onderzoek laat zien dat zowel unsupervised als self-supervised learning-a
 
 Dit onderzoek hanteert een praktische en casusgerichte benadering om zowel probleemgerichte als oplossingsgerichte vragen te beantwoorden. De aanpak past bij de bestaande technieken voor voorspellend onderhoud, zoals gebruikt in eerdere case-en vergelijkende studies van anderen. Deze bachelorproef zal ongeveer veertien weken in beslag nemen. Enkele weken zullen elkaar overlappen, dit wordt hieronder verder uitgelegd in de verschillende fases.
 
-\paragraph{Literatuurstudie}
+\paragraph{Literatuuronderzoek en theoretische basis}
 
-In de eerste plaats wordt er een literatuurstudie uitgevoerd om het onderhoudsprobleem in de bouwsector beter te kunnen plaatsen en te onderzoeken waarom gangbare onderhoudsmethoden leiden tot stilstand en fouten. Dit is al bewezen in de industrie en bij bouwmachines \autocite{ErRatby2025, Farwaha2024, Mikulic2024}. Bovendien wordt onderzocht welke sensoren, datatypes en machine learning- en unsupervised learning-alg\-oritmes momenteel het me\-est effectief zijn voor het opsporen van fouten en het voorspellen van de resterende levensduur van bepaalde machinecomponenten \autocite{Carvalho2019, Li2025, Meddaoui2024, Nayak2024}. Deze fase zal ongeveer drie weken duren en een mogelijke overlap met andere fases kan ontstaan als er extra bronnen vereist zijn. Daarnaast kan er een deliverable worden opgesteld dat aan het einde van deze drie weken ingediend kan worden om een heldere deadline te stellen.
+In de eerste fase vindt er een literatuurstudie plaats over voorspellend onderhoud, machine learning en het opsporen van onregelmatigheden in industriële toepassingen. Er wordt bestudeerd welke methoden het vaakst worden toegepast om defecten te voorspellen op basis van sensorgegevens. Bovendien wordt er gekeken naar de functie van tijdsreeksen, sensorgegevens en data-ana\-lyse in voorspellend onderhoud. Een solide theoretische basis essentieel is voor het creëren van betrouwbare voorspellend onderhoudsoplossingen \autocite{Carvalho2019, Elahi2023}. De kennis uit deze fase vormt de wetenschappelijke basis voor nader onderzoek.
 
-\paragraph{Analyse-fase}
+%In de eerste plaats wordt er een literatuurstudie uitgevoerd om het onderhoudsprobleem in de bouwsector beter te kunnen plaatsen en te onderzoeken waarom gangbare onderhoudsmethoden leiden tot stilstand en fouten. Dit is al bewezen in de industrie en bij bouwmachines \autocite{ErRatby2025, Farwaha2024, Mikulic2024}. Bovendien wordt onderzocht welke sensoren, datatypes en machine learning- en unsupervised learning-alg\-oritmes momenteel het me\-est effectief zijn voor het opsporen van fouten en het voorspellen van de resterende levensduur van bepaalde machinecomponenten \autocite{Carvalho2019, Li2025, Meddaoui2024, Nayak2024}. Deze fase zal ongeveer drie weken duren en een mogelijke overlap met andere fases kan ontstaan als er extra bronnen vereist zijn. Daarnaast kan er een deliverable worden opgesteld dat aan het einde van deze drie weken ingediend kan worden om een heldere deadline te stellen.
 
-In deze fase wordt de specifieke situatie bij Bouwonderneming Marchand BV onderzocht, in samenwerking met het bedrijf, door middel van gesprekken met de technische verantwoordelijke. Deze methode is gebaseerd op de praktijkvoorbeelden uit de onderhoudsonderzoeken van \textcite{Racchumi2024} en \textcite{Deepak2025}. De meest voorkomende problemen, onderhoudsintervallen en de belangrijkste sensoren worden hierbij bepaald. Het uitwerken van deze fase zal naar verwachting één tot twee weken in beslag nemen, met mogelijke overlap met de literatuurstudie.
+\paragraph{Dataverzamelingen en preprocessing}
 
-\paragraph{Data-verzameling}
+In de t\-weede fase worden de datasets verzameld en klaargemaakt voor aanvullende analyse. Aan de ene kant wordt er gebruikgemaakt van een verzamelde privédataset die afkomstig is van een operationele tractor in grondverzet en transport. Aan de andere kant wordt er gezocht naar een geschikte dataset voor publieke voorspellend onderhoud die als basis kan dienen voor latere analyses. Daarna worden de datasets bekeken en geordend. Onder andere worden ontbrekende waarden, dubbele records en tegenstrijdigheden besproken. Volgens de onderzoeken van \textcite{Dissem2024} en \textcite{Carvalho2019} is het voorbereiden van gegevens een cruciale fase, aangezien industriële sensordata vaak ruis en onvolledigheden bevat.
 
-Onderhouds- en foutgegevens kunnen opgevraagd worden bij de machine-dealers, omdat kleine bouwbedrijven vaak geen eigen sensorgegevens registreren. In de studies van \textcite{Elahi2023}, \textcite{Hu2024} en \textcite{Wang2025} over voorspellend onderhoud is het gebruikelijk om informatie te verkrijgen van externe organisaties waaronder dealers van de machines. Als dat nodig is, kunnen er extra gesimuleerde of synthetische tijdreeksen of data worden gecreëerd op basis van eerder bekende faalpatronen uit de literatuur \autocite{Nayak2024, Wang2025, Meddaoui2024}. Er bestaat een kans dat sommige dealers geen toegang willen geven tot hun data, daarom is er een alternatieve aanpak uitgewerkt in een volgende sectie van de methodologie namelijk de sectie `Risico en alternatieve aanpak` gebaseerd op synthetische data. Voor het opstellen van een complete dataset wordt ongeveer vier weken besteed, inclusief het bezoeken en contacteren van de diverse dealers en indien nodig het simuleren van extra bijkomende data. 
+%In deze fase wordt de specifieke situatie bij Bouwonderneming Marchand BV onderzocht, in samenwerking met het bedrijf, door middel van gesprekken met de technische verantwoordelijke. Deze methode is gebaseerd op de praktijkvoorbeelden uit de onderhoudsonderzoeken van \textcite{Racchumi2024} en \textcite{Deepak2025}. De meest voorkomende problemen, onderhoudsintervallen en de belangrijkste sensoren worden hierbij bepaald. Het uitwerken van deze fase zal naar verwachting één tot twee weken in beslag nemen, met mogelijke overlap met de literatuurstudie.
 
-Ondertussen werd er voor de start van de bachelorproefperiode al contact gelegd met de verantwoordelijke van Bouwonderneming Marchand BV en werd ook al contact gelegd naar een aantal dealers van bouwmachines zoals onder andere Van Der Spek in Ternat, een dealer van één van de hijskranen in het bedrijf.
+\paragraph{Vergelijkende data-analyse van beide datasets}
 
-\paragraph{Preprocessing en feature engineering}
+Na de preprocessing worden beide datasets bestudeerd met behulp van een verkennende data-analyse. Er worden trends, patronen en afwijkingen in de sensorgegevens onderzocht en weergegeven. Er wordt onderzocht in hoeverre de private dataset soortgelijke eigenschappen vertoont als de gekozen publieke dataset. De studie van \textcite{Xue2025} stelt dat trendanalyse en tijdsreeksanalyse cruciaal zijn voor voorspellend onderhoud, aangezien defecten vaak langzaam ontstaan. Deze fase is bedoeld om inzicht te bieden in de toepasbaarheid van beide datasets voor aanvullende modellering.
 
-In deze fase worden de verzamelde gegevens weergegeven, gefilterd en klaargemaakt voor gebruik in een unsupervised learning-model. Dit omvat onder andere het verwijderen van ruis uit de dataset en het normaliseren van tijdsreeksen, methoden die volgens de onderzoeken van \textcite{Wang2025} en \textcite{Aggarwal2025} essentieel worden beschouwd voor foutdiagnose onder realistische situaties. \textcite{Nayak2024} en \textcite{Dang2024} stellen dat de feature engineering gebaseerd is op de best practices voor gegevens die afkomstig zijn van vibratiesensoren, belastingsensoren en multisensoren. Voor deze fase is er ongeveer een week nodig om de dataset klaar te maken voor de volgende fase.
+%Onderhouds- en foutgegevens kunnen opgevraagd worden bij de machine-dealers, omdat kleine bouwbedrijven vaak geen eigen sensorgegevens registreren. In de studies van \textcite{Elahi2023}, \textcite{Hu2024} en \textcite{Wang2025} over voorspellend onderhoud is het gebruikelijk om informatie te verkrijgen van externe organisaties waaronder dealers van de machines. Als dat nodig is, kunnen er extra gesimuleerde of synthetische tijdreeksen of data worden gecreëerd op basis van eerder bekende faalpatronen uit de literatuur \autocite{Nayak2024, Wang2025, Meddaoui2024}. Er bestaat een kans dat sommige dealers geen toegang willen geven tot hun data, daarom is er een alternatieve aanpak uitgewerkt in een volgende sectie van de methodologie namelijk de sectie `Risico en alternatieve aanpak` gebaseerd op synthetische data. Voor het opstellen van een complete dataset wordt ongeveer vier weken besteed, inclusief het bezoeken en contacteren van de diverse dealers en indien nodig het simuleren van extra bijkomende data. 
 
-\paragraph{Proof-of-concept machine learning-model}
+%Ondertussen werd er voor de start van de bachelorproefperiode al contact gelegd met de verantwoordelijke van Bouwonderneming Marchand BV en werd ook al contact gelegd naar een aantal dealers van bouwmachines zoals onder andere Van Der Spek in Ternat, een dealer van één van de hijskranen in het bedrijf.
 
-Er worden diverse machine learning-algoritmes ontwikkeld en beoordeeld om onderhoudsbehoeften te voorspellen op basis van sensorgegevens. Volgens \textcite{Elahi2023}, \textcite{Giannoulidis2024} en \textcite{Aggarwal2025} is gelabelde foutdata bij kleine bouwbedrijven vaak beperkt en richt men zich voornamelijk op unsupervised en self-supervised technieken, die het mogelijk maken om afwijkingen in sensorgegevens te identificeren zonder duidelijke labels. 
+\paragraph{Het creëren van een voorspellend onderhoudsmethodiek voor de publieke dataset}
 
-De bestudeerde algoritmen omvatten similarit\-y-based methoden zoals Cosinus‑si\-milariteit, fo\-recasting-based modellen voor tijdsreeksen zoals LSTM, deep unsupervised modellen zoals autoencoders en een self-supervised Transformer (DASTAD) voor anomaly detection in multivariate sensordata \autocite{Giannoulidis2024, Aggarwal2025}. Volgens \textcite{Carvalho2019}, \textcite{Li2025} en \textcite{Khalili2025} bieden verschillende supervised learning modellen, zoals Random Forests, Gradient Boosting en CatBoost ook goede resultaten bij voldoende gelabelde gegevens. Stel dat de senseordata voldoende labeling bevat, kunnen de resultaten van de supervised learning modellen ook bestudeerd en beoordeeld worden.
+In de vierde fase wordt er een methodiek ontwikkeld om afwijkingen en mogelijke fouten te identificeren in industriële sensorgegevens en deze dan te voorspellen. Eerst wordt er gewerkt aan de publieke dataset, omdat deze meestal beter is vastgelegd en vaak informatie bevat over onjuiste gebeurtenissen. Er wordt onderzoek gedaan naar diverse machine learning- en anomalie detectie-methoden. Het onderzoek van \textcite{Carvalho2019} stelt dat deze technieken een essentieel aspect zijn van hedendaagse voorspellend onderhoudssystemen. De uitkomst van deze fase is een effectieve methodiek, samenvoeging van preprocessing- en machine learning-technieken die later kan worden gebruikt op de privédataset.
 
-De uitvoering vindt plaats in Python met Pand\-as, Scikit-learn en PyTorch en er wordt gekeken in welke mate tijdreeksmodellen uit andere domeinen, zoals multiview time-seriesmodellen voor vo\-ertuigen, relevant zijn voor bouwmachines \autocite{Chen2025} Voor deze fase zijn er ongeveer twee weken gepland.
+%In deze fase worden de verzamelde gegevens weergegeven, gefilterd en klaargemaakt voor gebruik in een unsupervised learning-model. Dit omvat onder andere het verwijderen van ruis uit de dataset en het normaliseren van tijdsreeksen, methoden die volgens de onderzoeken van \textcite{Wang2025} en \textcite{Aggarwal2025} essentieel worden beschouwd voor foutdiagnose onder realistische situaties. \textcite{Nayak2024} en \textcite{Dang2024} stellen dat de feature engineering gebaseerd is op de best practices voor gegevens die afkomstig zijn van vibratiesensoren, belastingsensoren en multisensoren. Voor deze fase is er ongeveer een week nodig om de dataset klaar te maken voor de volgende fase.
 
-\paragraph{Beoordeling van het model}
+\paragraph{Het toepassen van de methodiek op de privé-tractordataset}
 
-In deze fase wordt het model geëvalueerd met gebruikelijke prestat\-ie-indicatoren zoals precision, recall, F1-score en conf\-usion-matrices zoals aanbevolen in de studies over foutclassificatie en onderhoudsdetectie \autocite{Roehrich2024, Mahale2025}. De resultaten worden vergeleken met het bestaande preventieve onderhoudsbeleid van het bouwbedrijf. Volgens \textcite{Deepak2025} en \textcite{Hu2024} richt men zich op onjuiste meldingen, overbodige waarschuwingen en de relevantie van de resultaten in een realistische situatie voor het bouwbedrijf. Voor deze fase wordt ongeveer een week beschikbaar gesteld om een grondige evaluatie van het model te maken.
+Na de ontwikkeling van de methodiek wordt deze gebruikt op de privé-tracto\-rdataset. Er wordt nagegaan in hoeverre de gekozen methode effectief is in een realistische industri\-ële- en bouwcontext. De focus ligt op het opsporen van afwijkende patronen en mogelijke anomalieën in de beschikbare sensorgegevens. Deze aanpak is zeer waardevol in situaties waarin er weinig of geen historische foutlabels beschikbaar zijn \autocite{Giannoulidis2024}. Deze fase dient te bewijzen of de ontwikkelde methode ook geschikt is voor gebruik buiten de publieke dataset waarvoor deze is ontworpen.
+
+%Er worden diverse machine learning-algoritmes ontwikkeld en beoordeeld om onderhoudsbehoeften te voorspellen op basis van sensorgegevens. Volgens \textcite{Elahi2023}, \textcite{Giannoulidis2024} en \textcite{Aggarwal2025} is gelabelde foutdata bij kleine bouwbedrijven vaak beperkt en richt men zich voornamelijk op unsupervised en self-supervised technieken, die het mogelijk maken om afwijkingen in sensorgegevens te identificeren zonder duidelijke labels. 
+
+%De bestudeerde algoritmen omvatten similarit\-y-based methoden zoals Cosinus‑si\-milariteit, fo\-recasting-based modellen voor tijdsreeksen zoals LSTM, deep unsupervised modellen zoals autoencoders en een self-supervised Transformer (DASTAD) voor anomaly detection in multivariate sensordata \autocite{Giannoulidis2024, Aggarwal2025}. Volgens \textcite{Carvalho2019}, \textcite{Li2025} en \textcite{Khalili2025} bieden verschillende supervised learning modellen, zoals Random Forests, Gradient Boosting en CatBoost ook goede resultaten bij voldoende gelabelde gegevens. Stel dat de senseordata voldoende labeling bevat, kunnen de resultaten van de supervised learning modellen ook bestudeerd en beoordeeld worden.
+
+%De uitvoering vindt plaats in Python met Pand\-as, Scikit-learn en PyTorch en er wordt gekeken in welke mate tijdreeksmodellen uit andere domeinen, zoals multiview time-seriesmodellen voor vo\-ertuigen, relevant zijn voor bouwmachines \autocite{Chen2025} Voor deze fase zijn er ongeveer twee weken gepland.
+
+\paragraph{Vergelijking en beoordeling van de methodiek op beide datasets}
+
+
+
+%In deze fase wordt het model geëvalueerd met gebruikelijke prestat\-ie-indicatoren zoals precision, recall, F1-score en conf\-usion-matrices zoals aanbevolen in de studies over foutclassificatie en onderhoudsdetectie \autocite{Roehrich2024, Mahale2025}. De resultaten worden vergeleken met het bestaande preventieve onderhoudsbeleid van het bouwbedrijf. Volgens \textcite{Deepak2025} en \textcite{Hu2024} richt men zich op onjuiste meldingen, overbodige waarschuwingen en de relevantie van de resultaten in een realistische situatie voor het bouwbedrijf. Voor deze fase wordt ongeveer een week beschikbaar gesteld om een grondige evaluatie van het model te maken.
 
 \paragraph{Risico en alternatieve aanpak}
 
