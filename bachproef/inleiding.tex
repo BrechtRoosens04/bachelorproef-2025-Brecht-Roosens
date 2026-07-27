@@ -35,9 +35,9 @@ De studie van \textcite{Aggarwal2025} introduceert met DASTAD een transformer-ge
 
 Literatuur toont bovendien aan dat synthetische gegevens en digital twins een mogelijke oplossing kunnen zijn wanneer historische sensordata niet altijd beschikbaar zijn \autocite{Meddaoui2024, Hu2024}. Het onderzoek van \textcite{Nieminen2026} stelt dat synthetische gegevens steeds vaker worden gebruikt om voorspellend onderhoudsmodellen te valideren en evalueren.
 
-Deze bachelorproef bevindt zich in deze context en bestudeert op welke manier een voorspellend onderhoudsmodel, gebaseerd op machine learning, kan worden ontwikkeld voor een kleine bouwonderneming, zoals Bouwonderneming Marchan\-d BV waarmee nauw samengewerkt wordt, met beperkte gegevens en middelen.
+Deze bachelorproef bestudeert hoe een methodiek met machine learning kan worden ontwikkeld om aan de hand van de analyse van de sensordata van bouwmachines anomalieën op te sporen en zo het onderhoudsbeleid van kleine bouwondernemingen te ondersteunen. De bedoeling was om een voorspellend onderhoudsmodel te maken voor bouwbedrijf Marchand BV, waarmee nauw wordt samengewerkt. Bij de latere dataverzameling werd er van bedrijven die bouwmachines maken of gebruiken heel weinig of geen data waarin afwijkingen, defecten en onderhoudsmomenten correct aangeduid werden. Door het gebrek aan een correct gelabelde sensordataset werd de focus van het onderzoek verlegd naar het maken en evalueren van een methodiek waarin een anomaliedetectie-model zit. De ontwikkelde methodiek wordt eerst uitgewerkt en getest op een publieke dataset. Daarna wordt deze toegepast op de verzamelde private dataset van een tractor in grondverzet en transport, om de toepasbaarheid ervan te onderzoeken binnen een realistische context.
 
-\newpage
+%Deze bachelorproef bevindt zich in deze context en bestudeert op welke manier een voorspellend onderhoudsmodel, gebaseerd op machine learning, kan worden ontwikkeld voor een kleine bouwonderneming, zoals Bouwonderneming Marchan\-d BV waarmee nauw samengewerkt wordt, met beperkte gegevens en middelen.
 
 \section{\IfLanguageName{dutch}{Probleemstelling}{Problem Statement}}%
 \label{sec:probleemstelling}
@@ -48,7 +48,7 @@ De focus van deze bachelorproef ligt specifiek binnen Bouwonderneming Marchan\-d
 
 Hoewel voorspellend onderhoud in industriële omgevingen al aanzienlijke voordelen heeft opgeleverd, is de praktische toepassing ervan binnen kleine bouwbedrijven nog niet voldoende bestudeerd  \autocite{ErRatby2025, Mahfoud2025}. Kleine bedrijven hebben vaak geen uitgebreide historische datasets of specifieke kennis van \autocite{Elahi2023}. Dit leidt tot een kloof tussen de theoretische opties en de praktische uitvoering.
 
-De doelgroep van dit onderzoek zijn de technische verantwoordelijke van Bouwonderneming Marchand BV, de zaakvoerder van het bedrijf, de onderhoudsverantwoordelijken en de machine-operatoren. Voor deze specifieke doelgroep kan een goed onderbouwd proof-of-concept model een directe voordeel opleveren op het gebied van efficiëntere onderhoudsbeheer en het verminderen van risico's.
+De doelgroep van dit onderzoek zijn de technische verantwoordelijke van Bouwonderneming Marchand BV, de zaakvoerder van het bedrijf, de onderhoudsverantwoordelijken en de machine-operatoren. Voor deze specifieke doelgroep kan een goed onderbouwd proof-of-concept methodiek een directe voordeel opleveren op het gebied van efficiëntere onderhoudsbeheer en het verminderen van risico's.
 
 %Bouwmachines zijn cruciaal voor bouwbedrijven, omdat hun betrouwbaarheid een directe impact heeft op de productiviteit, planning en uitgaven van het bedrijf, maar onvoorziene problemen kunnen ervoor zorgen dat bouwmachines stilstand krijgen en dat er vertragingen op de werven ontstaan, wat leidt tot extra financiële en organisatorische gevolgen \autocite{Mikulic2024, ErRatby2025}. In de praktijk vindt het onderhoud vaak plaats op een preventieve of reactieve manier. Preventief onderhoud wordt regelmatig uitgevoerd, terwijl reactief onderhoud pas gebeurt na een storing \autocite{Morganti2024, Mikulic2024}. Volgens \textcite{ErRatby2025} kan deze methode niet effectief zijn, omdat onderdelen soms te vroeg worden vervangen of onverwachte defecten toch optreden.
 
@@ -71,9 +71,9 @@ De doelgroep van dit onderzoek zijn de technische verantwoordelijke van Bouwonde
 
 De centrale onderzoeksvraag luidt:
 
-\textbf{Op welke manier kan een machine learning-model, gebaseeerd op sensorgegevens, worden gebruikt om storingen in bouwmachines bij een kleine bouwonderneming nauwkeurig te voorspellen en het onderhoud effectiever te organiseren?}
+\textbf{Op welke manier kan een machine learning-methodiek, gebaseeerd op sensorgegevens, worden gebruikt om storingen in bouwmachines bij een kleine bouwonderneming nauwkeurig te voorspellen en het onderhoud effectiever te organiseren?}
 
-Deze vraag is van belang omdat onderzoek aantoont dat traditionele onderhoudsmethoden niet effectief genoeg zijn \autocite{Deepak2025, Mikulic2024}, terwijl volgens het onderzoek van\textcite{Elahi2023} de invoering van AI-gebaseerde technieken in kleine ondernemingen nog niet goed is uitgewerkt.
+Deze vraag is van belang omdat onderzoek aantoont dat traditionele onderhoudsmethoden niet effectief genoeg zijn \autocite{Deepak2025, Mikulic2024}, terwijl volgens het onderzoek van \textcite{Elahi2023} de invoering van AI-gebaseerde technieken in kleine ondernemingen nog niet goed is uitgewerkt.
 
 De onderzoeksvraag wordt verder verdeeld in deelvragen die zich richten op het probleemdomein en het oplossingsdomein.
 Dit omvat onder andere geschikte sensordata \autocite{Nayak2024}, ruisverwerking \autocite{Wang2025}, geschikte machine learning-algoritmes \autocite{Giannoulidis2024, Aggarwal2025} en volgens de studies van \textcite{Roehrich2024} en \textcite{Mahale2025} ook de evaluatiemetrieken.
@@ -89,7 +89,7 @@ Dit omvat onder andere geschikte sensordata \autocite{Nayak2024}, ruisverwerking
     
     \item Welke beperkingen zijn er met betrekking tot de beschikbaarheid en kwaliteit van sensordata binnen kleine bouwbedrijven?
     
-    \item Welke obstakels komen voor bij het verzamelen en verwerken van echte gegevens in de bouwsector?
+    \item Welke machine learning-modellen zijn het meest geschikt voor het opsporen van afwijkingen in sensordata van bouwmachines?
     
     \item Welke andere bronnen of technieken kunnen worden gebruikt als de gegevens beperkt of niet volledig zijn?
     
@@ -114,16 +114,14 @@ Deelvragen binnen het oplossingsdomein zijn gebaseerd op de inzichten uit het pr
     \item Welke methoden kunnen worden toegepast om om te gaan met beperkte of onvolledige gegevens?
 \end{itemize}
 
-Deze bachelorproef heeft als doel een soort van proof-of-concept voorspellend onderhoudsmodel te creëren en te evalueren voor de gekozen casus. Dit wordt ook aangevuld met een praktisch adviesrapport om het model te integreren en uit te voeren binnen het bedrijf. De bachelorproef is pas succesvol, zoals \textcite{Raffaele2024} en \textcite{Mahale2025} ook beschrijven in hun onderzoek, als het model technisch helemaal goed functioneert en een duidelijke waarde toevoegt aan het onderhoudsbeleid van het bouwbedrijf.
-
-\newpage
+Deze bachelorproef heeft als doel een soort van proof-of-concept methodiek te creëren en te evalueren voor de gekozen casus. De bachelorproef is pas succesvol, zoals \textcite{Raffaele2024} en \textcite{Mahale2025} ook beschrijven in hun onderzoek, als het model technisch helemaal goed functioneert en een duidelijke waarde toevoegt aan het onderhoudsbeleid van het bouwbedrijf.
 
 \section{\IfLanguageName{dutch}{Onderzoeksdoelstelling}{Research objective}}%
 \label{sec:onderzoeksdoelstelling}
 
 %Wat is het beoogde resultaat van je bachelorproef? Wat zijn de criteria voor succes? Beschrijf die zo concreet mogelijk. Gaat het bv.\ om een proof-of-concept, een prototype, een verslag met aanbevelingen, een vergelijkende studie, enz.
 
-Deze bachelorproef heeft als doel een technisch onderbouwd voorspellend onderhoudsmodel voor bouwmachines te creëren binnen een kleine bouwonderneming, zoals Bouwonderneming Marchand BV waarmee nauw wordt samengewerkt.
+Deze bachelorproef heeft als doel een technisch onderbouwd voorspellend onderhoudsmethodiek voor bouwmachines te creëren binnen een kleine bouwonderneming, zoals Bouwonderneming Marchand BV waarmee nauw wordt samengewerkt.
 
 Concreet wordt beoogd:
 \begin{itemize}
@@ -131,10 +129,9 @@ Concreet wordt beoogd:
     \item Geschikte machine learning-methoden te selecteren op basis van actuele literatuur  \autocite{Carvalho2019, Elahi2023}.
     \item Een anomaly detection-model te implementeren dat robuust is tegen beperkte labeling en ruis \autocite{Aggarwal2025, Wang2025}.
     \item Het model te evalueren aan de hand van objectieve prestatiemaatstaven zoals precision, recall en F1-score \autocite{Roehrich2024, Mahale2025}.
-    \item Een praktisch adviesrapport op te stellen voor mogelijke implementatie binnen de onderneming.
 \end{itemize}
 
-Het onderzoek is succesvol wanneer kan worden bewezen dat het ontwikkelde model technisch functioneert en mogelijk een efficiëntere onderhoudsbeleid ondersteunt, zoals ook blijkt uit het onderzoek van \textcite{ErRatby2025} bij vergelijkbare industriële toepassingen.
+Het onderzoek is succesvol wanneer kan worden bewezen dat het ontwikkelde methodiek technisch functioneert en mogelijk een efficiëntere onderhoudsbeleid ondersteunt, zoals ook blijkt uit het onderzoek van \textcite{ErRatby2025} bij vergelijkbare industriële toepassingen.
 
 %Deze bachelorproef heeft als doel een soort van proof-of-concept voorspellend onderhoudsmodel te creëren en te evalueren voor de gekozen casus. Dit wordt ook aangevuld met een praktisch
 %adviesrapport om het model te integreren en uit te voeren binnen het bedrijf. De bachelorproef is pas succesvol, zoals \textcite{Raffaele2024} en \textcite{Mahale2025} ook beschrijven in hun onderzoek, als het model technisch helemaal goed functioneert en een duidelijke waarde toevoegt aan het onderhoudsbeleid van het bouwbedrijf.
