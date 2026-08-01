@@ -180,22 +180,58 @@ In dit onderzoek wordt de LSTM Autoencoder gebruikt als een geavanceerd model vo
 %Een andere ontwikkeling in voorspellend onderhoud is de overgang naar Edge AI. In plaats van alleen data in de cloud te verwerken, worden modellen op locatie op industriële apparatuur geïnstalleerd \autocite{Mahale2025}. Dit vermindert de latency en verbetert de privacy van de data.
 %Het onderzoek van \textcite{Elahi2023} wijst uit dat voor kleine bedrijven een eenvoudige en effectieve modelarchitectuur van groter belang kan zijn dan optimale precisie, vanwege de beperkte infrastructuur.
 
-\section{\IfLanguageName{dutch}{Synthese en onderzoekspositie}{Synthesis and research position}}%
-\label{sec:{Synthese en onderzoekspositie}
+\section{\IfLanguageName{dutch}{One-Class SVM-model}{One-Class SVM-model}}%
+\label{sec:{One-Class SVM-model}
     
-Uit de literatuur blijkt dat:
-\begin{itemize}
-    \item Voorspellend onderhoud aantoonbare voordelen biedt ten opzichte van traditionele onderhoudsstrategieën \autocite{ErRatby2025, Mahale2025}.
-    
-    \item Machine learning, in het bijzonder anomaly detection, geschikt is voor foutdetectie in industriële systemen \autocite{Carvalho2019, Giannoulidis2024}.
-    
-    \item Deep learning en transformer-modellen sterke prestaties leveren bij complexe tijdsreeksen \autocite{Li2025, Aggarwal2025}.
-    
-    \item Beperkte data en ruis belangrijke implementatie-uitdagingen vormen \autocite{Elahi2023, Wang2025}.
-    
-    \item Synthetische data en digital twins mogelijke oplossingen bieden voor datatekorten \autocite{Meddaoui2024, Hu2024}.
-\end{itemize}
+De One-Class Support Vector Machine-model of One-Class SVM-model is een unsupervised machine learning-algoritme dat is ontwikkeld voor het opsporen van anomalieën. In tegenstelling tot een tradtionele Support Vector Machine-model, die klassen van elkaar onderscheidt, leert een One-Class SVM-model enkel de eigenschappen van gebruikelijke data. Volgens het onderzoek van \textcite{Carvalho2019} stelt het model een limiet vast voor de gebruikelijke observaties, waarna nieuwe waarnemingen die daarbuiten vallen als afwijkingen worden gezien.
 
-Wat minder is bestudeeerd, is de specifieke toepasbaarheid van deze technieken in kleine bouwbedrijven met beperkte financiële middelen en specifieke operationele omstandigheden.
+Bij voorspellend onderhoud is de One-Class SVM-model bijzonder waardevol wanneer er alleen normale conditiedata beschikbaar zijn en defecten nauwelijks voorkomen. De One-Class SVM-model is één van de meest populaire unsupervised methoden voor het detecteren van fouten in industriële toepassingen, omdat het model geen gelabelde foutdata vereist om afwijkingen te herkennen \autocite{Carvalho2019}. Dit biedt een nuttig alternatief in situaties waarin historische defectgegevens beperkt of helemaal ontbreken.
 
-Deze bachelorproef richt zich op dit kruispunt, namelijk het samenbrengen van technieken voor anomaly detection met een praktisch toepasbaar implementatiekader voor een kleine bouwbedrijf.
+De werking van een One-Class SVM-model hangt echter sterk af van de keuze van de kernel en de hyperparameters, waaronder de parameter $\nu$ en de kernelparameter $\gamma$. Bovendien is het model minder geschikt voor zeer grote datasets en ingewikkelde multivariate tijdsreeksen dan deep learning-modellen \autocite{Elahi2023}. Volgens de studie van \textcite{Giannoulidis2024} zijn neurale netwerken zoals autoencoders meestal effectiever wanneer er ingewikkelde patronen in sensordata moeten worden ontdekt, terwijl One-Class SVM-model vooral geschikt is voor kleinere datasets of minder ingewikkelde anomaliedetectietaken.
+
+Een significant voordeel van de One-Class SVM-model is dat het model relatief gemakkelijk te implementeren is en geen uitgebreide trainingsgegevens met foutlabels vereist. Dit maakt het mogelijk om het snel te gebruiken als basismodel voor het opsporen van anomalieën en biedt het een belangrijke referentie bij het vergelijken van diverse unsupervised leermethoden.
+
+In dit onderzoek wordt de One-Class SVM-model gebruikt als een klassiek unsupervised model voor het detecteren van anomalieën. Het model wordt eerst beoordeeld op basis van de opnebare MetroPT-3-dataset en daarna geïmplementeerd op de private tractordataset. De uitkomsten worden vergeleken met die van Random Forest-model, Autoencoder en LSTM Autoencoder om te bepalen welke methode het beste werkt voor het opsporen van afwijkingen in sensorgegevens en het ondersteunen van het onderhoudsbeleid voor bouwmachines in kleine bouwbedrijven.
+    
+%Uit de literatuur blijkt dat:
+%\begin{itemize}
+    %\item Voorspellend onderhoud aantoonbare voordelen biedt ten opzichte van traditionele onderhoudsstrategieën \autocite{ErRatby2025, Mahale2025}.
+    
+    %\item Machine learning, in het bijzonder anomaly detection, geschikt is voor foutdetectie in industriële systemen \autocite{Carvalho2019, Giannoulidis2024}.
+    
+    %\item Deep learning en transformer-modellen sterke prestaties leveren bij complexe tijdsreeksen \autocite{Li2025, Aggarwal2025}.
+    
+    %\item Beperkte data en ruis belangrijke implementatie-uitdagingen vormen \autocite{Elahi2023, Wang2025}.
+    
+    %\item Synthetische data en digital twins mogelijke oplossingen bieden voor datatekorten \autocite{Meddaoui2024, Hu2024}.
+%\end{itemize}
+
+%Wat minder is bestudeeerd, is de specifieke toepasbaarheid van deze technieken in kleine bouwbedrijven met beperkte financiële middelen en specifieke operationele omstandigheden.
+
+%Deze bachelorproef richt zich op dit kruispunt, namelijk het samenbrengen van technieken voor anomaly detection met een praktisch toepasbaar implementatiekader voor een kleine bouwbedrijf.
+
+\section{\IfLanguageName{dutch}{De beschikbaarheid en de kwaliteit van sensorgegevens}{The availability and quality of sensor data}}%
+\label{sec:{De beschikbaarheid en de kwaliteit van sensorgegevens}
+    
+De effectiviteit van machine learning-modellen voor het voorspellen van onderhoud hangt sterk af van de beschikbaarheid en de kwaliteit van senordata. Voor een betrouwbare detectie van afwijkingen en defecten zijn er genoeg historische gegevens vereist die zowel gebruikelijke als ongebruikelijke machinecondities weergeven. Volgens de onderzoeken van \textcite{Carvalho2019} en \textcite{Elahi2023} blijkt dat in de praktijk het verzamelen van dergelijke datasets echter een aanzienlijke uitdaging te zijn.
+
+Veel industriële organisaties hebben slechts een beperkte hoeveelheid gelabelde foutdata, omdat defecten relatief weinig voorkomen en onderhoudsinformatie niet altijd op een systematische manier wordt vastgelegd \autocite{Elahi2023}. Bovendien omvatten sensordatasets vaak ruis, onjuiste waarden en meetfouten, wat de prestaties van machine learning-modellen kan schaden. Volgens het onderzoek van \textcite{Wang2025}  kunnen ruis en signaalvervorming ook een grote impact hebben op de betrouwbaarheid van het opsporen van anomalieën en het stellen van een foutdiagnose.
+
+Binnen de bouwsector wordt deze kwestie nog verergerd door de zware werkomstandigheden waarin machines opereren. Bouwmachines worden onderhevig aan variabele belastingen, stof, trillingen en verschillende weersomstandigheden, wat kan leiden tot aanzienlijke variaties in de sensordata. De studie van \textcite{Mikulic2024} stelt ook dat kleine bouwbedrijven meestal minder geavanceerde monitoring- en dataverzamelingssystemen dan grote industriële ondernemingen, wat leidt tot het ontbreken van kwalitatieve historische datasets.
+    
+In de recente literatuur worden diverse oplossingen aangedragen om het gebrek aan representatieve data te verhelpen. Het toepassen van synthetische gegevens en digitale twins om machine learning-modellen te ontwikkelen en te verifiëren wordt gedaan wanneer historische sensorgegevens beperkt beschikbaar zijn \autocite{Meddaoui2024, Hu2024}. Bovendien laat het onderzoek van \textcite{Nieminen2026} zien dat synthetische datasets steeds vaker worden gebruikt voor voorspellend onderhoudsprocessen in Industry4.0-toepassingen.
+
+Binnen dit onderzoek is de beperkte beschikbaarheid van kwalitatieve sensordata eveneens een aanzienlijke uitdaging. Hoewel het oorspronkelijke doel was om een voorspellend onderhoudsmodel te creëren voor een kleine bouwonderneming, werd tijdens het verzamelen van data vastgesteld dat er onvoldoende gelabelde defect- en onderhoudsdata beschikbaar waren. Er is daarom gekozen om onderzoek te doen waarbij diverse anomaliedetectie-modellen eerst worden beoordeeld op een openbare dataset en daarna worden toegepast op een privé-tractordataset om te kijken welk model het beste zou passen in de methodiek. Zo kan de bruikbaarheid van de ontwikkelde anomaliedetectie-model worden bestudeerd in een realistische praktijksituatie.
+
+\section{\IfLanguageName{dutch}{Synthese en de keuze van de bestudeerde modellen}{Synthesis and selection of the models studied}}%
+\label{sec:{Synthese en de keuze van de bestudeerde modellen}
+    
+Volgens de literatuur hangt de keuze voor een machine learning-model voor voorspellend onderhoud sterk af van de beschikbaarheid en kwaliteit van de sensordata. Als er genoeg gelabelde fouten beschikbaar zijn, leveren supervised learning-modellen vaak uitstekende resultaten op. De studies van \textcite{Carvalho2019} en \textcite{Elahi2023} stellen dat veel bedrijven in de praktijk echter slechts een beperkte hoeveelheid historische defectgegevens hebben, wat de relevantie van dergelijke modellen vermindert.
+
+De literatuur laat zien dat het opsporen van onregelmatigheden in dergelijke situaties een geschikt alternatief biedt. Modellen zoals Isolation Forest-model, Autoencoders, LSTM Autoencoders en One-Class SVM leren het gebruikelijke gedrag van een machine en zijn in staat om afwijkingen te herkennen zonder duidelijke foutlabels \autocite{Giannoulidis2024, Davari2021}. Deze technieken zijn daardoor zeer aantrekkelijk voor kleine bedrijven, waar storingen realtief zelden voorkomen en historische onderhoudsinformatie vaak niet volledig is.
+
+In dit onderzoek zijn vijf modellen gekozen op basis van de literatuur. Random Forest-model is ingedeeld als representatief supervised referentiemodel, omdat dit algoritme vaak wordt gebruikt in het voorspellend ondrhoud en goede prestaties levert wanneer er genoeg gelabelde data beschikbaar zijn \autocite{Carvalho2019}. Bovendien zijn er vier modellen voor het detecteren van anomalieën bestudeerd: Isolation Forest-model, Autoencoder, LSTM Autoencoder en One-Class SVM. Volgens de odnerzoeken van \textcite{Elahi2023} en \textcite{Giannoulidis2024} zijn deze modellen niet afhankelijk van uitgebreide foutlabels, waardoor ze beter aansluiten bij de problemen die in de literatuur worden genoemd voor industriële toepassingen met beperkte datasets.
+
+De gekozen modellen worden eerst beoordeeld op basis van de publieke MetroPT-3-dataset, die speciaal is ontworpen voor onderzoek naar voorspellend onderhoud en het opsporen van anomalieën \autocite{Veloso2022}. Daarna wordt dezelfde methodiek toegepast op een privédataset van een tractor die dient voor grondverzet en transport. Dit maakt het mogelijk om te onderzoeken in hoeverre de ontwikkelde methode toepasbaar is op een realistische dataset uit de bouwsector.
+
+De literatuur toont aan dat er geen enkel universeel model is dat in elke situatie de beste resultaten oplevert. De selectie van een passend model is afhankelijk van de beschikbare sensorgegevens, de aanwezigheid van foutenlabels en de eigenschappen van de toepassing. Dit onderzoek concentreert zich op het creëren en beoordelen van een praktische machine learning-methodiek die kleine bouwbedrijven kan helpen bij het opsporen van mogelijke afwijkingen in de sensorgegevens maar ook met het ondersteunen van hun onderhoudsbeleid. De analyse van vijf diverse modellen dient aan te tonen welk model het meest geschikt is voor dit doel en in welke mate deze aanpak kan worden toegepast op zowel een openbare als een private datasets.
