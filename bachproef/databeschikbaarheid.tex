@@ -19,8 +19,23 @@ De mix van beperkte datacaptatie, beperkte toegankelijkheid en terughoudendheid 
 
 \newpage
 
-\section{\IfLanguageName{dutch}{Beperkte datacaptatie en digitalisering}{Limited data collection and digitization}}%
-\label{sec: Beperkte datacaptatie en digitalisering}
+\section{\IfLanguageName{dutch}{De beschikbaarheid van sensorgegevens}{The availability of sensor data}}%
+\label{sec: De beschikbaarheid van sensorgegevens}
+
+%\begin{table}
+%\centering
+%\begin{tabular}{lcr}
+% \toprule
+%\textbf{Kolom 1} & \textbf{Kolom 2} & \textbf{Kolom 3} \\
+% $\alpha$         & $\beta$          & $\gamma$         \\
+% \midrule
+%A                & 10.230           & a                \\
+%B                & 45.678           & b                \\
+%C                & 99.987           & c                \\
+% \bottomrule
+%\end{tabular}
+%\caption[Voorbeeld tabel]{\label{tab:example}Voorbeeld van een tabel.}
+%\end{table}
 
 Binnen kleine bouwbedrijven is de digitalisering van machinegegevens vaak nog niet optimaal. In tegenstelling tot volledig geautomatiseerde industriële omgevingen, waar sensorgegevens voortdurend en op een systematische manier worden verzameld en opgeslagen, hebben veel bouwbedrijven geen uitgebreide historische datasets. Dit ontbreken van datacaptatie vormt een cruciale obstakel voor het gebruik van technieken die gebaseerd zijn op gegevens, zoals voorspellend onderhoud. Volgens het onderzoek van \textcite{Elahi2023} is het beschikbaar hebben van gestructureerde en voldoende grote datasets een essentiële vereiste voor de invoering van kunstmatige intelligentie in industriële toepassingen.
 
@@ -30,24 +45,26 @@ Daarnaast wordt onderhoudsinformatie in veel gevallen nog manueel geregistreerd,
 
 Verder onderstreept het onderzoek van \textcite{Wang2025} dat, zelfs wanneer gegevens worden verzameld, deze vaak niet op een centrale en toegankelijke wijze worden opgeslagen. Data kan over diverse systemen of afdelingen worden verspreid, waardoor het lastig is om een compleet en samenhangend overzicht te krijgen van het gedrag en de staat van machines. Volgens de studie van \textcite{Wang2025} beperkt dit probleem van gefragmenteerde datacaptatie de mogelijkheden voor geavanceerde data-analyse aanzienlijk.
 
-De combinatie van beperkte digitalisering, onvoldoende gestructureerde data en gefragmenteerde opslag resulteert in een lage beschikbaarheid van bruikbare datasets binnen de bouwsector \autocite{Mikulic2024, Hu2024, Wang2025}. Dit vormt volgens de studies van \textcite{Elahi2023} en \textcite{Hu2024} een essentiële obstakel voor het creëren van betrouwbare voorspellende modellen, omdat zowel de hoeveelheid als de kwaliteit van de beschikbare gegevens niet genoeg zijn om complexe patronen en faalmechanismen nauwkeurig te analyseren.
-
-\newpage
-
-\section{\IfLanguageName{dutch}{Problemen bij het verkrijgen van externe datasets}{Problems obtaining external datasets}}%
-\label{sec: problemen bij het verkrijgen van externe datasets}
-
 Omdat kleine bouwbedrijven vaak geen uitgebreide of gestructureerde interne datasets hebben, wordt er in onderzoek en praktijk vaak gebruikgemaakt van externe bronnen van gegevens, zoals machine-dealers, fabrikanten of serviceproviders \autocite{Elahi2023, Hu2024}. In industriële omgevingen worden dergelijke gegevens vaak door diverse betrokkenen beheerd, waardoor externe partijen een mogelijke bron zijn voor operationele en onderhoudsinformatie \autocite{Meddaoui2024, Nayak2024}. In de praktijk blijkt het verwerven van deze datasets echter een ingewikkelde en onduidelijke taak te zijn.
 
-Tijdens de uitvoering van dit onderzoek werd aangetoond dat het in contact komen met externe partijen vaak leidt tot diverse uitdagingen. In verschillende situaties was er geen reactie op contactpogingen, waardoor het opstarten van samenwerkingen lastig werd. Daarnaast werd vastgesteld dat sommige partijen expliciet geen toegang wilden geven tot hun data, terwijl in andere gevallen onduidelijk bleef of de gevraagde data überhaupt beschikbaar was. Deze beperkte respons en onduidelijkheid leiden tot een aanzienlijke vertraging en onzekerheid tijdens de fase van het verzamelen van gegevens in het onderzoek.
+Tijdens dit onderzoek werd er contact opgenomen met diverse Belgische leveranciers en dealers van bouwmachines, zoals Luyckx, SMT Belgium, FM Bouwmachines, DB Machinery, Verhoeven International, Van der Spek, Coesens Machinery en diverse andere ondernemingen. Het doel was om telematicadata of historische sensorgegevens van bouwmachines te verkrijgen. In de praktijk bleek dit echter erg lastig te zijn. Bepaalde bedrijven hebben de aanvraag niet ingewilligd, terwijl andere aangaven dat ze geen datasets konden delen vanwege vertrouwelijkheid of commerciële redenen. In bepaalde situaties werden onderhoudsdata of algemene informatie verstrekt, maar geen relevante tijdsreeksen met sensormetingen.
 
-De literatuur toont aan dat dergelijke problemen vaak voorkomen bij het verzamelen van industriële informatie. De toegang tot gegevens wordt vaak bemoeilijkt door organisatorische en praktische obstakels, waaronder het gebrek aan standaard processen voor het delen van gegevens en een beperkte hoeveelheid interne middelen \autocite{Wang2025, Dissem2024}. Bovendien onderstreept het onderzoek van \textcite{Aggarwal2025} dat veel organisaties niet goed voorbereid zijn op het delen van gegevens voor analytische doeleinden, wat de toegankelijkheid nog verder vermindert.
+%Tijdens de uitvoering van dit onderzoek werd aangetoond dat het in contact komen met externe partijen vaak leidt tot diverse uitdagingen. In verschillende situaties was er geen reactie op contactpogingen, waardoor het opstarten van samenwerkingen lastig werd. Daarnaast werd vastgesteld dat sommige partijen expliciet geen toegang wilden geven tot hun data, terwijl in andere gevallen onduidelijk bleef of de gevraagde data überhaupt beschikbaar was. Deze beperkte respons en onduidelijkheid leiden tot een aanzienlijke vertraging en onzekerheid tijdens de fase van het verzamelen van gegevens in het onderzoek.
 
-Een cruciale factor hierbij is de vertrouwelijkheid van bedrijfsinformatie. Bedrijven zijn vaak niet bereid om informatie over machinegebruik, onderhoud en prestaties met externe partijen te delen, omdat deze informatie strategisch van belang is \autocite{Hu2024, Meddaoui2024}. Volgens de studies van \textcite{Elahi2023} en \textcite{Nayak2024} wordt dit versterkt door twijfels over het gebruik van gegevens, de eigendom en de mogelijke commerciële gevolgen.
+%De literatuur toont aan dat dergelijke problemen vaak voorkomen bij het verzamelen van industriële informatie. De toegang tot gegevens wordt vaak bemoeilijkt door organisatorische en praktische obstakels, waaronder het gebrek aan standaard processen voor het delen van gegevens en een beperkte hoeveelheid interne middelen \autocite{Wang2025, Dissem2024}. Bovendien onderstreept het onderzoek van \textcite{Aggarwal2025} dat veel organisaties niet goed voorbereid zijn op het delen van gegevens voor analytische doeleinden, wat de toegankelijkheid nog verder vermindert.
 
-Bovendien zijn er ook technische en organisatorische beperkingen van invloed. Veel organisaties hebben niet de benodigde infrastructuur om data op een efficiënte manier te extraheren en te delen \autocite{Giannoulidis2024}. Volgens de studies van \textcite{Wang2025} en \textcite{Dissem2024} is het zelfs wanneer data aanwezig is, deze moeilijk toegankelijk kan zijn door incompatibele systemen of een gebrek aan standaardisatie.
+%Een cruciale factor hierbij is de vertrouwelijkheid van bedrijfsinformatie. Bedrijven zijn vaak niet bereid om informatie over machinegebruik, onderhoud en prestaties met externe partijen te delen, omdat deze informatie strategisch van belang is \autocite{Hu2024, Meddaoui2024}. Volgens de studies van \textcite{Elahi2023} en \textcite{Nayak2024} wordt dit versterkt door twijfels over het gebruik van gegevens, de eigendom en de mogelijke commerciële gevolgen.
 
-De combinatie van beperkte respons, terughoudendheid in het delen van data en technische beperkingen maakt dat het verkrijgen van externe datasets één van de grootste uitdagingen vormt binnen dit onderzoek. Deze kwestie heeft volgens de onderzoeken van \textcite{Aggarwal2025} en \textcite{Giannoulidis2024} niet alleen invloed op de beschikbaarheid van gegevens, maar heeft ook invloed op de planning, haalbaarheid en uiteindelijke kwaliteit van het ontwikkelde voorspellend onderhoudsmodel.
+%Bovendien zijn er ook technische en organisatorische beperkingen van invloed. Veel organisaties hebben niet de benodigde infrastructuur om data op een efficiënte manier te extraheren en te delen \autocite{Giannoulidis2024}. Volgens de studies van \textcite{Wang2025} en \textcite{Dissem2024} is het zelfs wanneer data aanwezig is, deze moeilijk toegankelijk kan zijn door incompatibele systemen of een gebrek aan standaardisatie.
+
+%De combinatie van beperkte respons, terughoudendheid in het delen van data en technische beperkingen maakt dat het verkrijgen van externe datasets één van de grootste uitdagingen vormt binnen dit onderzoek. Deze kwestie heeft volgens de onderzoeken van \textcite{Aggarwal2025} en \textcite{Giannoulidis2024} niet alleen invloed op de beschikbaarheid van gegevens, maar heeft ook invloed op de planning, haalbaarheid en uiteindelijke kwaliteit van het ontwikkelde voorspellend onderhoudsmodel.
+
+Deze ervaringen komen overeen met de literatuur, die organisatorische, technische en commerciële elementen beschouwt als de voornaamste oorzaken van de beperkte toegankelijkheid van industriële datasets \autocite{Dissem2024, Elahi2023, Wang2025}. Bedrijven zien machine- en onderhoudsdata vaak als gevoelige bedrijfsinformatie en hebben daarnaast niet altijd de nodige infrastructuur om gegevens gemakkelijk te exporteren of te delen.
+
+Vanwege de beperkte beschikbaarheid van datasets werd er uiteindelijk gekozen voor een mix van de publieke MetroPT-3-dataset en een private tractordataset. De openbare dataset maakte het mogelijk om de ontwikkelde methodiek te creëren en et beoordelen op basis van gelabelde data, terwijl de private dataset werd ingezet om de toepasbaarheid van de methodiek in een realistische praktijkcontext te evalueren.
+
+\section{\IfLanguageName{dutch}{De praktische zoektocht naar datasets }{The pratical search for datasets}}%
+\label{sec: De praktische zoektocht naar datasets}
 
 \section{\IfLanguageName{dutch}{Mogelijke redenen voor een beperkte toegang tot data}{Possible reasons for limited access to data}}%
 \label{sec: mogelijke redenen voor een beperkte toegang tot data}
