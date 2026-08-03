@@ -272,32 +272,34 @@ Uiteindelijk was deze evaluatiefase een cruciale fase om de praktische waarde va
 
 In de finale fase van het onderzoek werden de uitkomsten van alle eerdere fasen samengevoegd en geëvalueerd in relatie tot de centrale onderzoeksvraag. Er werd onderzocht in hoeverre de ontwikkelde voorspellend onderhoudsmethode effectief is voor het opsporen van afwijkingen en mogelijke storingen in bouwmachines, gebaseerd op industriële sensorgegevens en telematicagegevens.
 
-De beoordeling concentreerde zich niet alleen op de effectiviteit van de toegepaste analysemethoden, maar ook op de praktische bruikbaarheid van de gehele aanpak onder realistische industriële omstandigheden. Het onderzoek van \textcite{Elahi2023} stelt dat de effectiviteit van AI-technieken in industriële toepassingen aanzienlijk hangt af van elementen zoals de kwaliteit van gegevens, de kwaliteit van preprocessing, de operationele omstandigheden en de beschikbaarheid van historische gegevens.
+De beoordeling concentreerde zich niet alleen op de effectiviteit van de toegepaste analysemethoden, maar ook op de praktische bruikbaarheid van de gehele aanpak onder realistische industriële omstandigheden. De evaluatie lag niet alleen op de effectiviteit van de ontwikkelde methodiek, maar ook op de praktische toepasbaarheid ervan in een realistische industriële omgeving. Er werd aandacht besteed aan de kwaliteit van de beschikbare data, de uitgevoerde preprocessing en de impact van de operationele omstandigheden op de resultaten.
 
-In deze fase werden de uitkomsten van de openbare MetroPT-3-dataset vergeleken met de resultaten van de private tractordataset. Dit maakte het mogelijk om te controleren in hoeverre de ontwikkelde methode overdraagbaar is naar real-world datasets met beperkte foutenlabels en variabele operationele omstandigheden. De studie van \textcite{Veloso2022} stelt dat het valideren van voorspellend onderhoudsmethoden op realistische industriële datasets een cruciaal aspect is van het huidige onderzoek.
+In deze fase werden de uitkomsten van de openbare MetroPT-3-dataset vergeleken met de resultaten van de private tractordataset. Dit maakte het mogelijk om te controleren in hoeverre de ontwikkelde methode overdraagbaar is naar real-world datasets met beperkte foutenlabels en variabele operationele omstandigheden. De uitkomsten van de openbare MetroPT-3-dataset werden vergeleken met die van de private tractordataset om te evalueren in hoeverre de ontwikkelde methodiek toepasbaar is in een praktijkomgeving zonder gelabelde defecten of storingen.
 
-Bovendien werden de beperkingen van het onderzoek grondig behandeld. Een aanzienlijke beperking was het gebrek aan duidelijke defectlabels in de privédataset. Dit maakte het moeilijk om supervised machine learning-methoden in beperkte mate te evalueren, waarbij de focus vooral lag op het opsporen van onregelmatigheden en het analyseren van trends. De studie van \textcite{Giannoulidis2024} stelt dat het ontbreken van gelabelde foutdata één van de meest voorkomende obstakels is in industriële voorspellend onderhoudsprojecten.
+Bovendien werden de beperkingen van het onderzoek grondig behandeld. Een aanzienlijke beperking was het gebrek aan duidelijke defectlabels in de privédataset. Dit maakte het moeilijk om supervised machine learning-methoden in beperkte mate te evalueren, waarbij de focus vooral lag op het opsporen van onregelmatigheden en het analyseren van trends. Een cruciaal nadeel van het onderzoek was het gebrek aan defectlabels in de privédataset. Dit maakte het moeilijk om de prestaties van supervised modellen objectief te evalueren, waardoor de focus lag op het opsporen van anomalieën en het analyseren van trends.
 
-De korte historische duur van de private dataset was eveneens een aandachtspunt. Betrouwbare degradatieanalyses vaak lange historische periodes vereisen om de evoluties en slijtagepatronen nauwkeurig te modellen \autocite{Xue2025}. Verschillende werkomstandigheden in bouwmachines kunnen daarnaast extra complicaties met zich meebrengen, omdat normaal machinegedrag aanzienlijk kan variëren afhankelijk van belasting en de intensiteit van het gebruik.
+De korte historische duur van de private dataset was eveneens een aandachtspunt. Bovendien zorgde de realtief korte tijdsduur van de private dataset voor een beperking in de analyse van langetermijndegradatie en slijtagepatronen. Verschillende werkomstandigheden in bouwmachines kunnen daarnaast extra complicaties met zich meebrengen, omdat normaal machinegedrag aanzienlijk kan variëren afhankelijk van belasting en de intensiteit van het gebruik.
 
-Tijdens deze evaluatiefase werd ook nagedacht over de kwaliteit van de gebruikte sensorgegevens en de invloed van preprocessing op de uiteindelijke analyses. Het onderzoek van \textcite{Dissem2024} benadrukt dat ruis, ontbrekende waarden en inconsistenties in industriële tijdsperiodes een aanzienlijke impact hebben op het opsporen van onregelmatigheden en de resultaten van machine learning.
+Tijdens deze evaluatiefase werd ook nagedacht over de kwaliteit van de gebruikte sensorgegevens en de invloed van preprocessing op de uiteindelijke analyses. Tijdens de beoordeling werd ook onderzocht welke impact de kwaliteit van de sensordata en de uitgevoerde preprocessing hadden op de uiteindelijke resultaten van de ontwikkelde methodiek.
 
 Daarnaast zijn er mogelijke verbeterpunten en aanbevelingen voor toekomstig onderzoek opgesteld. Er werd onder andere aandacht besteed aan:
 \begin{itemize}
-    \item Het verzamelen van langere historische datasets
+    \item Het verzamelen van langere historische datasets.
     
-    \item Het registreren van effectieve onderhouds- en storingsgebeurtenissen
+    \item Het registreren van effectieve onderhouds- en storingsgebeurtenissen.
     
-    \item Het toepassen van meer geavanceerde deep learning-modellen
+    \item Het toepassen van meer geavanceerde deep learning-modellen.
     
-    \item Het combineren van meerdere databronnen
+    \item Het combineren van meerdere databronnen.
     
-    \item Het verder onderzoeken van explainable AI binnen voorspellend onderhoud
+    \item Het verder onderzoeken van explainable AI binnen voorspellend onderhoud.
+    
+    \item Het verifiëren van de methodiek op extra datasets van andere bouwmachines.
 \end{itemize}
 
 Kritische reflectie op beperkingen, datakwaliteit en modeltoepasbaarheid een essentieel onderdeel van voorspellend onderhoud-onderzoek. Het onderzoek van \textcite{Matzka2020} accentueert het belang van verklaarbare en praktisch toepasbare AI-methodieken binnen industriële onderhoudssystemen.
 
-De uitkomst van deze bachelorproef verzamelde uiteindelijk de belangrijkste resultaten van het onderzoek en bestudeerde in welke mate anomalie detectie en voorspellend onderhoudsmethoden mogelijk nuttig zijn voor kleine bedrijven die beschikken over beperkte real-world telematicagegevens.
+Uiteindelijke werd onderzocht in welke mate de ontwikkelde methodiek waardevol kan zijn voor het onderhoudsbeleid van kleine bouwbedrijven. Er werd niet alleen gekeken naar de resultaten van de anomaliedetectie-modellen, maar ook naar de haalbaarheid van de gehele methodiek om te zetten naar realistische telematicagegevens met beperkte historische gegevens.
 
 %In de laatste fase van het onderzoek vindt de evaluatie plaats van het voorspellend onderhoudsmodel. Het gaat niet alleen om de technische resultaten van het model, maar ook om de toepassing ervan binnen de specifieke context van de casestudy. De studies van \textcite{Nayak2024}, \textcite{Wang2025} en \textcite{Elahi2023} accentueren dat zowel kwantitatieve als kwalitatieve beoordelingen cruciaal zijn voor voorspellend onderhoud, omdat modellen niet alleen nauwkeurig moeten zijn, maar ook praktisch toepasbaar moeten zijn in industriële omgevingen.
 
