@@ -100,12 +100,10 @@ De keuze voor de MetroPT-3-dataset maakte het mogelijk om de gekozen machine lea
 
 %Omdat de dataset klein is en geen duidelijke foutlabels bevat, wordt er veel nadruk gelegd op de interpretatie en evaluatie van de resultaten. In de literatuur wordt vermeld dat het beoordelen van unsupervised modellen moeilijk kan zijn, omdat er geen directe basiswaarheid beschikbaar is \autocite{Aggarwal2025, Giannoulidis2024}. Binnen dit onderzoek worden indirecte evaluatietechnieken toegepast, waaronder het onderzoeken van vastgelegde afwijkingen en het evalueren van hun geloofwaardigheid in relatie tot machinegedrag.
 
-\newpage
-
 \section{\IfLanguageName{dutch}{Vergelijkende data-analyse van de beide datasets}{Comparative data analysis of the two datasets}}%
 \label{sec: vergelijkende data-analyse van de beide datasets}
 
-In de derde fase werden beide datasets bestudeerd en geanalyseerd om een beter begrip te krijgen van hun structuur, trends en operationele eigenschappen. Het doel van deze fase was om te onderzoeken in hoeverre patronen in de tractordata overeenkomen met trends en afwijkingen in de openbare MetroPT-3-dataset. Door beide datasets naast elkaar te analyseren, werd onderzocht of soortgelijke sensorevoluties zichtbaar zijn in diverse industriële omgevingen.
+In de derde fase werden beide datasets bestudeerd en geanalyseerd om een beter begrip te krijgen van hun structuur, trends en operationele eigenschappen. Het doel van deze fase was om meer te begrijpen over de opbouw, sensordata en de operationele eigenschappen van beide datasets. Door de datasets zowel afzonderlijk als vergelijkend te analyseren, werd vastgesteld welke sensoren nuttig waren voor het opsporen van anomalieën en in welke mate de ontwikkelde methode later op beide datasets kon worden toegepast.
 
 Exploratieve data-analyse is een cruciale stap in projecten voor voorspellend onderhoud, omdat het inzicht biedt in het gedrag van sensoren, mogelijke afwijkingen en de algemene kwaliteit van de beschikbare gegevens \autocite{Carvalho2019}. De studie van \textcite{Elahi2023} beklemtoont eveneens dat een grondig inzicht in de gegevens essentieel is voor een betrouwbare toepassing van machine learning-modellen.
 
@@ -125,11 +123,15 @@ Voor beide datasets zijn er diverse grafische visualisaties ontwikkeld in Python
 
 Tijdens de analyse werd er specifiek gefocust op temperatuur-, druk- en motorbelastingsfactoren. Afwijkingen in temperatuur kunnen duiden op overbelasting, slijtage of defecte onderdelen \autocite{Touil2025}. Drukwaarden zijn cruciaal voor het opsporen van lekkages of problemen in hydraulische en pneumatische systemen \autocite{Daoudi2025}. Het onderzoek van \textcite{Mahale2025} benadrukt bovendien dat parameters zoals motorbelasting, motortoerental en energieverbruik inzicht bieden in de functionele staat van een machine.
 
-Tijdens de analyse werd ook bestudeerd of specifieke trends zich over tijd langzaam ontwikkelen. Veel defecten ontstaan niet plotseling, maar door middel van progressieve degradatieprocessen die zichtbaar zijn in tijdsreeksen van sensordata \autocite{Xue2025}. De studie van \textcite{Chen2025} accentueert eveneens dat tijdsgebaseerde patronen cruciaal zijn voor het opsporen van afwijkend machinegedrag in voorspellend onderhoudssystemen.
+Tijdens de analyse werd onderzocht of er in beide datasets geleidelijk veranderingen in de sensorgegevens waren die kunnen duiden op afwijkend machinegedrag. Er werd onderzocht of de temperatuur-, druk-, motorbelasting- en motortoerentalwaarden in de loop der tijd constant bleven of duidelijke trends, pieken of afwijkende veranderingen vertoonden. Bovendien werd onderzocht of deze patronen nuttig zijn als fundament voor de ontwikkeling en evaluatie van de diverse modellen voor anomaliedetectie.
+
+%Tijdens de analyse werd ook bestudeerd of specifieke trends zich over tijd langzaam ontwikkelen. Veel defecten ontstaan niet plotseling, maar door middel van progressieve degradatieprocessen die zichtbaar zijn in tijdsreeksen van sensordata \autocite{Xue2025}. De studie van \textcite{Chen2025} accentueert eveneens dat tijdsgebaseerde patronen cruciaal zijn voor het opsporen van afwijkend machinegedrag in voorspellend onderhoudssystemen.
 
 Naast algemene trendanalyse werden er ook afwijkende meetwaarden en mogelijke afwijkingen in beide datasets onderzocht. Er werd onderzocht of pieken, onverwachte schommelingen of langdurige afwijkingen binnen specifieke sensoren waarneembaar waren. Het onderzoek van \textcite{Giannoulidis2024} stelt dat anomalie detectie een cruciale methode is in situaties waar er weinig duidelijke foutlabels beschikbaar zijn, omdat afwijkend gedrag vaak een eerste aanwijzing is voor toekomstige problemen.
 
-De vergelijkende analyse van de private tractordataset en de publieke MetroPT-3-dataset leidde uiteindelijk tot een duidelijker begrip van de toepasbaarheid van de private data voor voorspellend onderhoud. Ondanks dat de private dataset geen duidelijke defectlabels bevatte, konden belangrijke operationele patronen en mogelijke afwijkingen toch worden bestudeerd door de middel van trendanalyse en visualisatie. Dit vormde een fundament voor de verdere ontwikkeling van methoden voor anomalie detectie in de volgende fasen van het onderzoek.
+De vergelijkende analyse van de twee datasets gaf inzicht in de opbouw, kwaliteit en toepasbaarheid van de beschikbare sensordata. Hoewel de private tractordataset geen defectlabels bevatte, maakten de trendanalyse en visualisaties het mogelijk om operationele patronen en mogelijke afwijkingen te herkennen. Deze analyse diende als fundament voor het toepassen en evalueren van de gekozen machine learningmodellen in de volgende fase van het onderzoek.
+
+%De vergelijkende analyse van de private tractordataset en de publieke MetroPT-3-dataset leidde uiteindelijk tot een duidelijker begrip van de toepasbaarheid van de private data voor voorspellend onderhoud. Ondanks dat de private dataset geen duidelijke defectlabels bevatte, konden belangrijke operationele patronen en mogelijke afwijkingen toch worden bestudeerd door de middel van trendanalyse en visualisatie. Dit vormde een fundament voor de verdere ontwikkeling van methoden voor anomalie detectie in de volgende fasen van het onderzoek.
 
 %De volgende fase van het onderzoek is gericht op het verzamelen en analyseren van gegevens die nodig zijn voor de ontwikkeling van het voorspellend onderhoudsmodel. In het kader van voorspellend onderhoud omvat deze informatie meestal reeksen die door sensoren worden verzameld, waarbij diverse machineparameters zoals temperatuur, trillingen en operationele variabelen voortdurend worden gevolgd \autocite{Mahale2025, Touil2025}. Deze sensorinformatie is essentieel voor het opsporen van patronen en afwijkingen in het gedrag van machines.
 
@@ -142,9 +144,11 @@ De vergelijkende analyse van de private tractordataset en de publieke MetroPT-3-
 \section{\IfLanguageName{dutch}{Ontwikkelen van een voorspellend onderhoud-metho\-diek op de gekozen publieke dataset}{Developing a predictive maintenance methodology based on the selected public dataset}}%
 \label{sec: Ontwikkelen van een voorspellend onderhoud-methodiek op de gekozen publieke dataset}
 
-De vierde fase ging over het creëren, testen en beoordelen van een voorspellend onderhoudsmethode op basis van de gekozen publieke MetroPT-3-dataset. Deze fase was een cruciale fase van het onderzoek, omdat de openbare dataset foutmeldingen bevatte en daardoor geschikt was voor het onderzoeken van afwijkend machinegedrag voordat er storingen optreden.
+De vierde fase was de essentie van dit onderzoek en had als doel een machine learning-methode voor het opsporen van anomalieën te creëren, gebaseerd op de openbare MetroPT-3-dataset. Deze fase was een cruciale fase van het onderzoek, omdat de openbare dataset foutmeldingen bevatte en daardoor geschikt was voor het onderzoeken van afwijkend machinegedrag voordat er storingen optreden.
 
 De MetroPT-3-dataset is speciaal ontworpen om studies naar voorspellend onderhoud, anomalie detectie en defectdetectie binnen industriële systemen te faciliteren \autocite{Veloso2022}. De registratie van foutieve gebeurtenissen maakte het mogelijk om sensorevoluties te analyseren voordat ze defecten veroorzaakten en machine learning-methoden te beoordelen in een realistische industriële omgeving.
+
+De ontwikkelde methodiek omvat een reeks stappen: het voorbereiden en normaliseren van sensordata, het onderzoeken van trends in de tijdsperiode, het creëren van verschillende machine learning-modellen voor het opsporen van afwijkingen en het voorbereiden van deze modellen voor verdere beoordeling en toepassing op de privédataset.
 
 In deze fase werden diverse analysetechnieken bestudeerd om afwijkingen en mogelijke fouten te identificeren in multivariate industriële tijdsperiodes. Er werden zowel supervised als unsupervised machine learning-methoden toegepast. Het onderzoek van \textcite{Carvalho2019} stelt dat beide strategieën de meest populaire zijn in voorspellend onderhoudssystemen, afhankelijk van de aanwezigheid van foutlabels en historische storingsinformatie.
 
@@ -158,7 +162,9 @@ In deze fase werd er ook gefocust op preprocessing, normalisatie en het organise
 
 De ontwikkelde methode bestond uiteindelijk uit diverse stappen, zoals het voorbereiden van gegevens, trendanalyse, het opsporen van onregelmatigheden en het beoordelen van afwijkende patronen in sensorgegevens. Deze fase had als doel een effectieve en herhaalbare voorspellend onderhoudsmethode te ontwikkelen die later in een realistische praktijkcontext kon worden toegepast op de private tractordataset.
 
-Door de methode eerst te testen op een openbare dataset met bekende falen, kon worden onderzocht welke methoden het meest effectief waren voor het opsporen van afwijkend machinegedrag. Deze kennis dienden daarna als fundament voor de toepassing op de privédataset in de volgende fase van het onderzoek.
+Het ontwikkelen van de methodiek op de publieke MetroPT-3-dataset maakte het mogelijk om te onderzoeken welke machine learning-methoden effectief zijn voor het opsporen van anomalieën in industriële sensordata. De ontwikkelde methode legt de fundamenten voor de toepassing op de private tractordataset in de volgende fase van het onderzoek en wordt daarna beoordeeld op basis van diverse prestatiemetrieken.
+
+%Door de methode eerst te testen op een openbare dataset met bekende falen, kon worden onderzocht welke methoden het meest effectief waren voor het opsporen van afwijkend machinegedrag. Deze kennis dienden daarna als fundament voor de toepassing op de privédataset in de volgende fase van het onderzoek.
 
 %In deze fase van het onderzoek wordt er een voorspellend onderhoudsmodel ontwikkeld dat is gebaseerd op een real-world dataset van een machine-dealer. Deze dataset bevat ongeveer twee maanden aan sensorgegevens, maar bevat geen gemarkeerde informatie over storingen of defecten. Klassieke supervised learning-methoden, die afhankelijk zijn van gelabelde gegevens, kunnen daardoor niet direct worden toegepast.
 
@@ -177,11 +183,15 @@ Door de methode eerst te testen op een openbare dataset met bekende falen, kon w
 
 In de vijfde fase werd de eerder ontwikkelde voorspellend onderhoudsmethodiek toegepast op de private tractordataset. Het doel van deze fase was om te bepalen in hoeverre de ontwikkelde methode effectief blijft in een realistische industriële omgeving, waarin beperkte historische gegevens en het gebrek aan duidelijke foutlabels een aanzienlijke uitdaging vormen.
 
-De privédataset omvatte telematicagegevens van een operationele tractor binnen een kleine onderneming die zich bezighoudt met grondverzet en transport. In tegenstelling tot de openbare MetroPT-3-dataset had deze dataset geen geregistreerde defectmeldingen of onderhoudslabels. Hierdoor waren klassieke methoden voor supervised machine learning slechts in beperkte mate toepasbaar.
+De privédataset omvatte telematicagegevens van een operationele tractor binnen een kleine onderneming die zich bezighoudt met grondverzet en transport. In tegenstelling tot de openbare MetroPT-3-dataset had deze dataset geen geregistreerde defectmeldingen of onderhoudslabels. Hierdoor waren klassieke methoden voor supervised machine learning slechts in beperkte mate toepasbaar. Desondanks is er ook een supervised model geëvalueerd op de openbare MetroPT-3-dataset. Dit fungeerde als een richtlijn om de resultaten van een traditionele supervised aanpak te vergelijken met diverse unsupervised technieken. Aan de hand van deze vergelijking werd onderzocht welke methoden het meest effectief zijn voor het gebruik van deze datasets zonder defectlabels.
+
+Ondanks dat de uiteindelijke aanpak zich richt op datasets zonder defectlabels, is er ook een supervised referentiemodel ontwikkeld voor de publieke MetroPT-3-dataset. Dit maakte het mogelijk om de resultaten van zowel supervised als unsupervised benaderingen op een objectieve manier te vergelijken. Aan de hand van deze vergelijking werd vastgesteld welke modellen geschikt waren voor de private tractordataset.
 
 Het gebrek aan gelabelde storingsdata  is één van de meest voorkomende problemen in industriële voorspellend onderhoudsprojecten \autocite{Giannoulidis2024}. Het onderzoek van \textcite{Carvalho2019} accentueert eveneens dat veel industriële organisaties niet genoeg historische foutdata hebben om volledig gecontroleerde modellen betrouwbaar te trainen.
 
-Daarom lag de nadruk in deze fase vooral op het opsporen van onzichtbare afwijkingen. Er werd getracht afwijkend gedrag te identificeren op basis van gebruikelijke operationele patronen zonder het toepassen van duidelijke foutlabels. De studie van \textcite{Aggarwal2025} stelt dat unsupervised technieken uiterst geschikt zijn voor multivariate industriële tijdsreeksen, omdat ze afwijkingen kunnen opsporen zonder dat ze vooraf gelabelde defectvoorbeelden vereisen.
+Om die reden werd de ontwikkelde methode gebruikt met de gekozen unsupervised modellen. Deze modellen dienden om afwijkende patronen in de sensordata te herkennen zonder dat defectlabels werden toegepast.
+
+%Daarom lag de nadruk in deze fase vooral op het opsporen van onzichtbare afwijkingen. Er werd getracht afwijkend gedrag te identificeren op basis van gebruikelijke operationele patronen zonder het toepassen van duidelijke foutlabels. De studie van \textcite{Aggarwal2025} stelt dat unsupervised technieken uiterst geschikt zijn voor multivariate industriële tijdsreeksen, omdat ze afwijkingen kunnen opsporen zonder dat ze vooraf gelabelde defectvoorbeelden vereisen.
 
 Tijdens de analyse werd onderzocht of specifieke sensoren afwijkende trends, scho\-mmelingen of onverwachte patronen vertoonden. Er werd opnieuw gefocust op factoren zoals temperatuur, druk, motorbelasting, motortoerental en brandstofverbruik, omdat volgens de studies van \textcite{Mahale2025} en \textcite{Touil2025}zijn deze variabelen vaak cruciale aanwijzingen voor de technische staat van bouwmachines.
 
@@ -190,6 +200,8 @@ Bovendien werd de ontwikkeling van sensordata over de tijd onderzocht om mogelij
 In deze fase werd ook in overweging genomen dat de tractor functioneert in een dynamische buitenomgeving. Hierdoor kunnen de operationele omstandigheden aanzienlijk verschillen, afhankelijk van motorbelasting, het terrein, de weersomstandigheden en de intensiteit van het gebruik. De onderzoeken van \textcite{Mahfoud2025} en \textcite{Hu2024} beklemtonen dat variabele operationele omstandigheden een aanzienlijke uitdaging vormen voor voorspellend onderhoudssystemen, aangezien normaal machinegedrag niet altijd volledig gelijk blijft.
 
 De implementatie van de methodiek op de privédataset maakte het mogelijk om te onderzoeken of het opsporen van onregelmatigheden ook nuttig blijft in kleine ondernemingen met slechts een beperkte hoeveelheid historische gegevens. Deze fase gaf bovendien inzicht in de praktische mogelijkheden van voorspellend onderhoudswerkzaamheden in realistische werkomgevingen, buiten gecontroleerde industriële testomstandigheden.
+
+Bij het interpreteren van de uitkomsten werden diverse operationele factoren in overweging genomen, waaronder variaties in motorbelasting, terrein en de intensiteit van het gebruik van de machine. Om die reden werden de vastgestelde afwijkingen altijd beoordeeld in relatie tot het gebruikelijke operationele gedrag van de tractor en niet alleen op basis van specifieke sensorwaarden.
 
 Ondanks het ontbreken van effectieve defectlabels, waren er toch mogelijkheden om afwijkende patronen in de sensorgegevens te onderzoeken door middel van trendanalyse, visualisatie en anomalie detectie. Dit maakte het mogelijk om te onderzoeken of de ontwikkelde methode mogelijk nuttig is voor vroegtijdige waarschuwingen en het ondersteunen van onderhoudsbeslissingen binnen een kleine bouwonderneming.
 
@@ -208,32 +220,36 @@ Ondanks het ontbreken van effectieve defectlabels, waren er toch mogelijkheden o
 \section{\IfLanguageName{dutch}{Vergelijken en evalueren van de methodiek op de beide datasets}{Comparing and evaluating the methodology on both datasets}}%
 \label{sec: Vergelijken en evalueren van de methodiek op de beide datasets}
 
-De zesde fase van het onderzoek bestond uit het analyseren van de uitkomsten tussen de openbare MetroPT-3-dataset en de private tractordataset. Het doel van deze fase was om te bepalen in hoeverre de ontwikkelde voorspellend onderhoudsmethode overdraagbaar is naar real-world sensordata die afkomstig zijn van operationele bouw- en transportmachines.
+De zesde fase van het onderzoek omvatte het beoordelen van de ontwikkelde methodiek. Eerst werden de resultaten van de gekozen anomaliedetectie-modellen beoordeeld op basis van de publieke MetroPT-3-dataset, waar de aanwezige foutlabels een objectieve evaluatie mogelijk maakten. Daarna werd dezelfde aanpak toegepast op de private tractordataset om te bepalen in hoeverre de aanpak kan worden overgedragen naar een realistische omgeving zonder gelabelde storingen of defecten.
 
-Openbare datasets voor voorspellend onderhoud zijn belangrijk voor onderzoek en het ontwikkelen van modellen \textcite{Veloso2022}. Maar er zijn nog steeds problemen als je deze methoden in een echte industriële omgeving wilt gebruiken. Volgens het onderzoek van \textcite{Elahi2023} werken veel AI-methoden goed met gecontroleerde datasets, maar in de praktijk is het veel moeilijker om ze toe te passen in een industriële omgeving met veel variabele factoren, storingen en beperkte gegevens over fouten.
+%De zesde fase van het onderzoek bestond uit het analyseren van de uitkomsten tussen de openbare MetroPT-3-dataset en de private tractordataset. Het doel van deze fase was om te bepalen in hoeverre de ontwikkelde voorspellend onderhoudsmethode overdraagbaar is naar real-world sensordata die afkomstig zijn van operationele bouw- en transportmachines.
 
-In deze fase werd onderzocht welke variaties er zijn tussen de twee datasets met betrekking tot de structuur van de gegevens, operationele gewoontes en het gedrag van sensoren. De openbare MetroPT-3-dataset omvatte helder vastgelegde foutmeldingen en gestructureerde industriële sensorgegevens, terwijl de private tractordataset vooral bestond uit operationele telematicagegevens zonder duidelijke foutlabels. Het onderzoek van \textcite{Carvalho2019} stelt dat de aanwezigheid van gelabelde storingsdata een aanzienlijke impact heeft op de keuze en de resultaten van machine learning-technieken in voorspellend onderhoud.
+%Openbare datasets voor voorspellend onderhoud zijn belangrijk voor onderzoek en het ontwikkelen van modellen \textcite{Veloso2022}. Maar er zijn nog steeds problemen als je deze methoden in een echte industriële omgeving wilt gebruiken. Volgens het onderzoek van \textcite{Elahi2023} werken veel AI-methoden goed met gecontroleerde datasets, maar in de praktijk is het veel moeilijker om ze toe te passen in een industriële omgeving met veel variabele factoren, storingen en beperkte gegevens over fouten.
+ 
+In deze fase werden de resultaten van beide datasets met elkaar vergeleken. Er werd onderzocht in welke mate de ontwikkelde methode in staat was om soortgelijke afwijkende patronen te herkennen, ondanks de variaties in de datastructuur en het ontbreken van defectlabels in de privédataset. De openbare MetroPT-3-dataset omvatte helder vastgelegde foutmeldingen en gestructureerde industriële sensorgegevens, terwijl de private tractordataset vooral bestond uit operationele telematicagegevens zonder duidelijke foutlabels. Het onderzoek van \textcite{Carvalho2019} stelt dat de aanwezigheid van gelabelde storingsdata een aanzienlijke impact heeft op de keuze en de resultaten van machine learning-technieken in voorspellend onderhoud.
 
 De analyse richtte zich onder andere op:
 \begin{itemize}
-    \item Verschillen in datastructuur
+    \item De resultaten van de diverse anomaliedetectie-modellen op de openbare dataset.
     
-    \item Verschillen in operationele patronen
+    \item De overdraagbaarheid van de ontwikkelde methodiek naar de privédataset mogelijk is.
     
-    \item Robuustheid van de methode
+    \item De robuustheid van de methodiek in diverse datastructuren.
     
-    \item Bruikbaarheid van anomalie detectie zonder labels
+    \item Anomalieën die in beide datasets zijn vastgesteld.
     
-    \item Praktische toepasbaarheid binnen kleine bouwondernemingen
+    \item Praktische bruikbaarheid voor kleine bouwbedrijven.
 \end{itemize}
 
-Een cruciaal aspect van deze vergelijking was de stevigheid van de ontwikkelde methode. Er werd onderzocht of dezelfde analysemethoden effectieve resultaten kunnen genereren in datasets met uiteenlopende kenmerken. De studie van \textcite{Xue2025} stelt dat variabele operationele omstandigheden één van de grootste obstakels zijn in voorspellend onderhoud, aangezien machinegedrag aanzienlijk kan variëren op basis van belasting, de omgeving en de intensiteit van het gebruik.
+Een cruciaal aspect van deze vergelijking was de stevigheid van de ontwikkelde methode. Er werd onderzocht of dezelfde analysemethoden effectieve resultaten kunnen genereren in datasets met uiteenlopende kenmerken. Een essentieel aspect van de evaluatie was het controleren of dezelfde methodiek effectief bleef wanneer deze werd gebruikt op datasets met uiteenlopende kenmerken en operationele omstandigheden.
 
-Bovendien werd er specifiek onderzocht in hoeverre anomalie detectie effectief blijft zonder duidelijke foutlabels. Unsupervised methodieken worden steeds belangrijker in industriële toepassingen, omdat veel bedrijven niet genoeg historische storingsdata hebben \autocite{Giannoulidis2024}. Het onderzoek van \textcite{Aggarwal2025} bewijst eveneens dat het opsporen van anomalieën in multivariate tijdsreeksen een waardevolle oplossing kan zijn voor situaties waarin supervised learning lastig te implementeren is.
+Bovendien werd er specifiek onderzocht in hoeverre anomalie detectie effectief blijft zonder duidelijke foutlabels. Daarna werd onderzocht welke afwijkingen door de diverse modellen op de privédataset werden vastgesteld. Er werd onderzocht of de ontdekte afwijkingen overeenkwamen met de visuele trendanalyse van de sensordata en of de methodiek ook zonder defectlabels waardevolle resultaten opleverde. 
 
-In deze bachelorproef werd ook bestudeerd of de ontwikkelde methode praktisch toepasbaar kan zijn voor kleine bouwondernemingen. Grote industriële ondernemingen hebben vaak uitgebreide historische onderhoudsgegevens, specifieke infrastructuur en aanzienlijke gegevens over sensoren. Kleine bedrijven hebben doorgaans minder datasets en minder uitgebreide mogelijkheden voor monitoring. De studie van \textcite{ErRatby2025} stelt dat de uitvoering van voorspellend onderhoudssystemen in kleinere industriële omgevingen een aanzienlijke uitdaging blijft.
+In deze bachelorproef werd ook bestudeerd of de ontwikkelde methode praktisch toepasbaar kan zijn voor kleine bouwondernemingen. Uiteindelijk werd onderzocht in hoeverre de ontwikkelde methodiek praktisch toepasbaar is in kleine bouwbedrijven, waar meestal slechts een beperkte hoeveelheid historische sensorgegevens en weinig of geen defectlabels beschikbaar zijn.
 
-De analyse van de twee datasets gaf de mogelijkheid om de sterke en zwakke punten van de ontwikkelde methode te begrijpen. Door de uitkomsten van zowel de publieke als de private dataset naast elkaar te analyseren, kon worden vastgesteld in hoeverre de aanpak herhaalbaar en overdraagbaar blijft in diverse industriële omgevingen.
+%De analyse van de twee datasets gaf de mogelijkheid om de sterke en zwakke punten van de ontwikkelde methode te begrijpen. Door de uitkomsten van zowel de publieke als de private dataset naast elkaar te analyseren, kon worden vastgesteld in hoeverre de aanpak herhaalbaar en overdraagbaar blijft in diverse industriële omgevingen.
+
+Deze vergelijking toonde aan dat de ontwikkelde methodiek niet alleen effectief is op een publieke dataset met gekende defecten, maar ook nuttig blijft wanneer dezelfde methodiek wordt toegepast op een privédataset zonder gelabelde defecten. Zo was het mogelijk om de overdraagbaarheid en praktische bruikbaarheid van de methodiek voor kleine bouwbedrijven te evalueren.
 
 Uiteindelijk was deze evaluatiefase een cruciale fase om de praktische waarde van het onderzoek te evalueren en om inzicht te krijgen in de haalbaarheid van voorspellend onderhoudsmethoden, gebaseerd op beperkte real-world telematicagegevens.
 
