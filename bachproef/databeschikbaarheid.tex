@@ -47,7 +47,7 @@ Verder onderstreept het onderzoek van \textcite{Wang2025} dat, zelfs wanneer geg
 
 Omdat kleine bouwbedrijven vaak geen uitgebreide of gestructureerde interne datasets hebben, wordt er in onderzoek en praktijk vaak gebruikgemaakt van externe bronnen van gegevens, zoals machine-dealers, fabrikanten of serviceproviders \autocite{Elahi2023, Hu2024}. In industriële omgevingen worden dergelijke gegevens vaak door diverse betrokkenen beheerd, waardoor externe partijen een mogelijke bron zijn voor operationele en onderhoudsinformatie \autocite{Meddaoui2024, Nayak2024}. In de praktijk blijkt het verwerven van deze datasets echter een ingewikkelde en onduidelijke taak te zijn.
 
-Tijdens dit onderzoek werd er contact opgenomen met diverse Belgische leveranciers en dealers van bouwmachines, zoals Luyckx, SMT Belgium, FM Bouwmachines, DB Machinery, Verhoeven International, Van der Spek, Coesens Machinery en diverse andere ondernemingen. Het doel was om telematicadata of historische sensorgegevens van bouwmachines te verkrijgen. In de praktijk bleek dit echter erg lastig te zijn. Bepaalde bedrijven hebben de aanvraag niet ingewilligd, terwijl andere aangaven dat ze geen datasets konden delen vanwege vertrouwelijkheid of commerciële redenen. In bepaalde situaties werden onderhoudsdata of algemene informatie verstrekt, maar geen relevante tijdsreeksen met sensormetingen.
+Tijdens dit onderzoek werd er contact opgenomen met diverse Belgische leveranciers en dealers van bouwmachines, zoals Luyckx NV, SMT Belgium, FM Bouwmachines, De Backer Machinery, Verhoeven International, Van der Spek NV, Lieromat Machinery en diverse andere ondernemingen. Het doel was om telematicadata of historische sensorgegevens van bouwmachines te verkrijgen. In de praktijk bleek dit echter erg lastig te zijn. Bepaalde bedrijven hebben de aanvraag niet ingewilligd, terwijl andere aangaven dat ze geen datasets konden delen vanwege vertrouwelijkheid of commerciële redenen. In bepaalde situaties werden onderhoudsdata of algemene informatie verstrekt, maar geen relevante tijdsreeksen met sensormetingen.
 
 %Tijdens de uitvoering van dit onderzoek werd aangetoond dat het in contact komen met externe partijen vaak leidt tot diverse uitdagingen. In verschillende situaties was er geen reactie op contactpogingen, waardoor het opstarten van samenwerkingen lastig werd. Daarnaast werd vastgesteld dat sommige partijen expliciet geen toegang wilden geven tot hun data, terwijl in andere gevallen onduidelijk bleef of de gevraagde data überhaupt beschikbaar was. Deze beperkte respons en onduidelijkheid leiden tot een aanzienlijke vertraging en onzekerheid tijdens de fase van het verzamelen van gegevens in het onderzoek.
 
@@ -65,6 +65,55 @@ Vanwege de beperkte beschikbaarheid van datasets werd er uiteindelijk gekozen vo
 
 \section{\IfLanguageName{dutch}{De praktische zoektocht naar datasets }{The pratical search for datasets}}%
 \label{sec: De praktische zoektocht naar datasets}
+
+Om passende datasets voor dit onderzoek te verzamelen, werd er intensief contact opgenomen met diverse Belgische leveranciers, dealers en bedrijven die zich bezighouden met de bouwmachine- en grondverzetsector. Deze contactpogingen hadden als doel telematicadata of historische sensorgegevens te verzamelen, die konden dienen voor de ontwikkeling en beoordeling van een anomaliedetectie-model.
+
+Naast het e-mailcontact werden ook diverse bedrijven persoonlijk bezocht om de onderzoeksvraag uit te leggen en de opties voor datadeling te bespreken. Hieronder biedt tabel 4.1 een samenvatting van de bedrijven die zijn benaderd en de uitkomsten van deze contacten.
+
+%\begin{table}
+%\centering
+%\begin{tabular}{lcr}
+% \toprule
+%\textbf{Bedrijf} & \textbf{Resultaat}  \\
+% $\alpha$         & $\beta$                   \\
+% \midrule
+%Mignon R\&L                & Ik heb het twee keer persoonlijk bezocht. De aanvraag werd vastgelegd, maar er kwam geen verdere reactie.                          \\
+%Mersch Gebroeders Bvba                & Ik heb het persoonlijk bezocht. Er werd beloofd om de opties te onderzoeken, maar er kwam geen verdere reactie.                           \\
+%Nino-Trac BV                & Ik heb een dataset ontvangen, maar deze bevatte slecht ongeveer 30 minuten aan sensordata, waardoor het niet geschikt was voor verdere analyses.                           \\
+% \bottomrule
+%\end{tabular}
+%\caption[Tabel gecontacteerde bedrijven]{\label{tab: gecontacteerde bedrijven}Een samenvatting van de betrokken bedrijven en de uitkomsten van de verzameling van gegevens.}
+%\end{table}
+
+\begin{table}
+    \centering
+    \begin{tabular}{l p{10cm}} % 'p{10cm}' zorgt ervoor dat de 2e kolom 10cm breed is en regels afbreekt.
+        \toprule
+        \textbf{Bedrijf} & \textbf{Resultaat} \\
+        \midrule
+        Mignon R\&L & Ik heb het twee keer persoonlijk bezocht. De aanvraag werd vastgelegd, maar er kwam geen verdere reactie. \\
+        Mersch Gebroeders Bvba & Ik heb het persoonlijk bezocht. Er werd beloofd om de opties te onderzoeken, maar er kwam geen verdere reactie. \\
+        Nino-Trac BV & Ik heb een dataset ontvangen, maar deze bevatte slechts ongeveer dertig minuten aan sensordata, waardoor het niet geschikt was voor verdere analyses. \\
+        Vanderroost nv & Ik heb hiervan de private tractordataset gekregen met ongeveer twee maanden aan telematicadata van een operationele tractor, maar de dataset bevatte geen onderhoudsmomenten of gelabelde defecten. \\
+        Vandaele machinery power rental & Ik heb contact opgenomen via e-mail. Ze bevonden zich in een transitie naar een nieuwe directie en hun digitale omgeving was in vernieuwingsproces hierdoor konden ze geen data afleveren. \\
+        Luyckx NV & Ik heb hun gecontacteerd via e-mail. Ze hebben onderhoudshistorieken en handleidingen afgeleverd, maar na intern overleg bleek het niet mogelijk om sensorgegevens erbij te geven. \\
+        SMT Belgium & Contact opgenomen via e-mail. De bruikbare datasets waren niet beschikbaar en konden ze niet geven. \\
+        Lieromat Machinery & Gemaild en extra onderzoeksinformatie bezorgd, maar geen reactie meer ontvangen. \\
+        Allebosch BV & Ik heb contact opgenomen via e-mail, maar geen reactie op ontvangen. \\
+        De Backer Machinery & Contact via e-mail en zij gaven aan het bedrijf recent hebben te overgenomen en daardoor onvoldoende gegevens beschikbaar hadden om te geven. \\
+        Van der Spek NV & Ik heb meerdere e-mails verstuurd, maar geen verdere reactie opgehad. \\
+        Verhoeven International & Meerdere e-mails naar verzonden, maar geen reactie gekregen. \\
+        FM Bouwmachines & Contact opneomen via e-mail, maar geen reactie opgekregen. \\
+        \bottomrule
+    \end{tabular}
+    \caption[Tabel gecontacteerde bedrijven]{\label{tab:gecontacteerde-bedrijven}Een samenvatting van de betrokken bedrijven en de uitkomsten van de verzameling van gegevens.}
+\end{table}
+
+\newpage
+
+Deze contacten tonen aan dat het zeer lastig was om bruikbare datasets te verkrijgen. In veel situaties was er geen reactie of konden bedrijven geen data delen vanwege vertrouwelijkheid, commerciële redenen of een tekort aan beschikbare historische gegevens. Uiteindelijk waren er slechts twee organisaties in staat om waardevolle data te leveren. Nino-Trac BV bood een beperkte dataset van ongeveer dertig minuten aan,die niet voldoende groot was voor verdere analyses. Vanderroost nv heeft een privédataset aangeleverd met ongeveer twee maanden aan telematicadata van een operationele tractor. Hoewel deze datasets geen onderhouds- of defectlabels bevatte, was zij een belangrijke bron van data voor het toepassen van de ontwikkelde methodiek.
+
+De uitkomsten van deze zoektocht tonen aan dat het verzamelen van representatieve sensordata in de bouwsector een aanzienlijke uitdaging blijft. Om de beperkingen van de privédataset te verhelpen, is besloten deze te combineren met de publieke MetroPT-3-dataset. Deze mix maakte het mogelijk om de voorgestelde methodiek zowel te creëren en te beoordelen op basis van gelabelde data als de overdraagbaarheid naar een realistische praktijksituatie te evalueren.
 
 \section{\IfLanguageName{dutch}{Mogelijke redenen voor een beperkte toegang tot data}{Possible reasons for limited access to data}}%
 \label{sec: mogelijke redenen voor een beperkte toegang tot data}
