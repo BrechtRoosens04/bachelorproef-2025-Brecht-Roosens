@@ -5,11 +5,15 @@
 \chapter{\IfLanguageName{dutch}{De verkregen werkelijke data van een machine in de bouw}{Actual data collected from a machine in the construction industry}}%
 \label{ch:de echte data}
 
-In het domein van voorspellend onderhoud zijn kwalitatieve en representatieve gegevens de essentiële basis voor het creëren van betrouwbare modellen. Zonder de juiste historische informatie over machinegedrag, belasting, sensormetingen en operationele omstandigheden is het lastig om patronen te identificeren die kunnen duiden op toekomstige problemen of onderhoudseisen. Diverse onderzoeken van \textcite{Carvalho2019}, \textcite{Elahi2023} en \textcite{Xue2025} accentueren dat de prestaties van artificiële intelligentie in voorspellend onderhoud direct gerelateerd zijn aan de beschikbaarheid van voldoende en bruikbare gegevens.
+Hoofdstuk 5 behandelt de privédataset die in deze bachelorproef  is ingezet voor de ontwikkeling en implementatie van het voorspellend onderhoudsmethodiek. De dataset omvat telematicadata van een operationele tractor die momenteel in gebruik is binnen een bouwbedrijf. Na de zoektocht naar geschikte datasets, zoals vermeld in het vorige hoofdstuk, bleek deze dataset de meest geschikte bron van realistische sensordata voor het verdere onderzoek te zijn.
 
-Voor deze bachelorproef is er bewust gekozen om te werken met werkelijke operationele gegevens van een tractor die actief wordt gebruikt in de grondverzet- en transportactiviteiten van een bouwbedrijf. Het toepassen van echte sensordata levert een aanzienlijke voordelen op in vergelijking met alleen theoretische of gesimuleerde datasets. Reële gegevens tonen namelijk de werkelijke situatie waarin machines opereren, zoals variabele belasting, verschillende weersomstandigheden, onregelmatige rijtijden, stationaire periodes en de interactie tussen mensen en de machines. Hierdoor kunnen volgens de studies van \textcite{Mahale2025} en \textcite{ErRatby2025} voorspellend onderhoudsoplossingen realistischer worden beoordeeld en beter aansluiten bij de industriële toepassingen.
+In dit hoofdstuk worden de kenmerken van de dataset toegelicht, worden de beschikbare sensoren en parameters toegelicht en er wordt toegelicht op welke manier de gegevens zijn voorbereid voor verdere analyse. Bovendien wordt de beperkingen van de dataset besproken, zoals het gebrek aan defectlabels en de historische duur,  evenals de impact hiervan op het verdere verloop van het onderzoek.
 
-In dit hoofdstuk wordt grondig toegelicht hoe deze gegevens zijn verzameld, welke eigenschappen en parameters aanwezig waren, hoe de dataset is opgeschoond en voorbereid en waarom deze dataset van belang is voor deze bachelorproef.
+%In het domein van voorspellend onderhoud zijn kwalitatieve en representatieve gegevens de essentiële basis voor het creëren van betrouwbare modellen. Zonder de juiste historische informatie over machinegedrag, belasting, sensormetingen en operationele omstandigheden is het lastig om patronen te identificeren die kunnen duiden op toekomstige problemen of onderhoudseisen. Diverse onderzoeken van \textcite{Carvalho2019}, \textcite{Elahi2023} en \textcite{Xue2025} accentueren dat de prestaties van artificiële intelligentie in voorspellend onderhoud direct gerelateerd zijn aan de beschikbaarheid van voldoende en bruikbare gegevens.
+
+%Voor deze bachelorproef is er bewust gekozen om te werken met werkelijke operationele gegevens van een tractor die actief wordt gebruikt in de grondverzet- en transportactiviteiten van een bouwbedrijf. Het toepassen van echte sensordata levert een aanzienlijke voordelen op in vergelijking met alleen theoretische of gesimuleerde datasets. Reële gegevens tonen namelijk de werkelijke situatie waarin machines opereren, zoals variabele belasting, verschillende weersomstandigheden, onregelmatige rijtijden, stationaire periodes en de interactie tussen mensen en de machines. Hierdoor kunnen volgens de studies van \textcite{Mahale2025} en \textcite{ErRatby2025} voorspellend onderhoudsoplossingen realistischer worden beoordeeld en beter aansluiten bij de industriële toepassingen.
+
+%In dit hoofdstuk wordt grondig toegelicht hoe deze gegevens zijn verzameld, welke eigenschappen en parameters aanwezig waren, hoe de dataset is opgeschoond en voorbereid en waarom deze dataset van belang is voor deze bachelorproef.
 
 \newpage
 
@@ -18,19 +22,86 @@ In dit hoofdstuk wordt grondig toegelicht hoe deze gegevens zijn verzameld, welk
 
 De gebruikte gegevens werden verstrekt door een erkende dealer van landbouw- en bouwmachines, namelijk Vanderroost Fr \& Zn nv, die verantwoordelijk is voor de verkoop, het onderhoud en de opvolging van machines in de bouw- en landbouwsector. In hedendaagse industriële omgevingen zijn dergelijke machines voorzien van geavanceerde voertuigvolgsystemen die voortdurend operationele informatie vastleggen. Deze systemen verzamelen gegevens van diverse sensoren die in de machine zijn geïntegreerd en bieden informatie over onder andere temperatuur, druk, motorbelasting en verbruik. De verzamelde data wordt meestal automatisch verzonden naar de centrale platforms van de producent of dealer, waar ze toegankelijk zijn voor aanvullende analyse, monitoring en onderhoudsplanning.
 
-De invoering van telecommunicatietechniek of kortweg telematica in bouwmachines is een onderdeel van de grotere transformatie naar het Industrial Internet of Things of afgekort IIoT, waarbij fysieke machines worden verbonden met digitale systemen. Dit leidt tot een voortdurende stroom van gegevens die kan worden ingezet om de toestand van machines in real-time te monitoren. Cloud computing, edge computing en samenhangende sensornetwerken essentieel zijn voor voorspellend onderhoud, omdat ze het mogelijk maken om een efficiënte verzameling, verwerking en analyse van grote hoeveelheden data te realiseren \autocite{Kapoor2025}. Het onderzoek van \textcite{Elahi2023} benadrukt eveneens dat sensordata gedurende de gehele levensduur van industriële apparatuur cruciaal is voor het implementeren van machine learning-modellen in onderhoudsstrategieën binnen bouwbedrijven.
+Moderne bouwmachines zijn voorzien van telematicasystemen die sensordata automatisch registreren wanneer de machine wordt gebruikt. Deze systemen verzamelen onder andere gegevens over de motorbelasting, het toerental, de temperaturen, de drukken en het verbruik van brandstof. Dit soort informatie kan volgens de studies van \textcite{Elahi2023} en \textcite{Kapoor2025} worden ingezet voor het onderzoeken van het gedrag van de machine en vormt de fundamenten voor toepassingen zoals voorspellend onderhoud.
 
-De verkregen gegevens worden doorgaans opgeslagen in cloudgebaseerde systemen, waar ze op een centraal punt toegankelijk zijn voor zowel producenten als onderhoudsdiensten. Cloud computing stelt ons in staat om op een schaalbare en flexibele manier om te gaan met aanzienlijke hoeveelheden data, wat essentieel is voor de toepassing van voorspellend onderhoud. Organisaties van cloudplatformen zijn in staat om grote datasets op een effectieve wijze op te slaan en te verwerken, wat nog steeds een essentieel principe is in datagedreven toepassingen \autocite{Creeger2009}. De studie van \textcite{Kapoor2025} stelt dat recente ontwikkelingen er bovendien toe leiden dat edge computing wordt toegepast, waarbij een gedeelte van de verwerking al lokaal op de machine plaatsvindt om snellere reacties te faciliteren.
+%De invoering van telecommunicatietechniek of kortweg telematica in bouwmachines is een onderdeel van de grotere transformatie naar het Industrial Internet of Things of afgekort IIoT, waarbij fysieke machines worden verbonden met digitale systemen. Dit leidt tot een voortdurende stroom van gegevens die kan worden ingezet om de toestand van machines in real-time te monitoren. Cloud computing, edge computing en samenhangende sensornetwerken essentieel zijn voor voorspellend onderhoud, omdat ze het mogelijk maken om een efficiënte verzameling, verwerking en analyse van grote hoeveelheden data te realiseren \autocite{Kapoor2025}. Het onderzoek van \textcite{Elahi2023} benadrukt eveneens dat sensordata gedurende de gehele levensduur van industriële apparatuur cruciaal is voor het implementeren van machine learning-modellen in onderhoudsstrategieën binnen bouwbedrijven.
 
-De gegevens over de aangeleverde tractor omvatten historische telematicagegevens die automatisch werden vastgelegd tijdens het gebruik van de machine. Dit houdt in dat de dataset geen gesimuleerde of experimentele informatie bevat, maar wel het gedrag van de tractor daadwerkelijk weergeeft onder realistische werkomstandigheden. Dit biedt volgens het onderzoek van \textcite{Carvalho2019} een aanzienlijk voordeel, omdat real-world gegevens vaak ingewikkelder en minder gestructureerd zijn dan synthetische gegevens, wat resulteert in een nauwkeuriger inzicht in de werkelijke praktijkomstandigheden.
+%De verkregen gegevens worden doorgaans opgeslagen in cloudgebaseerde systemen, waar ze op een centraal punt toegankelijk zijn voor zowel producenten als onderhoudsdiensten. Cloud computing stelt ons in staat om op een schaalbare en flexibele manier om te gaan met aanzienlijke hoeveelheden data, wat essentieel is voor de toepassing van voorspellend onderhoud. Organisaties van cloudplatformen zijn in staat om grote datasets op een effectieve wijze op te slaan en te verwerken, wat nog steeds een essentieel principe is in datagedreven toepassingen \autocite{Creeger2009}. De studie van \textcite{Kapoor2025} stelt dat recente ontwikkelingen er bovendien toe leiden dat edge computing wordt toegepast, waarbij een gedeelte van de verwerking al lokaal op de machine plaatsvindt om snellere reacties te faciliteren.
+
+\begin{table}
+\centering
+\begin{tabular}{lcr}
+ \toprule
+\textbf{Kenmerk} & \textbf{Waarde}  \\
+ \midrule
+Dataset-type                & Historische telematicadata                         \\
+Bouwmachine                & Tractor in grondverzet en transport                          \\
+Herkomst dataset                & Vanderroost NV                         \\
+Periode & Ongeveer twee maanden \\
+Formaat van de data & XLSX omgezet naar CSV \\
+Aanwezige Labels & Nee \\
+Onderhoudsmomenten & Nee \\
+Defect- of storingregistraties & Nee \\
+Datatype & Time-series \\
+ \bottomrule
+\end{tabular}
+\caption[Tabel Overzicht tractordataset]{\label{tab:tabel overzicht tractordataset}Een samenvatting van de verkregen tractordataset.}
+\end{table}
+
+Tabel 5.1 laat zien dat in tegenstelling tot tal van andere openbare datasets deze dataset geen gegevens bevat over onderhoudsmomenten of geregistreerde defecten. Hierdoor kan niet worden vastgesteld op welk moment een storing daadwerkelijk heeft plaatsgevonden. De dataset is daarom vooral geschikt voor het onderzoeken van operationele patronen en het identificeren van mogelijke afwijkingen die voortkomen uit sensordata.
+
+\newpage
+
+\begin{figure}
+\centering
+\includegraphics[width=1.0\textwidth]{foto_private_dataset.png}
+\caption[Figuur overzicht private dataset.]{\label{fig:overzicht private dataset}Voorbeeld van de telematicadata die van de tractor zijn verkregen. De dataset omvat tijdsgebonden metingen van sensoren, waaronder tijdstempel, motortoerental, motorbelasting, koelvloeistoftemperatuur, transmissieoliedruk, rijsnelheid en brandstofdebiet, die dienen voor verdere analyse en het opsporen van afwijkingen. Bron: Vanderroost NV (2025), eigen verwerking}
+\end{figure}
+
+Figuur 5.1 laat een gedeelte zien van de verzamelde tractordataset. Elke rij staat voor een tijdsregistratie van de machine, terwijl de kolommen diverse telematicaparameters bevatten die automatisch tijdens de werking zijn vastgelegd.
+
+\begin{table}
+\centering
+\begin{tabular}{lcr}
+ \toprule
+\textbf{Parameter} & \textbf{Beschrijving}  \\
+ \midrule
+Tijdstempel                & De tijdstip van de meting                           \\
+Draai-uren motor                & De totale levensduur van de motor                           \\
+Druk transmissieolie                & De druk van de transmissieolie                          \\
+Koelvloeistoftemperatuur motor & De temperatuur van de koelvloeistof. \\
+Motorbelasting & De huidige belasting van de motor. \\
+Motortoerental & De toerental van de motor. \\
+Rijsnelheid & De snelheid van de tractor. \\
+Accuspanning & De spanning van de accu. \\
+Brandstofdebiet & Het actuele brandstofverbruik. \\
+Brandstofpeil & Het brandstofniveau. \\
+DEF-/ureumgehalte & Het niveau van de DEF-/ureumvloeistof. \\
+Temperatuur inlaatspruitstuk & De temperatuur van de inlaatlucht. \\
+Temperatuur transmissieolie & De temperatuur van de transmissieolie. \\
+Motoroliedruk & De druk van de motorolie. \\
+Motorolietemperatuur & De temperatuur van de motorolie. \\
+Niveau DEF-/ureumtank & De vulgraad van de motorolie. \\
+Vuldruk motor & De turbodruk of de inlaatdruk van de motor. \\
+is\_idle & Dit geeft aan of de tractor stationair draait. \\
+ \bottomrule
+\end{tabular}
+\caption[Tabel alle parameters tractordataset]{\label{tab:alle parameters tractordataset}Alle parameters die in de tractordataset voorkomen.}
+\end{table}
+
+Naast de belangrijkste parameters die in Figuur 5.1 zijn weergegeven, omvat de complete dataset ook diverse extra sensormetingen. Tabel 5.2, die op het volgend blad staat, biedt een samenvatting van alle beschikbare variabelen die in de verdere analyse zijn toegepast.
+
+%De gegevens over de aangeleverde tractor omvatten historische telematicagegevens die automatisch werden vastgelegd tijdens het gebruik van de machine. Dit houdt in dat de dataset geen gesimuleerde of experimentele informatie bevat, maar wel het gedrag van de tractor daadwerkelijk weergeeft onder realistische werkomstandigheden. Dit biedt volgens het onderzoek van \textcite{Carvalho2019} een aanzienlijk voordeel, omdat real-world gegevens vaak ingewikkelder en minder gestructureerd zijn dan synthetische gegevens, wat resulteert in een nauwkeuriger inzicht in de werkelijke praktijkomstandigheden.
 
 De voortdurende registratie van sensorgegevens leidt tot de vorming van een tijdsgebonden dataset, die ook wel een time-series dataset wordt genoemd, waarbij diverse metingen zijn verbonden met een bepaalde tijdstempel. Deze datasets zijn zeer geschikt voor het voorspellen van onderhoud, omdat defecten en slijtageprocessen doorgaans niet plotseling optreden, maar zich geleidelijk in de loop der tijd ontwikkelen. Afwijkingen kunnen vaak alleen worden opgemerkt door trends en patronen in de tijd te onderzoeken. Het onderzoek van \textcite{Lu2026} stellen dat tijdsreeksen  cruciaal zijn voor het vroegtijdig opsporen van fouten in roterende machines, terwijl de studie van \textcite{WangXueyi2025} bewijzen dat veranderingen in sensorpatronen over tijd een belangrijke aanwijzing zijn voor aanvankelijke defecten.
 
 Daarnaast stelt het inzetten van historische telematicagegevens ons in staat om zowel normaal gedrag als mogelijke afwijkingen te herkennen zonder dat er duidelijke labels vereist zijn. Dit is vooral van belang in situaties waarin er weinig of geen onderhouds- of defectdata beschikbaar zijn, wat vaak voorkomt in industriële omgevingen. Volgens de studies van \textcite{Giannoulidis2024} en \textcite{Dissem2024} worden in dergelijke situaties regelmatig unsupervised learning-methoden toegepast, die patronen aanleren op basis van normaal gedrag en afwijkingen opsporen als afwijkingen van deze patronen.
 
-Samengevat geven de verzamelde telematicagegevens een nuttig en realistisch inzicht in het gedrag van de tractor. Hoewel deze dataset de werkelijke operationele situatie weerspiegelt, stelt de ingewikkeldheid van deze praktijkgegevens bepaalde beperkingen voor het modelleren. In deze bachelorproef wordt er gekozen voor een tweeledige benadering: voor de ontwikkeling en training van het model wordt een openbare, gesimuleerde dataset gebruikt, waarna de verkregen inzichten en resultaten worden beoordeeld op basis van de historische telematicagegevens van de tractor.
-
 \newpage
+
+De verzamelde tractordataset is een realistische praktijkdataset die zich richt op operationele sensordata, maar mist informatie over onderhoud en defecten. Om die reden werd de openbare MetroPT-3-dataset ingezet voor de creëring en evaluatie van de methodiek voor het detecteren van anomalieën. Daarna werd dezelfde aanpak toegepast op de private tractordataset om te evalueren in hoeverre deze dataset overdraagbaar is maar een realistische omgeving met beperkte historische data.
+
+%Samengevat geven de verzamelde telematicagegevens een nuttig en realistisch inzicht in het gedrag van de tractor. Hoewel deze dataset de werkelijke operationele situatie weerspiegelt, stelt de ingewikkeldheid van deze praktijkgegevens bepaalde beperkingen voor het modelleren. In deze bachelorproef wordt er gekozen voor een tweeledige benadering: voor de ontwikkeling en training van het model wordt een openbare, gesimuleerde dataset gebruikt, waarna de verkregen inzichten en resultaten worden beoordeeld op basis van de historische telematicagegevens van de tractor.
 
 \section{\IfLanguageName{dutch}{Relevantie van tractoren binnen voorspellend onderhoud}{The role of tractors in predictive maintenance}}%
 \label{sec: relevantie van tractoren in voorspellend onderhoud} 
