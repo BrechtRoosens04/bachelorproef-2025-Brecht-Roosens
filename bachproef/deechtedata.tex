@@ -245,30 +245,65 @@ Naast de gegevens van de sensor zijn ook de tijdstempel en de draaiuren van de m
 \section{\IfLanguageName{dutch}{Opschoning en voorbereiden van de data}{Data cleaning and preparation}}%
 \label{sec: Opschoning en voorbereiden van de data}
 
-Na het combineren van de diverse databestanden vond er een grondige preprocessingfase plaats. Industriële datasets vertonen vaak ruis, onduidelijke waarden, onduidelijke registratie of ongeldige meetwaarden. Onduidelijke tijdreeksgegevens vormen één van de grootste obstakels bij het opsporen van onregelmatigheden en het onderhouden van voorspellende gegevens, omdat onjuiste of inconsistente informatie de betrouwbaarheid van analyses en modellen aanzienlijk kan schaden \autocite{Dissem2024}. De studie van \textcite{Carvalho2019} beklemtoont eveneens dat de kwaliteit van data essentieel is voor machine learning-projecten en dat een aanzienlijk deel van de problemen met voorspellend onderhoudsprocessen ontstaat tijdens de voorbereidende verwerking van gegevens.
+Na het ontvangen van de telematicadata werd duidelijk dat de dataset niet uit één centraal databestand bestond, maar uit twaalf afzonderlijke excel-bestanden. Zes bestanden waren gerelateerd aan september, terwijl zes bestanden zich richtten op oktober. Elk bestand bevatte een gedeelte van de sensordata van de tractor die beschikbaar was. Om de data gereed te maken voor verdere analyse, werd elk bestand eerst afzonderlijk bekeken en gestandaardiseerd. Vervolgens werden de bestanden samengevoegd tot een uniforme dataset.
 
-In deze fase zijn er verschillende stappen ondernomen om de dataset te standaardiseren en voorbereid te maken op verdere analyse en modelontwikkeling.
+\paragraph{Het verwijderen van de afzonderlijke databestanden}
+De eerste fase omvatte het afzonderlijk verwerken van elk excel-bestand met de Python-bibliotheek pandas. De bestanden hadden een soortgelijke opbouw, maar moesten eerst worden gestandaardiseerd om later probleemloos te kunnen worden samengevoegd.
 
-\paragraph{Verwijdering van lege waarden}
-Eerst werden records die geen bruikbare meetwaarden bevatten, verwijderd of behandeld. Ontbrekende waarden kunnen resulteren in onjuiste analyses, onduidelijke statistieken en onzekere modeltraining. Volgens de studies van \textcite{Li2025} en \textcite{Dissem2024} is het cruciaal om missing values nauwkeurig te behandelen in tijdreeksanalyse en machine learning, omdat veel algoritmen niet in staat zijn om onvolledige inputgegevens te verwerken.
+Aanvankelijk werd de index van elk bestand herzien met reset\_index(), waardoor de records een opeenvolgende nummering kregen. Daarna werden de kolomnamen gewijzigd in consistente en goed leesbare namen. Alle bestanden maakten gebruik van identieke kolomnamen, wat essentieel was voor de verdere verwerking.
 
-\paragraph{Verwijdering van dubbele records}
-Bovendien zijn er dubbele records ontdekt en verwijderd. Duplicaten van deze aard kunnen ontstaan door exporten, synchronisatieproblemen of een overlap tussen bestanden. Als dubbele registraties niet worden verwijderd, kunnen analyses vertekend worden en kunnen modellen onjuiste patronen opmerken. Het onderzoek van \textcite{Carvalho2019} geven aan dat onjuiste of tegenstrijdige gegevens een nadelige impact hebben op de prestaties van voorspellend onderhoudsmodellen.
+\begin{listing}[H]
+\begin{minted}{python}
+df_spt_1 = df_spt_1.iloc[1:].reset_index(drop=True)
+\end{minted}
+\caption[Reset index tractordata]{Regel code om de dataset te herindexeren.}
+\end{listing}
 
-\paragraph{Verbeteren datumnotaties}
-De tijdstempels werden daarna omgezet naar een consistent datetime-formaat. Dit laat toe om de gegevens juist chronologisch te ordenen en later methoden zoals filtering, herhaling en tijdsgebaseerde analyses toe te passen. Volgens de studie van \textcite{Xue2025} zijn juiste tijdsstructuren cruciaal voor voorspellend onderhoud, omdat machinegedrag meestal wordt beoordeeld als een proces van tijdsreeksen.
+Vervolgens werd de kolom Tijdstempel omgevormd tot het datetime-formaat met behulp van pd.to\_datetime. Hierdoor konden de meetwaarden chronologisch worden ingedeeld en konden er later analyses op basis van tijd worden uitgevoerd.
 
-\paragraph{Numeriek converteren van de meetwaarden}
-Aanvankelijk was een aantal sensorgegevens opgeslagen in een tekstformaat. Deze waarden werden omgezet in numerieke datatypes, zodat mathematische berekeningen, statistische analyses en machine learning-processen op de juiste manier konden plaatsvinden. Het onderzoek van \textcite{Nayak2024} stellen dat betrouwbare feature-analyse een consistente numerieke weergave van sensorgegevens vereist.
+\begin{listing}[H]
+\begin{minted}{python}
+df_spt_1["Tijdstempel"] =pd.to_datetime(df_spt_1["Tijdstempel"], errors="coerce")
+\end{minted}
+\caption[Datetime omzetting tractordata]{Regel code om de waarden om te zetten naar datetime-formaat.}
+\end{listing}
 
-\paragraph{Chronologisch sorteren van de data}
-Vervolgens werden alle records chronologisch ingedeeld op basis van hun tijdstempel. Deze fase is cruciaal voor time series-analyse en modellen die op sequence zijn gebaseerd, zoals LSTM-netwerken, omdat deze modellen afhankelijk zijn van de juiste volgorde van achtereenvolgende observaties. De studies van \textcite{Li2025} en \textcite{Wang2025} accentueren dat tijdelijke samenhang een cruciale rol speelt in deep learning-toepassingen voor voorspellende onderhoud.
+\newpage
 
-\paragraph{Herindexeren van de dataset}
-Na het filteren en opschonen van de dataset werd deze opnieuw geïndexeerd, waardoor de gegevensstructuur weer consistent en opeenvolgend werd. Dit vergemakkelijkt toekomstige analyses en voorkomt problemen tijdens modeltraining of visualisatieprocessen.
+Bovendien zijn er diverse kolommen verwijderd die geen waarde toevoegden aan de verdere analyse. Het betrof onder andere GPS-gerelateerde data, zoals de locatiedata en in verdere excel-bestanden ook nog een aantal administratieve velden die niet van belang waren voor het creëren van een model voor het detecteren van anomalieën.
 
-\paragraph{Conclusie}
-Preprocessing is geen extra stap, maar een essentieel aspect van AI-projecten in de industrie \autocite{Elahi2023}. Het onderzoek van \textcite{Mahale2025} beklemtoont eveneens het belang van een juiste datavoorbereiding om betrouwbare voorspellend onderhoudsmodellen te creëren en onjuiste voorspellingen te vermijden.
+\begin{listing}[H]
+\begin{minted}{python}
+df_spt_1 = df_spt_1.drop(columns=["Locatie", "Longitude"], errors="ignore")
+\end{minted}
+\caption[Droppen onnodige kolommen tractordata]{Regel code om onnodige kolommen te verwijderen.}
+\end{listing}
+
+
+%Na het combineren van de diverse databestanden vond er een grondige preprocessingfase plaats. Industriële datasets vertonen vaak ruis, onduidelijke waarden, onduidelijke registratie of ongeldige meetwaarden. Onduidelijke tijdreeksgegevens vormen één van de grootste obstakels bij het opsporen van onregelmatigheden en het onderhouden van voorspellende gegevens, omdat onjuiste of inconsistente informatie de betrouwbaarheid van analyses en modellen aanzienlijk kan schaden \autocite{Dissem2024}. De studie van \textcite{Carvalho2019} beklemtoont eveneens dat de kwaliteit van data essentieel is voor machine learning-projecten en dat een aanzienlijk deel van de problemen met voorspellend onderhoudsprocessen ontstaat tijdens de voorbereidende verwerking van gegevens.
+
+%In deze fase zijn er verschillende stappen ondernomen om de dataset te standaardiseren en voorbereid te maken op verdere analyse en modelontwikkeling.
+
+%\paragraph{Verwijdering van lege waarden}
+%Eerst werden records die geen bruikbare meetwaarden bevatten, verwijderd of behandeld. Ontbrekende waarden kunnen resulteren in onjuiste analyses, onduidelijke statistieken en onzekere modeltraining. Volgens de studies van \textcite{Li2025} en \textcite{Dissem2024} is het cruciaal om missing values nauwkeurig te behandelen in tijdreeksanalyse en machine learning, omdat veel algoritmen niet in staat zijn om onvolledige inputgegevens te verwerken.
+
+%\paragraph{Verwijdering van dubbele records}
+%Bovendien zijn er dubbele records ontdekt en verwijderd. Duplicaten van deze aard kunnen ontstaan door exporten, synchronisatieproblemen of een overlap tussen bestanden. Als dubbele registraties niet worden verwijderd, kunnen analyses vertekend worden en kunnen modellen onjuiste patronen opmerken. Het onderzoek van \textcite{Carvalho2019} geven aan dat onjuiste of tegenstrijdige gegevens een nadelige impact hebben op de prestaties van voorspellend onderhoudsmodellen.
+
+%\paragraph{Verbeteren datumnotaties}
+%De tijdstempels werden daarna omgezet naar een consistent datetime-formaat. Dit laat toe om de gegevens juist chronologisch te ordenen en later methoden zoals filtering, herhaling en tijdsgebaseerde analyses toe te passen. Volgens de studie van \textcite{Xue2025} zijn juiste tijdsstructuren cruciaal voor voorspellend onderhoud, omdat machinegedrag meestal wordt beoordeeld als een proces van tijdsreeksen.
+
+%\paragraph{Numeriek converteren van de meetwaarden}
+%Aanvankelijk was een aantal sensorgegevens opgeslagen in een tekstformaat. Deze waarden werden omgezet in numerieke datatypes, zodat mathematische berekeningen, statistische analyses en machine learning-processen op de juiste manier konden plaatsvinden. Het onderzoek van \textcite{Nayak2024} stellen dat betrouwbare feature-analyse een consistente numerieke weergave van sensorgegevens vereist.
+
+%\paragraph{Chronologisch sorteren van de data}
+%Vervolgens werden alle records chronologisch ingedeeld op basis van hun tijdstempel. Deze fase is cruciaal voor time series-analyse en modellen die op sequence zijn gebaseerd, zoals LSTM-netwerken, omdat deze modellen afhankelijk zijn van de juiste volgorde van achtereenvolgende observaties. De studies van \textcite{Li2025} en \textcite{Wang2025} accentueren dat tijdelijke samenhang een cruciale rol speelt in deep learning-toepassingen voor voorspellende onderhoud.
+
+%\paragraph{Herindexeren van de dataset}
+%Na het filteren en opschonen van de dataset werd deze opnieuw geïndexeerd, waardoor de gegevensstructuur weer consistent en opeenvolgend werd. Dit vergemakkelijkt toekomstige analyses en voorkomt problemen tijdens modeltraining of visualisatieprocessen.
+
+%\paragraph{Conclusie}
+%Preprocessing is geen extra stap, maar een essentieel aspect van AI-projecten in de industrie \autocite{Elahi2023}. Het onderzoek van \textcite{Mahale2025} beklemtoont eveneens het belang van een juiste datavoorbereiding om betrouwbare voorspellend onderhoudsmodellen te creëren en onjuiste voorspellingen te vermijden.
 
 \newpage
 
