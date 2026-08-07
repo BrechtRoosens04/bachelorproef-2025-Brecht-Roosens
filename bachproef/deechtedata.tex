@@ -248,6 +248,7 @@ Naast de gegevens van de sensor zijn ook de tijdstempel en de draaiuren van de m
 Na het ontvangen van de telematicadata werd duidelijk dat de dataset niet uit één centraal databestand bestond, maar uit twaalf afzonderlijke excel-bestanden. Zes bestanden waren gerelateerd aan september, terwijl zes bestanden zich richtten op oktober. Elk bestand bevatte een gedeelte van de sensordata van de tractor die beschikbaar was. Om de data gereed te maken voor verdere analyse, werd elk bestand eerst afzonderlijk bekeken en gestandaardiseerd. Vervolgens werden de bestanden samengevoegd tot een uniforme dataset.
 
 \paragraph{Het verwijderen van de afzonderlijke databestanden}
+
 De eerste fase omvatte het afzonderlijk verwerken van elk excel-bestand met de Python-bibliotheek pandas. De bestanden hadden een soortgelijke opbouw, maar moesten eerst worden gestandaardiseerd om later probleemloos te kunnen worden samengevoegd.
 
 Aanvankelijk werd de index van elk bestand herzien met reset\_index(), waardoor de records een opeenvolgende nummering kregen. Daarna werden de kolomnamen gewijzigd in consistente en goed leesbare namen. Alle bestanden maakten gebruik van identieke kolomnamen, wat essentieel was voor de verdere verwerking.
@@ -279,6 +280,79 @@ df_spt_1 = df_spt_1.drop(columns=["Locatie", "Longitude"], errors="ignore")
 \caption[Droppen onnodige kolommen tractordata]{Regel code om onnodige kolommen te verwijderen.}
 \end{listing}
 
+Uiteindelijk zijn alle sensorkolommen gecontroleerd op hun type data. Oorspronkelijk werden diverse meetwaarden als tekst vastgelegd, waardoor ze werden omgezet naar numerieke waarden. Dit stelde statistische berekeningen, visualisaties en machine learning-algoritmen in staat om de data op de juiste manier te verwerken. Na het voltooien van deze stappen werden alle records chronologisch ingedeeld op basis van de tijdstempel.
+
+\begin{listing}[H]
+\begin{minted}{python}
+cols = [
+"Draai-uren motor",
+"Druk transmissieolie",
+"Koelvloeistoftemperatuur motor",
+"Motorbelasting",
+"Motortoerental",
+"Rijsnelheid"
+]
+
+df_spt_1[cols] = df_spt_1[cols].apply(pd.to_numeric, errors="coerce")
+\end{minted}
+\caption[Numeriek maken tractordata]{Regels code om de kolommen numeriek te maken in de dataset.}
+\end{listing}
+
+\newpage
+
+\paragraph{Het samenvoegen van de datasets}
+
+Na het afzonderlijk opschonen van alle twaalf bestanden, werden de datasets van september en oktober samengevoegd. Eerst werden de relevante bestanden van beide maanden samengevoegd met behulp van pd.concat(). Dit resulteerde in zes grotere datasets die elk één groep sensordata bevatten gedurende de totale meetperiode van ongeveer twee maanden.
+
+Na de samenvoeging werden deze datasets opnieuw chronologisch ingedeeld, zodat alle meetwaarden in de juiste volgorde waren.
+
+\begin{listing}[H]
+\begin{minted}{python}
+df1_all = pd.concat([df_spt_1, df_okt_1])
+df2_all = pd.concat([df_spt_2, df_okt_2])
+df3_all = pd.concat([df_spt_3, df_okt_3])
+df4_all = pd.concat([df_spt_4, df_okt_4])
+df5_all = pd.concat([df_spt_5, df_okt_5])
+df6_all = pd.concat([df_spt_6, df_okt_6])
+
+df1_all = df1_all.sort_values("Tijdstempel")
+df2_all = df2_all.sort_values("Tijdstempel")
+df3_all = df3_all.sort_values("Tijdstempel")
+df4_all = df4_all.sort_values("Tijdstempel")
+df5_all = df5_all.sort_values("Tijdstempel")
+df6_all = df6_all.sort_values("Tijdstempel")
+\end{minted}
+\caption[samenvoegen en sorteren tractordata]{Regels code om de datasets samen te voegen en te sorteren.}
+\end{listing}
+
+\newpage
+
+\paragraph{Het samenvoegen van de uiteindelijke tractordataset}
+
+De zes samengevoegde datasets bevatten diverse sensordata die niet altijd op hetzelfde moment zijn vastgelegd. Om die reden werd de functie merge\_asof() uit de bibliotheek pandas toegepast. Deze functie verbindt steeds de meting waarvan de tijdstempel het dichtst bij de tijdstempel van de andere dataset komt.
+
+Deze techniek maakte het mogelijk om de diverse sensorgroepen nauwkeurig te combineren tot één centrale analysetabel, zonder dat de tijdstempels volledig identiek waren. De merge\_asof()-functie werd meerdere keren gebruikt totdat alle sensordata in één definitieve dataset waren samengevoegd.
+
+\begin{listing}[H]
+\begin{minted}{python}
+df_all = df1_all.sort_values("Tijdstempel")   
+    
+df_all = pd.merge_asof(df_all, df2_all.sort_values("Tijdstempel"), on="Tijdstempel")
+df_all = pd.merge_asof(df_all, df3_all.sort_values("Tijdstempel"), on="Tijdstempel")
+df_all = pd.merge_asof(df_all, df4_all.sort_values("Tijdstempel"), on="Tijdstempel")
+df_all = pd.merge_asof(df_all, df5_all.sort_values("Tijdstempel"), on="Tijdstempel")
+df_all = pd.merge_asof(df_all, df6_all.sort_values("Tijdstempel"), on="Tijdstempel")
+\end{minted}
+\caption[samenvoegen uiteindelijke tractordataset]{Regels code om de datasets samen te voegen tot de uiteindelijke tractordataset.}
+\end{listing}
+
+\paragraph{Controle van de uiteindelijke dataset}
+
+Na de samenvoeging werd de uiteindelijke dataset nog gecontroleerd op de juiste structuur. Er werd onderzocht of de tijdstempels correct waren omgezet, of de records chronologisch waren geordend en of alle sensorkolommen het juiste type data bezaten. Bovendien werd onderzocht of de samenvoeging correct was verlopen en of de uiteindelijke dataset geschikt was voor verdere visualisatie en modellering.
+
+Doordat de data afkomstig was uit een werkelijke industriële omgeving, bleven bepaalde ontbrekende waarden bestaan. Deze werden niet vanzelf verwijderd, omdat ze het daadwerkelijke gedrag van de tractor weergaven en bepaalde sensoren niet voortdurend metingen vastlegden. Indien nodig werden deze ontbrekende waarden later tijdens de analyse afzonderlijk besproken.
+
+Na de complete preprocessing werd er een uniforme tijdsreeksdataset gecreëerd waarin de sensordata van september en oktober chronologisch waren samengevoegd. Door de kolomnamen te standaardiseren, de datatypes te converteren, onnodige kolommen te verwijderen en de verschillende databestanden te combineren, is een uniforme dataset ontstaan die geschikt was voor de visualisaties, trendanalyses en anomaliedetectie-modellen die in de komende hoofdstukken worden behandeld.
 
 %Na het combineren van de diverse databestanden vond er een grondige preprocessingfase plaats. Industriële datasets vertonen vaak ruis, onduidelijke waarden, onduidelijke registratie of ongeldige meetwaarden. Onduidelijke tijdreeksgegevens vormen één van de grootste obstakels bij het opsporen van onregelmatigheden en het onderhouden van voorspellende gegevens, omdat onjuiste of inconsistente informatie de betrouwbaarheid van analyses en modellen aanzienlijk kan schaden \autocite{Dissem2024}. De studie van \textcite{Carvalho2019} beklemtoont eveneens dat de kwaliteit van data essentieel is voor machine learning-projecten en dat een aanzienlijk deel van de problemen met voorspellend onderhoudsprocessen ontstaat tijdens de voorbereidende verwerking van gegevens.
 
@@ -305,62 +379,129 @@ df_spt_1 = df_spt_1.drop(columns=["Locatie", "Longitude"], errors="ignore")
 %\paragraph{Conclusie}
 %Preprocessing is geen extra stap, maar een essentieel aspect van AI-projecten in de industrie \autocite{Elahi2023}. Het onderzoek van \textcite{Mahale2025} beklemtoont eveneens het belang van een juiste datavoorbereiding om betrouwbare voorspellend onderhoudsmodellen te creëren en onjuiste voorspellingen te vermijden.
 
-\newpage
-
 \section{\IfLanguageName{dutch}{Uitdagingen bij het bekomen dataset}{Challenges with the obtained dataset}}%
 \label{sec: uitdagingen bij het bekomen dataset}
 
-Hoewel de verzamelde dataset nuttige informatie biedt over de werking en staat van de tractor, waren er ook diverse beperkingen die de analyse en de ontwikkeling van het model beïnvloeden. Volgens het onderzoek van \textcite{Elahi2023} en \textcite{Mahale2025} zijn de beperkingen vaak aanwezig in industriële voorspellend onderhoudstoepassingen, vooral wanneer er gebruikt wordt gemaakt van real-world sensorgegevens uit operationele machines.
+Hoewel de verzamelde telematicadata een nauwkeurig overzicht bieden van het gedrag van de tractor tijdens gebruikelijke werkzaamheden, zijn er ook enkele beperkingen aanwezig die de verdere analyse en de ontwikkeling van het anomaliedet\-ectie-model beïnvloeden. Deze beperkingen zijn volgens de studies van \textcite{Elahi2023} en \textcite{Mahale2025} kenmerkend voor industriële datasets in de praktijk en worden eveneens in de literatuur toegelicht.
+
+%Hoewel de verzamelde dataset nuttige informatie biedt over de werking en staat van de tractor, waren er ook diverse beperkingen die de analyse en de ontwikkeling van het model beïnvloeden. Volgens het onderzoek van \textcite{Elahi2023} en \textcite{Mahale2025} zijn de beperkingen vaak aanwezig in industriële voorspellend onderhoudstoepassingen, vooral wanneer er gebruikt wordt gemaakt van real-world sensorgegevens uit operationele machines.
 
 \paragraph{Geen gelabelde defecten in de data}
-De voornaamste beperking van de dataset is het gebrek aan duidelijke fout- of onderhoudslabels. Tijdens de beschikbare tijd van ongeveer twee maanden heeft de tractor nog geen onderhoud gehad en werden er geen duidelijke defecten vastgelegd. Hierdoor waren er geen bevestigde labels beschikbaar, zoals:
 
-\begin{itemize}
-    \item Storing transmissie
-    
-    \item Onderhoud uitgevoerd
-    
-    \item Sensorfout bevestigd
-    
-    \item Motorprobleem vastgelegd
- \end{itemize}
-    
-Dit maakt het moeilijker om supervised learning-methoden toe te passen, omdat deze modellen gebaseerd zijn op gelabelde voorbeelden van zowel normale als foutieve situaties. Het ontbreken van labels is één van de meest voorkomende problemen in industriële voorspellend onderhoudsprojecten \autocite{Giannoulidis2024}. De studie van \textcite{Aggarwal2025} accentueert eveneens dat veel industriële datasets slechts een beperkte of helemaal geen foutmarkeringen bevatten, wat vaak leidt tot de noodzaak van anomaly detection en onzichtbare technieken.
+De voornaamste beperking van de verzamelde dataset is het gebrek aan gelabelde defecten of onderhoudsmomenten. De beschikbare data omvat een periode van ongeveer twee maanden waarin de tractor doorgaans werd ingezet. In deze periode zijn er geen storingen, defecten of onderhoudsmaatregelen vastgelegd.
 
-Binnen voorspellend onderhoud ontwikkelen defecten zich bovendien vaak geleidelijk, hierdoor worden storingen niet altijd expliciet geregistreerd in de beschikbare sensordata. Het onderzoek van \textcite{Carvalho2019} beklemtoont dat het verzamelen van betrouwbare labels binnen industriële omgevingen duur, tijdsintensief en operationeel complex kan zijn.
+Dit maakte het niet haalbaar om supervised learning toe te passen, omdat dergelijke modellen voorbeelden vereisen van zowel normale als defecte situaties. Er werd in plaats daarvan gekozen voor een aanpak voor anomaliedetectie, waarbij het model het gebruikelijke gedrag van de machine leert en probeert afwijkingen te identificeren. Volgens de onderzoeken van \textcite{Giannoulidis2024} en \textcite{Aggarwal2025} stellen dat het ontbreken van gelabelde defecten vaak voorkomt in industriële toepassingen van voorspellend onderhoud.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lcr}
+\toprule
+\textbf{Eigenschap} & \textbf{Private tractordataset}  \\
+\midrule
+        Periode                & Ongeveer twee maanden                         \\
+        Gelabelde defecten & Geen beschikbaar \\
+        Onderhoudsmomenten & Niet aangegeven \\
+        Gekozen aanpak & Anomliedetectie \\
+\bottomrule
+\end{tabular}
+\caption[Tabel samenvatting tractordataset]{\label{tab:tabel samenvatting tractordataset}Een samenvatting over de eigenschappen van de verkregen tractordataset.}
+\end{table}
+
+
+%De voornaamste beperking van de dataset is het gebrek aan duidelijke fout- of onderhoudslabels. Tijdens de beschikbare tijd van ongeveer twee maanden heeft de tractor nog geen onderhoud gehad en werden er geen duidelijke defecten vastgelegd. Hierdoor waren er geen bevestigde labels beschikbaar, zoals:
+
+%\begin{itemize}
+    %\item Storing transmissie
+    
+    %\item Onderhoud uitgevoerd
+    
+    %\item Sensorfout bevestigd
+    
+    %\item Motorprobleem vastgelegd
+ %\end{itemize}
+    
+%Dit maakt het moeilijker om supervised learning-methoden toe te passen, omdat deze modellen gebaseerd zijn op gelabelde voorbeelden van zowel normale als foutieve situaties. Het ontbreken van labels is één van de meest voorkomende problemen in industriële voorspellend onderhoudsprojecten \autocite{Giannoulidis2024}. De studie van \textcite{Aggarwal2025} accentueert eveneens dat veel industriële datasets slechts een beperkte of helemaal geen foutmarkeringen bevatten, wat vaak leidt tot de noodzaak van anomaly detection en onzichtbare technieken.
+
+%Binnen voorspellend onderhoud ontwikkelen defecten zich bovendien vaak geleidelijk, hierdoor worden storingen niet altijd expliciet geregistreerd in de beschikbare sensordata. Het onderzoek van \textcite{Carvalho2019} beklemtoont dat het verzamelen van betrouwbare labels binnen industriële omgevingen duur, tijdsintensief en operationeel complex kan zijn.
 
 \paragraph{Beperkte historiek}
-Een andere belangrijke obstakel is de korte historische levensduur van de dataset. De sensorgegevens die beschikbaar zijn, duren slechts ongeveer twee maanden. Voor betrouwbare degradatieanalyse en het identificeren van langetermijnpatronen zijn meestal uitgebreidere historische periodes vereist. Het onderzoek van \textcite{Xue2025} beklemtoont dat uitgebreide tijdsreeksen cruciaal zijn voor voorspellend onderhoud, aangezien defecten en slijtageprocessen vaak geleidelijk zich over langere tijdsperiodes ontwikkelen. De studie van \textcite{Mahfoud2025} accentueert eveneens dat het tekort aan historische gegevens het lastiger maakt om robuuste machine learning-modellen te ontwikkelen en om betrouwbare voorspellingen te maken in dynamische industriële omstandigheden.
+
+Een andere beperking is de relatief korte duur van de meetprocedure. De telematicadata die beschikbaar zijn, duren ongeveer twee maanden, waardoor alleen het gebruik van de tractor gedurende deze tijd kon worden onderzocht. Hierdoor was het niet mogelijk om langetermijnpatronen, seizoensinvloeden of de geleidelijke ontwikkeling van slijtage te onderzoeken. Volgens de onderzoeken van \textcite{Xue2025} en \textcite{Mahfoud2025} is het verstandig om langere historische tijdsreeksen te gebruiken om degradatieprocessen beter te analyseren en om betrouwbaardere voorspellingen te doen.
+
+%Een andere belangrijke obstakel is de korte historische levensduur van de dataset. De sensorgegevens die beschikbaar zijn, duren slechts ongeveer twee maanden. Voor betrouwbare degradatieanalyse en het identificeren van langetermijnpatronen zijn meestal uitgebreidere historische periodes vereist. Het onderzoek van \textcite{Xue2025} beklemtoont dat uitgebreide tijdsreeksen cruciaal zijn voor voorspellend onderhoud, aangezien defecten en slijtageprocessen vaak geleidelijk zich over langere tijdsperiodes ontwikkelen. De studie van \textcite{Mahfoud2025} accentueert eveneens dat het tekort aan historische gegevens het lastiger maakt om robuuste machine learning-modellen te ontwikkelen en om betrouwbare voorspellingen te maken in dynamische industriële omstandigheden.
 
 \paragraph{Variabele werkomstandigheden}
-Bovendien opereert de tractor niet in een gecontroleerde fabriek, maar in een dynamische buitenomgeving waarin de werkomstandigheden voortdurend evolueren. Afhankelijk van de uitgevoerde werkzaamheden kunnen elementen zoals belasting, snelheid, terreinomstandigheden, weersomstandigheden en de intensiteit van het gebruik aanzienlijk verschillen. Dergelijke variabele  operationele omstandigheden vormen een aanzienlijke uitdaging voor voorspellend onderhoud, omdat gebruikspatronen vaak aanzienlijk kunnen variëren \autocite{Mahale2025, Chen2025}. Dit maakt het lastiger om te onderscheiden tussen normaal zwaar gebruik en daadwerkelijk afwijkend of defect gedrag. Het onderzoek van \textcite{Lu2026} beklemtoont eveneens dat industriële sensordata vaak ingewikkelde en niet-lineaire patronen bevatten als gevolg van veranderende operationele omstandigheden. Dit vereist het gebruik van flexibele en data-gedreven analysemethoden om betrouwbare detectie van afwijkingen te realiseren.
+
+De tractor werd ingezet in een werkelijke omgeving in plaats van  een gecontroleerde testsetting. Parameters zoals motorbelasting, motortoerental, snelheid en brandstofverbruik fluctueren voortdurend afhankelijk van de uitgevoerde werkzaamheden.
+
+Deze verschillen maken het lastig om te onderscheiden tussen normaal zwaar gebruik en daadwerkelijk afwijkend gedrag. Een hoge motorbelasting of een verhoogde temperatuur is niet altijd een teken van een defect, maar het kan ook het resultaat zijn van intensieve werkzaamheden. Volgens de onderzoeken van \textcite{Chen2025} en \textcite{Lu2026} zijn deze variabele werkomstandigheden één van de voornaamste obstakels bij het gebruik van anomaliedetectie op industriële sensorgegevens.
+
+De verzamelde dataset is, ondanks deze beperkingen, een belangrijke bron van echte sensordata. De gebrek aan gelabelde defecten en de beperkte historische data maakten een supervised methode niet haalbaar, maar stelden de dataset wel in staat om anomaliedetectie-technieken te beoordelen. Met de MetroPT-3-dataset werd het mogelijk om aan de ene kant modellen te creëren op gelabelde data en aan de andere kant de toepasbaarheid ervan te analyseren op realistische telematicadata uit de bouwsector.
+
+%Bovendien opereert de tractor niet in een gecontroleerde fabriek, maar in een dynamische buitenomgeving waarin de werkomstandigheden voortdurend evolueren. Afhankelijk van de uitgevoerde werkzaamheden kunnen elementen zoals belasting, snelheid, terreinomstandigheden, weersomstandigheden en de intensiteit van het gebruik aanzienlijk verschillen. Dergelijke variabele  operationele omstandigheden vormen een aanzienlijke uitdaging voor voorspellend onderhoud, omdat gebruikspatronen vaak aanzienlijk kunnen variëren \autocite{Mahale2025, Chen2025}. Dit maakt het lastiger om te onderscheiden tussen normaal zwaar gebruik en daadwerkelijk afwijkend of defect gedrag. Het onderzoek van \textcite{Lu2026} beklemtoont eveneens dat industriële sensordata vaak ingewikkelde en niet-lineaire patronen bevatten als gevolg van veranderende operationele omstandigheden. Dit vereist het gebruik van flexibele en data-gedreven analysemethoden om betrouwbare detectie van afwijkingen te realiseren.
 
 \section{\IfLanguageName{dutch}{Meerwaarde van de bekomen dataset}{Added value of the obtained dataset}}%
 \label{sec: meerwaarde van de bekomen dataset}
 
-Hoewel er beperkingen zijn, blijft de verzamelde dataset uiterst waardevol voor dit onderzoek. Real-time sensorgegevens van operationele machines geven waardevolle inzichten in het efficiënte gedrag, het gebruik en de variaties van industriële systemen. Volgens de onderzoeken van \textcite{Elahi2023} en \textcite{Mahale2025} bieden dergelijke praktijkdatasets een essentiële fundament voor voorspellend onderhoud op basis van gegevens, zelfs wanneer er geen duidelijke foutlabels beschikbaar zijn.
+Hoewel de ontvangen tractordataset enkele beperkingen vertoont, zoals het gebrek aan gelabelde defecten en een relatief korte historische periode, is ze een belangrijke bron voor dit onderzoek. De dataset omvat werkelijke telematicadata die automatisch werden vastgelegd tijdens de gebruikelijke werking van de tractor. Dit maakt het mogelijk om het gebruikelijke gedrag van de machine te onderzoeken onder verschillende operationele omstandigheden.
 
-De dataset maakt het onder andere mogelijk om normaal machinegedrag te simuleren en de gebruikelijke operationele patronen van de tractor te onderzoeken. Door de voortdurende registratie van sensorgegevens is het mogelijk om stationaire en actieve werkperiodes van elkaar te onderscheiden, evenals fluctuaties in motorbelasting, temperatuur en druk onder diverse gebruiksomstandigheden. De studies van \textcite{Chen2025} en \textcite{Xue2025} accentueren dat deze operationele patronen cruciaal zijn voor het doorgronden van machinegedrag en het opsporen van afwijkingen binnen bepaalde tijdsperiodes.
+Deze dataset toont in tegenstelling tot gesimuleerde datasets, de werkelijkheid weer, waarbij elementen zoals motorbelasting, snelheid, stationair draaien en variabele werkomstandigheden de sensormetingen beïnvloeden. Dit maakt het mogelijk om te controleren hoe diverse sensoren zich gedragen tijdens het gebruik van de machine en welke patronen hierbij voorkomen.
 
-De dataset stelt bovendien in staat om trends en evoluties in parameters zoals de temperatuur van koelvloeistof, motorbelasting, transmissiedruk en brandstofverbruik te onderzoeken. Volgens de onderzoeken van \textcite{Touil2025} en \textcite{Nayak2024} zijn veranderingen in deze sensorgegevens cruciale aanwijzingen voor slijtage, overbelasting of aanvankelijke defecten.
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{Grafiek_motortoerental_over_de_tijd.png}
+\caption[Grafiek van de motortoerental over de tijd.]{\label{fig:Grafiek_motortoerental_tijd}De ontwikkeling van de motortoerental gedurende de meetperiode. De variatie laat zien dat de tractor onder uiteenlopende bedrijfsomstandigheden werd ingezet, waardoor de dataset geschikt is voor het onderzoeken van normaal machinegedrag. Bron: Eigen verwerking van de verzamelde telematicagegevens.}
+\end{figure} 
 
-Hoewel er geen duidelijke foutlabels zijn, is het nog steeds mogelijk om anomalieën te detecteren met behulp van unsupervised learning-methoden. Unsupervised technieken zijn zeer geschikt voor industriële omgevingen waar alleen normaal machinegedrag aanwezig is \autocite{Giannoulidis2024, Aggarwal2025}. Deze methoden streven ernaar afwijkende patronen automatisch te herkennen, zonder dat er vooraf gelabelde foutgevallen nodig zijn.
+De dataset maakt het mogelijk om trends en de interacties tussen sensordata te onderzoeken. Op deze manier kunnen temperatuur-, druk- en motorbelastingswaarden gedurende een langere periode worden gevolgd en met elkaar worden vergeleken. Deze data is essentieel voor het opsporen van afwijkend gedrag, omdat defecten doorgaans langzaam ontstaan en zich eerst manifesteren in kleine veranderingen in deze parameters.
 
-Een extra voordeel van de dataset is de optie om de eigen sensorgegevens te vergelijken met openbare datasets voor voorspellend onderhoud. Het combineren van eigen industriële gegevens met openbare datasets kan zeer nuttig zijn wanneer lokale storingsdata beperkt toegankelijk is \autocite{Veloso2022}. Publieke datasets laten het toe om aanvullende analyses te doen, modellen te vergelijken en methodologieën te verifiëren binnen een bredere context van onderzoek.
-
-\section{\IfLanguageName{dutch}{Connectie met het verdere vervolg van het onderzoek}{Connection to the next phase of the research}}%
-\label{sec: Connectie met het verdere vervolg van het onderzoek}
-
-In deze bachelorproef diende de verzamelde dataset als fundament voor diverse andere onderzoeksstappen. De gegevens werden ingezet voor verkennende data-analyse, het tonen van trends en het analyseren van patronen in de sensorgegevens. Bovendien diende de dataset als basis voor de vergelijking met de publieke MetroPT-3 dataset, die later in het onderzoek werd toegepast voor supervised voorspellend onderhoudstoepassingen. De MetroPT-dataset is een belangrijke referentiedataset voor voorspellend onderhoud en het opsporen van onregelmatigheden binnen industriële tijdsreeksen \autocite{Veloso2022}. Door beide datasets naast elkaar te leggen, ontstaat een duidelijker beeld van de verschillen tussen real-world sensordata zonder label en openbare datasets met vastgelegde fouten.
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{Grafiek_motorolietemperatuur_over_de_tijd.png}
+\caption[Grafiek van de motorolietemperatuur over de tijd.]{\label{fig:Grafiek_motorolietemperatuur_tijd}De temperatuur van de motorolie gedurende de meetperiode. De temperatuur heeft een nauwkeurig patroon, waarbij bij de motor tijdens het gebruik opwarmt en vervolgens afkoelt wanneer de tractor niet in gebruik is. Bron: Eigen verwerking van de verzamelde telematicagegevens.}
+\end{figure}
 
 \newpage
+
+Bovendien biedt de dataset genoeg variatie om te onderscheiden tussen diverse gebruiksomstandigheden van de tractor. Door parameters zoals het motortoerental, de rijsnelheid, de motorbelasting en de afgeleide variabele is\_idle kan worden bepaald of de tractor actief was of stationair functioneerde. Deze gegevens zijn essentieel voor het interpreteren van de sensordata en bieden een waardevolle basis voor aanvullende analyse.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{Grafiek_is_idle.png}
+\caption[Staafdiagram over de parameter is\_idle.]{\label{fig:Staafdiagram_is_idle}Een voorbeeld van zowel actieve als stationaire periodes in de tractordataset. Het verschil tussen de twee toestanden helpt bij het interpreteren van de sensormetingen tijdens de verdere analyse. Bron: Eigen verwerking van de verzamelde telematicagegevens.}
+\end{figure}
+
+Hoewel de dataset geen duidelijke defectlabels bevat, blijft deze geschikt voor het opsporen van onregelmatigheden. Unsupervised machine learning-technieken leren het gebruikelijke gedrag van een machine kennen en herkennen daarna signalen die hiervan afwijken. Dit maakt het mogelijk om de dataset in te zetten om de toepasbaarheid van deze technieken in een echte praktijk te evalueren.
+
+Uiteindelijk is de private tractordataset een belangrijke toevoeging aan de publieke MetroPT-3-dataset gemarkeerde fouten bevat en geschikt is voor het ontwikkelen en evalueren van modellen, maakt de tractordataset het mogelijk om te onderzoeken in hoeverre dezelfde methodiek ook van toepassing is op werkelijke industriële telematicadata. Dit onderzoek verenigt de voordelen van een openbare referentiedataset met de praktische waarde van daadwerkelijke sensordata uit de bouwsector.
+
+%Hoewel er beperkingen zijn, blijft de verzamelde dataset uiterst waardevol voor dit onderzoek. Real-time sensorgegevens van operationele machines geven waardevolle inzichten in het efficiënte gedrag, het gebruik en de variaties van industriële systemen. Volgens de onderzoeken van \textcite{Elahi2023} en \textcite{Mahale2025} bieden dergelijke praktijkdatasets een essentiële fundament voor voorspellend onderhoud op basis van gegevens, zelfs wanneer er geen duidelijke foutlabels beschikbaar zijn.
+
+%De dataset maakt het onder andere mogelijk om normaal machinegedrag te simuleren en de gebruikelijke operationele patronen van de tractor te onderzoeken. Door de voortdurende registratie van sensorgegevens is het mogelijk om stationaire en actieve werkperiodes van elkaar te onderscheiden, evenals fluctuaties in motorbelasting, temperatuur en druk onder diverse gebruiksomstandigheden. De studies van \textcite{Chen2025} en \textcite{Xue2025} accentueren dat deze operationele patronen cruciaal zijn voor het doorgronden van machinegedrag en het opsporen van afwijkingen binnen bepaalde tijdsperiodes.
+
+%De dataset stelt bovendien in staat om trends en evoluties in parameters zoals de temperatuur van koelvloeistof, motorbelasting, transmissiedruk en brandstofverbruik te onderzoeken. Volgens de onderzoeken van \textcite{Touil2025} en \textcite{Nayak2024} zijn veranderingen in deze sensorgegevens cruciale aanwijzingen voor slijtage, overbelasting of aanvankelijke defecten.
+
+%Hoewel er geen duidelijke foutlabels zijn, is het nog steeds mogelijk om anomalieën te detecteren met behulp van unsupervised learning-methoden. Unsupervised technieken zijn zeer geschikt voor industriële omgevingen waar alleen normaal machinegedrag aanwezig is \autocite{Giannoulidis2024, Aggarwal2025}. Deze methoden streven ernaar afwijkende patronen automatisch te herkennen, zonder dat er vooraf gelabelde foutgevallen nodig zijn.
+
+%Een extra voordeel van de dataset is de optie om de eigen sensorgegevens te vergelijken met openbare datasets voor voorspellend onderhoud. Het combineren van eigen industriële gegevens met openbare datasets kan zeer nuttig zijn wanneer lokale storingsdata beperkt toegankelijk is \autocite{Veloso2022}. Publieke datasets laten het toe om aanvullende analyses te doen, modellen te vergelijken en methodologieën te verifiëren binnen een bredere context van onderzoek.
+
+%\section{\IfLanguageName{dutch}{Connectie met het verdere vervolg van het onderzoek}{Connection to the next phase of the research}}%
+%\label{sec: Connectie met het verdere vervolg van het onderzoek}
+
+%In deze bachelorproef diende de verzamelde dataset als fundament voor diverse andere onderzoeksstappen. De gegevens werden ingezet voor verkennende data-analyse, het tonen van trends en het analyseren van patronen in de sensorgegevens. Bovendien diende de dataset als basis voor de vergelijking met de publieke MetroPT-3 dataset, die later in het onderzoek werd toegepast voor supervised voorspellend onderhoudstoepassingen. De MetroPT-dataset is een belangrijke referentiedataset voor voorspellend onderhoud en het opsporen van onregelmatigheden binnen industriële tijdsreeksen \autocite{Veloso2022}. Door beide datasets naast elkaar te leggen, ontstaat een duidelijker beeld van de verschillen tussen real-world sensordata zonder label en openbare datasets met vastgelegde fouten.
 
 \section{\IfLanguageName{dutch}{Besluit}{Conclusion}}%
 \label{sec: Besluit}
 
-De verzamelde tractorgegevens bieden een solide en realistische fundament voor deze bachelorproef. Door telematicagegevens van een tractor in de grondverzet en transport werd er gebruikgemaakt van daadwerkelijke industriële sensorgegevens in plaats van alleen theoretische of volledig gesimuleerde voorbeelden. De onderzoeken van \textcite{Elahi2023} en \textcite{Mahale2025} stellen dat het inzetten van real-world industriële gegevens zeer nuttig is voor voorspellend onderhoudsonderzoek, omdat deze datasets de ingewikkeldheid en variaties van operationele omgevingen beter weergeven dan gesimuleerde testdata.
+In dit hoofdstuk werd de private tractordataset toegelicht, die als praktijkdataset werd ingezet tijdens deze bachelorproef. Eerst werd de oorsprong van de data uitgelegd, waarna de opbouw van de dataset, de gekozen parameters en de uitgevoerde preprocessing werden behandeld. Door de diverse databestanden te combineren en te verwijderen, werd er een uniforme tijdsreeksdataset gecreëerd die geschikt was voor verdere analyse.
 
-Na het combineren, ordenen en verwijderen van verschillende databestanden is er een nuttige centrale dataset ontstaan met belangrijke parameters zoals temperatuur, druk, motorbelasting, motortoerental en brandstofverbruik. De studies van \textcite{Carvalho2019}, \textcite{Nayak2024} en \textcite{Li2025} benadrukken dat deze sensorgegevens vaak ingezet worden in toepassingen voor voorspellende onderhoudsprocessen om machinegedrag te analyseren en afwijkingen te identificeren.
+Hoewel de dataset geen gemarkeerde defecten bevat en slechts een beperkte historische periode van ongeveer twee maanden beslaat, geeft zij een realistisch inzicht in het operationele gedrag van een tractor tijdens de dagelijkse werkzaamheden. Dit stelde de dataset in staat om trends in sensordata te analyseren en de haalbaarheid van methoden voor anomaliedetectie in een realistische praktijksituatie te evalueren.
 
-Hoewel er geen duidelijke defectlabels waren, levert de dataset toch waardevolle inzichten op over normaal machinegedrag en operationele patronen van de  tractor. Unsupervised learning- en anomaly detection-methoden zijn in staat om ook zonder foutlabels belangrijke afwijkingen te herkennen binnen industriële tijdsreeksen \autocite{Giannoulidis2024, Aggarwal2025}. Dit maakt de dataset geschikt voor het bestuderen van afwijkend gedrag, trendanalyse en het opsporen van mogelijke afwijkingen. Bovendien is het krijgen van kwalitatieve industriële sensordata in voorspellend onderhoudsprocessen vaak één van de grootste obstakels \autocite{Veloso2022, Carvalho2019}. het verzamelen van werkelijke onderhouds- en storingsgegevens kan in veel situaties lastig zijn, door problemen met toegankelijkheid, privacy, eigendomrechten of het gebrek aan voldoende historische data. Volgens de studies van \textcite{Elahi2023}, \textcite{Carvalho2019} en \textcite{Giannoulidis2024} is een beperkte toegang tot kwalitatieve industriële gegevens één van de belangrijkste obstakels in het onderzoek naar voorspellend onderhoud. In deze context biedt de verzamelde dataset een aanzienlijke waarde voor het onderzoek en vergroot dat de praktisch waarde van deze bachelorproef aanzienlijk.
+De mix van echte telematicadata, een zorgvuldige preprocessing en belangrijke sensormetingen biedt een belangrijke sensormetingen biedt een belangrijke fundament voor de verdere ontwikkeling van deze bachelorproef. In de komende hoofdstukken worden deze data toegepast om de gekozen analysemethoden en modellen voor anomaliedetectie te beoordelen.
+
+%De verzamelde tractorgegevens bieden een solide en realistische fundament voor deze bachelorproef. Door telematicagegevens van een tractor in de grondverzet en transport werd er gebruikgemaakt van daadwerkelijke industriële sensorgegevens in plaats van alleen theoretische of volledig gesimuleerde voorbeelden. De onderzoeken van \textcite{Elahi2023} en \textcite{Mahale2025} stellen dat het inzetten van real-world industriële gegevens zeer nuttig is voor voorspellend onderhoudsonderzoek, omdat deze datasets de ingewikkeldheid en variaties van operationele omgevingen beter weergeven dan gesimuleerde testdata.
+
+%Na het combineren, ordenen en verwijderen van verschillende databestanden is er een nuttige centrale dataset ontstaan met belangrijke parameters zoals temperatuur, druk, motorbelasting, motortoerental en brandstofverbruik. De studies van \textcite{Carvalho2019}, \textcite{Nayak2024} en \textcite{Li2025} benadrukken dat deze sensorgegevens vaak ingezet worden in toepassingen voor voorspellende onderhoudsprocessen om machinegedrag te analyseren en afwijkingen te identificeren.
+
+%Hoewel er geen duidelijke defectlabels waren, levert de dataset toch waardevolle inzichten op over normaal machinegedrag en operationele patronen van de  tractor. Unsupervised learning- en anomaly detection-methoden zijn in staat om ook zonder foutlabels belangrijke afwijkingen te herkennen binnen industriële tijdsreeksen \autocite{Giannoulidis2024, Aggarwal2025}. Dit maakt de dataset geschikt voor het bestuderen van afwijkend gedrag, trendanalyse en het opsporen van mogelijke afwijkingen. Bovendien is het krijgen van kwalitatieve industriële sensordata in voorspellend onderhoudsprocessen vaak één van de grootste obstakels \autocite{Veloso2022, Carvalho2019}. het verzamelen van werkelijke onderhouds- en storingsgegevens kan in veel situaties lastig zijn, door problemen met toegankelijkheid, privacy, eigendomrechten of het gebrek aan voldoende historische data. Volgens de studies van \textcite{Elahi2023}, \textcite{Carvalho2019} en \textcite{Giannoulidis2024} is een beperkte toegang tot kwalitatieve industriële gegevens één van de belangrijkste obstakels in het onderzoek naar voorspellend onderhoud. In deze context biedt de verzamelde dataset een aanzienlijke waarde voor het onderzoek en vergroot dat de praktisch waarde van deze bachelorproef aanzienlijk.
 

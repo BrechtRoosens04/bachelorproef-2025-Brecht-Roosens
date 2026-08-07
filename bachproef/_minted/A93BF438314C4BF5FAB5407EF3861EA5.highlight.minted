@@ -1,0 +1,9 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{n}{df\PYGZus{}all} \PYG{o}{=} \PYG{n}{df1\PYGZus{}all}\PYG{o}{.}\PYG{n}{sort\PYGZus{}values}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Tijdstempel\PYGZdq{}}\PYG{p}{)}
+
+\PYG{n}{df\PYGZus{}all} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{merge\PYGZus{}asof}\PYG{p}{(}\PYG{n}{df\PYGZus{}all}\PYG{p}{,} \PYG{n}{df2\PYGZus{}all}\PYG{o}{.}\PYG{n}{sort\PYGZus{}values}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Tijdstempel\PYGZdq{}}\PYG{p}{),} \PYG{n}{on}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Tijdstempel\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{df\PYGZus{}all} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{merge\PYGZus{}asof}\PYG{p}{(}\PYG{n}{df\PYGZus{}all}\PYG{p}{,} \PYG{n}{df3\PYGZus{}all}\PYG{o}{.}\PYG{n}{sort\PYGZus{}values}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Tijdstempel\PYGZdq{}}\PYG{p}{),} \PYG{n}{on}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Tijdstempel\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{df\PYGZus{}all} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{merge\PYGZus{}asof}\PYG{p}{(}\PYG{n}{df\PYGZus{}all}\PYG{p}{,} \PYG{n}{df4\PYGZus{}all}\PYG{o}{.}\PYG{n}{sort\PYGZus{}values}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Tijdstempel\PYGZdq{}}\PYG{p}{),} \PYG{n}{on}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Tijdstempel\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{df\PYGZus{}all} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{merge\PYGZus{}asof}\PYG{p}{(}\PYG{n}{df\PYGZus{}all}\PYG{p}{,} \PYG{n}{df5\PYGZus{}all}\PYG{o}{.}\PYG{n}{sort\PYGZus{}values}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Tijdstempel\PYGZdq{}}\PYG{p}{),} \PYG{n}{on}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Tijdstempel\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{df\PYGZus{}all} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{merge\PYGZus{}asof}\PYG{p}{(}\PYG{n}{df\PYGZus{}all}\PYG{p}{,} \PYG{n}{df6\PYGZus{}all}\PYG{o}{.}\PYG{n}{sort\PYGZus{}values}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Tijdstempel\PYGZdq{}}\PYG{p}{),} \PYG{n}{on}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Tijdstempel\PYGZdq{}}\PYG{p}{)}
+\end{MintedVerbatim}

@@ -1,0 +1,15 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{n}{df1\PYGZus{}all} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{concat}\PYG{p}{([}\PYG{n}{df\PYGZus{}spt\PYGZus{}1}\PYG{p}{,} \PYG{n}{df\PYGZus{}okt\PYGZus{}1}\PYG{p}{])}
+\PYG{n}{df2\PYGZus{}all} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{concat}\PYG{p}{([}\PYG{n}{df\PYGZus{}spt\PYGZus{}2}\PYG{p}{,} \PYG{n}{df\PYGZus{}okt\PYGZus{}2}\PYG{p}{])}
+\PYG{n}{df3\PYGZus{}all} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{concat}\PYG{p}{([}\PYG{n}{df\PYGZus{}spt\PYGZus{}3}\PYG{p}{,} \PYG{n}{df\PYGZus{}okt\PYGZus{}3}\PYG{p}{])}
+\PYG{n}{df4\PYGZus{}all} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{concat}\PYG{p}{([}\PYG{n}{df\PYGZus{}spt\PYGZus{}4}\PYG{p}{,} \PYG{n}{df\PYGZus{}okt\PYGZus{}4}\PYG{p}{])}
+\PYG{n}{df5\PYGZus{}all} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{concat}\PYG{p}{([}\PYG{n}{df\PYGZus{}spt\PYGZus{}5}\PYG{p}{,} \PYG{n}{df\PYGZus{}okt\PYGZus{}5}\PYG{p}{])}
+\PYG{n}{df6\PYGZus{}all} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{concat}\PYG{p}{([}\PYG{n}{df\PYGZus{}spt\PYGZus{}6}\PYG{p}{,} \PYG{n}{df\PYGZus{}okt\PYGZus{}6}\PYG{p}{])}
+
+\PYG{n}{df1\PYGZus{}all} \PYG{o}{=} \PYG{n}{df1\PYGZus{}all}\PYG{o}{.}\PYG{n}{sort\PYGZus{}values}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Tijdstempel\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{df2\PYGZus{}all} \PYG{o}{=} \PYG{n}{df2\PYGZus{}all}\PYG{o}{.}\PYG{n}{sort\PYGZus{}values}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Tijdstempel\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{df3\PYGZus{}all} \PYG{o}{=} \PYG{n}{df3\PYGZus{}all}\PYG{o}{.}\PYG{n}{sort\PYGZus{}values}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Tijdstempel\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{df4\PYGZus{}all} \PYG{o}{=} \PYG{n}{df4\PYGZus{}all}\PYG{o}{.}\PYG{n}{sort\PYGZus{}values}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Tijdstempel\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{df5\PYGZus{}all} \PYG{o}{=} \PYG{n}{df5\PYGZus{}all}\PYG{o}{.}\PYG{n}{sort\PYGZus{}values}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Tijdstempel\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{df6\PYGZus{}all} \PYG{o}{=} \PYG{n}{df6\PYGZus{}all}\PYG{o}{.}\PYG{n}{sort\PYGZus{}values}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}Tijdstempel\PYGZdq{}}\PYG{p}{)}
+\end{MintedVerbatim}
