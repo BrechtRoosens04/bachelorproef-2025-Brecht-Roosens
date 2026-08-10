@@ -2,5 +2,130 @@
 %% de onderzochte anomaliemodellen
 %%=============================================================================
 
-\chapter{\IfLanguageName{dutch}{De onderzochte anomaliedetectie-modellen}{The anomaly detection models studied}}%
-\label{ch:De onderzochte anomaliedetectie-modellen}
+\chapter{\IfLanguageName{dutch}{De ontwikkeling en evaluatie van machine learning anomaliedetectie-modellen}{The development and evaluation of machine learning anomaly detection models}}%
+\label{ch:De ontwikkeling en evaluatie van machine learning anomaliedetectie-modellen}
+
+In dit hoofdstuk worden de diverse machine learning-modellen behandeld die in deze bachelorproef zijn bestudeerd om afwijkend machinegedrag te identificeren. De modellen zijn gebruikt op basis van de sensordata uit de MetroPT-3-dataset en als fundament voor de verdere analyse van de verzamelde tractorgegevens. Er werd onderzocht in hoeverre diverse supervised en unsupervised technieken in staat zijn om afwijkingen in industriële tijdsreeksen te herkennen.
+
+Vervolgens worden Random Forest-model, Isolation Forest-model, Autoencoder en One-Class SVM bepsroken. Elk model krijgt eerst een beknopte uitleg over de werking en de betekenis voor voorspellend onderhoud. Daarna wordt uitgelegd op welke manier het model in deze bachelorproef is ingezet, welke parameters en gegevens zijn toegepast en welke resultaten zijn behaald. Wanneer dit een extra waarde oplevert, worden de resultaten versterkt met grafieken en andere visualisaties uit de gemaakte notebooks.
+
+De modellen worden niet alleen geëvalueerd aan de hand van één enkele prestatiemetriek. Daarnaast wordt onderzocht hoe de modellen afwijkende patronen identificeren, op welke wijze deze uitkomsten zich verhouden tot de vastgelegde defecten in de MetroPT-3-dataset en welke beperkingen tijdens de analyse worden waargenomen. Zo wordt er een onderbouwde vergelijking gemaakt tussen de diverse technieken en wordt vastgesteld welke methode het meest geschikt is voor de situatie van deze bachelorproef.
+
+\newpage
+
+\section{\IfLanguageName{dutch}{Het Random Forest-model}{The Random Forest-model}}%
+\label{sec: {Het Random Forest-model}
+    
+Random Forest-model werd als eerste model bestudeerd, aangezien  het een supervised machine learning-algoritme is dat gelabelde voorbeelden inzet om te onderscheiden tussen gebruikelijke en afwijkende situaties. In deze bachelorproef werd het model gebruikt op de MetroPT-3-dataset, waarin naast de sensormetingen ook foutperiodes als falen  waren vermeld. Dit maakte het mogelijk om te onderzoeken in hoeverre een klassiek classificatiemodel in staat was om de geregistreerde fouten te identificeren.
+
+Voor de modeltraining zijn zeven sensorkenmerken gekozen: kolom ``TP2'',  kolom ``TP3'', kolom ``H1'', kolom ``DV\_pressure'', kolom ``Reservoirs'', kolom ``Oil\_temperature'' en kolom ``Motor\_current''. Bovendien zijn er voor deze variabelen steeds een gemiddelde van tien metingen en een standaardafwijking vastgesteld. De uiteindelijke invoer omvatte zowel de huidige sensorwaarden als informatie over recente aanpassingen en fluctuaties in de sensordata.
+
+De dataset werd chronologisch verdeeld om te voorkome, dat toekomstige observaties werden ingezet voor het voorspellen van eerdere situaties. De grens werd vastgesteld op één juli 2020. Alle metingen voor deze datum dienden als trainingsdata, terwijl de metingen vanaf één juli 2020 als testdata werden gebruikt. De trainingsset omvatte 1 045 505 normale observaties en 28 332 defectobservaties. De testset omvatte 441 980 normale observaties en 1 622 defectobservaties. Daarna werden de eigenschappen gestandiseerd door middel van StandardScaler.
+
+Voor het Random Forest-model zijn honderd beslissingsbomen toegepast. Het model is opgeleid met de gestandaardiseerde trainingsdata en daarna ingezet om voor elke observatie in de testset te voorspellen of deze als normaal of als defect werd gezien.
+
+\begin{listing}[H]
+\begin{minted}{python}
+rf_verb = RandomForestClassifier(n_estimators=100)
+rf_verb.fit(x_train_scaled_verb, y_train_verb)
+
+y_pred_verb = rf_verb.predict(x_test_scaled_verb)
+\end{minted}
+\caption[Code snippet Random Forest-model training]{Codefragment van de training van het Random Forest-model.}
+\end{listing}
+
+De resultaten laten zien dat het model een algemene accuracy van 1.00 heeft bereikt. Aanvankelijk lijkt dit een uitstekend resultaat te zijn. Als er echter specifiek naar de defectklasse wordt gekeken, blijkt dat het model geen enkel defect nauwkeurig heeft voorspeld. Voor de defectklasse waren zowel de precision als de recall en de F1-score 0.00. In de testset waren er in totaal 1 622 daadwerkelijke defectobservaties, terwijl het model geen enkele voorspelling van defecten maakte.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lcccr}
+\toprule
+\textbf{Model} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score} \\
+\midrule
+Random Forest                & 1.00           & 0.00 & 0.00 & 0.00                \\
+\bottomrule
+\end{tabular}
+\caption[Tabel overzicht Random Forest-model]{\label{tab:tabel_overzicht_Random_Forest_model}Overzicht van de resultaten van het Random Forest-model.}
+\end{table}
+
+Bij de resultaten in de tabel~\ref{tab:tabel_overzicht_Random_Forest_model} wordt er een opmerking gemaakt namelijk precision, recall en F1-score zijn gerelateerd aan de defectklasse ``failure = 1''.
+
+Dit resultaat wijst op een cruciaal probleem tijdens de beoordeling van het model. De testset omvatte aanzienlijk meer normale observaties dan defectobservaties. Een model kan hierdoor een uiterst hoge algemene accuracy bereiken door bijna alleen de normale klasse te voorspellen. De nauwkeurigheid van 1.00 biedt daarom geen compleet overzicht van de prestaties van het model voor voorspellend onderhoud.
+
+Dit wordt eveneens ondersteund door het aantal voorspelde defecten. In de testset waren er 1 622 echte defecten, terwijl Random Forest-model geen defecten voorspelde. Het model slaagde er daarom niet in om de defectklasse op een effectieve manier te identificeren.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{Confusion_matrix_Random_Forest.png}
+\caption[Confusion matrix van het Random Forest-model.]{\label{fig:Confusion_Matrix_Random_Forest} De confusion matrix van het Random Forest-model is gebaseerd op de MetroPT-3-testset. De matrix laat zien hoeveel normale en defecte observaties correct en fout zijn geclassificeerd. Het model beschouwde geen observaties als defect, waardoor de 1 622 daadwerkelijke defectobservaties niet werden opgemerkt.}
+\end{figure} 
+
+\newpage
+
+Naast de uitkomsten van de classificatie werd ook bestudeerd welke variabelen de grootste impact hadden op de voorspellingen van het Random Forest-model. De feature importance van het model is hiervoor onderzocht.
+
+De voornaamste variabele was ``DV\_pressure\_mean\_10'' met een importance van 0.272409. Vervolgens kwamen ``Oil\_temperature\_mean\_10'' met 0.152243, ``DV\_pres\-sure'' met 0.109111 en ``Oil\_temperature'' met 0.088148. Vooral variabelen die verband hielden met druk en temperatuur hadden daardoor een relatief aanzienlijke impact op de keuzes van het model. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{Feature_importance_Random_Forest.png}
+\caption[Grafiek van de feature importance van het Random Forest-model.]{\label{fig:Feature_importance_Random_Forest}De feature importance van het Random Forest-model voor de MetroPT-3-dataset. De grafiek laat zien hoe de gebruikte sensorkenmerken en hun gemiddelden van tien metingen en standaardafwijkingen de voorspellingen van het model beïnvloeden. ``DV\_pressure\_mean\_10'' en ``Oil\_temperature\_mean\_10 zijn de voornaamste kenmerken.}
+\end{figure} 
+
+De analyse van de belangrijkheid van de functie toont daarnaast aan dat niet alleen de huidige sensorwaarden van belang waren, maar ook de gemiddelden die over de afgelopen tien metingen zijn vastgelegd. Dit bevordert het toepassen van tijdsafgeleide eigenschappen in de analyse van sensorgegevens. 
+
+Voor een extra beoordeling werd de ROC-curve van het Random Forest-model vastgesteld. Er werd een ROC-AUC van 0.9973 behaald. Bovendien was de ``Average Precision'' 0.5030. Deze uitkomsten dienen echter voorzichtig te worden benaderd in combinatie met de eerder genoemde classificatieresultaten. Bij een sterk onevenwichtige dataset kan de ROC-AUC vooral een duidelijker beeld bieden dan de daadwerkelijke opsporing van de zeldzame defectklasse.
+
+In deze experimenten bleek dat Random Forest niet geschikt was om de fouten in de MetroPT-3-dataset op een effectieve manier te identificeren. Hoewel het model een accuracy van 1.00 en een ROC-AUC van 0.9973 bereikte, voorspelde het geen van de 1 622 daadwerkelijke defectobservaties in de testset. De precision, recall en F1-score voor de defectklasse waren daardoor allemaal 0.00.
+
+Het experiment laat vooral zien wat het probleem is van een sterk onevenwichtige dataset in een klassiek supervised classificatie-model. Daarom zijn er ook unsupervised technieken bestudeerd die minder afhankelijk zijn vooraf gemarkeerde defecten.
+
+\section{\IfLanguageName{dutch}{Het Isolation Forest-model}{The Isolation Forest-model}}%
+\label{sec: {Het Isolation Forest-model}
+    
+Na het Random Forest-model werd Isolation Forest-model bestudeerd als de eerste unsupervised anomaliedetectie-model. Het voornaamste onderscheid met Ra\-ndom Forest-model is dat Isolation Forest-model niet direct leert om normale en defecte observaties van elkaar te onderscheiden. Het model streeft ernaar om afwijkende observaties te identificeren op basis van hun kenmerken binnen de dataset.
+
+Deze methode is van belang voor deze bachelorproef, aangezien de private tractordataset geen duidelijke defectlabels bevat. Een methode die afwijkingen kan opsporen zonder dat voor elke observatie duidelijk moet zijn of er een defect aanwezig is, is daardoor boeiender voor de uiteindelijke toepassing op de tractordata.
+
+Voor Isolation Forest-model zijn dezelfde standaardkenmerken toegepast als bij Random Forest-model. Het model kreeg training op de trainingsset die voor één jui 2020 plaatsvond. Daarnaast is er een contaminatiewaarde van 0.01 vastgesteld. Deze parameter stelt vast welk percentage van de observaties door het model als mogelijk afwijkend wordt gezien.
+
+\begin{listing}[H]
+\begin{minted}{python}
+iso_verb = IsolationForest(contamination=0.01)
+iso_verb.fit(x_train_scaled_verb)
+
+y_pred_iso_verb = iso_verb.predict(x_test_scaled_verb)
+y_pred_iso_verb = [1 if x_verb == -1 else 0 for x_verb in y_pred_iso_verb]
+\end{minted}
+\caption[Code snippet Isolation Forest-model]{Codefragment van het Isolation Forest-model.}
+\end{listing}
+
+De voorspellingen van Isolation Forest-model werden daarna in vergelijking gebracht met de bekende defectlabels van de MetroPT-3-testset. Het model had een accuracy van 0,98. Voor de defectklasse was de precision 0.00, de recall 0.01 en de F1-score 0.00.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lcccr}
+\toprule
+\textbf{Model} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score} \\
+\midrule
+Isolation Forest                & 0.98          & 0.00 & 0.01 & 0.00                \\
+\bottomrule
+\end{tabular}
+\caption[Tabel overzicht Isolation Forest-model]{\label{tab:tabel_overzicht_Isolation_Forest_model}Overzicht van de resultaten van het Isolation Forest-model.}
+\end{table}
+
+Hier wordt ook weer de opmerking gemaakt dat precision, recall en F1-score weer betrekking heeft tot de defectklasse ``failure = 1''.
+
+In tegenstelling tot Random Forest-model ontdekte Isolation Forest-model echter slechts een beperkt aantal defecten. De recall van 0.01 houdt echter in dat slechts een zeer klein percentage van de 1 622 daadwerkelijke defectobservaties is opgemerkt. Hierdoor bleef de capaciteit om te detecteren beperkt.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{Confusion_matrix_Isolation_Forest.png}
+\caption[Confusion matrix van het Isolation Forest-model.]{\label{fig:Confusion_Matrix_Isolation_Forest} De confusion matrix van het ISolation Forest-model op de MetroPT-3-testset. De matrix laat zien hoe normale en defecte observaties worden geclassificeerd door de Isolation Forest-model.}
+\end{figure} 
+
+Het resultaat is vooral boeiend omdat Isolation Forest-model,in tegenstelling tot Random Forest-model, geen vooraf gelabelde defecten vereist om afwijkingen te identificeren. Hierdoor kan het model ook worden gebruikt voor datasets waarin uitsluitend normaal machinegedrag aanwezig is. De beperkte recall van de MetroPT-3-dataset laat echter zien dat het opsporen van statistische afwijkingen niet automatisch inhoudt dat alle echte defecten worden opgemerkt.
+
+Isolation Forest-model was in staat om enkele afwijkingen te herkennen, maar de daadwerkelijke defecten werden slechts gedeeltelijk opgemerkt. De recall voor de defectklasse was slechts 0.01. Het model presteerde hierdoor iets beter dan Random Forest-model in het daadwerkelijk opsporen van defecten, maar de algemene detectiecapaciteit was niet voldoende.
+
+Dit resultaat gaf een belangrijke aanleiding om daarna een Autoencoder te analyseren. Bij een Autoencoder wordt er niet direct geprobeerd de defectklasse te classificeren, maar wordt geleerd om gebruikelijke patronen opnieuw te creëren. Grote  reconstructiefouten kunnen daarna als mogelijke afwijkingen worden gezien.

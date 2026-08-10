@@ -1,0 +1,6 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{n}{rf\PYGZus{}verb} \PYG{o}{=} \PYG{n}{RandomForestClassifier}\PYG{p}{(}\PYG{n}{n\PYGZus{}estimators}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{)}
+\PYG{n}{rf\PYGZus{}verb}\PYG{o}{.}\PYG{n}{fit}\PYG{p}{(}\PYG{n}{x\PYGZus{}train\PYGZus{}scaled\PYGZus{}verb}\PYG{p}{,} \PYG{n}{y\PYGZus{}train\PYGZus{}verb}\PYG{p}{)}
+
+\PYG{n}{y\PYGZus{}pred\PYGZus{}verb} \PYG{o}{=} \PYG{n}{rf\PYGZus{}verb}\PYG{o}{.}\PYG{n}{predict}\PYG{p}{(}\PYG{n}{x\PYGZus{}test\PYGZus{}scaled\PYGZus{}verb}\PYG{p}{)}
+\end{MintedVerbatim}
