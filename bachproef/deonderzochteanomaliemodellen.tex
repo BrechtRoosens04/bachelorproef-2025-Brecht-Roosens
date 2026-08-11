@@ -129,3 +129,108 @@ Het resultaat is vooral boeiend omdat Isolation Forest-model,in tegenstelling to
 Isolation Forest-model was in staat om enkele afwijkingen te herkennen, maar de daadwerkelijke defecten werden slechts gedeeltelijk opgemerkt. De recall voor de defectklasse was slechts 0.01. Het model presteerde hierdoor iets beter dan Random Forest-model in het daadwerkelijk opsporen van defecten, maar de algemene detectiecapaciteit was niet voldoende.
 
 Dit resultaat gaf een belangrijke aanleiding om daarna een Autoencoder te analyseren. Bij een Autoencoder wordt er niet direct geprobeerd de defectklasse te classificeren, maar wordt geleerd om gebruikelijke patronen opnieuw te creëren. Grote  reconstructiefouten kunnen daarna als mogelijke afwijkingen worden gezien.
+
+\section{\IfLanguageName{dutch}{Het Autoencoder-model}{The Autoencoder-model}}%
+\label{sec: {Het Autoencoder-model}
+
+Na het bestuderen van Random Forest-model en Isolation Forest-model werd er een Autoencoder ingezet om afwijkingen in de sensdordata te identificeren. Een Autoencoder probeert, in tegenstelling tot een traditioneel classificatiemodel, niet direct een defectklasse te voorspellen. Het model leert vooral hoe de invoerdata zo effectief mogelijk opnieuw te reconstrueren. Als een observatie aanzienlijk verschilt van de patronen die het model tijdens de training heeft ontdekt, zal de fout in reconstructie toenemen. Deze reconstructiefout kan daarna worden ingezet als een anomalie score.
+
+De Autoencoder werd aanvankelijk gebruikt voor de MetroPT-3-dataset. Daarna werd dezelfde methodiek gewijzigd en toegepast op de private tractordataset. Dit maakt het mogelijk om te onderzoeken of de methode niet alleen geschikt was voor een openbare dataset met vastgelegde defecten, maar ook effectief was voor de daadwerkelijke sensordata van de tractor.
+
+\paragraph{Autoencoder toegepast op de MetroPT-3-dataset}
+
+Voor de toepassing op de MetroPT-3-dataset zijn zeven sensoren gekozen: ``TP2'', ``TP3'', ``H1'', ``DV\_pressure'', ``Reservoirs'', ``Oil\_temperature'', en ``Motor\_current''. Naast de oorspronkelijke sensormetingen zijn er ook een toenemende gemiddelde en een standaardafwijking voor elke gekozen variabele vastgesteld over tien achtereenvolgende metingen. Dit maakte het mogelijk om, naast de huidige waarde, ook informatie over de lokale trend en de variatie van de sensormeting aan het model aanbieden.
+
+De data werd daarna gestandaardiseerd door middel van ``StandardScaler''. Voor de eerste uitvoering werd een tijdsgebonden verdeling van training en tests toegepast, waarbij de laatste twintig procent van de data als testset werd ingezet. De analyse toonde echter aan dat deze verdeling tijdens de testperiode geen defecten vertoonde. Hierdoor was het niet mogelijk om de prestaties van het model voor de defectklasse op een zinvolle manier te evalueren. Om dit probleem aan te pakken, is de limiet van de trainingsperiode verhoogd naar één juli 2020. Dit leidde ertoe dat de testset defectgevallen bevatte.
+
+De Autoencoder was samengesteld uit een encoder en een decoder. De encoder verminderde de invoer aanvankelijk tot zestien neuronen en daarna tot een verborgen representatie van acht neuronen. De decoder vergrootte deze representatie vervolgens naar zestien neuronen en uiteindelijk naar het oorspronkelijke aantal invoerkenmerken. Het model kreeg training met de ``Adam-optimizer'' en de Mean Squared Error of MSE als verliesfactor. Gedurende tien epochs vond er training plaats met een batchgrootte van Tweeëndertig en een validatiesplit van tien procent.
+
+\begin{listing}[H]
+\begin{minted}{python}
+input_dim_verb = x_train_scaled_verb.shape[1]
+
+input_layer_verb = Input(shape=(input_dim_verb,))
+encoded_verb = Dense(16, activation='relu')(input_layer_verb)
+encoded_verb = Dense(8, activation='relu')(encoded_verb)
+
+decoded_verb= Dense(16, activation='relu')(encoded_verb)
+decoded_verb = Dense(input_dim_verb, activation='linear')(decoded_verb)
+
+autoencoder_verb = Model(input_layer_verb, decoded_verb)
+autoencoder_verb.compile(optimizer='adam', loss='mse')
+
+autoencoder_verb.fit(
+    x_train_scaled_verb, x_train_scaled_verb,
+    epochs=10,
+    batch_size=32,
+    validation_split=0.1
+)
+\end{minted}
+\caption[Code snippet opbouw en training van de Autoencoder]{Codefragment van de opbouw en training van de Autoencoder op de MetroPT-3-dataset.}
+\end{listing}
+
+De encoder vermindert de input tot een verborgen afbeelding van acht neuronen, waarna de decoder de oorspronkelijke input opnieuw opbouwt. Het model krijgt training met de Adam-optimizer en de Mean Squared Error als verliesfactor.
+
+Na de training werd de reconstructiefout voor elke observatie  vastgesteld. Deze reconstructiefout is de fundament voor het vaststellen van een afwijking. Tijdens de uiteindelijke beoordeling werd een drempel vastgesteld op basis van het negenennegentigste percentiel van de reconstructiefouten. Er werden observaties met een reconstructiefout boven deze grens als afwijkend gezien.
+
+\begin{listing}[H]
+\begin{minted}{python}
+reconstructions_verb = autoencoder_verb.predict(x_test_scaled_verb)
+mse_verb = np.mean(
+    np.power(x_test_scaled_verb - reconstructions_verb, 2), 
+    axis = 1
+)
+
+threshold_verb = np.percentile(mse_verb, 99)
+
+y_pred_auto_verb = [
+    1 if e_verb > threshold_verb else 0 for e_verb in mse_verb
+]
+\end{minted}
+\caption[Code snippet berekening reconstructiefout en  anomaliegrens Autoencoder]{Codefragment van de berekening van de reconstructiefout en de anomaliedrempel voor de autoencoder op de MetroPT-3-dataset.}
+\end{listing}
+
+Bij elke testwaarneming wordt het gemiddelde kwadratische verschil tussen de originele en gereconstrueerde sensordata vastgesteld. De negenennegentigste percentielwaarde van deze fouten fungeert daarna als een limiet voor het identificeren van mogelijke afwijkingen.
+
+De uiteindelijke uitkomsten tijdens de aangepaste testperiode waren beter dan die van de modellen die eerder zijn bestudeerd. De Autoencoder scoorde een precision van 0.16, een recall van 0.44 en een F1-score van 0.24 voor de defectklasse. Dit houdt in dat het model in staat was om ongeveer vierenveertig procent van de geregistreerde defecten tijdens de testperiode te identificeren. De precision was met 0.16 relatief laag, waardoor een groot aantal gedetecteerde afwijkingen geen geregistreerd defect bleek te zijn.
+
+In de uitgevoerde analyse leverde de Autoencoder de beste resultaten voor de defectklasse. Random Forest-model behaalde een recall van 0.00 en Isolation Forest-model een recall van slechts 0.01, terwijl de Autoencoder een recall van 0.44 registreert. De uitkomsten laten zien dat de reconstructiemethode van de Autoencoder in deze dataset effectiever was in het opsporen van afwijkende patronen dan de twee andere methoden die zijn onderzocht.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lcccr}
+\toprule
+\textbf{Model} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-score} \\
+\midrule
+Random Forest                & 1.00           & 0.00 & 0.00 & 0.00                \\
+Isolation Forest                & 0.98          & 0.00 & 0.01 & 0.00                \\
+Autoencoder & 0.99 & 0.16 & 0.44 & 0.24 \\
+\bottomrule
+\end{tabular}
+\caption[Tabel vergelijking tot nu onderzochte modellen]{\label{tab:tabel_vergelijking_tot_nu_onderzochte_modellen}Vergelijking van de tot nu onderzochte modellen.}
+\end{table}
+
+\newpage
+
+Zoals eerder vermeld hebben de precision, recall en F1-score betrekking op de defectklasse ``failure = 1''.
+
+Om de classificatieresultaten van de Autoencoder beter te begrijpen, is er ook een confusion matrix ontwikkeld. Dit laat zien hoeveel normale observaties en defectgevallen correct of onjuist zijn geclassificeerd.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{Confusion_matrix_Autoencoder.png}
+\caption[Confusion matrix van de Autoencoder op de metroPT-3-dataset.]{\label{fig:Confusion_Matrix_Autoencoder_metroPT-3-dataset} De matrix liet zien hoe de normaal geclassificeerde observaties en de gelabelde defecten zich verdelen over de juiste en onjuiste voorspellingen van het model. De figuur toont aan dat het model een aantal defectgevallen identificeert, maar tegelijkertijd ook normale observaties als afwijkend kan indelen. Bron: eigen verwerking in Python-notebook.}
+\end{figure} 
+
+De uitkomsten dienen voorzichtig te worden benaderd. De MetroPT-3-dataset toont een duidelijke relatie tussen normale en defecte observaties. Hierdoor kan een hoge accuracy een vertekend beeld schetsen van de daadwerkelijke prestaties. Voor het evalueren van anomaliedetectie zijn vooral precision, recall en F1-score van de defectklasse van belang.
+
+\newpage
+
+\paragraph{Autoencoder toegepast op de private tractordataset}
+
+Na de beoordeling van de MetroPt-3-dataset werd dezelfde aanpak toegepast op de private tractordataset. Het was de bedoeling om te onderzoeken of een Autoencoder effectief is voor het opsporen van afwijkingen in de daadwerkelijke sensordata van de tractor.
+
+Voor de dataset van de tractor zijn negen technische parameters gekozen: motorbelasting, motortoerental, temperatuur van de koelvloeistof van de motor, temperatuur van de transmissieolie, motorolietemperatuur, motoroliedruk, transmissieoliedruk, brandstofverbruik van de motor en vuldruk van de motor. Voor elke parameter zijn daarna een rolling mean en rolling standaardafwijking over tien achtereenvolgende observaties vastgesteld. Dit leidde ertoe dat het aantal kenmerken werd vergroot van negen oorspronkelijke sensoren naar zevenentwintig kenmerken. Na het verwijderen van de ontbrekende waarden waren er 85 065 observaties over.
+
+
+

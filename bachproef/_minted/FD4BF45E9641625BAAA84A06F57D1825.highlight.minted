@@ -1,0 +1,13 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{n}{reconstructions\PYGZus{}verb} \PYG{o}{=} \PYG{n}{autoencoder\PYGZus{}verb}\PYG{o}{.}\PYG{n}{predict}\PYG{p}{(}\PYG{n}{x\PYGZus{}test\PYGZus{}scaled\PYGZus{}verb}\PYG{p}{)}
+\PYG{n}{mse\PYGZus{}verb} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{mean}\PYG{p}{(}
+    \PYG{n}{np}\PYG{o}{.}\PYG{n}{power}\PYG{p}{(}\PYG{n}{x\PYGZus{}test\PYGZus{}scaled\PYGZus{}verb} \PYG{o}{\PYGZhy{}} \PYG{n}{reconstructions\PYGZus{}verb}\PYG{p}{,} \PYG{l+m+mi}{2}\PYG{p}{),}
+    \PYG{n}{axis} \PYG{o}{=} \PYG{l+m+mi}{1}
+\PYG{p}{)}
+
+\PYG{n}{threshold\PYGZus{}verb} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{percentile}\PYG{p}{(}\PYG{n}{mse\PYGZus{}verb}\PYG{p}{,} \PYG{l+m+mi}{99}\PYG{p}{)}
+
+\PYG{n}{y\PYGZus{}pred\PYGZus{}auto\PYGZus{}verb} \PYG{o}{=} \PYG{p}{[}
+    \PYG{l+m+mi}{1} \PYG{k}{if} \PYG{n}{e\PYGZus{}verb} \PYG{o}{\PYGZgt{}} \PYG{n}{threshold\PYGZus{}verb} \PYG{k}{else} \PYG{l+m+mi}{0} \PYG{k}{for} \PYG{n}{e\PYGZus{}verb} \PYG{o+ow}{in} \PYG{n}{mse\PYGZus{}verb}
+\PYG{p}{]}
+\end{MintedVerbatim}

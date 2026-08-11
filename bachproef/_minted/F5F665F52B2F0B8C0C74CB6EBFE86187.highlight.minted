@@ -1,0 +1,20 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{n}{input\PYGZus{}dim\PYGZus{}verb} \PYG{o}{=} \PYG{n}{x\PYGZus{}train\PYGZus{}scaled\PYGZus{}verb}\PYG{o}{.}\PYG{n}{shape}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}
+
+\PYG{n}{input\PYGZus{}layer\PYGZus{}verb} \PYG{o}{=} \PYG{n}{Input}\PYG{p}{(}\PYG{n}{shape}\PYG{o}{=}\PYG{p}{(}\PYG{n}{input\PYGZus{}dim\PYGZus{}verb}\PYG{p}{,))}
+\PYG{n}{encoded\PYGZus{}verb} \PYG{o}{=} \PYG{n}{Dense}\PYG{p}{(}\PYG{l+m+mi}{16}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}relu\PYGZsq{}}\PYG{p}{)(}\PYG{n}{input\PYGZus{}layer\PYGZus{}verb}\PYG{p}{)}
+\PYG{n}{encoded\PYGZus{}verb} \PYG{o}{=} \PYG{n}{Dense}\PYG{p}{(}\PYG{l+m+mi}{8}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}relu\PYGZsq{}}\PYG{p}{)(}\PYG{n}{encoded\PYGZus{}verb}\PYG{p}{)}
+
+\PYG{n}{decoded\PYGZus{}verb}\PYG{o}{=} \PYG{n}{Dense}\PYG{p}{(}\PYG{l+m+mi}{16}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}relu\PYGZsq{}}\PYG{p}{)(}\PYG{n}{encoded\PYGZus{}verb}\PYG{p}{)}
+\PYG{n}{decoded\PYGZus{}verb} \PYG{o}{=} \PYG{n}{Dense}\PYG{p}{(}\PYG{n}{input\PYGZus{}dim\PYGZus{}verb}\PYG{p}{,} \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}linear\PYGZsq{}}\PYG{p}{)(}\PYG{n}{decoded\PYGZus{}verb}\PYG{p}{)}
+
+\PYG{n}{autoencoder\PYGZus{}verb} \PYG{o}{=} \PYG{n}{Model}\PYG{p}{(}\PYG{n}{input\PYGZus{}layer\PYGZus{}verb}\PYG{p}{,} \PYG{n}{decoded\PYGZus{}verb}\PYG{p}{)}
+\PYG{n}{autoencoder\PYGZus{}verb}\PYG{o}{.}\PYG{n}{compile}\PYG{p}{(}\PYG{n}{optimizer}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}adam\PYGZsq{}}\PYG{p}{,} \PYG{n}{loss}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}mse\PYGZsq{}}\PYG{p}{)}
+
+\PYG{n}{autoencoder\PYGZus{}verb}\PYG{o}{.}\PYG{n}{fit}\PYG{p}{(}
+    \PYG{n}{x\PYGZus{}train\PYGZus{}scaled\PYGZus{}verb}\PYG{p}{,} \PYG{n}{x\PYGZus{}train\PYGZus{}scaled\PYGZus{}verb}\PYG{p}{,}
+    \PYG{n}{epochs}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{,}
+    \PYG{n}{batch\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mi}{32}\PYG{p}{,}
+    \PYG{n}{validation\PYGZus{}split}\PYG{o}{=}\PYG{l+m+mf}{0.1}
+\PYG{p}{)}
+\end{MintedVerbatim}
