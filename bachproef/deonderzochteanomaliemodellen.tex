@@ -232,5 +232,75 @@ Na de beoordeling van de MetroPt-3-dataset werd dezelfde aanpak toegepast op de 
 
 Voor de dataset van de tractor zijn negen technische parameters gekozen: motorbelasting, motortoerental, temperatuur van de koelvloeistof van de motor, temperatuur van de transmissieolie, motorolietemperatuur, motoroliedruk, transmissieoliedruk, brandstofverbruik van de motor en vuldruk van de motor. Voor elke parameter zijn daarna een rolling mean en rolling standaardafwijking over tien achtereenvolgende observaties vastgesteld. Dit leidde ertoe dat het aantal kenmerken werd vergroot van negen oorspronkelijke sensoren naar zevenentwintig kenmerken. Na het verwijderen van de ontbrekende waarden waren er 85 065 observaties over.
 
+De zevenentwintig eigenschappen zijn daarna gestandaardiseerd met behulp van StandardScaler. Vervolgens werd er een autoencoder ontwikkeld met een encoder die uit tweeëndertig en zestien neuronen bestaat. De decoder omvatte tweeëndertig neuronen en een uitvoerlaag die opnieuw zevenentwintig waarden bevatte. De oorspronkelijke multidimensionale sensormeting werd eerst verkleind tot een kleinere weergave en daarna opnieuw opgebouwd.
+
+\begin{listing}[H]
+\begin{minted}{python}
+input_dim = X_scaled.shape[1]
+
+input_layer = Input(shape=(input_dim,))
+
+encoded = Dense(32, activation='relu')(input_layer)
+encoded = Dense(16, activation='relu')(encoded)
+
+decoded = Dense(32, activation='relu')(encoded)
+decoded = Dense(input_dim, activation='linear')(decoded)
+
+autoencoder = Model(
+    inputs=input_layer,
+    outputs=decoded
+)
+
+autoencoder.compile(
+    optimizer=Adam(),
+    loss='mse'
+)
+\end{minted}
+\caption[Code snippet opbouw van de Autoencoder op de private tractordataset.]{Codefragment van de opbouw van de autoencoder op de private tractordataset.}
+\end{listing}
+
+De encoder vermindert de zevenentwintig invoerkenmerken aanvankelijk naar tweeëndertig en daarna naar zestien neuronen. De decoder vergroot deze representatie tot tweeëndertig neuronen en herstelt daarna de oorspronkelijke zevenentwintig eigenschappen.
+
+Het model onderging twintig epochs training met een batchgrootte van 256 en een validatieset van twintig procent. Tijdens de training nam de trainingsverlies geleidelijk af van 0.3341 naar 0.0051. De validatieverlies nam af van 0.0887 en 0.0069. Dit laat zien dat het model tijdens de training steeds beter in staat was om de invoerdata te herstellen.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{foto_epoch_verloop.png}
+\caption[Trainings- en validatieverlies van de Autoencoder op de private tractordataset]{\label{fig:Verloop_epoch_tractordataset} De figuur laat zien hoe de trainings- en validatieverlies verliep bij de iedere epoch of trainingsiteratie en laat zien het model geleidelijk aan beter leert om de sensordata te reconstrueren. Bron: eigen verwerking in Python-notebook.}
+\end{figure} 
+
+Na de training werd de Mean Squared Error tussen de originele en gereconstrueerde sensordata vastgesteld voor elke observatie. De negenennegentigste percentielwaarde van deze reconstructiefouten diende als limiet voor anomalieën. De berekende drempel was 0.05748. Alle waarnemingen met een grotere reconstructiefout werden als een anomalie gemarkeerd.
+
+Deze aanpak leidde tot 851 geconstateerde afwijkingen binnen de 85 065 beschikbare observaties. Dit vertegenwoordigt ongeveer één procent van de dataset. De methode ontdekte een relatief kleine groep observaties die duidelijk afweek van het gedrag dat door de Autoencoder werd gecreëerd.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{Grafiek_Autoencoder_anomaly_scores_tractordataset.png}
+\caption[Anomalyscores van de Autoencoder toegepast op de private tractordataset]{\label{fig:anomalyscores_autoencoder_tractordataset} De grafiek laat de reconstructiefout van de reconstructiefout van de tractormetingen zien gedurende de beschikbare tijdsperiode. De horizontale drempel toont de negenennegentigste percentielwaarde van de fouten in de reconstructie aan. De Autoencoder markeert waarnemingen die boven deze grens liggen als een mogelijke afwijking. Bron: eigen verwerking in Python-notebook. }
+\end{figure} 
+
+De grafiek in figuur~\ref{fig:anomalyscores_autoencoder_tractordataset} laat de anomaly score van de tractormetingen doorheen de tijd, waarbij de ingestelde drempel als referentie wordt gebruikt. De Autoencoder beschouwt waarnemingen die boven deze grens liggen als een afwijking. Rond twintig oktober 2025 werden vooral verschillende hoge anomaly scores geconstateerd. 
+
+Om de vastgestelde afwijkingen afzonderlijk te kunnen zien, is er bovendien een tweede visualisatie opgesteld. Er worden uitsluitend de observaties getoond die door de Autoencoder boven de anomaliedrempel zijn vastgesteld.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{Grafiek_gedetecteerde_anomalieen_autoencoder_tractordata.png}
+\caption[Gedetecteerde anomalieën van de autoencoder in de tractordata]{\label{fig:gedetecteerde_anomalieën_autoencoder_tractordataset} De figuur laat zien wanneer de reconstructiefout de vastgelegde anomaliedrempel overschreed. De punten die zijn weergegeven, vertegenwoordigen observaties die door het model als afwijkend zijn gemarkeerd. De visualisatie maakt het mogelijk om te onderzoeken of de afwijkingen zich in specifieke tijden van het gebruik van de tractor manifesteren. Bron: eigen verwerking in Python-notebook. }
+\end{figure} 
+
+\newpage
+
+Een opvallend onderscheid met de MetroPT-3-dataset is dat de private tractordataset geen geregistreerde defectlabels bevat. Hierdoor is het niet mogelijk om te bepalen of de 851 gedetecteerde afwijkingen overeenkomen met echte technische defecten. Voor deze dataset zijn precision, recall en F1-score daarom niet op dezelfde wijze te berekenen. Daarom dienen de uitkomsten te worden beschouwd als waargenomen afwijkingen in het gedrag van sensoren en niet als bevestigde defecten.
+
+Dit verschil is essentieel voor de toekomstige implementatie van het model. De Autoencoder laat zien dat afwijkende patronen in de tractordata automatisch kunnen worden opgespoord, zonder dat er vooraf gemarkeerde defectgevallen aanwezig zijn. Een opgemerkte afwijking is echter een indicatie die verder bestudeerd moet worden en mag niet automatisch als een defect worden gezien.
+
+\paragraph{Vergelijking tussen MetroPT-3-dataset en de private tractordataset}
+
+De inzet van de Autoencoder op beide datasets laat zien dat dezelfde algemene methode voor het detecteren van anomalieën op diverse industriële datasets kan worden gebruikt. Bij MetroPT-3-dataset was het mogelijk om de methode te evalueren op basis van geregistreerde defecten. Hierdoor was het mogelijk om precision, recall en F1-score te berekenen. Bij de tractordataset waren dergelijke labels niet aanwezig, waardoor de beoordeling werd gebaseerd op de ontdekt reconstructiefouten en het aantal observaties dat boven de vastgelegde grens lag.
+
+Op de MetroPT-3-dataset scoorde de Autoencoder een recall van 0.44 voor de defectklasse en een F1-score van 0.24. Hierdoor ontdekte het model meer geregistreerde fouten dan in Random Forest-model en Isolation Forest-model. Bij de private tractordataset zijn 851 waarnemingen als anomalie geclassificeerd, wat ongeveer één procent van alle waarnemingen vertegenwoordigt.
+
+De uitkomsten geven vooral aan dat de Autoencoder technisch relevant is voor beide datasets, maar dat de interpretatie van de resultaten afhankelijk is van de beschikbare labels. De MetroPT-3-dataset biedt de mogelijkheid voor een objectieve beoordeling van bekende defecten, terwijl de tractordataset voornamelijk bedoeld is om mogelijke afwijkingen in het daadwerkelijke machinegedrag te achterhalen. Dit maakt de Autoencoder een boeiende aanpak voor de verdere ontwikkeling van het detecteren van anomalieën binnen de private tractordataset.
 
 
