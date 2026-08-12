@@ -1,0 +1,24 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{n}{sequence\PYGZus{}length} \PYG{o}{=} \PYG{l+m+mi}{30}
+
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{create\PYGZus{}sequences}\PYG{p}{(}\PYG{n}{X}\PYG{p}{,} \PYG{n}{seq\PYGZus{}len}\PYG{p}{):}
+    \PYG{n}{sequences} \PYG{o}{=} \PYG{p}{[]}
+
+    \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{X}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{n}{seq\PYGZus{}len}\PYG{p}{):}
+        \PYG{n}{sequences}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{X}\PYG{p}{[}\PYG{n}{i}\PYG{p}{:}\PYG{n}{i}\PYG{o}{+}\PYG{n}{seq\PYGZus{}len}\PYG{p}{])}
+
+    \PYG{k}{return} \PYG{n}{np}\PYG{o}{.}\PYG{n}{array}\PYG{p}{(}\PYG{n}{sequences}\PYG{p}{)}
+
+\PYG{n}{X\PYGZus{}train\PYGZus{}seq} \PYG{o}{=} \PYG{n}{create\PYGZus{}sequences}\PYG{p}{(}
+    \PYG{n}{x\PYGZus{}train\PYGZus{}scaled\PYGZus{}verb}\PYG{p}{,}
+    \PYG{n}{sequence\PYGZus{}length}
+\PYG{p}{)}
+
+\PYG{n}{X\PYGZus{}test\PYGZus{}seq} \PYG{o}{=} \PYG{n}{create\PYGZus{}sequences}\PYG{p}{(}
+    \PYG{n}{x\PYGZus{}test\PYGZus{}scaled\PYGZus{}verb}\PYG{p}{,}
+    \PYG{n}{sequence\PYGZus{}length}
+\PYG{p}{)}
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{X\PYGZus{}train\PYGZus{}seq}\PYG{o}{.}\PYG{n}{shape}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{X\PYGZus{}test\PYGZus{}seq}\PYG{o}{.}\PYG{n}{shape}\PYG{p}{)}
+\end{MintedVerbatim}

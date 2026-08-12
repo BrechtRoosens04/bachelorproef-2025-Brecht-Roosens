@@ -276,7 +276,7 @@ Deze aanpak leidde tot 851 geconstateerde afwijkingen binnen de 85 065 beschikba
 \begin{figure}[H]
 \centering
 \includegraphics[width=1.0\textwidth]{Grafiek_Autoencoder_anomaly_scores_tractordataset.png}
-\caption[Anomalyscores van de Autoencoder toegepast op de private tractordataset]{\label{fig:anomalyscores_autoencoder_tractordataset} De grafiek laat de reconstructiefout van de reconstructiefout van de tractormetingen zien gedurende de beschikbare tijdsperiode. De horizontale drempel toont de negenennegentigste percentielwaarde van de fouten in de reconstructie aan. De Autoencoder markeert waarnemingen die boven deze grens liggen als een mogelijke afwijking. Bron: eigen verwerking in Python-notebook. }
+\caption[Anomalyscores van de Autoencoder toegepast op de private tractordataset]{\label{fig:anomalyscores_autoencoder_tractordataset} De grafiek laat de reconstructiefout van de tractormetingen zien gedurende de beschikbare tijdsperiode. De horizontale drempel toont de negenennegentigste percentielwaarde van de fouten in de reconstructie aan. De Autoencoder markeert waarnemingen die boven deze grens liggen als een mogelijke afwijking. Bron: eigen verwerking in Python-notebook. }
 \end{figure} 
 
 De grafiek in figuur~\ref{fig:anomalyscores_autoencoder_tractordataset} laat de anomaly score van de tractormetingen doorheen de tijd, waarbij de ingestelde drempel als referentie wordt gebruikt. De Autoencoder beschouwt waarnemingen die boven deze grens liggen als een afwijking. Rond twintig oktober 2025 werden vooral verschillende hoge anomaly scores geconstateerd. 
@@ -303,4 +303,146 @@ Op de MetroPT-3-dataset scoorde de Autoencoder een recall van 0.44 voor de defec
 
 De uitkomsten geven vooral aan dat de Autoencoder technisch relevant is voor beide datasets, maar dat de interpretatie van de resultaten afhankelijk is van de beschikbare labels. De MetroPT-3-dataset biedt de mogelijkheid voor een objectieve beoordeling van bekende defecten, terwijl de tractordataset voornamelijk bedoeld is om mogelijke afwijkingen in het daadwerkelijke machinegedrag te achterhalen. Dit maakt de Autoencoder een boeiende aanpak voor de verdere ontwikkeling van het detecteren van anomalieën binnen de private tractordataset.
 
+\section{\IfLanguageName{dutch}{Het LSTM Autoencoder-model}{The LSTM Autoencoder-model}}%
+\label{sec: {Het_LSTM Autoencoder-model}
+    
+Na het gebruik van een klassieke Autoencoder werd een LSTM Autoencoder bestudeerd om afwijkingen in de sensordata te identificeren. Het voornaamste onderscheid met de reguliere Autoencoder is dat de LSTM Autoencoder rekening houdt met de tijdelijke volgorde van de metingen. Een LSTM Autoencoder verwerkt opeenvolgende metingen als één tijdsreeks, terwijl een traditionele Autoencoder vooral leert om de eigenschappen van één observatie te herstellen.
+
+Dit is van belang voor voorspellend onderhoud, aangezien afwijkend machinegedrag niet altijd in één enkele meting zichtbaar is. Een defect kan bijvoorbeeld door een langzame verandering in temperatuur, druk of motorbelasting tijdens verschillende achtereenvolgende metingen. LSTM-netwerken zijn ontwikkeld om tijdelijke afhankelijkheden te verwerken, waardoor ze in staat zijn om zowel kortetermijn- als langetermijnpatronen in verschillende tijdsreeksen te leren.
+    
+De LSTM Autoencoder werd aanvankelijk gebruikt in de MetroPT-3-dataset. Daarna werd dezelfde methodiek gewijzigd en toegepast op de private tractordataset. Zo kon worden nagegaan of een model dat duidelijk rekening houdt met tijdelijke patronen niet alleen geschikt is voor de openbare dataset, maar ook relevant is voor de werkelijke sensordata van de tractor.
+
+\paragraph{LSTM Autoencoder toegepast op de MetroPT-3-dataset}
+
+Voor de MetroPT-3-dataset zijn dezelfde zeven sensoren toegepast als bij de gebruikelijke Autoencoder: ``TP2'', ``TP3'', ``H1'', ``DV\_pressure'', ``Reservoirs'', ``Oil\_temperature'', en ``Motor\_current''. Voor elke gekozen sensor zijn bovendien een toenemende gemiddelde en een standaardafwijking over tien achtereenvolgende metingenvastgesteld. Dit resulteerde niet alleen in het gebruik van de huidige sensorwaarde, maar ook in de toevoeging van informatie over de lokale variatie in de sensormeting. Hierdoor zijn er in totaal eenentwintig eigenschappen ontstaan.
+
+De defectperiodes die zijn van vastgelegd in de MetroPT-3-dataset werden daarna als referentie toegepast. Doordat de eerste tijdsgebaseerde verdeling van traintests niet genoeg defecten in de testperiode had, werd de limiet van de trainingsperiode verhoogd naar één juli 2020. De testset omvatte 441 980 normale obeservaties en 1 622 gelabelde defecten.
+
+Om de tijdelijke opbouw van de gegevens aan het model te verduidelijken, zijn de gestandiseerde data omgevormd tot opeenvolgende sequenties. Er werd een sequencelengte van dertig metingen toegepast. Elke invoersequentie omvatte daardoor dertig achtereenvolgende tijdstappen met elk eenentwintig eigenschappen. De uiteindelijke trainigsgegevens had een vorm van (1 073 307, 30, 21) en de testgegevens had een vorm van (443 572, 30, 21).
+
+\begin{listing}[H]
+\begin{minted}{python}
+sequence_length = 30
+
+def create_sequences(X, seq_len):
+    sequences = []
+
+    for i in range(len(X) - seq_len):
+        sequences.append(X[i:i+seq_len])
+
+    return np.array(sequences)
+
+X_train_seq = create_sequences(
+    x_train_scaled_verb,
+    sequence_length
+)
+
+X_test_seq = create_sequences(
+    x_test_scaled_verb,
+    sequence_length
+)
+
+print(X_train_seq.shape)
+print(X_test_seq.shape)
+\end{minted}
+\caption[Code snippet opstellen van de tijdsequenties in de MetroPT-3-dataset]{Codefragment van het opstellen van de tijdsequenties in de MetroPT-3-dataset.}
+\end{listing}
+
+Het codefragment is interessant, omdat het verduidelijkt waarom dit model een LSTM Autoencoder is en geen standaard Autoencoder. De individuele observaties worden niet afzonderlijk gepresenteerd, maar in reeksen van dertig achtereenvolgende metingen.
+
+De LSTM Autoencoder was opgebouwd uit zowel een encoder- als een decodergedeelte. De encoder maakte gebruik van een LSTM-laag met vierenzestig neuronen om de complete sequentie van derig tijdstappen te combineren in een onzichtbare representatie. Daarna werd deze representatie met een ``RepeatVector'' opnieuw over dertig tijdstappen verdeeld. De decoder omvatte opnieuw een LSTM-laag met vierenzestig neuronen, gevolgd door een ``TimeDistributed''-laag met een ``Dense''-laag, zodat de oorspronkelijke eenentwintig kenmerken voor elke tijdstap opnieuw konden worden hersteld.
+
+Het definitieve model had 56 405 trainbare parameters.
+
+\begin{listing}[H]
+\begin{minted}{python}
+n_features = X_train_seq.shape[2]
+
+inputs = Input(shape=(sequence_length, n_features))
+
+encoded = LSTM(
+    64,
+    activation='relu'
+)(inputs)
+
+encoded = RepeatVector(sequence_length)(encoded)
+
+decoded = LSTM(
+    64,
+    activation='relu',
+    return_sequences=True
+)(encoded)
+
+decoded = TimeDistributed(
+    Dense(n_features)
+)(decoded)
+
+lstm_autoencoder = Model(
+    inputs,
+    decoded
+)
+
+lstm_autoencoder.compile(
+    optimizer='adam',
+    loss='mse'
+)
+\end{minted}
+\caption[Code snippet De structuur van de LSTM Autoencoder op de MetroPT-3-dataset.]{Codefragment van de structuur van de LSTM Autoencoder op de MetroPT-3-dataset.}
+\end{listing}
+
+De Autoencoder kreeg alleen training op gebruikelijke observaties uit de trainingsgegevens zijn hiervoor gekozen. Dit stelde het model in staat om vooral het gebruikelijke tijdelijke gedrag van het compressorsysteem te reconstrueren.
+
+In de eerste versie vond er een training plaats over tien epochs, met een batchgrootte van 256 en een validatiesplit van twintig procent. Vervolgens vond er een tweede training plaats met maximaal vijftig epochs en ``EarlyStopping'', waarbij de validatieverlies werd gevolgd. De tweede versie werd toegepast voor de definitieve beoordeling.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{Grafiek_Model_verlies_LSTM.png}
+\caption[Trainings- en validatieloss van de tweede LSTM Autoencoder-training op de MetroPT-3-dataset]{\label{fig:Loss_LSTM_MetroPT-3-dataset}  Bron: eigen verwerking in Python-notebook. }
+\end{figure}
+
+De tweede training maakte gebruik van ``EarlyStopping'' met een geduld van vijf epochs en herstelde de gewichten van de beste uitvoering. Deze methode werd toegepast om te vermijden dat het model onnodig lang werd getraind als de validatieprestatie niet meer verbeterde.
+
+Na de training werden de testsequenties opnieuw door het model herzien. Voor elke sequentie werd de gemiddelde Mean Squared Error vastgesteld tussen de oorspronkelijke en de gereconstrueerde waarden. Een grotere reconstructiefout houdt in dat de specifieke tijdsequentie meer verschilt van de patronen die het model tijdens de training heeft ontdekt.
+
+Voor het vaststellen van de anomaliedrempel werd de reconstructiefout van de gebruikelijke trainingssequenties toegepast. De negenennegentigste percentielwaarde is vastgesteld als de maximale waarde. Voor de definitieve uitvoering was deze drempel 4.39065. Sequenties die een reconstructiefout hebben die boven deze waarde ligt, werden als een anomalie gezien.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{Grafiek_reconstructiefout_LSTM.png}
+\caption[Grafiek reconstructiefout in de testset over de tijd van de MetroPT-3-dataset]{\label{fig:Grafiek_reconstructiefout_LSTM} De grafiek laat de reconstructiefout van de tractormetingen zien gedurende de beschikbare tijdsperiode. De horizontale drempel toont de negenennegentigste percentielwaarde van de fouten in de reconstructie aan. De LSTM Autoencoder markeert waarnemingen die boven deze grens liggen als een mogelijke afwijking. Bron: eigen verwerking in Python-notebook. }
+\end{figure} 
+
+De uiteindelijke beoordeling toonde aan dat de LSTM Autoencoder een precision van 0.0556, een recall van 0.1603 en een F1-score van 0.0825 bereikte voor de defectklasse. Het model ontdekte zo ongeveer zestien procent van de geregistreerde defectmeldingen tijdens de testperiode. De precision was relatief laag, wat inhoudt dat een aanzienlijk aantal van de door het model geïdentificeerde afwijkingen niet overeenkwam met een gelabeld defect.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{Confusion_matrix_LSTM}
+\caption[Confusion matrix van de LSTM Autoencoder op de metroPT-3-dataset.]{\label{fig:Confusion_Matrix_LSTM_metroPT-3-dataset} De matrix liet zien hoe de normaal geclassificeerde observaties en de gelabelde defecten zich verdelen over de juiste en onjuiste voorspellingen van het model. De figuur toont aan dat het model een aantal defectgevallen identificeert, maar tegelijkertijd ook normale observaties als afwijkend kan indelen. Bron: eigen verwerking in Python-notebook.}
+\end{figure} 
+
+De uitkomsten laten zien dat de LSTM Autoencoder in staat was om een aantal geregistreerde fouten te herkennen. De resultaten waren echter beperkt. In tegenstelling tot de eerder bestudeerd gewone Autoencoder, die een recall van 0.44 voor de defectklasse opleverde, presteerde de LSTM Autoencoder in deze variant minder goed. De tijdelijke verwerking van de data resulteerde dus niet automatisch in verbeterde classificatieresultaten.
+
+Dit resultaat is van groot belang, omdat het aantoont dat de ingewikkeldere structuur van een LSTM Autoencoder niet altijd leidt tot betere resultaten. De techniek is in staat om tijdelijke afhankelijkheden te identificeren, maar de resultaten zijn ook afhankelijk van  onder andere de gekozen sequentielengte, modelarchitectuur, trainingsstrategie en de anomaliedrempel.
+
+\paragraph{LSTM Autoencoder toegepast op de private tractordataset}
+
+Na de beoordeling van de MetroPT-3-dataset werd de LSTM Autoencoder gebruikt voor de private tractordataset. Het was de bedoeling om te bepalen of dezelfde methodiek kon worden toegepast om tijdelijke afwijkingen sensordata van de tractor te herkennen.
+
+Voor de tractordataset zijn zestien technische parameters gekozen. Deze omvatten de draaiuren van de motor, de druk van de transmissieolie, de temperatuur van koelvloeistof, de motorbelasting, het toerental, de rijsnelheid, de accuspanning, het brandstofdebiet, het brandstofpeil, het niveau van de DEF-/ureumtank, evenals de vuldruk van de motor. De kolom ``is\_idle'' is niet toegepast als invoerkenmerken.
+
+Voor de modellering werden de ontbrekende waarden in de gekozen kenmerken ingevuld met een vooruitvullend veld en vervolgens een achteruitvullend veld. Daar\-na werden de waarden genomaliseerd met behulp van ``StandardScaler''.
+
+\begin{listing}[H]
+\begin{minted}{python}
+X = X.fillna(method="ffill")
+X = X.fillna(method="bfill")
+
+scaler = StandardScaler()
+
+X_scaled = scaler.fit_transform(X)
+\end{minted}
+\caption[Code snippet gedeelte van preprocessing van tractordata voor het toepassen van LSTM Autoencoder]{Codefragment van een gedeelte van de preprocessing van de tractordata voor het toepassen van LSTM Autoencoder.}
+\end{listing}
+
+Vervolgens werden er opnieuw sequenties van dertig achtereenvolgende metingen gecreëerd. Elke sequetie kreeg een vorm van dertig tijdstappen met zestien verschillende sensorkenmerken. Hierdoor zijn er 85 044 sequenties ontstaan met een dimensie van ``(30, 16)''.
 

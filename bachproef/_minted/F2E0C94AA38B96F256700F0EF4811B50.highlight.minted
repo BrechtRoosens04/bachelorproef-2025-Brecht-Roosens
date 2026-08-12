@@ -1,0 +1,8 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{n}{X} \PYG{o}{=} \PYG{n}{X}\PYG{o}{.}\PYG{n}{fillna}\PYG{p}{(}\PYG{n}{method}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}ffill\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{X} \PYG{o}{=} \PYG{n}{X}\PYG{o}{.}\PYG{n}{fillna}\PYG{p}{(}\PYG{n}{method}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}bfill\PYGZdq{}}\PYG{p}{)}
+
+\PYG{n}{scaler} \PYG{o}{=} \PYG{n}{StandardScaler}\PYG{p}{()}
+
+\PYG{n}{X\PYGZus{}scaled} \PYG{o}{=} \PYG{n}{scaler}\PYG{o}{.}\PYG{n}{fit\PYGZus{}transform}\PYG{p}{(}\PYG{n}{X}\PYG{p}{)}
+\end{MintedVerbatim}

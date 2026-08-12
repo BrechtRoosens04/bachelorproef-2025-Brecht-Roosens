@@ -1,0 +1,32 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{n}{n\PYGZus{}features} \PYG{o}{=} \PYG{n}{X\PYGZus{}train\PYGZus{}seq}\PYG{o}{.}\PYG{n}{shape}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]}
+
+\PYG{n}{inputs} \PYG{o}{=} \PYG{n}{Input}\PYG{p}{(}\PYG{n}{shape}\PYG{o}{=}\PYG{p}{(}\PYG{n}{sequence\PYGZus{}length}\PYG{p}{,} \PYG{n}{n\PYGZus{}features}\PYG{p}{))}
+
+\PYG{n}{encoded} \PYG{o}{=} \PYG{n}{LSTM}\PYG{p}{(}
+    \PYG{l+m+mi}{64}\PYG{p}{,}
+    \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}relu\PYGZsq{}}
+\PYG{p}{)(}\PYG{n}{inputs}\PYG{p}{)}
+
+\PYG{n}{encoded} \PYG{o}{=} \PYG{n}{RepeatVector}\PYG{p}{(}\PYG{n}{sequence\PYGZus{}length}\PYG{p}{)(}\PYG{n}{encoded}\PYG{p}{)}
+
+\PYG{n}{decoded} \PYG{o}{=} \PYG{n}{LSTM}\PYG{p}{(}
+    \PYG{l+m+mi}{64}\PYG{p}{,}
+    \PYG{n}{activation}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}relu\PYGZsq{}}\PYG{p}{,}
+    \PYG{n}{return\PYGZus{}sequences}\PYG{o}{=}\PYG{k+kc}{True}
+\PYG{p}{)(}\PYG{n}{encoded}\PYG{p}{)}
+
+\PYG{n}{decoded} \PYG{o}{=} \PYG{n}{TimeDistributed}\PYG{p}{(}
+    \PYG{n}{Dense}\PYG{p}{(}\PYG{n}{n\PYGZus{}features}\PYG{p}{)}
+\PYG{p}{)(}\PYG{n}{decoded}\PYG{p}{)}
+
+\PYG{n}{lstm\PYGZus{}autoencoder} \PYG{o}{=} \PYG{n}{Model}\PYG{p}{(}
+    \PYG{n}{inputs}\PYG{p}{,}
+    \PYG{n}{decoded}
+\PYG{p}{)}
+
+\PYG{n}{lstm\PYGZus{}autoencoder}\PYG{o}{.}\PYG{n}{compile}\PYG{p}{(}
+    \PYG{n}{optimizer}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}adam\PYGZsq{}}\PYG{p}{,}
+    \PYG{n}{loss}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}mse\PYGZsq{}}
+\PYG{p}{)}
+\end{MintedVerbatim}
