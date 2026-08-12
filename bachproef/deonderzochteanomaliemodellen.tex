@@ -397,7 +397,7 @@ In de eerste versie vond er een training plaats over tien epochs, met een batchg
 \begin{figure}[H]
 \centering
 \includegraphics[width=1.0\textwidth]{Grafiek_Model_verlies_LSTM.png}
-\caption[Trainings- en validatieloss van de tweede LSTM Autoencoder-training op de MetroPT-3-dataset]{\label{fig:Loss_LSTM_MetroPT-3-dataset}  Bron: eigen verwerking in Python-notebook. }
+\caption[Trainings- en validatieloss van de tweede LSTM Autoencoder-training op de MetroPT-3-dataset]{\label{fig:Loss_LSTM_MetroPT-3-dataset} Het verloop van de trainings- valisdatieloss tijdens de tweede training van de LSTM Autoencoder op de MetroPT-3-dataset Bron: eigen verwerking in Python-notebook. }
 \end{figure}
 
 De tweede training maakte gebruik van ``EarlyStopping'' met een geduld van vijf epochs en herstelde de gewichten van de beste uitvoering. Deze methode werd toegepast om te vermijden dat het model onnodig lang werd getraind als de validatieprestatie niet meer verbeterde.
@@ -409,7 +409,7 @@ Voor het vaststellen van de anomaliedrempel werd de reconstructiefout van de geb
 \begin{figure}[H]
 \centering
 \includegraphics[width=1.0\textwidth]{Grafiek_reconstructiefout_LSTM.png}
-\caption[Grafiek reconstructiefout in de testset over de tijd van de MetroPT-3-dataset]{\label{fig:Grafiek_reconstructiefout_LSTM} De grafiek laat de reconstructiefout van de tractormetingen zien gedurende de beschikbare tijdsperiode. De horizontale drempel toont de negenennegentigste percentielwaarde van de fouten in de reconstructie aan. De LSTM Autoencoder markeert waarnemingen die boven deze grens liggen als een mogelijke afwijking. Bron: eigen verwerking in Python-notebook. }
+\caption[Grafiek reconstructiefout in de testset over de tijd van de LSTM Autoencoder op de MetroPT-3-dataset]{\label{fig:Grafiek_reconstructiefout_LSTM} De grafiek laat de reconstructiefout van de metingen zien gedurende de beschikbare tijdsperiode. De horizontale drempel toont de negenennegentigste percentielwaarde van de fouten in de reconstructie aan. De LSTM Autoencoder markeert waarnemingen die boven deze grens liggen als een mogelijke afwijking. Bron: eigen verwerking in Python-notebook. }
 \end{figure} 
 
 De uiteindelijke beoordeling toonde aan dat de LSTM Autoencoder een precision van 0.0556, een recall van 0.1603 en een F1-score van 0.0825 bereikte voor de defectklasse. Het model ontdekte zo ongeveer zestien procent van de geregistreerde defectmeldingen tijdens de testperiode. De precision was relatief laag, wat inhoudt dat een aanzienlijk aantal van de door het model geïdentificeerde afwijkingen niet overeenkwam met een gelabeld defect.
@@ -445,4 +445,63 @@ X_scaled = scaler.fit_transform(X)
 \end{listing}
 
 Vervolgens werden er opnieuw sequenties van dertig achtereenvolgende metingen gecreëerd. Elke sequetie kreeg een vorm van dertig tijdstappen met zestien verschillende sensorkenmerken. Hierdoor zijn er 85 044 sequenties ontstaan met een dimensie van ``(30, 16)''.
+
+Voor de tractor is dezelfde algemene architectuur toegepast als voor MetroPT-3-dataset. De encoder omvatte een LSTM-laag van vierenzestig eenheden, gevolgd door een ``RepeatVector''. De decoder omvatte een tweede LSTM-laag met vierenzestig eenheden en een TimeDistributed Dense-laag die de zestien oorspronkelijke eigenschappen opnieuw herstelde. In deze versie had het model 54 800 trainbare parameters.
+
+\begin{listing}[H]
+\begin{minted}{python}
+timesteps = X_sequences.shape[1]
+n_features = X_sequences.shape[2]
+
+inputs = Input(shape=(timesteps, n_features))
+
+encoded = LSTM(64, activation='tanh')(inputs)
+
+decoded = RepeatVector(timesteps)(encoded)
+
+decoded = LSTM(64,
+    activation='tanh',
+    return_sequences=True)(decoded)
+
+outputs = TimeDistributed(Dense(n_features))(decoded)
+
+lstm_autoencoder = Model(inputs, outputs)
+
+lstm_autoencoder.compile(
+    optimizer='adam',
+    loss='mse'
+)
+
+\end{minted}
+\caption[Code snippet De structuur van de LSTM Autoencoder op de private tractordataset.]{Codefragment van de structuur van de LSTM Autoencoder op de tractordataset.}
+\end{listing}
+
+Na de reconstructie van de sequenties diende de reconstructiefout als anomaly score. Deze reconstructiefout is aan de oorspronkelijke tractorgegevens toegevoegd, samen met een binaire anomalie-kolom. Dit maakte het mogelijk om de observaties met een aanzienlijke reconstructiefout afzonderlijk te onderzoeken.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{Grafiek_reconstructiefout_LSTM_tractor.png}
+\caption[Grafiek reconstructiefout over de tijd van de LSTM Autoencoder op de private tractordataset]{\label{fig:Grafiek_reconstructiefout_LSTM_tractor}De grafiek laat de reconstructiefout van de tractormetingen zien gedurende de beschikbare tijdsperiode. De horizontale drempel toont de threshold in de reconstructie aan. De LSTM Autoencoder markeert waarnemingen die boven deze grens liggen als een mogelijke afwijking. Bron: eigen verwerking in Python-notebook. }
+\end{figure} 
+
+Toch is het belangrijk om dezelfde voorzichtigheid te tonen als bij de gewone Autoencoder. De private tractordataset heeft geen bevestigde labels voor defecten. Een observatie die door de LSTM Autoencoder als een anomalie wordt gekarakteriseerd, kan daarom niet automatisch worden beschouwd als een technisch probleem. De aanpak laat zien dat het gedrag van sensoren op specifieke momenten aanzienlijk verschilt van de patronen die het model heeft aangeleerd, maar extra technische informatie is vereist om te achterhalen of dit daadwerkelijk gerelateerd is aan een storing of slijtage.
+
+Een cruciaal voordeel van de LSTM-methde is dat er niet alleen een individuele sensormeting wordt beoordeeld. Het model evalueert een serie van achtereenvolgende metingen. Dit kan leiden tot een anomalie omdat een groep sensoren zich in verschillende opeenvolgende tijdstappen anders gedraagt dan wanneer ze normaal functioneren.
+
+\paragraph{Vergelijking tussen MetroPT-3-dataset en de private tractordataset}
+
+De implementatie van de LSTM Autoencoder op beide datasets laat zien dat dezelfde algemene methodiek op diverse industriële tijdsreeksen kan worden gebruikt. Bij MetroPT-3-dataset was het mogelijk om de voorspellingen te vergelijken met de geregistreerde defectlabels. Bij de tractordataset waren dergelijke labels niet beschikbaar, waardoor deze methode werd toegepast om mogelijke afwijkingen in het werkelijke machinegedrag te achterhalen.
+
+De uitkomsten laten zien dat de LSTM Autoencoder op beide datasets technisch relevant is, maar dat de evaluatiemogelijkheden uiteenlopen. MetroPT-3-dataset biedt de mogelijkheid om objectief te vergelijken met vastgelegde defecten, terwijl de dataset van tractoren vooral bedoeld is voor het opsporen van mogelijke afwijkingen.
+
+De LSTM Autoencoder scoorde op MetroPT-3-dataset een recall van 0.1603 en een F1-score van 0.0825. Ondanks dat hiermee een aantal defecten werd opgemerkt, waren de prestaties lager dan die van de eerder bestudeerd gewone Autoencoder. Dit houdt in dat het toevoegen van tijdelijke informatie in deze specifieke uitvoering niet automatisch resulteerde in een verbeterde opsporing van geregistreerde fouten.
+
+De voordelen van de private tractordataset liggen voornamelijk in het feit dat het model de opeenvolging van sensormetingen in overweging neemt. Dit past perfect bij de aard van voorspellend onderhoud, waarbij afwijkend gedrag zich langzaam kan ontwikkelen. De uitkomsten dienen echter verder te worden bestudeerd, aangezien de huidige dataset geen bevestigde defectlabels bevat.
+
+Aan de hand van deze experimenten kan worden vastgelegd dat een LSTM Autoencoder een praktische oplossing is voor het opsporen van anomalieën in multivariate tijdsreeksen. De methode vormt vooral een boeiende toevoeging wanneer de tijdelijke verbinding tussen achtereenvolgende sensormetingen van belang is. De uitkomsten van MetroPT-3-dataset laten tegelijkertijd zien dat een ingewikkelder model niet altijd beter presteert dan een gebruikelijke Autoencoder. De LSTM Autoencoder maakt het mogelijk om tijdelijke afwijkingen op een systematische manier te herkennen voor de private tractordataset zodat deze afwijkingen in een volgende fase technisch kunnen worden bestudeerd.
+
+
+
+
+
 
