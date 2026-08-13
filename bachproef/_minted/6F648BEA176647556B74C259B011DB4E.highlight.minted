@@ -1,0 +1,9 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{n}{ocsvm} \PYG{o}{=} \PYG{n}{OneClassSVM}\PYG{p}{(}
+    \PYG{n}{kernel}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}rbf\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{gamma}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}scale\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{nu}\PYG{o}{=}\PYG{l+m+mf}{0.01}
+\PYG{p}{)}
+
+\PYG{n}{ocsvm}\PYG{o}{.}\PYG{n}{fit}\PYG{p}{(}\PYG{n}{x\PYGZus{}train\PYGZus{}sample}\PYG{p}{)}
+\end{MintedVerbatim}

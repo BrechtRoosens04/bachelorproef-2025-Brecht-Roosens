@@ -1,0 +1,5 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{n}{y\PYGZus{}pred} \PYG{o}{=} \PYG{n}{ocsvm}\PYG{o}{.}\PYG{n}{predict}\PYG{p}{(}\PYG{n}{x\PYGZus{}test\PYGZus{}scaled}\PYG{p}{)}
+
+\PYG{n}{y\PYGZus{}pred} \PYG{o}{=} \PYG{p}{(}\PYG{n}{y\PYGZus{}pred} \PYG{o}{==} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{o}{.}\PYG{n}{astype}\PYG{p}{(}\PYG{n+nb}{int}\PYG{p}{)}
+\end{MintedVerbatim}

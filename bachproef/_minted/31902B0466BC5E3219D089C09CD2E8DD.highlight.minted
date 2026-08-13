@@ -1,0 +1,13 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{n}{x\PYGZus{}train\PYGZus{}normal} \PYG{o}{=} \PYG{n}{x\PYGZus{}train\PYGZus{}scaled}\PYG{p}{[}\PYG{n}{y\PYGZus{}train} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{]}
+
+\PYG{n}{np}\PYG{o}{.}\PYG{n}{random}\PYG{o}{.}\PYG{n}{seed}\PYG{p}{(}\PYG{l+m+mi}{42}\PYG{p}{)}
+
+\PYG{n}{indices} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{random}\PYG{o}{.}\PYG{n}{choice}\PYG{p}{(}
+    \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{x\PYGZus{}train\PYGZus{}normal}\PYG{p}{),}
+    \PYG{n}{size}\PYG{o}{=}\PYG{n+nb}{min}\PYG{p}{(}\PYG{l+m+mi}{100000}\PYG{p}{,} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{x\PYGZus{}train\PYGZus{}normal}\PYG{p}{)),}
+    \PYG{n}{replace}\PYG{o}{=}\PYG{k+kc}{False}
+\PYG{p}{)}
+
+\PYG{n}{x\PYGZus{}train\PYGZus{}sample} \PYG{o}{=} \PYG{n}{x\PYGZus{}train\PYGZus{}normal}\PYG{p}{[}\PYG{n}{indices}\PYG{p}{]}
+\end{MintedVerbatim}

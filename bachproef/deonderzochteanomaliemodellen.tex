@@ -500,7 +500,141 @@ De voordelen van de private tractordataset liggen voornamelijk in het feit dat h
 
 Aan de hand van deze experimenten kan worden vastgelegd dat een LSTM Autoencoder een praktische oplossing is voor het opsporen van anomalieën in multivariate tijdsreeksen. De methode vormt vooral een boeiende toevoeging wanneer de tijdelijke verbinding tussen achtereenvolgende sensormetingen van belang is. De uitkomsten van MetroPT-3-dataset laten tegelijkertijd zien dat een ingewikkelder model niet altijd beter presteert dan een gebruikelijke Autoencoder. De LSTM Autoencoder maakt het mogelijk om tijdelijke afwijkingen op een systematische manier te herkennen voor de private tractordataset zodat deze afwijkingen in een volgende fase technisch kunnen worden bestudeerd.
 
+\section{\IfLanguageName{dutch}{Het One-Class SVM-model}{The One-Class SVM-model}}%
+\label{sec: {Het_One-Class_SVM-model}
+    
+De One-Class SVM-model of One-Class Support Vector Machine is het laatste model voor het detecteren van anomalieën die onderzocht is. In tegenstelling tot een traditioneel supervised classificatiemodel is de One-Class SVM-model gebaseerd op vooral normale observaties. Het model streeft ernaar om een limiet vast te stellen voor het gebruikelijke gedrag van de machine in de dataset. Observaties die buiten deze limiet liggen, worden gezien als mogelijke afwijkingen.
 
+De methode is hierdoor geschikt voor situaties waarin er slechts een beperkte hoeveelheid gelabelde defeftdata beschikbaar is. Dit is in lijn met de private tractordataset, waarin geen bevestigde defectlabels waren opgenomen. In deze bachelorproef werd de One-Class SVM-model aanvankelijk gebruikt op de MetroPT-3-dataset, waar defectmomenten waren vastgelegd. Daarna werd dezelfde aanpak toegepast op de private tractordataset om te bepalen of de methodiek kan worden overgedragen naar de werkelijke telematicadata van een tractor.
+    
+\paragraph{One-Class SVM-model toegepast op de MetroPT-3-dataset}
+
+Voor het gebruik van de One-Class SVM-model werd eerst de MetroPT-3-dataset ingelezen en vervolgens chronologisch geordend op basis van de tijdstempel. De gelabelde defectmomenten werden daarna als labels aan de dataset toegevoegd. Voor elk vastgelegd defect werd een periode van zes uur voorafgaand aan het defect als storing aangeduid. Dit maakte het mogelijk om te onderzoeken of het model afwijkende sensordata kon identificeren voordat het daadwerkelijke defectmoment plaatsvond.
+
+De eigenschappen van het model zijn afgeleid van de beschikbare sensordata, waarbij de kolommen ``timestamp'' en ``failure'' niet als invoerkenmerken zijn ingezet. De data werd daarna gestandaardiseerd met behulp van StandardScaler. Dit speelt een cruciale rol voor One-Class SVM-model, aangezien de schaal van de verschillende sensoren de berekening van de afstand en de uiteindelijke grens van beslissing kan beïnvloeden.
+
+\begin{listing}[H]
+\begin{minted}{python}
+x = df_MetroPT.drop(columns=["timestamp", "failure"])
+y = df_MetroPT["failure"]
+
+split_date = "2020-07-01"
+
+train_mask = df_MetroPT["timestamp"] < split_date
+test_mask = df_MetroPT["timestamp"] >= split_date
+
+x_train = x[train_mask]
+x_test = x[test_mask]
+
+y_train = y[train_mask]
+y_test = y[test_mask]
+
+scaler = StandardScaler()
+ 
+x_train_scaled = scaler.fit_transform(x_train)
+x_test_scaled = scaler.transform(x_test)
+\end{minted}
+\caption[Code snippet Het voorbereiden en standaardiseren van MetroPT-3-data voor het One-Class SVM-model.]{Codefragment van het voorbereiden en standaardiseren van de MetroPT-3-data voor het One-Class SVM-model.}
+\end{listing}
+
+Voor het trainen van One-Class SVM-model werden alleen observaties toegepast die gedurende de trainingsperiode als gebruikelijk werden beschouwd. Uit deze gebruikelijke observaties werd daarna een willekeurige steekproef van maximaal 100 000 observaties verzameld. Dit zorgde ervoor dat de rekentijd van het model werd verkort zonder dat alle beschikbare normale observaties nodig waren.
+    
+\begin{listing}[H]
+\begin{minted}{python}
+x_train_normal = x_train_scaled[y_train == 0]
+
+np.random.seed(42)
+
+indices = np.random.choice(
+    len(x_train_normal),
+    size=min(100000, len(x_train_normal)),
+    replace=False
+)
+
+x_train_sample = x_train_normal[indices]
+\end{minted}
+\caption[Code snippet Het selecteren van normale trainingsobservaties voor het One-Class SVM-model.]{Codefragment van het selecteren van normale trainingsobservaties voor het One-Class SVM-model.}
+\end{listing}    
+    
+Daarna werd het One-Class SVM-model ontwikkeld met behulp van een ``rbf-kernel''. In de eerste versie werd ``nu = 0.01'' toegepast. De parameter stelt onder andere vast hoeveel observaties het model als mogelijke afwijkingen kan zien. De gamma-parameter werd geconfigureerd op schaal, waardoor de waarde automatisch werd aangepast aan de invoerdata.
+
+\begin{listing}[H]
+\begin{minted}{python}
+ocsvm = OneClassSVM(
+    kernel="rbf",
+    gamma="scale",
+    nu=0.01
+)
+
+ocsvm.fit(x_train_sample)
+\end{minted}
+\caption[Code snippet Het trainen van het One-Class SVM-model op de MetroPT-3-dataset.]{Codefragment van het trainen van het One-Class SVM-model op de MetroPT-3-dataset.}
+\end{listing} 
+    
+Na de training werden er voorspellingen gedaan op basis van de testdata. One-Class SVM-model hanteert ``+1'' voor normale observaties en ``-1'' voor afwijkingen. Deze waarden zijn omgezet naar de labels die zijn gebruikt, waarbij ``0'' verwijst naar gebruikelijk gedrag en ``1'' naar een storing.
+
+\begin{listing}[H]
+\begin{minted}{python}
+y_pred = ocsvm.predict(x_test_scaled)
+
+y_pred = (y_pred == -1).astype(int)
+\end{minted}
+\caption[Code snippet Het voorspellen van afwijkingen met de One-Class SVM-model op de MetroPT-3-dataset.]{Codefragment van het voorspellen van afwijkingen met het One-Class SVM-model op de MetroPT-3-dataset.}
+\end{listing} 
+
+De testset omvatte 443 602 observaties, waaronder 441 436 gebruikelijke observaties en 2 166 observatie met gelabelde fouten. De eerste versie van de One-Class SVM-model bereikte een accuracy van 0.239, een precision van 0.00064, recall van 0.9995 en een F1-score van 0.0127 voor de storingsklasse.
+
+Het hoge aantal herinneringen laat zien dat bijna alle geregistreerde storingsmeldingen zijn opgemerkt. De precision was echter uiterst laag. Dit houdt in dat het model bijna alle storingen identificeerde, maar tegelijkertijd een aanzienlijk aantal normale observaties ook als een anomalie beschouwde. Dit blijkt eveneens uit de accuracy van slechts ongeveer vierentwintig procent.
+
+Om het effect van de parameter te bestuderen, werd er een tweede versie uitgevoerd met een lagere waarde van ``nu = 0.0005''.
+
+\begin{listing}[H]
+\begin{minted}{python}
+ocsvm_verb = OneClassSVM(
+    kernel="rbf",
+    gamma="scale",
+    nu=0.0005
+)
+
+ocsvm_verb.fit(x_train_sample)
+\end{minted}
+\caption[Code snippet Tweede One-Class SVM configuratie met een lagere ``nu''-waarde]{Codefragment van de tweede One-Class SVM configuratie met een lagere ``nu''-waarde.}
+\end{listing}
+
+Deze verandering resulteerde in een accuracy van 0.289, een precision van 0.0067, een recall van 0.9834 en een F1-score van 0.0133. De lagere ``nu''-waarde verhoogde de accuracy en precision aanzienlijk, terwijl de recall slechts beperkt afnam. De F1-score was echter uiterst laag.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lcr}
+\toprule
+\textbf{Metriek} & \textbf{``nu = 0.01''} & \textbf{``nu = 0.0005''} \\
+\midrule
+Accuracy                & 0.2390           & 0.2886 \\
+Precision                & 0.0064          & 0.0067 \\
+Recall & 0.9995 & 0.9834 \\
+F1-score & 0.0127 & 0.0133 \\
+\bottomrule
+\end{tabular}
+\caption[Tabel vergelijking van de twee versies van de One-Class SVM configuratie op de MetroPT-3-dataset]{\label{tab:tabel_vergelijking_versies_One-Class_SVM}Vergelijking van de twee versies van de One-Class SVM configuratie op de MetroPT-3-dataset.}
+\end{table}
+    
+De uitkomsten laten zien dat het aanpassen van ``nu'' een beperkte verbetering heeft opgeleverd, maar dat het One-Class SVM-model in deze configuratie moeite had om onderscheid te maken tussen gebruikelijke operationele variaties en daadwerkelijke afwijkingen die verband houden met defecten.
+
+Doordat de MetroPT-3-dataset beschikte over geregistreerde defectlabels was het mogelijk om een confusion matrix te creëren. Deze visualisatie laat zien hoeveel normale en defecte observaties het model op een juiste of onjuiste manier heeft geclassificeerd.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{Confusion_matrix_One_class_svm.png}
+\caption[Confusion matrix van de One-Class SVM-model op de metroPT-3-dataset.]{\label{fig:Confusion_Matrix_One_clas_SVM_metroPT-3-dataset} De matrix liet zien hoe de normaal geclassificeerde observaties en de gelabelde defecten zich verdelen over de juiste en onjuiste voorspellingen van het model. De figuur toont aan dat het model een aantal defectgevallen identificeert, maar tegelijkertijd ook normale observaties als afwijkend kan indelen. Bron: eigen verwerking in Python-notebook.}
+\end{figure} 
+
+De confusion matrix uit figuur~\ref{fig:Confusion_Matrix_One_clas_SVM_metroPT-3-dataset} toont zowel de sterke recall als de lage precision van het model visueel aan. Het model herkent bijna alle geregistreerde storingen, maar beschouwt bovensien een aanzienlijk aantal normale observaties als een anomalie.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{Grafiek_verdeling_decision_function_scores_SVM.png}
+\caption[Grafiek verdeling van de One-Class SVM decision function scores voor gebruikelijke en defecte observaties op de MetroPT-3-testset]{\label{fig:Verdeling_decision_SVM} De verdeling van de decision function scores per klasse. Lagere scores wijzen op een grotere afwijking. De zwarte onderbroken lijn toont de gebruikelijke beslissingsgrens aan. De kloof tussen de twee secties laat zien waar het model moeite heeft om beide klassen duidelijk van elkaar te scheiden met de standaarddrempelwaarde  Bron: eigen verwerking in Python-notebook.}
+\end{figure}
 
 
 
