@@ -430,7 +430,7 @@ Na de beoordeling van de MetroPT-3-dataset werd de LSTM Autoencoder gebruikt voo
 
 Voor de tractordataset zijn zestien technische parameters gekozen. Deze omvatten de draaiuren van de motor, de druk van de transmissieolie, de temperatuur van koelvloeistof, de motorbelasting, het toerental, de rijsnelheid, de accuspanning, het brandstofdebiet, het brandstofpeil, het niveau van de DEF-/ureumtank, evenals de vuldruk van de motor. De kolom ``is\_idle'' is niet toegepast als invoerkenmerken.
 
-Voor de modellering werden de ontbrekende waarden in de gekozen kenmerken ingevuld met een vooruitvullend veld en vervolgens een achteruitvullend veld. Daar\-na werden de waarden genomaliseerd met behulp van ``StandardScaler''.
+Voor de modellering werden de ontbrekende waarden in de gekozen kenmerken ingevuld met een vooruitvullend veld en vervolgens een achteruitvullend veld. Daar\-na werden de waarden genormaliseerd met behulp van ``StandardScaler''.
 
 \begin{listing}[H]
 \begin{minted}{python}
@@ -444,7 +444,7 @@ X_scaled = scaler.fit_transform(X)
 \caption[Code snippet gedeelte van preprocessing van tractordata voor het toepassen van LSTM Autoencoder]{Codefragment van een gedeelte van de preprocessing van de tractordata voor het toepassen van LSTM Autoencoder.}
 \end{listing}
 
-Vervolgens werden er opnieuw sequenties van dertig achtereenvolgende metingen gecreëerd. Elke sequetie kreeg een vorm van dertig tijdstappen met zestien verschillende sensorkenmerken. Hierdoor zijn er 85 044 sequenties ontstaan met een dimensie van ``(30, 16)''.
+Vervolgens werden er opnieuw sequenties van dertig achtereenvolgende metingen gecreëerd. Elke sequentie kreeg een vorm van dertig tijdstappen met zestien verschillende sensorkenmerken. Hierdoor zijn er 85 044 sequenties ontstaan met een dimensie van ``(30, 16)''.
 
 Voor de tractor is dezelfde algemene architectuur toegepast als voor MetroPT-3-dataset. De encoder omvatte een LSTM-laag van vierenzestig eenheden, gevolgd door een ``RepeatVector''. De decoder omvatte een tweede LSTM-laag met vierenzestig eenheden en een TimeDistributed Dense-laag die de zestien oorspronkelijke eigenschappen opnieuw herstelde. In deze versie had het model 54 800 trainbare parameters.
 
