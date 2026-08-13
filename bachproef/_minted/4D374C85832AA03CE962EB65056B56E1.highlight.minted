@@ -1,0 +1,15 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{n}{ocsvm} \PYG{o}{=} \PYG{n}{OneClassSVM}\PYG{p}{(}
+    \PYG{n}{kernel}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}rbf\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{gamma}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}scale\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{nu}\PYG{o}{=}\PYG{l+m+mf}{0.0005}
+\PYG{p}{)}
+
+\PYG{n}{ocsvm}\PYG{o}{.}\PYG{n}{fit}\PYG{p}{(}\PYG{n}{X\PYGZus{}scaled}\PYG{p}{)}
+
+\PYG{n}{predictions} \PYG{o}{=} \PYG{n}{ocsvm}\PYG{o}{.}\PYG{n}{predict}\PYG{p}{(}\PYG{n}{X\PYGZus{}scaled}\PYG{p}{)}
+
+\PYG{n}{predictions} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{where}\PYG{p}{(}\PYG{n}{predictions} \PYG{o}{==} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}
+
+\PYG{n}{df\PYGZus{}tractor}\PYG{p}{[}\PYG{l+s+s2}{\PYGZdq{}Anomaly\PYGZdq{}}\PYG{p}{]} \PYG{o}{=} \PYG{n}{predictions}
+\end{MintedVerbatim}

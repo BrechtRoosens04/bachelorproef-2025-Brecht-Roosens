@@ -636,6 +636,69 @@ De confusion matrix uit figuur~\ref{fig:Confusion_Matrix_One_clas_SVM_metroPT-3-
 \caption[Grafiek verdeling van de One-Class SVM decision function scores voor gebruikelijke en defecte observaties op de MetroPT-3-testset]{\label{fig:Verdeling_decision_SVM} De verdeling van de decision function scores per klasse. Lagere scores wijzen op een grotere afwijking. De zwarte onderbroken lijn toont de gebruikelijke beslissingsgrens aan. De kloof tussen de twee secties laat zien waar het model moeite heeft om beide klassen duidelijk van elkaar te scheiden met de standaarddrempelwaarde  Bron: eigen verwerking in Python-notebook.}
 \end{figure}
 
+De grafiek in figuur~\ref{fig:Verdeling_decision_SVM} laat zien hoe de scores van de beslissingsfunctie voor beide klassen zijn verdeeld. De gebruikelijke beslissingsgrens van het One-Class SVM-model bedraagt nul. Volgens de implementatie duiden lagere scores op een grotere afwijking van het geleerde gebruikelijke gedrag. De sterke samenhang tussen de twee verdelingen maakt het duidelijk waarom het model moeite heeft om normale en defecte observaties van elkaar te onderscheiden.
 
+\paragraph{One-Class SVM-model toegepast op de private tractordataset}
+
+Na de beoordeling van MetroPT-3-dataset werd dezelfde methode voor het detecteren van anomalieën gebruikt voor de private tractordataset. Het was de bedoeling om te onderzoeken of de One-Class SVM-model in staat is om afwijkende patronen te herkennen in de daadwerkelijke sensordata van de tractor.
+
+Van de tractordataset werden de technische parameters: de motorbelasting, het motortoerental, de rijsnelheid, de accuspanning, het brandstofdebiet, het brandstofpeil, diverse temperatuur- en drukmetingen. Eerst werd de data voorbereid en daarna gestandaardiseerd voordat ze aan het model werden gepresenteerd.
+
+Voor de private tractordataset is een One-Class SVM-model toegepast met een ``rbf-kernel'' met een ``gamma = scale'' en een ``nu = 0.005''. 
+
+\begin{listing}[H]
+\begin{minted}{python}
+ocsvm = OneClassSVM(
+    kernel="rbf",
+    gamma="scale",
+    nu=0.0005
+)
+
+ocsvm.fit(X_scaled)
+
+predictions = ocsvm.predict(X_scaled)
+
+predictions = np.where(predictions == -1, 1, 0)
+
+df_tractor["Anomaly"] = predictions
+\end{minted}
+\caption[Code snippet One-Class SVM-model op de private tractordataset]{Codefragment van de One-Class SVM-model op de private tractordataset.}
+\end{listing}
+
+Na de training van het model werden er voorspellingen gedaan voor alle beschikbare observaties. De dataset telde in totaal 85 074 observaties. Een One-Class SVM-model beschouwde 84 996 observaties als normaal en achtenzeventig als afwijking. Dit houdt in dat ongeveer 0.09 procent van de beschikbare observaties als afwijkend werd geclassificeerd.
+
+Deze verhouding is veel lager dan bij de oorspronkelijke versie op de MetroPT-3-testset. Dit houdt in dat het model op de private tractordataset slechts een zeer beperkte groep observaties als afwijkend zag.
+
+Aangezien de private tractordataset geen geregistreerde defectlabels bevat, is het niet mogelijk om te bepalen of deze achtenzeventig observaties daadwerkelijk gerelateerd zijn aan technische defecten. Daarom dienen de uitkomsten te worden beschouwd als afwijkingen van het normale sensorgedrag dat door One-Class SVM-model is geleerd.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{Grafiek_anomalieen_SVM_tractordataset.png}
+\caption[Grafiek Door One-Class SVM-model aangeduide anomalieën in de motorbelasting van de private tractordataset.]{\label{fig:Grafiek_anomalieen_SVM_tractordataset} Het tijdsverloop van de motorbelasting van september tot november 2025. De rode stippen wijzen op de afwijkingen die door het One-Class SVM-model zijn vastgesteld. Bron: eigen verwerking in Python-notebook.}
+\end{figure}
+
+De grafiek in figuur~\ref{fig:Grafiek_anomalieen_SVM_tractordataset} laat zien hoe de motorbelasting zich ontwikkelt gedurende de beschikbare meetperiode. De aangeduide punten zijn de observaties die door het One-Class SVM-model als een afwijking beschouwd. Hierdoor is het mogelijk om visueel te controleren onder welke operationele omstandigheden het model afwijkingen opmerkte.
+
+Verdere analyse toont daarnaast aan dat de gemiddelde motorbelasting bij de als afwijking genoemde observaties 42.23 was, terwijl dit bij de gebruikelijke observaties 29.70 was. Het gemiddelde motortoerental was eveneens hoger bij de anomalieën: 1 251.39 in vergelijking met 977.29 bij de gebruikelijke waarnemingen. Dit wijst erop dat een aantal van de afwijkingen die door het model zijn vastgesteld, gerelateerd is aan situaties waarin de tractor zwaarder of intensiever werd belast.
+
+Andere parameters toonden ook variaties tussen de gebruikelijke observaties en de vastgestelde anomalieën. De gemiddelde vuldruk van de motor was 155.98 bij de anomalieën, terwijl deze bij normale observaties 115.93 was. De gemiddelde temperatuur van motorolie was respectievelijk 75.28 en 66.76.
+
+Deze afwijkingen mogen echter niet automatisch als aanwijzingen voor een defect worden gezien. Een stijging van de motorbelasting, het toerental of de temperatuur kan bijvoorbeeld ook voortkomen uit een gebruikelijke intensieve gebruikssituatie die normaal is voor de tractor. Zonder onderhouds- of defectlabels is het niet haalbaar om dit onderscheid definitief te maken.
+
+\paragraph{Vergelijking tussen MetroPT-3-dataset en de private tractordataset}
+
+De implementatie van het One-Class SVM-model op beide datasets laat zien dat dezelfde methode voor het detecteren van anomalieën geschikt is voor zowel openbare industriële data als de werkelijke telematicadata van een tractor. De interpretatie van de resultaten varieert aanzienlijk vanwege de aanwezigheid van defectlabels in MetroPT-3-dataset en het ontbreken daarvan in de privédataset.
+
+Op de MetroPt-3-dataset was het mogelijk om het model objectief te beoordelen op basis van de geregistreerde stroingslabels. De beste van de twee onderzochte configuraties, met ``nu = 0.0005'', bereikte een accuracy van 0.2886, een precision van 0.0067, een recall van 0.9834 en een F1-score van 0.0133. Het model kon bijna alle geregistreerde storingen opsporen, maar gaf tegelijkertijd ook een aanzienlijke hoeveelheid foutieve anomaliedetecties.
+
+Op de private tractordataset werden zevenentachtig van de 85 074 waarnemingen als afwijking beschouwd, wat neerkomt op 0.09 procent van de totale dataset. Aangezien er geen bevestigde defectlabels zijn, is het niet mogelijk om een precision, recall of F1-score te berekenen in vergelijking met de werkelijke defecten.
+
+De uitkomsten wijzen erop dat One-Class SVM-model technisch toepasbaar is voor private tractordataset en in staat is om een beperkte groep afwijkende observaties te herkennen. De ontdekte anomalieën dienen echter te worden gezien als signalen van waarschuwing en niet als aangetoonde defecten. Voor een praktische toepassing zou extra informatie, zoals onderhoudsregistraties, machine-inspecties of langere historische meetreeksen, vereist zijn om vast te stellen of deze afwijkingen daadwerkelijk gerelateerd zijn aan technische problemen.
+
+Het One-Class SVM-model was het laatste onderzochte model voor anomaliedetectie in deze bachelorproef. Op de MetroPT-3-dataset slaagde het model erin bijna alle geregistreerde defecten te herkennen, maar dit leidde tot een aanzienlijk aantal foutieve anomalieën. De lage precision en F1-score wijzen erop dat de methode in de gekozen configuratie niet voldoende onderscheid maakte tussen gebruikelijke operationele variaties en echte storingen.
+
+Op de private tractordataset werd echter slechts 0.09 procent van de waarnemingen als afwijking vermeld. Dit resulteert in een aanzienlijk kleinere groep mogelijke afwijkingen die verder bestudeerd kan worden. Vooral de variaties in motorbelasting, motortoerental, vuldruk en temperatuur tussen de normale en als afwijkend geclassificeerde waarnemingen kunnen hierbij als indicatie dienen.
+
+De toepassing op beide datasets toont opnieuw aan dat de tweedelige benadering in deze bachelorproef van groot belang is: MetroPt-3-dataset stelt een objectieve beoordeling van anomaliedetectietechnieken mogelijk door de aanwezige defectlabels, terwijl de private tractordataset toont aan hoe dezelfde methodiek kan worden toegepast als dergelijke labels ontbreken.
 
 
