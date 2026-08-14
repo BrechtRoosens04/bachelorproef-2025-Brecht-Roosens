@@ -28,7 +28,7 @@ Moderne bouwmachines zijn voorzien van telematicasystemen die sensordata automat
 
 %De verkregen gegevens worden doorgaans opgeslagen in cloudgebaseerde systemen, waar ze op een centraal punt toegankelijk zijn voor zowel producenten als onderhoudsdiensten. Cloud computing stelt ons in staat om op een schaalbare en flexibele manier om te gaan met aanzienlijke hoeveelheden data, wat essentieel is voor de toepassing van voorspellend onderhoud. Organisaties van cloudplatformen zijn in staat om grote datasets op een effectieve wijze op te slaan en te verwerken, wat nog steeds een essentieel principe is in datagedreven toepassingen \autocite{Creeger2009}. De studie van \textcite{Kapoor2025} stelt dat recente ontwikkelingen er bovendien toe leiden dat edge computing wordt toegepast, waarbij een gedeelte van de verwerking al lokaal op de machine plaatsvindt om snellere reacties te faciliteren.
 
-\begin{table}
+\begin{table}[H]
 \centering
 \begin{tabular}{lcr}
  \toprule
@@ -48,7 +48,7 @@ Datatype & Time-series \\
 \caption[Tabel Overzicht tractordataset]{\label{tab:tabel overzicht tractordataset}Een samenvatting van de verkregen tractordataset.}
 \end{table}
 
-Tabel 5.1 laat zien dat in tegenstelling tot tal van andere openbare datasets deze dataset geen gegevens bevat over onderhoudsmomenten of geregistreerde defecten. Hierdoor kan niet worden vastgesteld op welk moment een storing daadwerkelijk heeft plaatsgevonden. De dataset is daarom vooral geschikt voor het onderzoeken van operationele patronen en het identificeren van mogelijke afwijkingen die voortkomen uit sensordata.
+Tabel~\ref{tab:tabel overzicht tractordataset} laat zien dat in tegenstelling tot tal van andere openbare datasets deze dataset geen gegevens bevat over onderhoudsmomenten of geregistreerde defecten. Hierdoor kan niet worden vastgesteld op welk moment een storing daadwerkelijk heeft plaatsgevonden. De dataset is daarom vooral geschikt voor het onderzoeken van operationele patronen en het identificeren van mogelijke afwijkingen die voortkomen uit sensordata.
 
 \newpage
 
@@ -58,9 +58,9 @@ Tabel 5.1 laat zien dat in tegenstelling tot tal van andere openbare datasets de
 \caption[Figuur overzicht private dataset.]{\label{fig:overzicht private dataset}Voorbeeld van de telematicadata die van de tractor zijn verkregen. De dataset omvat tijdsgebonden metingen van sensoren, waaronder tijdstempel, motortoerental, motorbelasting, koelvloeistoftemperatuur, transmissieoliedruk, rijsnelheid en brandstofdebiet, die dienen voor verdere analyse en het opsporen van afwijkingen. Bron: Vanderroost NV (2025), eigen verwerking}
 \end{figure}
 
-Figuur 5.1 laat een gedeelte zien van de verzamelde tractordataset. Elke rij staat voor een tijdsregistratie van de machine, terwijl de kolommen diverse telematicaparameters bevatten die automatisch tijdens de werking zijn vastgelegd.
+Figuur~\ref{fig:overzicht private dataset} laat een gedeelte zien van de verzamelde tractordataset. Elke rij staat voor een tijdsregistratie van de machine, terwijl de kolommen diverse telematicaparameters bevatten die automatisch tijdens de werking zijn vastgelegd.
 
-\begin{table}
+\begin{table}[H]
 \centering
 \begin{tabular}{lcr}
  \toprule
@@ -89,7 +89,9 @@ is\_idle & Dit geeft aan of de tractor stationair draait. \\
 \caption[Tabel alle parameters tractordataset]{\label{tab:alle parameters tractordataset}Alle parameters die in de tractordataset voorkomen.}
 \end{table}
 
-Naast de belangrijkste parameters die in Figuur 5.1 zijn weergegeven, omvat de complete dataset ook diverse extra sensormetingen. Tabel 5.2, die op het volgend blad staat, biedt een samenvatting van alle beschikbare variabelen die in de verdere analyse zijn toegepast.
+\newpage
+
+Naast de belangrijkste parameters die in Figuur~\ref{fig:overzicht private dataset} zijn weergegeven, omvat de complete dataset ook diverse extra sensormetingen. Tabel~\ref{tab:alle parameters tractordataset}, die op het volgend blad staat, biedt een samenvatting van alle beschikbare variabelen die in de verdere analyse zijn toegepast.
 
 %De gegevens over de aangeleverde tractor omvatten historische telematicagegevens die automatisch werden vastgelegd tijdens het gebruik van de machine. Dit houdt in dat de dataset geen gesimuleerde of experimentele informatie bevat, maar wel het gedrag van de tractor daadwerkelijk weergeeft onder realistische werkomstandigheden. Dit biedt volgens het onderzoek van \textcite{Carvalho2019} een aanzienlijk voordeel, omdat real-world gegevens vaak ingewikkelder en minder gestructureerd zijn dan synthetische gegevens, wat resulteert in een nauwkeuriger inzicht in de werkelijke praktijkomstandigheden.
 
@@ -97,9 +99,7 @@ De voortdurende registratie van sensorgegevens leidt tot de vorming van een tijd
 
 Daarnaast stelt het inzetten van historische telematicagegevens ons in staat om zowel normaal gedrag als mogelijke afwijkingen te herkennen zonder dat er duidelijke labels vereist zijn. Dit is vooral van belang in situaties waarin er weinig of geen onderhouds- of defectdata beschikbaar zijn, wat vaak voorkomt in industriële omgevingen. Volgens de studies van \textcite{Giannoulidis2024} en \textcite{Dissem2024} worden in dergelijke situaties regelmatig unsupervised learning-methoden toegepast, die patronen aanleren op basis van normaal gedrag en afwijkingen opsporen als afwijkingen van deze patronen.
 
-\newpage
-
-De verzamelde tractordataset is een realistische praktijkdataset die zich richt op operationele sensordata, maar mist informatie over onderhoud en defecten. Om die reden werd de openbare MetroPT-3-dataset ingezet voor de creëring en evaluatie van de methodiek voor het detecteren van anomalieën. Daarna werd dezelfde aanpak toegepast op de private tractordataset om te evalueren in hoeverre deze dataset overdraagbaar is maar een realistische omgeving met beperkte historische data.
+De verzamelde tractordataset is een realistische praktijkdataset die zich richt op operationele sensordata, maar mist informatie over onderhoud en defecten. Om die reden werd de openbare MetroPT-3-dataset ingezet voor de creatie en evaluatie van de methodiek voor het detecteren van anomalieën. Daarna werd dezelfde aanpak toegepast op de private tractordataset om te evalueren in hoeverre deze dataset overdraagbaar is maar een realistische omgeving met beperkte historische data.
 
 %Samengevat geven de verzamelde telematicagegevens een nuttig en realistisch inzicht in het gedrag van de tractor. Hoewel deze dataset de werkelijke operationele situatie weerspiegelt, stelt de ingewikkeldheid van deze praktijkgegevens bepaalde beperkingen voor het modelleren. In deze bachelorproef wordt er gekozen voor een tweeledige benadering: voor de ontwikkeling en training van het model wordt een openbare, gesimuleerde dataset gebruikt, waarna de verkregen inzichten en resultaten worden beoordeeld op basis van de historische telematicagegevens van de tractor.
 
@@ -130,12 +130,10 @@ Hierdoor fungeert de tractor als een voorbeeldige praktijkcase voor deze bachelo
 
 %Samengevat is de nadruk op tractoren in de grondverzet en het transport niet toevallig, maar zeer gemotiveerd. Deze machines zijn bijzonder geschikt voor het gebruik van voorspellend onderhoud door de combinatie van zware werkomstandigheden, hoge kosten bij stilstand en de beschikbaarheid van sensordata. Deze situatie biedt een praktisch en belangrijk toepassingsgebied voor het analyseren van anomaly detection en machine learning-methoden in deze bachelorproef.
 
-\newpage
-
 \section{\IfLanguageName{dutch}{Structuur van de verkregen werkelijke data}{Structure of the actual data obtained}}%
 \label{sec: structuur van de verkregen werkelijke data} 
 
-De oorspronkelijke dataset werd niet geleverd als één centraal bestand, maar bestond uit diverse afzonderlijke excel-exporten die verspreid waren over diverse bestanden en tijdsperiodes. Bij telematicasystemen van bouwmachines is dit gebruikelijk, omdat sensordata regelmatig worden verzonden. Volgens de studies van \textcite{Elahi2023} en \textcite{Mahale2025} resulteert dit vaak in een gefragmenteerde datastructuur, waarbij data afkomstig is uit diverse bronnen en exportformaten.
+De oorspronkelijke dataset werd niet geleverd als één centraal bestand, maar bestond uit diverse afzonderlijke exportbestanden van Excel die verspreid waren over diverse bestanden en tijdsperiodes. Bij telematicasystemen van bouwmachines is dit gebruikelijk, omdat sensordata regelmatig worden verzonden. Volgens de studies van \textcite{Elahi2023} en \textcite{Mahale2025} resulteert dit vaak in een gefragmenteerde datastructuur, waarbij data afkomstig is uit diverse bronnen en exportformaten.
 
 %De oorspronkelijke dataset werd niet gepresenteerd als één centraal databestand, maar bestond uit verschillende afzonderlijke exporten die over diverse bestanden en tijdsperiodes waren verspreid. Dit is gebruikelijk in industriële en bouwgerelateerde gebieden, waar sensorgegevens vaak op regelmatige basis worden verzonden, zoals maandelijks, kwartaallijks of via een machine, afhankelijk van de toegepaste telematica- of monitoringsystemen. Volgens de onderzoeken van \textcite{Elahi2023} en \textcite{Mahale2025} stellen dat dit vaak leidt tot een gefragmenteerde datastructuur in voorspellend onderhoudstoepassingen, waarbij informatie komt uit diverse bronnen, sensoren en exportformaten.
 
@@ -162,8 +160,6 @@ Na het combineren van de bestanden werd de dataset gecontroleerd op consistentie
 Na deze controles had het onderzoek een consistente dataset die geschikt was voor de preprocessing, visualisatie en de ontwikkeling van de anomaliedetectie-modellen die in de volgende hoofdstukken worden behandeld.
 
 %In het onderzoek naar voorspellend onderhoud is de kwaliteit van sensordata vooral van groot belang. De betrouwbaarheid van machine learning-modellen hangt aanzienlijk af van de kwaliteit, consistentie en de toegankelijkheid van de inputdata \autocite{Li2025}. Daarom werd er in dit onderzoek extra aandacht besteed aan het nakijken en normaliseren van de verzamelde meetgegevens voordat er verdere analyse en modellering werden uitgevoerd.
-
-\newpage
 
 \section{\IfLanguageName{dutch}{Geselecteerde parameters uit de verkregen data}{Selected parameters from the collected data}}%
 \label{sec: geselecteerde parameters uit de verkregen data}
@@ -240,16 +236,14 @@ Naast de gegevens van de sensor zijn ook de tijdstempel en de draaiuren van de m
 
 %Bovendien zijn ook parameters zoals draai-uren en tijdstempels behouden, omdat deze essentieel zijn voor het onderzoeken van trends, de intensiteit van gebruik en processen van tijdsgebonden degradatie. De studie van \textcite{Xue2025} benadrukt dat tijdsreeksen en operationele gebruiksdata cruciaal zijn voor voorspellend onderhoud, aangezien defecten vaak geleidelijk ontstaan over langere tijd.
 
-\newpage
-
 \section{\IfLanguageName{dutch}{Opschoning en voorbereiden van de data}{Data cleaning and preparation}}%
 \label{sec: Opschoning en voorbereiden van de data}
 
-Na het ontvangen van de telematicadata werd duidelijk dat de dataset niet uit één centraal databestand bestond, maar uit twaalf afzonderlijke excel-bestanden. Zes bestanden waren gerelateerd aan september, terwijl zes bestanden zich richtten op oktober. Elk bestand bevatte een gedeelte van de sensordata van de tractor die beschikbaar was. Om de data gereed te maken voor verdere analyse, werd elk bestand eerst afzonderlijk bekeken en gestandaardiseerd. Vervolgens werden de bestanden samengevoegd tot een uniforme dataset.
+Na het ontvangen van de telematicadata werd duidelijk dat de dataset niet uit één centraal databestand bestond, maar uit twaalf afzonderlijke Excel-bestanden. Zes bestanden waren gerelateerd aan september, terwijl zes bestanden zich richtten op oktober. Elk bestand bevatte een gedeelte van de sensordata van de tractor die beschikbaar was. Om de data gereed te maken voor verdere analyse, werd elk bestand eerst afzonderlijk bekeken en gestandaardiseerd. Vervolgens werden de bestanden samengevoegd tot een uniforme dataset.
 
 \paragraph{Het verwijderen van de afzonderlijke databestanden}
 
-De eerste fase omvatte het afzonderlijk verwerken van elk excel-bestand met de Python-bibliotheek pandas. De bestanden hadden een soortgelijke opbouw, maar moesten eerst worden gestandaardiseerd om later probleemloos te kunnen worden samengevoegd.
+De eerste fase omvatte het afzonderlijk verwerken van elk Excel-bestand met de Python-bibliotheek pandas. De bestanden hadden een soortgelijke opbouw, maar moesten eerst worden gestandaardiseerd om later probleemloos te kunnen worden samengevoegd.
 
 Aanvankelijk werd de index van elk bestand herzien met reset\_index(), waardoor de records een opeenvolgende nummering kregen. Daarna werden de kolomnamen gewijzigd in consistente en goed leesbare namen. Alle bestanden maakten gebruik van identieke kolomnamen, wat essentieel was voor de verdere verwerking.
 
@@ -271,7 +265,7 @@ df_spt_1["Tijdstempel"] =pd.to_datetime(df_spt_1["Tijdstempel"], errors="coerce"
 
 \newpage
 
-Bovendien zijn er diverse kolommen verwijderd die geen waarde toevoegden aan de verdere analyse. Het betrof onder andere GPS-gerelateerde data, zoals de locatiedata en in verdere excel-bestanden ook nog een aantal administratieve velden die niet van belang waren voor het creëren van een model voor het detecteren van anomalieën.
+Bovendien zijn er diverse kolommen verwijderd die geen waarde toevoegden aan de verdere analyse. Het betrof onder andere GPS-gerelateerde data, zoals de locatiedata en in verdere Excel-bestanden ook nog een aantal administratieve velden die niet van belang waren voor het creëren van een model voor het detecteren van anomalieën.
 
 \begin{listing}[H]
 \begin{minted}{python}

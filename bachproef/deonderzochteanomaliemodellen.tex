@@ -7,7 +7,7 @@
 
 In dit hoofdstuk worden de diverse machine learning-modellen behandeld die in deze bachelorproef zijn bestudeerd om afwijkend machinegedrag te identificeren. De modellen zijn gebruikt op basis van de sensordata uit de MetroPT-3-dataset en als fundament voor de verdere analyse van de verzamelde tractorgegevens. Er werd onderzocht in hoeverre diverse supervised en unsupervised technieken in staat zijn om afwijkingen in industriële tijdsreeksen te herkennen.
 
-Vervolgens worden Random Forest-model, Isolation Forest-model, Autoencoder en One-Class SVM bepsroken. Elk model krijgt eerst een beknopte uitleg over de werking en de betekenis voor voorspellend onderhoud. Daarna wordt uitgelegd op welke manier het model in deze bachelorproef is ingezet, welke parameters en gegevens zijn toegepast en welke resultaten zijn behaald. Wanneer dit een extra waarde oplevert, worden de resultaten versterkt met grafieken en andere visualisaties uit de gemaakte notebooks.
+Vervolgens worden Random Forest-model, Isolation Forest-model, Autoencoder, LSTM Autoencoder en One-Class SVM bepsroken. Elk model krijgt eerst een beknopte uitleg over de werking en de betekenis voor voorspellend onderhoud. Daar\-na wordt uitgelegd op welke manier het model in deze bachelorproef is ingezet, welke parameters en gegevens zijn toegepast en welke resultaten zijn behaald. Wanneer dit een extra waarde oplevert, worden de resultaten versterkt met grafieken en andere visualisaties uit de gemaakte notebooks.
 
 De modellen worden niet alleen geëvalueerd aan de hand van één enkele prestatiemetriek. Daarnaast wordt onderzocht hoe de modellen afwijkende patronen identificeren, op welke wijze deze uitkomsten zich verhouden tot de vastgelegde defecten in de MetroPT-3-dataset en welke beperkingen tijdens de analyse worden waargenomen. Zo wordt er een onderbouwde vergelijking gemaakt tussen de diverse technieken en wordt vastgesteld welke methode het meest geschikt is voor de situatie van deze bachelorproef.
 
@@ -20,7 +20,7 @@ Random Forest-model werd als eerste model bestudeerd, aangezien  het een supervi
 
 Voor de modeltraining zijn zeven sensorkenmerken gekozen: kolom ``TP2'',  kolom ``TP3'', kolom ``H1'', kolom ``DV\_pressure'', kolom ``Reservoirs'', kolom ``Oil\_temperature'' en kolom ``Motor\_current''. Bovendien zijn er voor deze variabelen steeds een gemiddelde van tien metingen en een standaardafwijking vastgesteld. De uiteindelijke invoer omvatte zowel de huidige sensorwaarden als informatie over recente aanpassingen en fluctuaties in de sensordata.
 
-De dataset werd chronologisch verdeeld om te voorkome, dat toekomstige observaties werden ingezet voor het voorspellen van eerdere situaties. De grens werd vastgesteld op één juli 2020. Alle metingen voor deze datum dienden als trainingsdata, terwijl de metingen vanaf één juli 2020 als testdata werden gebruikt. De trainingsset omvatte 1 045 505 normale observaties en 28 332 defectobservaties. De testset omvatte 441 980 normale observaties en 1 622 defectobservaties. Daarna werden de eigenschappen gestandiseerd door middel van StandardScaler.
+De dataset werd chronologisch verdeeld om te voorkomen dat toekomstige observaties werden ingezet voor het voorspellen van eerdere situaties. De grens werd vastgesteld op één juli 2020. Alle metingen voor deze datum dienden als trainingsdata, terwijl de metingen vanaf één juli 2020 als testdata werden gebruikt. De trainingsset omvatte 1 045 505 normale observaties en 28 332 defectobservaties. De testset omvatte 441 980 normale observaties en 1 622 defectobservaties. Daarna werden de eigenschappen gestandaardiseerd door middel van StandardScaler.
 
 Voor het Random Forest-model zijn honderd beslissingsbomen toegepast. Het model is opgeleid met de gestandaardiseerde trainingsdata en daarna ingezet om voor elke observatie in de testset te voorspellen of deze als normaal of als defect werd gezien.
 
@@ -87,7 +87,7 @@ Na het Random Forest-model werd Isolation Forest-model bestudeerd als de eerste 
 
 Deze methode is van belang voor deze bachelorproef, aangezien de private tractordataset geen duidelijke defectlabels bevat. Een methode die afwijkingen kan opsporen zonder dat voor elke observatie duidelijk moet zijn of er een defect aanwezig is, is daardoor boeiender voor de uiteindelijke toepassing op de tractordata.
 
-Voor Isolation Forest-model zijn dezelfde standaardkenmerken toegepast als bij Random Forest-model. Het model kreeg training op de trainingsset die voor één jui 2020 plaatsvond. Daarnaast is er een contaminatiewaarde van 0.01 vastgesteld. Deze parameter stelt vast welk percentage van de observaties door het model als mogelijk afwijkend wordt gezien.
+Voor Isolation Forest-model zijn dezelfde standaardkenmerken toegepast als bij Random Forest-model. Het model kreeg training op de trainingsset die voor één juli 2020 plaatsvond. Daarnaast is er een contaminatiewaarde van 0.01 vastgesteld. Deze parameter stelt vast welk percentage van de observaties door het model als mogelijk afwijkend wordt gezien.
 
 \begin{listing}[H]
 \begin{minted}{python}
@@ -133,7 +133,7 @@ Dit resultaat gaf een belangrijke aanleiding om daarna een Autoencoder te analys
 \section{\IfLanguageName{dutch}{Het Autoencoder-model}{The Autoencoder-model}}%
 \label{sec: {Het Autoencoder-model}
 
-Na het bestuderen van Random Forest-model en Isolation Forest-model werd er een Autoencoder ingezet om afwijkingen in de sensdordata te identificeren. Een Autoencoder probeert, in tegenstelling tot een traditioneel classificatiemodel, niet direct een defectklasse te voorspellen. Het model leert vooral hoe de invoerdata zo effectief mogelijk opnieuw te reconstrueren. Als een observatie aanzienlijk verschilt van de patronen die het model tijdens de training heeft ontdekt, zal de fout in reconstructie toenemen. Deze reconstructiefout kan daarna worden ingezet als een anomalie score.
+Na het bestuderen van Random Forest-model en Isolation Forest-model werd er een Autoencoder ingezet om afwijkingen in de sensordata te identificeren. Een Autoencoder probeert, in tegenstelling tot een traditioneel classificatiemodel, niet direct een defectklasse te voorspellen. Het model leert vooral hoe de invoerdata zo effectief mogelijk opnieuw te reconstrueren. Als een observatie aanzienlijk verschilt van de patronen die het model tijdens de training heeft ontdekt, zal de fout in reconstructie toenemen. Deze reconstructiefout kan daarna worden ingezet als een anomalie score.
 
 De Autoencoder werd aanvankelijk gebruikt voor de MetroPT-3-dataset. Daarna werd dezelfde methodiek gewijzigd en toegepast op de private tractordataset. Dit maakt het mogelijk om te onderzoeken of de methode niet alleen geschikt was voor een openbare dataset met vastgelegde defecten, maar ook effectief was voor de daadwerkelijke sensordata van de tractor.
 
@@ -232,7 +232,7 @@ Na de beoordeling van de MetroPt-3-dataset werd dezelfde aanpak toegepast op de 
 
 Voor de dataset van de tractor zijn negen technische parameters gekozen: motorbelasting, motortoerental, temperatuur van de koelvloeistof van de motor, temperatuur van de transmissieolie, motorolietemperatuur, motoroliedruk, transmissieoliedruk, brandstofverbruik van de motor en vuldruk van de motor. Voor elke parameter zijn daarna een rolling mean en rolling standaardafwijking over tien achtereenvolgende observaties vastgesteld. Dit leidde ertoe dat het aantal kenmerken werd vergroot van negen oorspronkelijke sensoren naar zevenentwintig kenmerken. Na het verwijderen van de ontbrekende waarden waren er 85 065 observaties over.
 
-De zevenentwintig eigenschappen zijn daarna gestandaardiseerd met behulp van StandardScaler. Vervolgens werd er een autoencoder ontwikkeld met een encoder die uit tweeëndertig en zestien neuronen bestaat. De decoder omvatte tweeëndertig neuronen en een uitvoerlaag die opnieuw zevenentwintig waarden bevatte. De oorspronkelijke multidimensionale sensormeting werd eerst verkleind tot een kleinere weergave en daarna opnieuw opgebouwd.
+De zevenentwintig eigenschappen zijn daarna gestandaardiseerd met behulp van StandardScaler. Vervolgens werd er een Autoencoder ontwikkeld met een encoder die uit tweeëndertig en zestien neuronen bestaat. De decoder omvatte tweeëndertig neuronen en een uitvoerlaag die opnieuw zevenentwintig waarden bevatte. De oorspronkelijke multidimensionale sensormeting werd eerst verkleind tot een kleinere weergave en daarna opnieuw opgebouwd.
 
 \begin{listing}[H]
 \begin{minted}{python}
@@ -314,11 +314,11 @@ De LSTM Autoencoder werd aanvankelijk gebruikt in de MetroPT-3-dataset. Daarna w
 
 \paragraph{LSTM Autoencoder toegepast op de MetroPT-3-dataset}
 
-Voor de MetroPT-3-dataset zijn dezelfde zeven sensoren toegepast als bij de gebruikelijke Autoencoder: ``TP2'', ``TP3'', ``H1'', ``DV\_pressure'', ``Reservoirs'', ``Oil\_temperature'', en ``Motor\_current''. Voor elke gekozen sensor zijn bovendien een toenemende gemiddelde en een standaardafwijking over tien achtereenvolgende metingenvastgesteld. Dit resulteerde niet alleen in het gebruik van de huidige sensorwaarde, maar ook in de toevoeging van informatie over de lokale variatie in de sensormeting. Hierdoor zijn er in totaal eenentwintig eigenschappen ontstaan.
+Voor de MetroPT-3-dataset zijn dezelfde zeven sensoren toegepast als bij de gebruikelijke Autoencoder: ``TP2'', ``TP3'', ``H1'', ``DV\_pressure'', ``Reservoirs'', ``Oil\_temperature'', en ``Motor\_current''. Voor elke gekozen sensor zijn bovendien een toenemende gemiddelde en een standaardafwijking over tien achtereenvolgende metingen vastgesteld. Dit resulteerde niet alleen in het gebruik van de huidige sensorwaarde, maar ook in de toevoeging van informatie over de lokale variatie in de sensormeting. Hierdoor zijn er in totaal eenentwintig eigenschappen ontstaan.
 
-De defectperiodes die zijn van vastgelegd in de MetroPT-3-dataset werden daarna als referentie toegepast. Doordat de eerste tijdsgebaseerde verdeling van traintests niet genoeg defecten in de testperiode had, werd de limiet van de trainingsperiode verhoogd naar één juli 2020. De testset omvatte 441 980 normale obeservaties en 1 622 gelabelde defecten.
+De defectperiodes die zijn van vastgelegd in de MetroPT-3-dataset werden daarna als referentie toegepast. Doordat de eerste tijdsgebaseerde verdeling van traintests niet genoeg defecten in de testperiode had, werd de limiet van de trainingsperiode verhoogd naar één juli 2020. De testset omvatte 441 980 normale observaties en 1 622 gelabelde defecten.
 
-Om de tijdelijke opbouw van de gegevens aan het model te verduidelijken, zijn de gestandiseerde data omgevormd tot opeenvolgende sequenties. Er werd een sequencelengte van dertig metingen toegepast. Elke invoersequentie omvatte daardoor dertig achtereenvolgende tijdstappen met elk eenentwintig eigenschappen. De uiteindelijke trainigsgegevens had een vorm van (1 073 307, 30, 21) en de testgegevens had een vorm van (443 572, 30, 21).
+Om de tijdelijke opbouw van de gegevens aan het model te verduidelijken, zijn de gestandaardiseerde data omgevormd tot opeenvolgende sequenties. Er werd een sequentielengte van dertig metingen toegepast. Elke invoersequentie omvatte daardoor dertig achtereenvolgende tijdstappen met elk eenentwintig eigenschappen. De uiteindelijke trainingsgegevens had een vorm van (1 073 307, 30, 21) en de testgegevens had een vorm van (443 572, 30, 21).
 
 \begin{listing}[H]
 \begin{minted}{python}
@@ -486,7 +486,7 @@ Na de reconstructie van de sequenties diende de reconstructiefout als anomaly sc
 
 Toch is het belangrijk om dezelfde voorzichtigheid te tonen als bij de gewone Autoencoder. De private tractordataset heeft geen bevestigde labels voor defecten. Een observatie die door de LSTM Autoencoder als een anomalie wordt gekarakteriseerd, kan daarom niet automatisch worden beschouwd als een technisch probleem. De aanpak laat zien dat het gedrag van sensoren op specifieke momenten aanzienlijk verschilt van de patronen die het model heeft aangeleerd, maar extra technische informatie is vereist om te achterhalen of dit daadwerkelijk gerelateerd is aan een storing of slijtage.
 
-Een cruciaal voordeel van de LSTM-methde is dat er niet alleen een individuele sensormeting wordt beoordeeld. Het model evalueert een serie van achtereenvolgende metingen. Dit kan leiden tot een anomalie omdat een groep sensoren zich in verschillende opeenvolgende tijdstappen anders gedraagt dan wanneer ze normaal functioneren.
+Een cruciaal voordeel van de LSTM-methode is dat er niet alleen een individuele sensormeting wordt beoordeeld. Het model evalueert een serie van achtereenvolgende metingen. Dit kan leiden tot een anomalie omdat een groep sensoren zich in verschillende opeenvolgende tijdstappen anders gedraagt dan wanneer ze normaal functioneren.
 
 \paragraph{Vergelijking tussen MetroPT-3-dataset en de private tractordataset}
 
@@ -505,7 +505,7 @@ Aan de hand van deze experimenten kan worden vastgelegd dat een LSTM Autoencoder
     
 De One-Class SVM-model of One-Class Support Vector Machine is het laatste model voor het detecteren van anomalieën die onderzocht is. In tegenstelling tot een traditioneel supervised classificatiemodel is de One-Class SVM-model gebaseerd op vooral normale observaties. Het model streeft ernaar om een limiet vast te stellen voor het gebruikelijke gedrag van de machine in de dataset. Observaties die buiten deze limiet liggen, worden gezien als mogelijke afwijkingen.
 
-De methode is hierdoor geschikt voor situaties waarin er slechts een beperkte hoeveelheid gelabelde defeftdata beschikbaar is. Dit is in lijn met de private tractordataset, waarin geen bevestigde defectlabels waren opgenomen. In deze bachelorproef werd de One-Class SVM-model aanvankelijk gebruikt op de MetroPT-3-dataset, waar defectmomenten waren vastgelegd. Daarna werd dezelfde aanpak toegepast op de private tractordataset om te bepalen of de methodiek kan worden overgedragen naar de werkelijke telematicadata van een tractor.
+De methode is hierdoor geschikt voor situaties waarin er slechts een beperkte hoeveelheid gelabelde defectdata beschikbaar is. Dit is in lijn met de private tractordataset, waarin geen bevestigde defectlabels waren opgenomen. In deze bachelorproef werd de One-Class SVM-model aanvankelijk gebruikt op de MetroPT-3-dataset, waar defectmomenten waren vastgelegd. Daarna werd dezelfde aanpak toegepast op de private tractordataset om te bepalen of de methodiek kan worden overgedragen naar de werkelijke telematicadata van een tractor.
     
 \paragraph{One-Class SVM-model toegepast op de MetroPT-3-dataset}
 
@@ -628,7 +628,7 @@ Doordat de MetroPT-3-dataset beschikte over geregistreerde defectlabels was het 
 \caption[Confusion matrix van de One-Class SVM-model op de metroPT-3-dataset.]{\label{fig:Confusion_Matrix_One_clas_SVM_metroPT-3-dataset} De matrix liet zien hoe de normaal geclassificeerde observaties en de gelabelde defecten zich verdelen over de juiste en onjuiste voorspellingen van het model. De figuur toont aan dat het model een aantal defectgevallen identificeert, maar tegelijkertijd ook normale observaties als afwijkend kan indelen. Bron: eigen verwerking in Python-notebook.}
 \end{figure} 
 
-De confusion matrix uit figuur~\ref{fig:Confusion_Matrix_One_clas_SVM_metroPT-3-dataset} toont zowel de sterke recall als de lage precision van het model visueel aan. Het model herkent bijna alle geregistreerde storingen, maar beschouwt bovensien een aanzienlijk aantal normale observaties als een anomalie.
+De confusion matrix uit figuur~\ref{fig:Confusion_Matrix_One_clas_SVM_metroPT-3-dataset} toont zowel de sterke recall als de lage precision van het model visueel aan. Het model herkent bijna alle geregistreerde storingen, maar beschouwt bovendien een aanzienlijk aantal normale observaties als een anomalie.
 
 \begin{figure}[H]
 \centering
@@ -699,6 +699,6 @@ Het One-Class SVM-model was het laatste onderzochte model voor anomaliedetectie 
 
 Op de private tractordataset werd echter slechts 0.09 procent van de waarnemingen als afwijking vermeld. Dit resulteert in een aanzienlijk kleinere groep mogelijke afwijkingen die verder bestudeerd kan worden. Vooral de variaties in motorbelasting, motortoerental, vuldruk en temperatuur tussen de normale en als afwijkend geclassificeerde waarnemingen kunnen hierbij als indicatie dienen.
 
-De toepassing op beide datasets toont opnieuw aan dat de tweedelige benadering in deze bachelorproef van groot belang is: MetroPt-3-dataset stelt een objectieve beoordeling van anomaliedetectietechnieken mogelijk door de aanwezige defectlabels, terwijl de private tractordataset toont aan hoe dezelfde methodiek kan worden toegepast als dergelijke labels ontbreken.
+De toepassing op beide datasets toont opnieuw aan dat de tweedelige benadering in deze bachelorproef van groot belang is: MetroPt-3-dataset stelt een objectieve beoordeling van anomaliedetectie-technieken mogelijk door de aanwezige defectlabels, terwijl de private tractordataset toont aan hoe dezelfde methodiek kan worden toegepast als dergelijke labels ontbreken.
 
 
