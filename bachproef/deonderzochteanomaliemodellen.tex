@@ -31,7 +31,7 @@ rf_verb.fit(x_train_scaled_verb, y_train_verb)
 
 y_pred_verb = rf_verb.predict(x_test_scaled_verb)
 \end{minted}
-\caption[Code snippet Random Forest-model training]{Codefragment van de training van het Random Forest-model.}
+\caption[Code snippet: Random Forest-model training]{Codefragment van de training van het Random Forest-model.}
 \end{listing}
 
 De resultaten laten zien dat het model een algemene accuracy van 1.00 heeft bereikt. Aanvankelijk lijkt dit een uitstekend resultaat te zijn. Als er echter specifiek naar de defectklasse wordt gekeken, blijkt dat het model geen enkel defect nauwkeurig heeft voorspeld. Voor de defectklasse waren zowel de precision als de recall en de F1-score 0.00. In de testset waren er in totaal 1 622 daadwerkelijke defectobservaties, terwijl het model geen enkele voorspelling van defecten maakte.
@@ -45,7 +45,7 @@ De resultaten laten zien dat het model een algemene accuracy van 1.00 heeft bere
 Random Forest                & 1.00           & 0.00 & 0.00 & 0.00                \\
 \bottomrule
 \end{tabular}
-\caption[Tabel overzicht Random Forest-model]{\label{tab:tabel_overzicht_Random_Forest_model}Overzicht van de resultaten van het Random Forest-model.}
+\caption[Tabel: overzicht Random Forest-model]{\label{tab:tabel_overzicht_Random_Forest_model}Overzicht van de resultaten van het Random Forest-model.}
 \end{table}
 
 Bij de resultaten in de tabel~\ref{tab:tabel_overzicht_Random_Forest_model} wordt er een opmerking gemaakt namelijk precision, recall en F1-score zijn gerelateerd aan de defectklasse ``failure = 1''.
@@ -97,7 +97,7 @@ iso_verb.fit(x_train_scaled_verb)
 y_pred_iso_verb = iso_verb.predict(x_test_scaled_verb)
 y_pred_iso_verb = [1 if x_verb == -1 else 0 for x_verb in y_pred_iso_verb]
 \end{minted}
-\caption[Code snippet Isolation Forest-model]{Codefragment van het Isolation Forest-model.}
+\caption[Code snippet: Isolation Forest-model]{Codefragment van het Isolation Forest-model.}
 \end{listing}
 
 De voorspellingen van Isolation Forest-model werden daarna in vergelijking gebracht met de bekende defectlabels van de MetroPT-3-testset. Het model had een accuracy van 0,98. Voor de defectklasse was de precision 0.00, de recall 0.01 en de F1-score 0.00.
@@ -111,7 +111,7 @@ De voorspellingen van Isolation Forest-model werden daarna in vergelijking gebra
 Isolation Forest                & 0.98          & 0.00 & 0.01 & 0.00                \\
 \bottomrule
 \end{tabular}
-\caption[Tabel overzicht Isolation Forest-model]{\label{tab:tabel_overzicht_Isolation_Forest_model}Overzicht van de resultaten van het Isolation Forest-model.}
+\caption[Tabel: overzicht Isolation Forest-model]{\label{tab:tabel_overzicht_Isolation_Forest_model}Overzicht van de resultaten van het Isolation Forest-model.}
 \end{table}
 
 Hier wordt ook weer de opmerking gemaakt dat precision, recall en F1-score weer betrekking heeft tot de defectklasse ``failure = 1''.
@@ -166,7 +166,7 @@ autoencoder_verb.fit(
     validation_split=0.1
 )
 \end{minted}
-\caption[Code snippet opbouw en training van de Autoencoder]{Codefragment van de opbouw en training van de Autoencoder op de MetroPT-3-dataset.}
+\caption[Code snippet: opbouw en training van de Autoencoder]{Codefragment van de opbouw en training van de Autoencoder op de MetroPT-3-dataset.}
 \end{listing}
 
 De encoder vermindert de input tot een verborgen afbeelding van acht neuronen, waarna de decoder de oorspronkelijke input opnieuw opbouwt. Het model krijgt training met de Adam-optimizer en de Mean Squared Error als verliesfactor.
@@ -187,7 +187,7 @@ y_pred_auto_verb = [
     1 if e_verb > threshold_verb else 0 for e_verb in mse_verb
 ]
 \end{minted}
-\caption[Code snippet berekening reconstructiefout en  anomaliegrens Autoencoder]{Codefragment van de berekening van de reconstructiefout en de anomaliedrempel voor de autoencoder op de MetroPT-3-dataset.}
+\caption[Code snippet: berekening reconstructiefout en  anomaliegrens Autoencoder]{Codefragment van de berekening van de reconstructiefout en de anomaliedrempel voor de autoencoder op de MetroPT-3-dataset.}
 \end{listing}
 
 Bij elke testwaarneming wordt het gemiddelde kwadratische verschil tussen de originele en gereconstrueerde sensordata vastgesteld. De negenennegentigste percentielwaarde van deze fouten fungeert daarna als een limiet voor het identificeren van mogelijke afwijkingen.
@@ -207,7 +207,7 @@ Isolation Forest                & 0.98          & 0.00 & 0.01 & 0.00            
 Autoencoder & 0.99 & 0.16 & 0.44 & 0.24 \\
 \bottomrule
 \end{tabular}
-\caption[Tabel vergelijking tot nu onderzochte modellen]{\label{tab:tabel_vergelijking_tot_nu_onderzochte_modellen}Vergelijking van de tot nu onderzochte modellen.}
+\caption[Tabel: vergelijking van de tot nu onderzochte modellen]{\label{tab:tabel_vergelijking_tot_nu_onderzochte_modellen}Vergelijking van de tot nu onderzochte modellen.}
 \end{table}
 
 \newpage
@@ -219,7 +219,7 @@ Om de classificatieresultaten van de Autoencoder beter te begrijpen, is er ook e
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{Confusion_matrix_Autoencoder.png}
-\caption[Confusion matrix van de Autoencoder op de metroPT-3-dataset.]{\label{fig:Confusion_Matrix_Autoencoder_metroPT-3-dataset} De matrix liet zien hoe de normaal geclassificeerde observaties en de gelabelde defecten zich verdelen over de juiste en onjuiste voorspellingen van het model. De figuur toont aan dat het model een aantal defectgevallen identificeert, maar tegelijkertijd ook normale observaties als afwijkend kan indelen. Bron: eigen verwerking in Python-notebook.}
+\caption[Confusion matrix van de Autoencoder op de metroPT-3-dataset.]{\label{fig:Confusion_Matrix_Autoencoder_metroPT-3-dataset} De matrix liet zien hoe de normaal geclassificeerde observaties en de gelabelde defecten zich verdelen over de juiste en onjuiste voorspellingen van het model. De figuur toont aan dat het model een aantal defectgevallen identificeert, maar tegelijkertijd ook normale observaties als afwijkend kan indelen.}
 \end{figure} 
 
 De uitkomsten dienen voorzichtig te worden benaderd. De MetroPT-3-dataset toont een duidelijke relatie tussen normale en defecte observaties. Hierdoor kan een hoge accuracy een vertekend beeld schetsen van de daadwerkelijke prestaties. Voor het evalueren van anomaliedetectie zijn vooral precision, recall en F1-score van de defectklasse van belang.
@@ -256,7 +256,7 @@ autoencoder.compile(
     loss='mse'
 )
 \end{minted}
-\caption[Code snippet opbouw van de Autoencoder op de private tractordataset.]{Codefragment van de opbouw van de autoencoder op de private tractordataset.}
+\caption[Code snippet: opbouw van de Autoencoder op de private tractordataset.]{Codefragment van de opbouw van de autoencoder op de private tractordataset.}
 \end{listing}
 
 De encoder vermindert de zevenentwintig invoerkenmerken aanvankelijk naar tweeëndertig en daarna naar zestien neuronen. De decoder vergroot deze representatie tot tweeëndertig neuronen en herstelt daarna de oorspronkelijke zevenentwintig eigenschappen.
@@ -266,7 +266,7 @@ Het model onderging twintig epochs training met een batchgrootte van 256 en een 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{foto_epoch_verloop.png}
-\caption[Trainings- en validatieverlies van de Autoencoder op de private tractordataset]{\label{fig:Verloop_epoch_tractordataset} De figuur laat zien hoe de trainings- en validatieverlies verliep bij de iedere epoch of trainingsiteratie en laat zien het model geleidelijk aan beter leert om de sensordata te reconstrueren. Bron: eigen verwerking in Python-notebook.}
+\caption[Trainings- en validatieverlies van de Autoencoder op de private tractordataset]{\label{fig:Verloop_epoch_tractordataset} De figuur laat zien hoe de trainings- en validatieverlies verliep bij de iedere epoch of trainingsiteratie en laat zien het model geleidelijk aan beter leert om de sensordata te reconstrueren.}
 \end{figure} 
 
 Na de training werd de Mean Squared Error tussen de originele en gereconstrueerde sensordata vastgesteld voor elke observatie. De negenennegentigste percentielwaarde van deze reconstructiefouten diende als limiet voor anomalieën. De berekende drempel was 0.05748. Alle waarnemingen met een grotere reconstructiefout werden als een anomalie gemarkeerd.
@@ -276,7 +276,7 @@ Deze aanpak leidde tot 851 geconstateerde afwijkingen binnen de 85 065 beschikba
 \begin{figure}[H]
 \centering
 \includegraphics[width=1.0\textwidth]{Grafiek_Autoencoder_anomaly_scores_tractordataset.png}
-\caption[Anomalyscores van de Autoencoder toegepast op de private tractordataset]{\label{fig:anomalyscores_autoencoder_tractordataset} De grafiek laat de reconstructiefout van de tractormetingen zien gedurende de beschikbare tijdsperiode. De horizontale drempel toont de negenennegentigste percentielwaarde van de fouten in de reconstructie aan. De Autoencoder markeert waarnemingen die boven deze grens liggen als een mogelijke afwijking. Bron: eigen verwerking in Python-notebook. }
+\caption[Grafiek van de anomalyscores van de Autoencoder toegepast op de private tractordataset]{\label{fig:anomalyscores_autoencoder_tractordataset} De grafiek laat de reconstructiefout van de tractormetingen zien gedurende de beschikbare tijdsperiode. De horizontale drempel toont de negenennegentigste percentielwaarde van de fouten in de reconstructie aan. De Autoencoder markeert waarnemingen die boven deze grens liggen als een mogelijke afwijking.}
 \end{figure} 
 
 De grafiek in figuur~\ref{fig:anomalyscores_autoencoder_tractordataset} laat de anomaly score van de tractormetingen doorheen de tijd, waarbij de ingestelde drempel als referentie wordt gebruikt. De Autoencoder beschouwt waarnemingen die boven deze grens liggen als een afwijking. Rond twintig oktober 2025 werden vooral verschillende hoge anomaly scores geconstateerd. 
@@ -286,7 +286,8 @@ Om de vastgestelde afwijkingen afzonderlijk te kunnen zien, is er bovendien een 
 \begin{figure}[H]
 \centering
 \includegraphics[width=1.0\textwidth]{Grafiek_gedetecteerde_anomalieen_autoencoder_tractordata.png}
-\caption[Gedetecteerde anomalieën van de autoencoder in de tractordata]{\label{fig:gedetecteerde_anomalieën_autoencoder_tractordataset} De figuur laat zien wanneer de reconstructiefout de vastgelegde anomaliedrempel overschreed. De punten die zijn weergegeven, vertegenwoordigen observaties die door het model als afwijkend zijn gemarkeerd. De visualisatie maakt het mogelijk om te onderzoeken of de afwijkingen zich in specifieke tijden van het gebruik van de tractor manifesteren. Bron: eigen verwerking in Python-notebook. }
+\caption[Grafiek met de gedetecteerde anomalieën van de autoencoder in de
+tractordata]{\label{fig:gedetecteerde_anomalieën_autoencoder_tractordataset} De figuur laat zien wanneer de reconstructiefout de vastgelegde anomaliedrempel overschreed. De punten die zijn weergegeven, vertegenwoordigen observaties die door het model als afwijkend zijn gemarkeerd. De visualisatie maakt het mogelijk om te onderzoeken of de afwijkingen zich in specifieke tijden van het gebruik van de tractor manifesteren.}
 \end{figure} 
 
 \newpage
@@ -345,7 +346,7 @@ X_test_seq = create_sequences(
 print(X_train_seq.shape)
 print(X_test_seq.shape)
 \end{minted}
-\caption[Code snippet opstellen van de tijdsequenties in de MetroPT-3-dataset]{Codefragment van het opstellen van de tijdsequenties in de MetroPT-3-dataset.}
+\caption[Code snippet: opstellen van de tijdsequenties in de MetroPT-3-dataset]{Codefragment van het opstellen van de tijdsequenties in de MetroPT-3-dataset.}
 \end{listing}
 
 Het codefragment is interessant, omdat het verduidelijkt waarom dit model een LSTM Autoencoder is en geen standaard Autoencoder. De individuele observaties worden niet afzonderlijk gepresenteerd, maar in reeksen van dertig achtereenvolgende metingen.
@@ -387,7 +388,7 @@ lstm_autoencoder.compile(
     loss='mse'
 )
 \end{minted}
-\caption[Code snippet De structuur van de LSTM Autoencoder op de MetroPT-3-dataset.]{Codefragment van de structuur van de LSTM Autoencoder op de MetroPT-3-dataset.}
+\caption[Code snippet: de structuur van de LSTM Autoencoder op de MetroPT-3-dataset.]{Codefragment van de structuur van de LSTM Autoencoder op de MetroPT-3-dataset.}
 \end{listing}
 
 De Autoencoder kreeg alleen training op gebruikelijke observaties uit de trainingsgegevens zijn hiervoor gekozen. Dit stelde het model in staat om vooral het gebruikelijke tijdelijke gedrag van het compressorsysteem te reconstrueren.
@@ -397,7 +398,7 @@ In de eerste versie vond er een training plaats over tien epochs, met een batchg
 \begin{figure}[H]
 \centering
 \includegraphics[width=1.0\textwidth]{Grafiek_Model_verlies_LSTM.png}
-\caption[Trainings- en validatieloss van de tweede LSTM Autoencoder-training op de MetroPT-3-dataset]{\label{fig:Loss_LSTM_MetroPT-3-dataset} Het verloop van de trainings- valisdatieloss tijdens de tweede training van de LSTM Autoencoder op de MetroPT-3-dataset Bron: eigen verwerking in Python-notebook. }
+\caption[Grafiek van de trainings- en validatieloss van de tweede LSTM Autoencoder-training op de MetroPT-3-dataset]{\label{fig:Loss_LSTM_MetroPT-3-dataset} Het verloop van de trainings- en validatieloss tijdens de tweede training van de LSTM Autoencoder op de MetroPT-3-dataset.}
 \end{figure}
 
 De tweede training maakte gebruik van ``EarlyStopping'' met een geduld van vijf epochs en herstelde de gewichten van de beste uitvoering. Deze methode werd toegepast om te vermijden dat het model onnodig lang werd getraind als de validatieprestatie niet meer verbeterde.
@@ -409,7 +410,7 @@ Voor het vaststellen van de anomaliedrempel werd de reconstructiefout van de geb
 \begin{figure}[H]
 \centering
 \includegraphics[width=1.0\textwidth]{Grafiek_reconstructiefout_LSTM.png}
-\caption[Grafiek reconstructiefout in de testset over de tijd van de LSTM Autoencoder op de MetroPT-3-dataset]{\label{fig:Grafiek_reconstructiefout_LSTM} De grafiek laat de reconstructiefout van de metingen zien gedurende de beschikbare tijdsperiode. De horizontale drempel toont de negenennegentigste percentielwaarde van de fouten in de reconstructie aan. De LSTM Autoencoder markeert waarnemingen die boven deze grens liggen als een mogelijke afwijking. Bron: eigen verwerking in Python-notebook. }
+\caption[Grafiek van reconstructiefout in de testset over de tijd van de LSTM Autoencoder op de MetroPT-3-dataset]{\label{fig:Grafiek_reconstructiefout_LSTM} De grafiek laat de reconstructiefout van de metingen zien gedurende de beschikbare tijdsperiode. De horizontale drempel toont de negenennegentigste percentielwaarde van de fouten in de reconstructie aan. De LSTM Autoencoder markeert waarnemingen die boven deze grens liggen als een mogelijke afwijking.}
 \end{figure} 
 
 De uiteindelijke beoordeling toonde aan dat de LSTM Autoencoder een precision van 0.0556, een recall van 0.1603 en een F1-score van 0.0825 bereikte voor de defectklasse. Het model ontdekte zo ongeveer zestien procent van de geregistreerde defectmeldingen tijdens de testperiode. De precision was relatief laag, wat inhoudt dat een aanzienlijk aantal van de door het model geïdentificeerde afwijkingen niet overeenkwam met een gelabeld defect.
@@ -417,7 +418,7 @@ De uiteindelijke beoordeling toonde aan dat de LSTM Autoencoder een precision va
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{Confusion_matrix_LSTM}
-\caption[Confusion matrix van de LSTM Autoencoder op de metroPT-3-dataset.]{\label{fig:Confusion_Matrix_LSTM_metroPT-3-dataset} De matrix liet zien hoe de normaal geclassificeerde observaties en de gelabelde defecten zich verdelen over de juiste en onjuiste voorspellingen van het model. De figuur toont aan dat het model een aantal defectgevallen identificeert, maar tegelijkertijd ook normale observaties als afwijkend kan indelen. Bron: eigen verwerking in Python-notebook.}
+\caption[Confusion matrix van de LSTM Autoencoder op de metroPT-3-dataset.]{\label{fig:Confusion_Matrix_LSTM_metroPT-3-dataset} De matrix liet zien hoe de normaal geclassificeerde observaties en de gelabelde defecten zich verdelen over de juiste en onjuiste voorspellingen van het model. De figuur toont aan dat het model een aantal defectgevallen identificeert, maar tegelijkertijd ook normale observaties als afwijkend kan indelen.}
 \end{figure} 
 
 De uitkomsten laten zien dat de LSTM Autoencoder in staat was om een aantal geregistreerde fouten te herkennen. De resultaten waren echter beperkt. In tegenstelling tot de eerder bestudeerd gewone Autoencoder, die een recall van 0.44 voor de defectklasse opleverde, presteerde de LSTM Autoencoder in deze variant minder goed. De tijdelijke verwerking van de data resulteerde dus niet automatisch in verbeterde classificatieresultaten.
@@ -441,7 +442,7 @@ scaler = StandardScaler()
 
 X_scaled = scaler.fit_transform(X)
 \end{minted}
-\caption[Code snippet gedeelte van preprocessing van tractordata voor het toepassen van LSTM Autoencoder]{Codefragment van een gedeelte van de preprocessing van de tractordata voor het toepassen van LSTM Autoencoder.}
+\caption[Code snippet: gedeelte van preprocessing van tractordata voor het toepassen van LSTM Autoencoder]{Codefragment van een gedeelte van de preprocessing van de tractordata voor het toepassen van LSTM Autoencoder.}
 \end{listing}
 
 Vervolgens werden er opnieuw sequenties van dertig achtereenvolgende metingen gecreëerd. Elke sequentie kreeg een vorm van dertig tijdstappen met zestien verschillende sensorkenmerken. Hierdoor zijn er 85 044 sequenties ontstaan met een dimensie van ``(30, 16)''.
@@ -473,7 +474,7 @@ lstm_autoencoder.compile(
 )
 
 \end{minted}
-\caption[Code snippet De structuur van de LSTM Autoencoder op de private tractordataset.]{Codefragment van de structuur van de LSTM Autoencoder op de tractordataset.}
+\caption[Code snippet: De structuur van de LSTM Autoencoder op de private tractordataset.]{Codefragment van de structuur van de LSTM Autoencoder op de tractordataset.}
 \end{listing}
 
 Na de reconstructie van de sequenties diende de reconstructiefout als anomaly score. Deze reconstructiefout is aan de oorspronkelijke tractorgegevens toegevoegd, samen met een binaire anomalie-kolom. Dit maakte het mogelijk om de observaties met een aanzienlijke reconstructiefout afzonderlijk te onderzoeken.
@@ -481,7 +482,7 @@ Na de reconstructie van de sequenties diende de reconstructiefout als anomaly sc
 \begin{figure}[H]
 \centering
 \includegraphics[width=1.0\textwidth]{Grafiek_reconstructiefout_LSTM_tractor.png}
-\caption[Grafiek reconstructiefout over de tijd van de LSTM Autoencoder op de private tractordataset]{\label{fig:Grafiek_reconstructiefout_LSTM_tractor}De grafiek laat de reconstructiefout van de tractormetingen zien gedurende de beschikbare tijdsperiode. De horizontale drempel toont de threshold in de reconstructie aan. De LSTM Autoencoder markeert waarnemingen die boven deze grens liggen als een mogelijke afwijking. Bron: eigen verwerking in Python-notebook. }
+\caption[Grafiek van de reconstructiefout over de tijd van de LSTM Autoencoder op de private tractordataset]{\label{fig:Grafiek_reconstructiefout_LSTM_tractor}De grafiek laat de reconstructiefout van de tractormetingen zien gedurende de beschikbare tijdsperiode. De horizontale drempel toont de threshold in de reconstructie aan. De LSTM Autoencoder markeert waarnemingen die boven deze grens liggen als een mogelijke afwijking.}
 \end{figure} 
 
 Toch is het belangrijk om dezelfde voorzichtigheid te tonen als bij de gewone Autoencoder. De private tractordataset heeft geen bevestigde labels voor defecten. Een observatie die door de LSTM Autoencoder als een anomalie wordt gekarakteriseerd, kan daarom niet automatisch worden beschouwd als een technisch probleem. De aanpak laat zien dat het gedrag van sensoren op specifieke momenten aanzienlijk verschilt van de patronen die het model heeft aangeleerd, maar extra technische informatie is vereist om te achterhalen of dit daadwerkelijk gerelateerd is aan een storing of slijtage.
@@ -534,7 +535,7 @@ scaler = StandardScaler()
 x_train_scaled = scaler.fit_transform(x_train)
 x_test_scaled = scaler.transform(x_test)
 \end{minted}
-\caption[Code snippet Het voorbereiden en standaardiseren van MetroPT-3-data voor het One-Class SVM-model.]{Codefragment van het voorbereiden en standaardiseren van de MetroPT-3-data voor het One-Class SVM-model.}
+\caption[Code snippet: het voorbereiden en standaardiseren van MetroPT-3-data voor het One-Class SVM-model.]{Codefragment van het voorbereiden en standaardiseren van de MetroPT-3-data voor het One-Class SVM-model.}
 \end{listing}
 
 Voor het trainen van One-Class SVM-model werden alleen observaties toegepast die gedurende de trainingsperiode als gebruikelijk werden beschouwd. Uit deze gebruikelijke observaties werd daarna een willekeurige steekproef van maximaal 100 000 observaties verzameld. Dit zorgde ervoor dat de rekentijd van het model werd verkort zonder dat alle beschikbare normale observaties nodig waren.
@@ -553,7 +554,7 @@ indices = np.random.choice(
 
 x_train_sample = x_train_normal[indices]
 \end{minted}
-\caption[Code snippet Het selecteren van normale trainingsobservaties voor het One-Class SVM-model.]{Codefragment van het selecteren van normale trainingsobservaties voor het One-Class SVM-model.}
+\caption[Code snippet: het selecteren van normale trainingsobservaties voor het One-Class SVM-model.]{Codefragment van het selecteren van normale trainingsobservaties voor het One-Class SVM-model.}
 \end{listing}    
     
 Daarna werd het One-Class SVM-model ontwikkeld met behulp van een ``rbf-kernel''. In de eerste versie werd ``nu = 0.01'' toegepast. De parameter stelt onder andere vast hoeveel observaties het model als mogelijke afwijkingen kan zien. De gamma-parameter werd geconfigureerd op schaal, waardoor de waarde automatisch werd aangepast aan de invoerdata.
@@ -568,7 +569,7 @@ ocsvm = OneClassSVM(
 
 ocsvm.fit(x_train_sample)
 \end{minted}
-\caption[Code snippet Het trainen van het One-Class SVM-model op de MetroPT-3-dataset.]{Codefragment van het trainen van het One-Class SVM-model op de MetroPT-3-dataset.}
+\caption[Code snippet: het trainen van het One-Class SVM-model op de MetroPT-3-dataset.]{Codefragment van het trainen van het One-Class SVM-model op de MetroPT-3-dataset.}
 \end{listing} 
     
 Na de training werden er voorspellingen gedaan op basis van de testdata. One-Class SVM-model hanteert ``+1'' voor normale observaties en ``-1'' voor afwijkingen. Deze waarden zijn omgezet naar de labels die zijn gebruikt, waarbij ``0'' verwijst naar gebruikelijk gedrag en ``1'' naar een storing.
@@ -579,7 +580,7 @@ y_pred = ocsvm.predict(x_test_scaled)
 
 y_pred = (y_pred == -1).astype(int)
 \end{minted}
-\caption[Code snippet Het voorspellen van afwijkingen met de One-Class SVM-model op de MetroPT-3-dataset.]{Codefragment van het voorspellen van afwijkingen met het One-Class SVM-model op de MetroPT-3-dataset.}
+\caption[Code snippet: het voorspellen van afwijkingen met de One-Class SVM-model op de MetroPT-3-dataset.]{Codefragment van het voorspellen van afwijkingen met het One-Class SVM-model op de MetroPT-3-dataset.}
 \end{listing} 
 
 De testset omvatte 443 602 observaties, waaronder 441 436 gebruikelijke observaties en 2 166 observatie met gelabelde fouten. De eerste versie van de One-Class SVM-model bereikte een accuracy van 0.239, een precision van 0.00064, recall van 0.9995 en een F1-score van 0.0127 voor de storingsklasse.
@@ -598,7 +599,7 @@ ocsvm_verb = OneClassSVM(
 
 ocsvm_verb.fit(x_train_sample)
 \end{minted}
-\caption[Code snippet Tweede One-Class SVM configuratie met een lagere ``nu''-waarde]{Codefragment van de tweede One-Class SVM configuratie met een lagere ``nu''-waarde.}
+\caption[Code snippet: tweede One-Class SVM configuratie met een lagere ``nu''-waarde]{Codefragment van de tweede One-Class SVM configuratie met een lagere ``nu''-waarde.}
 \end{listing}
 
 Deze verandering resulteerde in een accuracy van 0.289, een precision van 0.0067, een recall van 0.9834 en een F1-score van 0.0133. De lagere ``nu''-waarde verhoogde de accuracy en precision aanzienlijk, terwijl de recall slechts beperkt afnam. De F1-score was echter uiterst laag.
@@ -615,7 +616,7 @@ Recall & 0.9995 & 0.9834 \\
 F1-score & 0.0127 & 0.0133 \\
 \bottomrule
 \end{tabular}
-\caption[Tabel vergelijking van de twee versies van de One-Class SVM configuratie op de MetroPT-3-dataset]{\label{tab:tabel_vergelijking_versies_One-Class_SVM}Vergelijking van de twee versies van de One-Class SVM configuratie op de MetroPT-3-dataset.}
+\caption[Tabel: vergelijking van de twee versies van de One-Class SVM configuratie op de MetroPT-3-dataset]{\label{tab:tabel_vergelijking_versies_One-Class_SVM}Vergelijking van de twee versies van de One-Class SVM configuratie op de MetroPT-3-dataset.}
 \end{table}
     
 De uitkomsten laten zien dat het aanpassen van ``nu'' een beperkte verbetering heeft opgeleverd, maar dat het One-Class SVM-model in deze configuratie moeite had om onderscheid te maken tussen gebruikelijke operationele variaties en daadwerkelijke afwijkingen die verband houden met defecten.
@@ -625,7 +626,7 @@ Doordat de MetroPT-3-dataset beschikte over geregistreerde defectlabels was het 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{Confusion_matrix_One_class_svm.png}
-\caption[Confusion matrix van de One-Class SVM-model op de metroPT-3-dataset.]{\label{fig:Confusion_Matrix_One_clas_SVM_metroPT-3-dataset} De matrix liet zien hoe de normaal geclassificeerde observaties en de gelabelde defecten zich verdelen over de juiste en onjuiste voorspellingen van het model. De figuur toont aan dat het model een aantal defectgevallen identificeert, maar tegelijkertijd ook normale observaties als afwijkend kan indelen. Bron: eigen verwerking in Python-notebook.}
+\caption[Confusion matrix van de One-Class SVM-model op de metroPT-3-dataset.]{\label{fig:Confusion_Matrix_One_clas_SVM_metroPT-3-dataset} De matrix liet zien hoe de normaal geclassificeerde observaties en de gelabelde defecten zich verdelen over de juiste en onjuiste voorspellingen van het model. De figuur toont aan dat het model een aantal defectgevallen identificeert, maar tegelijkertijd ook normale observaties als afwijkend kan indelen.}
 \end{figure} 
 
 De confusion matrix uit figuur~\ref{fig:Confusion_Matrix_One_clas_SVM_metroPT-3-dataset} toont zowel de sterke recall als de lage precision van het model visueel aan. Het model herkent bijna alle geregistreerde storingen, maar beschouwt bovendien een aanzienlijk aantal normale observaties als een anomalie.
@@ -633,7 +634,7 @@ De confusion matrix uit figuur~\ref{fig:Confusion_Matrix_One_clas_SVM_metroPT-3-
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{Grafiek_verdeling_decision_function_scores_SVM.png}
-\caption[Grafiek verdeling van de One-Class SVM decision function scores voor gebruikelijke en defecte observaties op de MetroPT-3-testset]{\label{fig:Verdeling_decision_SVM} De verdeling van de decision function scores per klasse. Lagere scores wijzen op een grotere afwijking. De zwarte onderbroken lijn toont de gebruikelijke beslissingsgrens aan. De kloof tussen de twee secties laat zien waar het model moeite heeft om beide klassen duidelijk van elkaar te scheiden met de standaarddrempelwaarde  Bron: eigen verwerking in Python-notebook.}
+\caption[Grafiek van de verdeling van de One-Class SVM decision function scores voor gebruikelijke en defecte observaties op de MetroPT-3-testset]{\label{fig:Verdeling_decision_SVM} De verdeling van de decision function scores per klasse. Lagere scores wijzen op een grotere afwijking. De zwarte onderbroken lijn toont de gebruikelijke beslissingsgrens aan. De kloof tussen de twee secties laat zien waar het model moeite heeft om beide klassen duidelijk van elkaar te scheiden met de standaarddrempelwaarde.}
 \end{figure}
 
 De grafiek in figuur~\ref{fig:Verdeling_decision_SVM} laat zien hoe de scores van de beslissingsfunctie voor beide klassen zijn verdeeld. De gebruikelijke beslissingsgrens van het One-Class SVM-model bedraagt nul. Volgens de implementatie duiden lagere scores op een grotere afwijking van het geleerde gebruikelijke gedrag. De sterke samenhang tussen de twee verdelingen maakt het duidelijk waarom het model moeite heeft om normale en defecte observaties van elkaar te onderscheiden.
@@ -662,7 +663,7 @@ predictions = np.where(predictions == -1, 1, 0)
 
 df_tractor["Anomaly"] = predictions
 \end{minted}
-\caption[Code snippet One-Class SVM-model op de private tractordataset]{Codefragment van de One-Class SVM-model op de private tractordataset.}
+\caption[Code snippet: One-Class SVM-model op de private tractordataset]{Codefragment van de One-Class SVM-model op de private tractordataset.}
 \end{listing}
 
 Na de training van het model werden er voorspellingen gedaan voor alle beschikbare observaties. De dataset telde in totaal 85 074 observaties. Een One-Class SVM-model beschouwde 84 996 observaties als normaal en achtenzeventig als afwijking. Dit houdt in dat ongeveer 0.09 procent van de beschikbare observaties als afwijkend werd geclassificeerd.
@@ -674,7 +675,7 @@ Aangezien de private tractordataset geen geregistreerde defectlabels bevat, is h
 \begin{figure}[H]
 \centering
 \includegraphics[width=1.0\textwidth]{Grafiek_anomalieen_SVM_tractordataset.png}
-\caption[Grafiek Door One-Class SVM-model aangeduide anomalieën in de motorbelasting van de private tractordataset.]{\label{fig:Grafiek_anomalieen_SVM_tractordataset} Het tijdsverloop van de motorbelasting van september tot november 2025. De rode stippen wijzen op de afwijkingen die door het One-Class SVM-model zijn vastgesteld. Bron: eigen verwerking in Python-notebook.}
+\caption[Grafiek van de door One-Class SVM-model aangeduide anomalieën in de motorbelasting van de private tractordataset.]{\label{fig:Grafiek_anomalieen_SVM_tractordataset} Het tijdsverloop van de motorbelasting van september tot november 2025. De rode stippen wijzen op de afwijkingen die door het One-Class SVM-model zijn vastgesteld.}
 \end{figure}
 
 De grafiek in figuur~\ref{fig:Grafiek_anomalieen_SVM_tractordataset} laat zien hoe de motorbelasting zich ontwikkelt gedurende de beschikbare meetperiode. De aangeduide punten zijn de observaties die door het One-Class SVM-model als een afwijking beschouwd. Hierdoor is het mogelijk om visueel te controleren onder welke operationele omstandigheden het model afwijkingen opmerkte.

@@ -5,7 +5,7 @@
 \chapter{\IfLanguageName{dutch}{De verkregen werkelijke data van een machine in de bouw}{Actual data collected from a machine in the construction industry}}%
 \label{ch:de echte data}
 
-Hoofdstuk 5 behandelt de privédataset die in deze bachelorproef  is ingezet voor de ontwikkeling en implementatie van het voorspellend onderhoudsmethodiek. De dataset omvat telematicadata van een operationele tractor die momenteel in gebruik is binnen een bouwbedrijf. Na de zoektocht naar geschikte datasets, zoals vermeld in het vorige hoofdstuk, bleek deze dataset de meest geschikte bron van realistische sensordata voor het verdere onderzoek te zijn.
+Hoofdstuk 5 behandelt de privédataset die in deze bachelorproef is ingezet voor de ontwikkeling en implementatie van het voorspellend onderhoudsmethodiek. De dataset omvat telematicadata van een operationele tractor die momenteel in gebruik is binnen een bouwbedrijf. Na de zoektocht naar geschikte datasets, zoals vermeld in het vorige hoofdstuk, bleek deze dataset de meest geschikte bron van realistische sensordata voor het verdere onderzoek te zijn.
 
 In dit hoofdstuk worden de kenmerken van de dataset toegelicht, worden de beschikbare sensoren en parameters toegelicht en er wordt toegelicht op welke manier de gegevens zijn voorbereid voor verdere analyse. Bovendien wordt de beperkingen van de dataset besproken, zoals het gebrek aan defectlabels en de historische duur,  evenals de impact hiervan op het verdere verloop van het onderzoek.
 
@@ -45,7 +45,7 @@ Defect- of storingregistraties & Nee \\
 Datatype & Time-series \\
  \bottomrule
 \end{tabular}
-\caption[Tabel Overzicht tractordataset]{\label{tab:tabel overzicht tractordataset}Een samenvatting van de verkregen tractordataset.}
+\caption[Tabel: overzicht tractordataset]{\label{tab:tabel overzicht tractordataset}Een samenvatting van de verkregen tractordataset.}
 \end{table}
 
 Tabel~\ref{tab:tabel overzicht tractordataset} laat zien dat in tegenstelling tot tal van andere openbare datasets deze dataset geen gegevens bevat over onderhoudsmomenten of geregistreerde defecten. Hierdoor kan niet worden vastgesteld op welk moment een storing daadwerkelijk heeft plaatsgevonden. De dataset is daarom vooral geschikt voor het onderzoeken van operationele patronen en het identificeren van mogelijke afwijkingen die voortkomen uit sensordata.
@@ -55,7 +55,7 @@ Tabel~\ref{tab:tabel overzicht tractordataset} laat zien dat in tegenstelling to
 \begin{figure}
 \centering
 \includegraphics[width=1.0\textwidth]{foto_private_dataset.png}
-\caption[Figuur overzicht private dataset.]{\label{fig:overzicht private dataset}Voorbeeld van de telematicadata die van de tractor zijn verkregen. De dataset omvat tijdsgebonden metingen van sensoren, waaronder tijdstempel, motortoerental, motorbelasting, koelvloeistoftemperatuur, transmissieoliedruk, rijsnelheid en brandstofdebiet, die dienen voor verdere analyse en het opsporen van afwijkingen. Bron: Vanderroost NV (2025), eigen verwerking}
+\caption[Figuur: overzicht verzamelde private dataset.]{\label{fig:overzicht private dataset}Voorbeeld van de telematicadata die van de tractor zijn verkregen. De dataset omvat tijdsgebonden metingen van sensoren, waaronder tijdstempel, motortoerental, motorbelasting, koelvloeistoftemperatuur, transmissieoliedruk, rijsnelheid en brandstofdebiet, die dienen voor verdere analyse en het opsporen van afwijkingen.}
 \end{figure}
 
 Figuur~\ref{fig:overzicht private dataset} laat een gedeelte zien van de verzamelde tractordataset. Elke rij staat voor een tijdsregistratie van de machine, terwijl de kolommen diverse telematicaparameters bevatten die automatisch tijdens de werking zijn vastgelegd.
@@ -86,7 +86,7 @@ Vuldruk motor & De turbodruk of de inlaatdruk van de motor. \\
 is\_idle & Dit geeft aan of de tractor stationair draait. \\
  \bottomrule
 \end{tabular}
-\caption[Tabel alle parameters tractordataset]{\label{tab:alle parameters tractordataset}Alle parameters die in de tractordataset voorkomen.}
+\caption[Tabel: alle parameters tractordataset]{\label{tab:alle parameters tractordataset}Alle parameters die in de private tractordataset voorkomen.}
 \end{table}
 
 \newpage
@@ -95,7 +95,7 @@ Naast de belangrijkste parameters die in Figuur~\ref{fig:overzicht private datas
 
 %De gegevens over de aangeleverde tractor omvatten historische telematicagegevens die automatisch werden vastgelegd tijdens het gebruik van de machine. Dit houdt in dat de dataset geen gesimuleerde of experimentele informatie bevat, maar wel het gedrag van de tractor daadwerkelijk weergeeft onder realistische werkomstandigheden. Dit biedt volgens het onderzoek van \textcite{Carvalho2019} een aanzienlijk voordeel, omdat real-world gegevens vaak ingewikkelder en minder gestructureerd zijn dan synthetische gegevens, wat resulteert in een nauwkeuriger inzicht in de werkelijke praktijkomstandigheden.
 
-De voortdurende registratie van sensorgegevens leidt tot de vorming van een tijdsgebonden dataset, die ook wel een time-series dataset wordt genoemd, waarbij diverse metingen zijn verbonden met een bepaalde tijdstempel. Deze datasets zijn zeer geschikt voor het voorspellen van onderhoud, omdat defecten en slijtageprocessen doorgaans niet plotseling optreden, maar zich geleidelijk in de loop der tijd ontwikkelen. Afwijkingen kunnen vaak alleen worden opgemerkt door trends en patronen in de tijd te onderzoeken. Het onderzoek van \textcite{Lu2026} stellen dat tijdsreeksen  cruciaal zijn voor het vroegtijdig opsporen van fouten in roterende machines, terwijl de studie van \textcite{WangXueyi2025} bewijzen dat veranderingen in sensorpatronen over tijd een belangrijke aanwijzing zijn voor aanvankelijke defecten.
+De voortdurende registratie van sensorgegevens leidt tot de vorming van een tijdsgebonden dataset, die ook wel een time-series dataset wordt genoemd, waarbij diverse metingen zijn verbonden met een bepaalde tijdstempel. Deze datasets zijn zeer geschikt voor het voorspellen van onderhoud, omdat defecten en slijtageprocessen doorgaans niet plotseling optreden, maar zich geleidelijk in de loop der tijd ontwikkelen. Afwijkingen kunnen vaak alleen worden opgemerkt door trends en patronen in de tijd te onderzoeken. Het onderzoek van \textcite{Lu2026} stellen dat tijdsreeksen cruciaal zijn voor het vroegtijdig opsporen van fouten in roterende machines, terwijl de studie van \textcite{WangXueyi2025} bewijzen dat veranderingen in sensorpatronen over tijd een belangrijke aanwijzing zijn voor aanvankelijke defecten.
 
 Daarnaast stelt het inzetten van historische telematicagegevens ons in staat om zowel normaal gedrag als mogelijke afwijkingen te herkennen zonder dat er duidelijke labels vereist zijn. Dit is vooral van belang in situaties waarin er weinig of geen onderhouds- of defectdata beschikbaar zijn, wat vaak voorkomt in industriële omgevingen. Volgens de studies van \textcite{Giannoulidis2024} en \textcite{Dissem2024} worden in dergelijke situaties regelmatig unsupervised learning-methoden toegepast, die patronen aanleren op basis van normaal gedrag en afwijkingen opsporen als afwijkingen van deze patronen.
 
@@ -245,22 +245,22 @@ Na het ontvangen van de telematicadata werd duidelijk dat de dataset niet uit é
 
 De eerste fase omvatte het afzonderlijk verwerken van elk Excel-bestand met de Python-bibliotheek pandas. De bestanden hadden een soortgelijke opbouw, maar moesten eerst worden gestandaardiseerd om later probleemloos te kunnen worden samengevoegd.
 
-Aanvankelijk werd de index van elk bestand herzien met reset\_index(), waardoor de records een opeenvolgende nummering kregen. Daarna werden de kolomnamen gewijzigd in consistente en goed leesbare namen. Alle bestanden maakten gebruik van identieke kolomnamen, wat essentieel was voor de verdere verwerking.
+Aanvankelijk werd de index van elk bestand herzien met ``reset\_index()'', waardoor de records een opeenvolgende nummering kregen. Daarna werden de kolomnamen gewijzigd in consistente en goed leesbare namen. Alle bestanden maakten gebruik van identieke kolomnamen, wat essentieel was voor de verdere verwerking.
 
 \begin{listing}[H]
 \begin{minted}{python}
 df_spt_1 = df_spt_1.iloc[1:].reset_index(drop=True)
 \end{minted}
-\caption[Reset index tractordata]{Regel code om de dataset te herindexeren.}
+\caption[Code snippet: reset index tractordata]{Regel code om de dataset te herindexeren.}
 \end{listing}
 
-Vervolgens werd de kolom Tijdstempel omgevormd tot het datetime-formaat met behulp van pd.to\_datetime. Hierdoor konden de meetwaarden chronologisch worden ingedeeld en konden er later analyses op basis van tijd worden uitgevoerd.
+Vervolgens werd de kolom Tijdstempel omgevormd tot het datetime-formaat met behulp van ``pd.to\_datetime''. Hierdoor konden de meetwaarden chronologisch worden ingedeeld en konden er later analyses op basis van tijd worden uitgevoerd.
 
 \begin{listing}[H]
 \begin{minted}{python}
 df_spt_1["Tijdstempel"] =pd.to_datetime(df_spt_1["Tijdstempel"], errors="coerce")
 \end{minted}
-\caption[Datetime omzetting tractordata]{Regel code om de waarden om te zetten naar datetime-formaat.}
+\caption[Code snippet: datetime omzetting tractordata]{Regel code om de waarden om te zetten naar datetime-formaat.}
 \end{listing}
 
 \newpage
@@ -271,7 +271,7 @@ Bovendien zijn er diverse kolommen verwijderd die geen waarde toevoegden aan de 
 \begin{minted}{python}
 df_spt_1 = df_spt_1.drop(columns=["Locatie", "Longitude"], errors="ignore")
 \end{minted}
-\caption[Droppen onnodige kolommen tractordata]{Regel code om onnodige kolommen te verwijderen.}
+\caption[Code snippet: droppen onnodige kolommen tractordata]{Regel code om onnodige kolommen te verwijderen.}
 \end{listing}
 
 Uiteindelijk zijn alle sensorkolommen gecontroleerd op hun type data. Oorspronkelijk werden diverse meetwaarden als tekst vastgelegd, waardoor ze werden omgezet naar numerieke waarden. Dit stelde statistische berekeningen, visualisaties en machine learning-algoritmen in staat om de data op de juiste manier te verwerken. Na het voltooien van deze stappen werden alle records chronologisch ingedeeld op basis van de tijdstempel.
@@ -289,14 +289,14 @@ cols = [
 
 df_spt_1[cols] = df_spt_1[cols].apply(pd.to_numeric, errors="coerce")
 \end{minted}
-\caption[Numeriek maken tractordata]{Regels code om de kolommen numeriek te maken in de dataset.}
+\caption[Code snippet: numeriek maken tractordata]{Regels code om de kolommen numeriek te maken in de dataset.}
 \end{listing}
 
 \newpage
 
 \paragraph{Het samenvoegen van de datasets}
 
-Na het afzonderlijk opschonen van alle twaalf bestanden, werden de datasets van september en oktober samengevoegd. Eerst werden de relevante bestanden van beide maanden samengevoegd met behulp van pd.concat(). Dit resulteerde in zes grotere datasets die elk één groep sensordata bevatten gedurende de totale meetperiode van ongeveer twee maanden.
+Na het afzonderlijk opschonen van alle twaalf bestanden, werden de datasets van september en oktober samengevoegd. Eerst werden de relevante bestanden van beide maanden samengevoegd met behulp van ``pd.concat()''. Dit resulteerde in zes grotere datasets die elk één groep sensordata bevatten gedurende de totale meetperiode van ongeveer twee maanden.
 
 Na de samenvoeging werden deze datasets opnieuw chronologisch ingedeeld, zodat alle meetwaarden in de juiste volgorde waren.
 
@@ -316,16 +316,16 @@ df4_all = df4_all.sort_values("Tijdstempel")
 df5_all = df5_all.sort_values("Tijdstempel")
 df6_all = df6_all.sort_values("Tijdstempel")
 \end{minted}
-\caption[samenvoegen en sorteren tractordata]{Regels code om de datasets samen te voegen en te sorteren.}
+\caption[Code snippet: samenvoegen en sorteren tractordata]{Regels code om de datasets samen te voegen en te sorteren.}
 \end{listing}
 
 \newpage
 
 \paragraph{Het samenvoegen van de uiteindelijke tractordataset}
 
-De zes samengevoegde datasets bevatten diverse sensordata die niet altijd op hetzelfde moment zijn vastgelegd. Om die reden werd de functie merge\_asof() uit de bibliotheek pandas toegepast. Deze functie verbindt steeds de meting waarvan de tijdstempel het dichtst bij de tijdstempel van de andere dataset komt.
+De zes samengevoegde datasets bevatten diverse sensordata die niet altijd op hetzelfde moment zijn vastgelegd. Om die reden werd de functie ``merge\_asof()'' uit de bibliotheek pandas toegepast. Deze functie verbindt steeds de meting waarvan de tijdstempel het dichtst bij de tijdstempel van de andere dataset komt.
 
-Deze techniek maakte het mogelijk om de diverse sensorgroepen nauwkeurig te combineren tot één centrale analysetabel, zonder dat de tijdstempels volledig identiek waren. De merge\_asof()-functie werd meerdere keren gebruikt totdat alle sensordata in één definitieve dataset waren samengevoegd.
+Deze techniek maakte het mogelijk om de diverse sensorgroepen nauwkeurig te combineren tot één centrale analysetabel, zonder dat de tijdstempels volledig identiek waren. De ``merge\_asof()''-functie werd meerdere keren gebruikt totdat alle sensordata in één definitieve dataset waren samengevoegd.
 
 \begin{listing}[H]
 \begin{minted}{python}
@@ -337,7 +337,7 @@ df_all = pd.merge_asof(df_all, df4_all.sort_values("Tijdstempel"), on="Tijdstemp
 df_all = pd.merge_asof(df_all, df5_all.sort_values("Tijdstempel"), on="Tijdstempel")
 df_all = pd.merge_asof(df_all, df6_all.sort_values("Tijdstempel"), on="Tijdstempel")
 \end{minted}
-\caption[samenvoegen uiteindelijke tractordataset]{Regels code om de datasets samen te voegen tot de uiteindelijke tractordataset.}
+\caption[Code snippet: samenvoegen uiteindelijke tractordataset]{Regels code om de datasets samen te voegen tot de uiteindelijke tractordataset.}
 \end{listing}
 
 \paragraph{Controle van de uiteindelijke dataset}
@@ -398,7 +398,7 @@ Dit maakte het niet haalbaar om supervised learning toe te passen, omdat dergeli
         Gekozen aanpak & Anomliedetectie \\
 \bottomrule
 \end{tabular}
-\caption[Tabel samenvatting tractordataset]{\label{tab:tabel samenvatting tractordataset}Een samenvatting over de eigenschappen van de verkregen tractordataset.}
+\caption[Tabel: samenvatting tractordataset]{\label{tab:tabel samenvatting tractordataset}Een samenvatting over de eigenschappen van de verkregen tractordataset.}
 \end{table}
 
 
@@ -444,7 +444,7 @@ Deze dataset toont in tegenstelling tot gesimuleerde datasets, de werkelijkheid 
 \begin{figure}[H]
 \centering
 \includegraphics[width=1.0\textwidth]{Grafiek_motortoerental_over_de_tijd.png}
-\caption[Grafiek van de motortoerental over de tijd.]{\label{fig:Grafiek_motortoerental_tijd}De ontwikkeling van de motortoerental gedurende de meetperiode. De variatie laat zien dat de tractor onder uiteenlopende bedrijfsomstandigheden werd ingezet, waardoor de dataset geschikt is voor het onderzoeken van normaal machinegedrag. Bron: Eigen verwerking van de verzamelde telematicagegevens.}
+\caption[Grafiek van de motortoerental over de tijd.]{\label{fig:Grafiek_motortoerental_tijd}De ontwikkeling van de motortoerental gedurende de meetperiode. De variatie laat zien dat de tractor onder uiteenlopende bedrijfsomstandigheden werd ingezet, waardoor de dataset geschikt is voor het onderzoeken van normaal machinegedrag.}
 \end{figure} 
 
 De dataset maakt het mogelijk om trends en de interacties tussen sensordata te onderzoeken. Op deze manier kunnen temperatuur-, druk- en motorbelastingswaarden gedurende een langere periode worden gevolgd en met elkaar worden vergeleken. Deze data is essentieel voor het opsporen van afwijkend gedrag, omdat defecten doorgaans langzaam ontstaan en zich eerst manifesteren in kleine veranderingen in deze parameters.
@@ -452,17 +452,17 @@ De dataset maakt het mogelijk om trends en de interacties tussen sensordata te o
 \begin{figure}[H]
 \centering
 \includegraphics[width=1.0\textwidth]{Grafiek_motorolietemperatuur_over_de_tijd.png}
-\caption[Grafiek van de motorolietemperatuur over de tijd.]{\label{fig:Grafiek_motorolietemperatuur_tijd}De temperatuur van de motorolie gedurende de meetperiode. De temperatuur heeft een nauwkeurig patroon, waarbij bij de motor tijdens het gebruik opwarmt en vervolgens afkoelt wanneer de tractor niet in gebruik is. Bron: Eigen verwerking van de verzamelde telematicagegevens.}
+\caption[Grafiek van de motorolietemperatuur over de tijd.]{\label{fig:Grafiek_motorolietemperatuur_tijd}De temperatuur van de motorolie gedurende de meetperiode. De temperatuur heeft een nauwkeurig patroon, waarbij bij de motor tijdens het gebruik opwarmt en vervolgens afkoelt wanneer de tractor niet in gebruik is.}
 \end{figure}
 
 \newpage
 
-Bovendien biedt de dataset genoeg variatie om te onderscheiden tussen diverse gebruiksomstandigheden van de tractor. Door parameters zoals het motortoerental, de rijsnelheid, de motorbelasting en de afgeleide variabele is\_idle kan worden bepaald of de tractor actief was of stationair functioneerde. Deze gegevens zijn essentieel voor het interpreteren van de sensordata en bieden een waardevolle basis voor aanvullende analyse.
+Bovendien biedt de dataset genoeg variatie om te onderscheiden tussen diverse gebruiksomstandigheden van de tractor. Door parameters zoals het motortoerental, de rijsnelheid, de motorbelasting en de afgeleide variabele ``is\_idle'' kan worden bepaald of de tractor actief was of stationair functioneerde. Deze gegevens zijn essentieel voor het interpreteren van de sensordata en bieden een waardevolle basis voor aanvullende analyse.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{Grafiek_is_idle.png}
-\caption[Staafdiagram over de parameter is\_idle.]{\label{fig:Staafdiagram_is_idle}Een voorbeeld van zowel actieve als stationaire periodes in de tractordataset. Het verschil tussen de twee toestanden helpt bij het interpreteren van de sensormetingen tijdens de verdere analyse. Bron: Eigen verwerking van de verzamelde telematicagegevens.}
+\caption[Staafdiagram over de parameter is\_idle.]{\label{fig:Staafdiagram_is_idle}Een staafdiagram met zowel actieve als stationaire periodes in de tractordataset. Het verschil tussen de twee toestanden helpt bij het interpreteren van de sensormetingen tijdens de verdere analyse.}
 \end{figure}
 
 Hoewel de dataset geen duidelijke defectlabels bevat, blijft deze geschikt voor het opsporen van onregelmatigheden. Unsupervised machine learning-technieken leren het gebruikelijke gedrag van een machine kennen en herkennen daarna signalen die hiervan afwijken. Dit maakt het mogelijk om de dataset in te zetten om de toepasbaarheid van deze technieken in een echte praktijk te evalueren.
@@ -491,7 +491,7 @@ In dit hoofdstuk werd de private tractordataset toegelicht, die als praktijkdata
 
 Hoewel de dataset geen gemarkeerde defecten bevat en slechts een beperkte historische periode van ongeveer twee maanden beslaat, geeft zij een realistisch inzicht in het operationele gedrag van een tractor tijdens de dagelijkse werkzaamheden. Dit stelde de dataset in staat om trends in sensordata te analyseren en de haalbaarheid van methoden voor anomaliedetectie in een realistische praktijksituatie te evalueren.
 
-De mix van echte telematicadata, een zorgvuldige preprocessing en belangrijke sensormetingen biedt een belangrijke sensormetingen biedt een belangrijke fundament voor de verdere ontwikkeling van deze bachelorproef. In de komende hoofdstukken worden deze data toegepast om de gekozen analysemethoden en modellen voor anomaliedetectie te beoordelen.
+De mix van echte telematicadata, een zorgvuldige preprocessing en belangrijke sensormetingen biedt een belangrijk fundament voor de verdere ontwikkeling van deze bachelorproef. In de komende hoofdstukken worden deze data toegepast om de gekozen analysemethoden en modellen voor anomaliedetectie te beoordelen.
 
 %De verzamelde tractorgegevens bieden een solide en realistische fundament voor deze bachelorproef. Door telematicagegevens van een tractor in de grondverzet en transport werd er gebruikgemaakt van daadwerkelijke industriële sensorgegevens in plaats van alleen theoretische of volledig gesimuleerde voorbeelden. De onderzoeken van \textcite{Elahi2023} en \textcite{Mahale2025} stellen dat het inzetten van real-world industriële gegevens zeer nuttig is voor voorspellend onderhoudsonderzoek, omdat deze datasets de ingewikkeldheid en variaties van operationele omgevingen beter weergeven dan gesimuleerde testdata.
 
